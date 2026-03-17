@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useScoreStorage } from '@/composables/useScoreStorage'
-import StartScreen from '@/components/StartScreen.vue'
+import MainScreen from '@/components/MainScreen.vue'
 
 const router = useRouter()
 const { bestScore } = useScoreStorage()
@@ -12,5 +12,5 @@ function handleStart() {
 </script>
 
 <template>
-  <StartScreen :best-score="bestScore" @start="handleStart" />
+  <MainScreen :best-score="bestScore" @start="handleStart" />
 </template>
