@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --surface: rgba(30, 30, 30, 0.95);
+  --border: rgba(255, 255, 255, 0.15);
+  --text: #f0f0f0;
+  --muted: #888888;
+  --success: #00e676;
+  --danger: #ff3b5c;
+  --warning: #ffab00;
+  --card-radius: 16px;
+
+  --color-red: #ff3b5c;
+  --color-blue: #448aff;
+  --color-yellow: #ffd600;
+  --color-green: #00e676;
+  --color-purple: #d500f9;
+
+  /* Theme: Orange (default) — 긴박한 생존 느낌 */
+  --accent: #ff9100;
+  --accent-dim: rgba(255, 145, 0, 0.4);
+  --accent-glow: rgba(255, 145, 0, 0.2);
+}
+
+/* Theme: Minimal — the-perfect 스타일 화이트 미니멀 */
+[data-theme="minimal"] {
+  --accent: #ffffff;
+  --accent-dim: rgba(255, 255, 255, 0.4);
+  --accent-glow: rgba(255, 255, 255, 0.15);
+}
+
+body {
+  background: var(--bg);
+  background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+}
+
+#app {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Score pop animation */
+@keyframes score-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.score-pop {
+  animation: score-pop 0.3s ease-out;
+}
+
+/* Fade in/out */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Flash overlay */
+@keyframes flash-red {
+  0% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+/* Particle burst */
+@keyframes particle-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0);
+  }
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* Mission text entrance */
+@keyframes mission-enter {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.mission-enter {
+  animation: mission-enter 0.3s ease-out;
+}
