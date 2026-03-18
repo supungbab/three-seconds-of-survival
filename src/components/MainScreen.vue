@@ -194,33 +194,32 @@ onMounted(() => {
     <!-- City skyline -->
     <div class="skyline">
       <div class="skyline__layer skyline__layer--back">
-        <div class="building" style="--w: 28px; --h: 70px; --x: 3%" />
-        <div class="building" style="--w: 22px; --h: 95px; --x: 10%" />
-        <div class="building" style="--w: 35px; --h: 55px; --x: 17%" />
-        <div class="building" style="--w: 18px; --h: 110px; --x: 26%" />
-        <div class="building" style="--w: 40px; --h: 65px; --x: 33%" />
-        <div class="building" style="--w: 25px; --h: 85px; --x: 42%" />
-        <div class="building" style="--w: 20px; --h: 120px; --x: 50%" />
-        <div class="building" style="--w: 32px; --h: 60px; --x: 58%" />
-        <div class="building" style="--w: 24px; --h: 100px; --x: 66%" />
-        <div class="building" style="--w: 38px; --h: 50px; --x: 74%" />
-        <div class="building" style="--w: 20px; --h: 80px; --x: 82%" />
-        <div class="building" style="--w: 30px; --h: 70px; --x: 90%" />
+        <div class="building" style="--w: 60px; --h: 160px; --x: -2%" />
+        <div class="building" style="--w: 48px; --h: 220px; --x: 8%" />
+        <div class="building" style="--w: 75px; --h: 130px; --x: 17%" />
+        <div class="building" style="--w: 40px; --h: 260px; --x: 27%" />
+        <div class="building" style="--w: 85px; --h: 150px; --x: 35%" />
+        <div class="building" style="--w: 55px; --h: 200px; --x: 46%" />
+        <div class="building" style="--w: 44px; --h: 280px; --x: 55%" />
+        <div class="building" style="--w: 70px; --h: 140px; --x: 63%" />
+        <div class="building" style="--w: 50px; --h: 230px; --x: 72%" />
+        <div class="building" style="--w: 80px; --h: 120px; --x: 80%" />
+        <div class="building" style="--w: 45px; --h: 190px; --x: 89%" />
+        <div class="building" style="--w: 65px; --h: 160px; --x: 96%" />
       </div>
       <div class="skyline__layer skyline__layer--front">
-        <div class="building" style="--w: 34px; --h: 50px; --x: 0%" />
-        <div class="building" style="--w: 26px; --h: 75px; --x: 8%" />
-        <div class="building" style="--w: 42px; --h: 40px; --x: 15%" />
-        <div class="building" style="--w: 20px; --h: 90px; --x: 24%" />
-        <div class="building" style="--w: 30px; --h: 55px; --x: 32%" />
-        <div class="building" style="--w: 36px; --h: 70px; --x: 40%" />
-        <div class="building" style="--w: 22px; --h: 85px; --x: 49%" />
-        <div class="building" style="--w: 28px; --h: 45px; --x: 57%" />
-        <div class="building" style="--w: 40px; --h: 65px; --x: 64%" />
-        <div class="building" style="--w: 18px; --h: 95px; --x: 73%" />
-        <div class="building" style="--w: 32px; --h: 55px; --x: 80%" />
-        <div class="building" style="--w: 26px; --h: 75px; --x: 88%" />
-        <div class="building" style="--w: 30px; --h: 45px; --x: 95%" />
+        <div class="building" style="--w: 72px; --h: 120px; --x: -3%" />
+        <div class="building" style="--w: 55px; --h: 180px; --x: 6%" />
+        <div class="building" style="--w: 90px; --h: 95px; --x: 14%" />
+        <div class="building" style="--w: 44px; --h: 210px; --x: 23%" />
+        <div class="building" style="--w: 65px; --h: 130px; --x: 32%" />
+        <div class="building" style="--w: 78px; --h: 165px; --x: 41%" />
+        <div class="building" style="--w: 48px; --h: 200px; --x: 51%" />
+        <div class="building" style="--w: 60px; --h: 105px; --x: 59%" />
+        <div class="building" style="--w: 85px; --h: 155px; --x: 67%" />
+        <div class="building" style="--w: 40px; --h: 225px; --x: 76%" />
+        <div class="building" style="--w: 70px; --h: 130px; --x: 84%" />
+        <div class="building" style="--w: 55px; --h: 175px; --x: 92%" />
       </div>
       <div class="skyline__ground" />
     </div>
@@ -387,7 +386,6 @@ onMounted(() => {
   align-items: center;
   gap: 24px;
   padding: 0 24px;
-  margin-bottom: 60px;
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -848,7 +846,7 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 180px;
+  height: 50vh;
   z-index: 2;
   pointer-events: none;
 }
