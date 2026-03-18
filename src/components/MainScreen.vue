@@ -62,7 +62,10 @@ onMounted(() => {
 
 <template>
   <div class="arcade-screen" :class="{ 'is-ready': mounted }">
-    <!-- Scanline overlay -->
+    <!-- CRT effects layer -->
+    <div class="crt-vignette" />
+    <div class="crt-flicker" />
+    <div class="crt-noise" />
     <div class="scanlines" />
 
     <!-- Stars -->
@@ -72,6 +75,15 @@ onMounted(() => {
         top: `${(i * 23 + i * 7) % 55}%`,
         animationDelay: `${(i * 0.7) % 4}s`,
         animationDuration: `${1.5 + (i % 3) * 0.8}s`
+      }" />
+    </div>
+
+    <!-- Floating embers rising from skyline -->
+    <div class="embers">
+      <span v-for="i in 12" :key="i" class="ember" :style="{
+        left: `${(i * 31 + i * 5) % 90 + 5}%`,
+        animationDelay: `${(i * 1.3) % 6}s`,
+        animationDuration: `${3 + (i % 4) * 1.5}s`,
       }" />
     </div>
 
@@ -223,10 +235,11 @@ onMounted(() => {
 .arcade-screen {
   position: relative;
   height: 100dvh;
-  background: var(--arc-bg);
+  background: #060a12;
   background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(255, 184, 0, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 30% 20%, rgba(255, 59, 92, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 15%, rgba(57, 255, 20, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(255, 120, 20, 0.08) 0%, transparent 40%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -237,6 +250,60 @@ onMounted(() => {
   user-select: none;
 }
 
+/* ─── CRT Vignette ─── */
+.crt-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.4) 80%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* ─── CRT Flicker ─── */
+.crt-flicker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
+  animation: crt-flicker 0.15s infinite;
+  opacity: 0;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0; }
+  5% { opacity: 0.02; background: rgba(255, 255, 255, 0.02); }
+  10% { opacity: 0; }
+  92% { opacity: 0; }
+  93% { opacity: 0.015; background: rgba(200, 255, 200, 0.015); }
+  94% { opacity: 0; }
+}
+
+/* ─── CRT Static Noise ─── */
+.crt-noise {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9;
+  animation: noise-drift 0.5s steps(3) infinite;
+  opacity: 0.6;
+}
+
+@keyframes noise-drift {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-2%, -3%); }
+  66% { transform: translate(1%, 2%); }
+  100% { transform: translate(-1%, -1%); }
+}
+
 /* ─── Scanlines ─── */
 .scanlines {
   position: absolute;
@@ -245,14 +312,14 @@ onMounted(() => {
     to bottom,
     transparent 0px,
     transparent 2px,
-    rgba(0, 0, 0, 0.15) 2px,
-    rgba(0, 0, 0, 0.15) 4px
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
   );
   pointer-events: none;
-  z-index: 10;
+  z-index: 13;
 }
 
-/* ─── Stars ─── */
+/* ─── Stars (dimmer, survival sky) ─── */
 .stars {
   position: absolute;
   inset: 0;
@@ -270,8 +337,45 @@ onMounted(() => {
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.9; }
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.5; }
+}
+
+/* ─── Embers ─── */
+.embers {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ember {
+  position: absolute;
+  bottom: 40px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ff6b2b;
+  box-shadow: 0 0 6px rgba(255, 107, 43, 0.6);
+  opacity: 0;
+  animation: ember-rise ease-out infinite;
+}
+
+@keyframes ember-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px) translateX(20px) scale(0.3);
+  }
 }
 
 /* ─── Content ─── */
@@ -744,9 +848,31 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 160px;
+  height: 180px;
   z-index: 2;
   pointer-events: none;
+}
+
+/* Fire glow at base of skyline */
+.skyline::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background:
+    radial-gradient(ellipse at 25% 100%, rgba(255, 80, 20, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 100%, rgba(255, 50, 10, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 100%, rgba(255, 100, 30, 0.10) 0%, transparent 40%);
+  animation: fire-glow 4s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes fire-glow {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
 }
 
 .skyline__layer {
@@ -767,23 +893,53 @@ onMounted(() => {
 }
 
 .skyline__layer--back .building {
-  background: var(--arc-building-back);
-  opacity: 0.7;
+  background: #0c1424;
+  opacity: 0.8;
 }
 
 .skyline__layer--front .building {
-  background: var(--arc-building-front);
+  background: #050a14;
 }
 
+/* Window lights — some reddish (fire reflections) */
 .skyline__layer--front .building::before {
   content: '';
   position: absolute;
   inset: 6px 4px 8px;
   background-image:
-    radial-gradient(circle, rgba(255, 200, 50, 0.5) 1px, transparent 1px);
-  background-size: 8px 10px;
-  background-position: 0 0;
-  opacity: 0.4;
+    radial-gradient(circle, rgba(255, 180, 50, 0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 80, 30, 0.4) 1px, transparent 1px);
+  background-size: 8px 10px, 12px 14px;
+  background-position: 0 0, 4px 5px;
+  opacity: 0.35;
+}
+
+/* Subtle red top-glow on some buildings */
+.skyline__layer--front .building::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 20%;
+  right: 20%;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(255, 60, 20, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  animation: building-glow 5s ease-in-out infinite;
+}
+
+.skyline__layer--front .building:nth-child(2n)::after {
+  opacity: 1;
+  animation-delay: -2s;
+}
+
+.skyline__layer--front .building:nth-child(3n)::after {
+  opacity: 1;
+  animation-delay: -4s;
+}
+
+@keyframes building-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
 }
 
 .skyline__ground {
@@ -792,7 +948,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 8px;
-  background: var(--arc-building-front);
+  background: #050a14;
 }
 
 /* ─── Version ─── */
