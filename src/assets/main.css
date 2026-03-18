@@ -15,8 +15,6 @@
 :root {
   /* ─── Arcade Nightscape tokens ─── */
   --arc-bg: #0a0610;
-  --arc-surface: #111827;
-  --arc-surface-light: #1e293b;
   --arc-text: #e2e8f0;
   --arc-muted: #64748b;
 
@@ -61,32 +59,12 @@
   --arc-success: #39ff14;
   --arc-warning: #ffab00;
 
-  /* ─── Pixel icon colors ─── */
-  --px-crown: #b8a060;
-  --px-crown-dark: #9a8450;
-
-  --arc-building-back: #1a0c0e;
-  --arc-building-front: #0a0508;
-
   /* Game mission colors */
   --color-red: #ff3b5c;
   --color-blue: #448aff;
   --color-yellow: #ffd600;
   --color-green: #00e676;
   --color-purple: #d500f9;
-
-  /* Legacy compat aliases */
-  --bg: var(--arc-bg);
-  --surface: var(--arc-surface);
-  --border: var(--arc-surface-light);
-  --text: var(--arc-text);
-  --muted: var(--arc-muted);
-  --success: var(--arc-success);
-  --danger: var(--arc-danger);
-  --warning: var(--arc-warning);
-  --accent: var(--px-green);
-  --accent-dim: var(--px-green-dim);
-  --accent-glow: var(--px-green-glow);
 }
 
 body {
