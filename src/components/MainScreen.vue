@@ -78,7 +78,42 @@ onMounted(() => {
       }" />
     </div>
 
-    <!-- Floating embers rising from skyline -->
+    <!-- 뒤: 원경 건물 (z-index 1) -->
+    <div class="layer-buildings">
+      <div class="skyline__layer skyline__layer--back">
+        <div class="building" style="--w: 60px; --h: 160px; --x: -2%" />
+        <div class="building" style="--w: 48px; --h: 220px; --x: 8%" />
+        <div class="building" style="--w: 75px; --h: 130px; --x: 17%" />
+        <div class="building" style="--w: 40px; --h: 260px; --x: 27%" />
+        <div class="building" style="--w: 85px; --h: 150px; --x: 35%" />
+        <div class="building" style="--w: 55px; --h: 200px; --x: 46%" />
+        <div class="building" style="--w: 44px; --h: 280px; --x: 55%" />
+        <div class="building" style="--w: 70px; --h: 140px; --x: 63%" />
+        <div class="building" style="--w: 50px; --h: 230px; --x: 72%" />
+        <div class="building" style="--w: 80px; --h: 120px; --x: 80%" />
+        <div class="building" style="--w: 45px; --h: 190px; --x: 89%" />
+        <div class="building" style="--w: 65px; --h: 160px; --x: 96%" />
+      </div>
+      <div class="skyline__layer skyline__layer--front">
+        <div class="building" style="--w: 72px; --h: 120px; --x: -3%" />
+        <div class="building" style="--w: 55px; --h: 180px; --x: 6%" />
+        <div class="building" style="--w: 90px; --h: 95px; --x: 14%" />
+        <div class="building" style="--w: 44px; --h: 210px; --x: 23%" />
+        <div class="building" style="--w: 65px; --h: 130px; --x: 32%" />
+        <div class="building" style="--w: 78px; --h: 165px; --x: 41%" />
+        <div class="building" style="--w: 48px; --h: 200px; --x: 51%" />
+        <div class="building" style="--w: 60px; --h: 105px; --x: 59%" />
+        <div class="building" style="--w: 85px; --h: 155px; --x: 67%" />
+        <div class="building" style="--w: 40px; --h: 225px; --x: 76%" />
+        <div class="building" style="--w: 70px; --h: 130px; --x: 84%" />
+        <div class="building" style="--w: 55px; --h: 175px; --x: 92%" />
+      </div>
+    </div>
+
+    <!-- 앞: 땅 (z-index 3, 건물 하단 가림) -->
+    <div class="layer-ground" />
+
+    <!-- Floating embers rising from horizon -->
     <div class="embers">
       <span v-for="i in 12" :key="i" class="ember" :style="{
         left: `${(i * 31 + i * 5) % 90 + 5}%`,
@@ -198,38 +233,6 @@ onMounted(() => {
       </div>
     </Transition>
 
-    <!-- City skyline -->
-    <div class="skyline">
-      <div class="skyline__layer skyline__layer--back">
-        <div class="building" style="--w: 60px; --h: 160px; --x: -2%" />
-        <div class="building" style="--w: 48px; --h: 220px; --x: 8%" />
-        <div class="building" style="--w: 75px; --h: 130px; --x: 17%" />
-        <div class="building" style="--w: 40px; --h: 260px; --x: 27%" />
-        <div class="building" style="--w: 85px; --h: 150px; --x: 35%" />
-        <div class="building" style="--w: 55px; --h: 200px; --x: 46%" />
-        <div class="building" style="--w: 44px; --h: 280px; --x: 55%" />
-        <div class="building" style="--w: 70px; --h: 140px; --x: 63%" />
-        <div class="building" style="--w: 50px; --h: 230px; --x: 72%" />
-        <div class="building" style="--w: 80px; --h: 120px; --x: 80%" />
-        <div class="building" style="--w: 45px; --h: 190px; --x: 89%" />
-        <div class="building" style="--w: 65px; --h: 160px; --x: 96%" />
-      </div>
-      <div class="skyline__layer skyline__layer--front">
-        <div class="building" style="--w: 72px; --h: 120px; --x: -3%" />
-        <div class="building" style="--w: 55px; --h: 180px; --x: 6%" />
-        <div class="building" style="--w: 90px; --h: 95px; --x: 14%" />
-        <div class="building" style="--w: 44px; --h: 210px; --x: 23%" />
-        <div class="building" style="--w: 65px; --h: 130px; --x: 32%" />
-        <div class="building" style="--w: 78px; --h: 165px; --x: 41%" />
-        <div class="building" style="--w: 48px; --h: 200px; --x: 51%" />
-        <div class="building" style="--w: 60px; --h: 105px; --x: 59%" />
-        <div class="building" style="--w: 85px; --h: 155px; --x: 67%" />
-        <div class="building" style="--w: 40px; --h: 225px; --x: 76%" />
-        <div class="building" style="--w: 70px; --h: 130px; --x: 84%" />
-        <div class="building" style="--w: 55px; --h: 175px; --x: 92%" />
-      </div>
-      <div class="skyline__ground" />
-    </div>
 
     <!-- Version -->
     <div class="version">ver 1.0</div>
@@ -347,17 +350,164 @@ onMounted(() => {
   50% { opacity: 0.5; }
 }
 
+/* ─── Layer: Buildings (뒤, 원경) ─── */
+.layer-buildings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.skyline__layer {
+  position: absolute;
+  bottom: 50vh;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+.building {
+  position: absolute;
+  bottom: 0;
+  left: var(--x);
+  width: var(--w);
+  height: var(--h);
+  border-radius: 2px 2px 0 0;
+}
+
+.skyline__layer--back .building {
+  background: #0c1424;
+  opacity: 0.8;
+}
+
+.skyline__layer--front .building {
+  background: #050a14;
+}
+
+/* Window lights — some reddish (fire reflections) */
+.skyline__layer--front .building::before {
+  content: '';
+  position: absolute;
+  inset: 6px 4px 8px;
+  background-image:
+    radial-gradient(circle, rgba(255, 180, 50, 0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 80, 30, 0.4) 1px, transparent 1px);
+  background-size: 8px 10px, 12px 14px;
+  background-position: 0 0, 4px 5px;
+  opacity: 0.35;
+}
+
+/* Subtle red top-glow on some buildings */
+.skyline__layer--front .building::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 20%;
+  right: 20%;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(255, 60, 20, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  animation: building-glow 5s ease-in-out infinite;
+}
+
+.skyline__layer--front .building:nth-child(2n)::after {
+  opacity: 1;
+  animation-delay: -2s;
+}
+
+.skyline__layer--front .building:nth-child(3n)::after {
+  opacity: 1;
+  animation-delay: -4s;
+}
+
+@keyframes building-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* ─── Layer: Ground (앞, 근경) ─── */
+.layer-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    /* 거친 흙 노이즈 텍스처 */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+    /* 흙 색조 그라데이션 */
+    linear-gradient(
+      to bottom,
+      #1a1410 0%,
+      #15100c 8%,
+      #120e0a 20%,
+      #0e0a07 45%,
+      #0a0806 100%
+    );
+}
+
+/* Horizon fire glow at top of ground */
+.layer-ground::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background:
+    radial-gradient(ellipse at 25% 80%, rgba(255, 80, 20, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 80%, rgba(255, 50, 10, 0.14) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 100, 30, 0.12) 0%, transparent 40%);
+  animation: fire-glow 4s ease-in-out infinite alternate;
+}
+
+/* 지표면 경계선 — 흙+화염 경계 */
+.layer-ground::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(60, 35, 15, 0.5) 0%,
+      rgba(40, 22, 10, 0.3) 40%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 80, 30, 0.06) 20%,
+      rgba(255, 60, 20, 0.1) 50%,
+      rgba(255, 80, 30, 0.06) 80%,
+      transparent 100%
+    );
+}
+
+@keyframes fire-glow {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
 /* ─── Embers ─── */
 .embers {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
 }
 
 .ember {
   position: absolute;
-  bottom: 40px;
+  bottom: 50vh;
   width: 3px;
   height: 3px;
   border-radius: 50%;
@@ -880,114 +1030,6 @@ onMounted(() => {
   transform: scale(0.95);
 }
 
-/* ─── Skyline ─── */
-.skyline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50vh;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Fire glow at base of skyline */
-.skyline::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background:
-    radial-gradient(ellipse at 25% 100%, rgba(255, 80, 20, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 100%, rgba(255, 50, 10, 0.12) 0%, transparent 45%),
-    radial-gradient(ellipse at 85% 100%, rgba(255, 100, 30, 0.10) 0%, transparent 40%);
-  animation: fire-glow 4s ease-in-out infinite alternate;
-  z-index: 1;
-}
-
-@keyframes fire-glow {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.7; }
-}
-
-.skyline__layer {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  right: 0;
-  height: 100%;
-}
-
-.building {
-  position: absolute;
-  bottom: 0;
-  left: var(--x);
-  width: var(--w);
-  height: var(--h);
-  border-radius: 2px 2px 0 0;
-}
-
-.skyline__layer--back .building {
-  background: #0c1424;
-  opacity: 0.8;
-}
-
-.skyline__layer--front .building {
-  background: #050a14;
-}
-
-/* Window lights — some reddish (fire reflections) */
-.skyline__layer--front .building::before {
-  content: '';
-  position: absolute;
-  inset: 6px 4px 8px;
-  background-image:
-    radial-gradient(circle, rgba(255, 180, 50, 0.5) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 80, 30, 0.4) 1px, transparent 1px);
-  background-size: 8px 10px, 12px 14px;
-  background-position: 0 0, 4px 5px;
-  opacity: 0.35;
-}
-
-/* Subtle red top-glow on some buildings */
-.skyline__layer--front .building::after {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: 20%;
-  right: 20%;
-  height: 8px;
-  background: radial-gradient(ellipse, rgba(255, 60, 20, 0.3) 0%, transparent 70%);
-  opacity: 0;
-  animation: building-glow 5s ease-in-out infinite;
-}
-
-.skyline__layer--front .building:nth-child(2n)::after {
-  opacity: 1;
-  animation-delay: -2s;
-}
-
-.skyline__layer--front .building:nth-child(3n)::after {
-  opacity: 1;
-  animation-delay: -4s;
-}
-
-@keyframes building-glow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-}
-
-.skyline__ground {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: #050a14;
-}
 
 /* ─── Version ─── */
 .version {
