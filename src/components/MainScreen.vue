@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { usePressable } from '@/composables/usePressable'
+import { useSettings } from '@/composables/useSettings'
+import { useAudio } from '@/composables/useAudio'
 import { ref, onMounted } from 'vue'
 
 defineProps<{
@@ -12,6 +14,44 @@ const emit = defineEmits<{
 
 const start = usePressable(() => emit('start'))
 const mounted = ref(false)
+const showOptions = ref(false)
+const showRankingToast = ref(false)
+
+const { soundEnabled, volume } = useSettings()
+const { playTick } = useAudio()
+
+function openOptions(e: Event) {
+  e.stopPropagation()
+  showOptions.value = true
+}
+
+function closeOptions() {
+  showOptions.value = false
+}
+
+function openRanking(e: Event) {
+  e.stopPropagation()
+  showRankingToast.value = true
+  setTimeout(() => { showRankingToast.value = false }, 1500)
+}
+
+function toggleSound(e: Event) {
+  e.stopPropagation()
+  soundEnabled.value = !soundEnabled.value
+  if (soundEnabled.value) {
+    playTick()
+  }
+}
+
+function onVolumeInput(e: Event) {
+  const target = e.target as HTMLInputElement
+  volume.value = Number(target.value)
+}
+
+function testSound(e: Event) {
+  e.stopPropagation()
+  playTick()
+}
 
 onMounted(() => {
   requestAnimationFrame(() => {
@@ -55,6 +95,18 @@ onMounted(() => {
         </span>
       </button>
 
+      <!-- Sub buttons -->
+      <div class="sub-buttons">
+        <button class="arcade-btn arcade-btn--sub" @click="openRanking">
+          <span class="arcade-btn__icon-sm">🏆</span>
+          <span class="arcade-btn__label-sm">랭킹</span>
+        </button>
+        <button class="arcade-btn arcade-btn--sub" @click="openOptions">
+          <span class="arcade-btn__icon-sm">⚙</span>
+          <span class="arcade-btn__label-sm">옵션</span>
+        </button>
+      </div>
+
       <!-- Best score -->
       <div v-if="bestScore > 0" class="score-badge">
         <span class="score-badge__label">최고 점수</span>
@@ -63,6 +115,69 @@ onMounted(() => {
 
       <div v-else class="first-play">첫 도전을 시작하세요!</div>
     </div>
+
+    <!-- Ranking toast -->
+    <Transition name="toast">
+      <div v-if="showRankingToast" class="toast">
+        준비 중입니다
+      </div>
+    </Transition>
+
+    <!-- Options modal -->
+    <Transition name="modal">
+      <div v-if="showOptions" class="modal-overlay" @click.self="closeOptions">
+        <div class="modal-card">
+          <div class="modal-header">
+            <span class="modal-title">옵션</span>
+            <button class="modal-close" @click="closeOptions">✕</button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Sound toggle -->
+            <div class="option-row">
+              <span class="option-label">효과음</span>
+              <button
+                class="toggle-btn"
+                :class="{ active: soundEnabled }"
+                @click="toggleSound"
+              >
+                <span class="toggle-track">
+                  <span class="toggle-thumb" />
+                </span>
+                <span class="toggle-text">{{ soundEnabled ? 'ON' : 'OFF' }}</span>
+              </button>
+            </div>
+
+            <!-- Volume slider -->
+            <div class="option-row" :class="{ disabled: !soundEnabled }">
+              <span class="option-label">볼륨</span>
+              <div class="volume-control">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  :value="volume"
+                  :disabled="!soundEnabled"
+                  class="volume-slider"
+                  @input="onVolumeInput"
+                />
+                <span class="volume-value">{{ Math.round(volume * 100) }}%</span>
+              </div>
+            </div>
+
+            <!-- Test sound -->
+            <button
+              class="test-sound-btn"
+              :disabled="!soundEnabled"
+              @click="testSound"
+            >
+              🔊 소리 테스트
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <!-- City skyline -->
     <div class="skyline">
@@ -117,7 +232,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  cursor: pointer;
   font-family: 'Galmuri11', monospace;
   -webkit-user-select: none;
   user-select: none;
@@ -167,7 +281,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   padding: 0 24px;
   margin-bottom: 60px;
   opacity: 0;
@@ -183,7 +297,7 @@ onMounted(() => {
 /* ─── Title ─── */
 .title-block {
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .title-big {
@@ -241,7 +355,7 @@ onMounted(() => {
   letter-spacing: 1px;
 }
 
-/* ─── Arcade Button ─── */
+/* ─── Arcade Buttons ─── */
 .arcade-btn {
   display: flex;
   align-items: center;
@@ -313,6 +427,39 @@ onMounted(() => {
   letter-spacing: 2px;
 }
 
+/* ─── Sub Buttons ─── */
+.sub-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.arcade-btn--sub {
+  padding: 10px 20px;
+  gap: 8px;
+  border-color: var(--arc-surface-light);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--arc-muted);
+  box-shadow: none;
+  animation: none;
+}
+
+.arcade-btn--sub:hover {
+  border-color: var(--arc-green);
+  color: var(--arc-green);
+  background: rgba(57, 255, 20, 0.06);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.1);
+}
+
+.arcade-btn__icon-sm {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.arcade-btn__label-sm {
+  font-size: 14px;
+  font-weight: 700;
+}
+
 /* ─── Score Badge ─── */
 .score-badge {
   display: flex;
@@ -348,6 +495,247 @@ onMounted(() => {
   font-size: 14px;
   color: var(--arc-muted);
   opacity: 0.7;
+}
+
+/* ─── Toast ─── */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 24px;
+  background: var(--arc-surface);
+  border: 1px solid var(--arc-surface-light);
+  border-radius: 4px;
+  color: var(--arc-muted);
+  font-size: 14px;
+  font-family: 'Galmuri11', monospace;
+  z-index: 20;
+}
+
+.toast-enter-active { transition: all 0.2s ease; }
+.toast-leave-active { transition: all 0.2s ease; }
+.toast-enter-from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+.toast-leave-to { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+
+/* ─── Modal ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 15, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 24px;
+}
+
+.modal-card {
+  background: var(--arc-surface);
+  border: 2px solid var(--arc-surface-light);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow:
+    0 0 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--arc-surface-light);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--arc-text);
+  letter-spacing: 2px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--arc-muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-family: 'Galmuri11', monospace;
+  transition: color 0.15s;
+}
+
+.modal-close:hover {
+  color: var(--arc-text);
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Option Row ─── */
+.option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: opacity 0.2s;
+}
+
+.option-row.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.option-label {
+  font-size: 14px;
+  color: var(--arc-text);
+}
+
+/* ─── Toggle ─── */
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Galmuri11', monospace;
+}
+
+.toggle-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--arc-surface-light);
+  position: relative;
+  transition: background 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.toggle-btn.active .toggle-track {
+  background: rgba(57, 255, 20, 0.2);
+  border-color: var(--arc-green);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--arc-muted);
+  transition: all 0.2s;
+}
+
+.toggle-btn.active .toggle-thumb {
+  left: 20px;
+  background: var(--arc-green);
+  box-shadow: 0 0 8px var(--arc-green-glow);
+}
+
+.toggle-text {
+  font-size: 12px;
+  color: var(--arc-muted);
+  min-width: 24px;
+}
+
+.toggle-btn.active .toggle-text {
+  color: var(--arc-green);
+}
+
+/* ─── Volume Slider ─── */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 4px;
+  background: var(--arc-surface-light);
+  border-radius: 2px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--arc-green);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--arc-green-glow);
+  border: none;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--arc-green);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--arc-green-glow);
+  border: none;
+}
+
+.volume-value {
+  font-size: 12px;
+  color: var(--arc-muted);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ─── Test Sound Button ─── */
+.test-sound-btn {
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--arc-surface-light);
+  border-radius: 4px;
+  color: var(--arc-muted);
+  font-size: 13px;
+  font-family: 'Galmuri11', monospace;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.test-sound-btn:hover:not(:disabled) {
+  border-color: var(--arc-green);
+  color: var(--arc-green);
+}
+
+.test-sound-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Modal Transition ─── */
+.modal-enter-active { transition: opacity 0.2s ease; }
+.modal-leave-active { transition: opacity 0.15s ease; }
+.modal-enter-from,
+.modal-leave-to { opacity: 0; }
+
+.modal-enter-active .modal-card {
+  transition: transform 0.2s ease;
+}
+.modal-leave-active .modal-card {
+  transition: transform 0.15s ease;
+}
+.modal-enter-from .modal-card {
+  transform: scale(0.95);
+}
+.modal-leave-to .modal-card {
+  transform: scale(0.95);
 }
 
 /* ─── Skyline ─── */
@@ -387,7 +775,6 @@ onMounted(() => {
   background: var(--arc-building-front);
 }
 
-/* Window lights on front buildings */
 .skyline__layer--front .building::before {
   content: '';
   position: absolute;

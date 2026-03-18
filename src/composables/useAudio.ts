@@ -1,3 +1,5 @@
+import { useSettings } from './useSettings'
+
 let audioCtx: AudioContext | null = null
 
 function getContext(): AudioContext {
@@ -8,6 +10,9 @@ function getContext(): AudioContext {
 }
 
 function playTone(frequency: number, duration: number, type: OscillatorType = 'sine') {
+  const { soundEnabled, volume } = useSettings()
+  if (!soundEnabled.value) return
+
   const ctx = getContext()
   if (ctx.state === 'suspended') {
     ctx.resume()
@@ -18,7 +23,7 @@ function playTone(frequency: number, duration: number, type: OscillatorType = 's
 
   osc.type = type
   osc.frequency.value = frequency
-  gain.gain.value = 0.3
+  gain.gain.value = 0.3 * volume.value
   gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration)
 
   osc.connect(gain)
