@@ -136,7 +136,7 @@ onMounted(() => {
       <!-- Button group -->
       <div class="btn-group">
       <button class="arcade-btn arcade-btn--primary" @click="start.onClick">
-        <span class="arcade-btn__icon">▶</span>
+        <span class="arcade-btn__icon"><span class="pixel-runner"></span></span>
         <span class="arcade-btn__text">
           <span class="arcade-btn__label">게임 시작</span>
           <span class="arcade-btn__sub">START GAME</span>
@@ -145,14 +145,14 @@ onMounted(() => {
 
       <div class="sub-buttons">
         <button class="arcade-btn arcade-btn--sub" @click="openRanking">
-          <span class="arcade-btn__icon-sm">🏆</span>
+          <span class="arcade-btn__icon-sm"><span class="pixel-crown"></span></span>
           <span class="arcade-btn__text-sm">
             <span class="arcade-btn__label-sm">랭킹</span>
             <span class="arcade-btn__sub-sm">RANKING</span>
           </span>
         </button>
         <button class="arcade-btn arcade-btn--sub" @click="openOptions">
-          <span class="arcade-btn__icon-sm">⚙</span>
+          <span class="arcade-btn__icon-sm"><span class="pixel-gear"></span></span>
           <span class="arcade-btn__text-sm">
             <span class="arcade-btn__label-sm">옵션</span>
             <span class="arcade-btn__sub-sm">OPTIONS</span>
@@ -630,80 +630,134 @@ onMounted(() => {
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
 }
 
 .arcade-btn {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 32px;
-  border: 2px solid var(--arc-green);
-  border-radius: 4px;
-  background: rgba(57, 255, 20, 0.06);
-  color: var(--arc-green);
+  gap: 16px;
+  padding: 14px 24px;
+  border: 3px solid #4a5648;
+  border-radius: 0;
+  background: #0c140c;
+  color: #8cc890;
   font-family: 'Galmuri11', monospace;
   cursor: pointer;
   position: relative;
-  transition: all 0.2s ease;
+  transition: background 0.15s, box-shadow 0.15s;
   box-shadow:
-    0 0 12px rgba(57, 255, 20, 0.15),
-    inset 0 0 12px rgba(57, 255, 20, 0.05);
+    /* outer dark frame */
+    0 0 0 3px #111311,
+    /* inner bevel highlight */
+    inset 1px 1px 0 #5a6858,
+    inset -1px -1px 0 #2a322a,
+    /* subtle glow */
+    inset 0 0 20px rgba(57, 255, 20, 0.03);
+  image-rendering: pixelated;
 }
 
 .arcade-btn:hover {
-  background: rgba(57, 255, 20, 0.12);
+  background: #101c10;
+  border-color: #5a6a56;
   box-shadow:
-    0 0 24px rgba(57, 255, 20, 0.25),
-    inset 0 0 20px rgba(57, 255, 20, 0.08);
-  transform: scale(1.02);
+    0 0 0 3px #111311,
+    0 0 16px rgba(57, 255, 20, 0.1),
+    inset 1px 1px 0 #6a7a66,
+    inset -1px -1px 0 #3a4a3a,
+    inset 0 0 24px rgba(57, 255, 20, 0.06);
+  color: #a0dca4;
 }
 
 .arcade-btn:active {
-  transform: scale(0.97);
-  background: rgba(57, 255, 20, 0.2);
+  background: #081008;
+  box-shadow:
+    0 0 0 3px #111311,
+    inset 2px 2px 0 #2a322a,
+    inset -1px -1px 0 #4a5648,
+    inset 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .arcade-btn--primary {
   width: 100%;
   justify-content: center;
-  animation: btn-pulse 2.5s ease-in-out infinite;
+  animation: btn-pulse 3s ease-in-out infinite;
 }
 
 @keyframes btn-pulse {
   0%, 100% {
     box-shadow:
-      0 0 12px rgba(57, 255, 20, 0.15),
-      inset 0 0 12px rgba(57, 255, 20, 0.05);
+      0 0 0 3px #111311,
+      inset 1px 1px 0 #5a6858,
+      inset -1px -1px 0 #2a322a,
+      inset 0 0 20px rgba(57, 255, 20, 0.03);
   }
   50% {
     box-shadow:
-      0 0 20px rgba(57, 255, 20, 0.3),
-      inset 0 0 16px rgba(57, 255, 20, 0.08);
+      0 0 0 3px #111311,
+      0 0 10px rgba(57, 255, 20, 0.08),
+      inset 1px 1px 0 #5a6858,
+      inset -1px -1px 0 #2a322a,
+      inset 0 0 24px rgba(57, 255, 20, 0.06);
   }
 }
 
+/* ─── Pixel Runner Icon ─── */
 .arcade-btn__icon {
-  font-size: 22px;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-right: 2px solid #2a3a2a;
+  padding-right: 14px;
+  margin-right: 2px;
+}
+
+.pixel-runner {
+  display: block;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow:
+    /* head */
+    8px 0 0 currentColor, 10px 0 0 currentColor,
+    8px 2px 0 currentColor, 10px 2px 0 currentColor,
+    /* shoulders */
+    4px 4px 0 currentColor, 6px 4px 0 currentColor, 8px 4px 0 currentColor,
+    10px 4px 0 currentColor, 12px 4px 0 currentColor, 14px 4px 0 currentColor,
+    /* front arm + torso */
+    0px 6px 0 currentColor, 2px 6px 0 currentColor,
+    8px 6px 0 currentColor, 10px 6px 0 currentColor,
+    /* torso + back arm */
+    8px 8px 0 currentColor, 10px 8px 0 currentColor,
+    14px 8px 0 currentColor, 16px 8px 0 currentColor,
+    /* legs */
+    6px 10px 0 currentColor, 12px 10px 0 currentColor,
+    /* lower legs */
+    4px 12px 0 currentColor, 14px 12px 0 currentColor,
+    /* feet */
+    2px 14px 0 currentColor, 16px 14px 0 currentColor;
 }
 
 .arcade-btn__text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 3px;
 }
 
 .arcade-btn__label {
   font-size: 20px;
   font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .arcade-btn__sub {
   font-size: 10px;
-  color: var(--arc-green-dim);
-  letter-spacing: 2px;
+  color: #5a7a5c;
+  letter-spacing: 3px;
 }
 
 /* ─── Sub Buttons ─── */
@@ -716,32 +770,93 @@ onMounted(() => {
 .arcade-btn--sub {
   flex: 1;
   justify-content: center;
-  padding: 10px 20px;
-  gap: 8px;
-  border-color: var(--arc-surface-light);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--arc-muted);
-  box-shadow: none;
+  padding: 12px 16px;
+  gap: 12px;
+  border: 2px solid #4a4a46;
+  background: #121214;
+  color: #9a9690;
+  box-shadow:
+    0 0 0 2px #0a0a0c,
+    inset 1px 1px 0 #3a3a38,
+    inset -1px -1px 0 #1a1a1c;
   animation: none;
 }
 
 .arcade-btn--sub:hover {
-  border-color: var(--arc-green);
-  color: var(--arc-green);
-  background: rgba(57, 255, 20, 0.06);
-  box-shadow: 0 0 12px rgba(57, 255, 20, 0.1);
+  border-color: #5a5a56;
+  color: #c0bab0;
+  background: #181818;
+  box-shadow:
+    0 0 0 2px #0a0a0c,
+    inset 1px 1px 0 #4a4a48,
+    inset -1px -1px 0 #2a2a2c;
+}
+
+.arcade-btn--sub:active {
+  background: #0e0e10;
+  box-shadow:
+    0 0 0 2px #0a0a0c,
+    inset 2px 2px 0 #1a1a1c,
+    inset -1px -1px 0 #3a3a38;
 }
 
 .arcade-btn__icon-sm {
-  font-size: 20px;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ─── Pixel Crown Icon ─── */
+.pixel-crown {
+  display: block;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow:
+    /* crown tips */
+    0 0 0 #b8a060, 6px 0 0 #b8a060, 12px 0 0 #b8a060,
+    /* crown mid */
+    0 2px 0 #b8a060, 2px 2px 0 #b8a060, 4px 2px 0 #b8a060,
+    6px 2px 0 #b8a060, 8px 2px 0 #b8a060, 10px 2px 0 #b8a060, 12px 2px 0 #b8a060,
+    /* crown body */
+    0 4px 0 #9a8450, 2px 4px 0 #9a8450, 4px 4px 0 #9a8450,
+    6px 4px 0 #9a8450, 8px 4px 0 #9a8450, 10px 4px 0 #9a8450, 12px 4px 0 #9a8450,
+    /* base */
+    0 6px 0 #b8a060, 2px 6px 0 #b8a060, 4px 6px 0 #b8a060,
+    6px 6px 0 #b8a060, 8px 6px 0 #b8a060, 10px 6px 0 #b8a060, 12px 6px 0 #b8a060;
+}
+
+/* ─── Pixel Gear Icon ─── */
+.pixel-gear {
+  display: block;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow:
+    /* top */
+    4px 0 0 #9a9690, 6px 0 0 #9a9690, 8px 0 0 #9a9690,
+    /* row 1 */
+    2px 2px 0 #9a9690, 4px 2px 0 #9a9690, 6px 2px 0 #9a9690, 8px 2px 0 #9a9690, 10px 2px 0 #9a9690,
+    /* row 2 */
+    0 4px 0 #9a9690, 2px 4px 0 #9a9690, 4px 4px 0 #808080, 6px 4px 0 #808080, 8px 4px 0 #808080, 10px 4px 0 #9a9690, 12px 4px 0 #9a9690,
+    /* row 3 center */
+    0 6px 0 #9a9690, 2px 6px 0 #9a9690, 4px 6px 0 #808080, 6px 6px 0 #121214, 8px 6px 0 #808080, 10px 6px 0 #9a9690, 12px 6px 0 #9a9690,
+    /* row 4 */
+    0 8px 0 #9a9690, 2px 8px 0 #9a9690, 4px 8px 0 #808080, 6px 8px 0 #808080, 8px 8px 0 #808080, 10px 8px 0 #9a9690, 12px 8px 0 #9a9690,
+    /* row 5 */
+    2px 10px 0 #9a9690, 4px 10px 0 #9a9690, 6px 10px 0 #9a9690, 8px 10px 0 #9a9690, 10px 10px 0 #9a9690,
+    /* bottom */
+    4px 12px 0 #9a9690, 6px 12px 0 #9a9690, 8px 12px 0 #9a9690;
 }
 
 .arcade-btn__text-sm {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1px;
+  gap: 2px;
 }
 
 .arcade-btn__label-sm {
@@ -751,14 +866,12 @@ onMounted(() => {
 
 .arcade-btn__sub-sm {
   font-size: 8px;
-  color: var(--arc-muted);
+  color: #606058;
   letter-spacing: 1.5px;
-  opacity: 0.6;
 }
 
 .arcade-btn--sub:hover .arcade-btn__sub-sm {
-  color: var(--arc-green-dim);
-  opacity: 1;
+  color: #8a8880;
 }
 
 /* ─── Score Badge ─── */
