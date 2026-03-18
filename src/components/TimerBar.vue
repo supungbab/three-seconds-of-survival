@@ -19,25 +19,30 @@ defineProps<{
 .timer-bar-container {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 3px;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .timer-bar-fill {
   height: 100%;
-  background: var(--accent);
+  background: var(--arc-green);
   border-radius: 3px;
   transition: none;
   will-change: width;
 }
 
 .timer-bar-fill.active {
-  box-shadow: 0 0 10px var(--accent-dim);
+  box-shadow:
+    0 0 8px var(--arc-green-glow),
+    0 0 20px rgba(57, 255, 20, 0.15);
 }
 
 .timer-bar-fill.urgent {
-  background: var(--danger);
-  box-shadow: 0 0 10px rgba(255, 59, 92, 0.5);
+  background: var(--arc-danger);
+  box-shadow:
+    0 0 8px var(--arc-danger-glow),
+    0 0 20px rgba(255, 59, 92, 0.2);
 }
 </style>

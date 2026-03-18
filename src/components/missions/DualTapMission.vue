@@ -34,13 +34,14 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 3px solid var(--accent);
+  background: rgba(57, 255, 20, 0.04);
+  border: 2px solid var(--arc-green);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
   animation: pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.12);
 }
 
 .dual-circle.right {
@@ -49,6 +50,6 @@
 
 .dual-hint {
   font-size: 16px;
-  color: var(--muted);
+  color: var(--arc-muted);
 }
 </style>

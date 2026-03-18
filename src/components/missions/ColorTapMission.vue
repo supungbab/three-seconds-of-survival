@@ -19,6 +19,14 @@ const COLOR_MAP: Record<MissionColor, string> = {
   purple: 'var(--color-purple)',
 }
 
+const GLOW_MAP: Record<MissionColor, string> = {
+  red: 'rgba(255, 59, 92, 0.4)',
+  blue: 'rgba(68, 138, 255, 0.4)',
+  yellow: 'rgba(255, 214, 0, 0.4)',
+  green: 'rgba(0, 230, 118, 0.4)',
+  purple: 'rgba(213, 0, 249, 0.4)',
+}
+
 function handleTap(color: MissionColor) {
   const correct = props.negative
     ? color !== props.targetColor
@@ -34,7 +42,11 @@ function handleTap(color: MissionColor) {
         v-for="(color, i) in colors"
         :key="i"
         class="color-circle"
-        :style="{ backgroundColor: COLOR_MAP[color] }"
+        :style="{
+          backgroundColor: COLOR_MAP[color],
+          boxShadow: `0 0 16px ${GLOW_MAP[color]}, inset 0 0 12px rgba(0,0,0,0.3)`,
+          borderColor: COLOR_MAP[color],
+        }"
         @pointerdown="handleTap(color)"
       />
     </div>
@@ -59,13 +71,13 @@ function handleTap(color: MissionColor) {
 .color-circle {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  border: 2px solid;
   cursor: pointer;
   transition: transform 0.1s;
 }
 
 .color-circle:active {
-  transform: scale(0.9);
+  transform: scale(0.88);
 }
 </style>

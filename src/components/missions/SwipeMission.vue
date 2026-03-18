@@ -35,19 +35,24 @@ const ARROWS: Record<SwipeDirection, string> = {
 .arrow-display {
   font-size: 96px;
   line-height: 1;
-  color: var(--accent);
-  text-shadow: 0 0 40px var(--accent-dim);
+  color: var(--arc-green);
+  text-shadow:
+    0 0 20px var(--arc-green-glow),
+    0 0 60px rgba(57, 255, 20, 0.15);
 }
 
 .arrow-display.reverse {
-  color: var(--danger);
-  text-shadow: 0 0 40px rgba(255, 59, 92, 0.4);
+  color: var(--arc-danger);
+  text-shadow:
+    0 0 20px var(--arc-danger-glow),
+    0 0 60px rgba(255, 59, 92, 0.15);
 }
 
 .reverse-label {
   font-size: 20px;
-  color: var(--danger);
+  color: var(--arc-danger);
   font-weight: 700;
   margin-top: 8px;
+  text-shadow: 0 0 12px var(--arc-danger-glow);
 }
 </style>

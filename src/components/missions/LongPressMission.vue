@@ -29,18 +29,22 @@ defineProps<{
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 3px solid var(--accent);
+  background: rgba(57, 255, 20, 0.04);
+  border: 2px solid var(--arc-green);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.1);
 }
 
 .press-circle.pressing {
   transform: scale(0.9);
-  box-shadow: 0 0 40px var(--accent-dim);
-  border-color: var(--success);
+  border-color: var(--arc-cyan);
+  box-shadow:
+    0 0 24px rgba(0, 229, 255, 0.3),
+    0 0 60px rgba(0, 229, 255, 0.1),
+    inset 0 0 20px rgba(0, 229, 255, 0.08);
 }
 
 .press-inner {
@@ -54,6 +58,6 @@ defineProps<{
 
 .press-hint {
   font-size: 16px;
-  color: var(--muted);
+  color: var(--arc-muted);
 }
 </style>

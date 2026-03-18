@@ -26,8 +26,9 @@
 .warning-text {
   font-size: 20px;
   font-weight: 700;
-  color: var(--danger);
+  color: var(--arc-danger);
   animation: pulse-warning 0.6s ease-in-out infinite;
+  text-shadow: 0 0 16px var(--arc-danger-glow);
 }
 
 @keyframes pulse-warning {

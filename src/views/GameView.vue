@@ -81,6 +81,9 @@ onUnmounted(() => {
     class="game-view"
     :class="{ shake: feedback.isShaking.value }"
   >
+    <!-- Scanline overlay -->
+    <div class="scanlines" />
+
     <!-- Header -->
     <div class="game-header">
       <TimerBar
@@ -179,6 +182,24 @@ onUnmounted(() => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  background: var(--arc-bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(255, 184, 0, 0.03) 0%, transparent 40%);
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
 }
 
 .game-header {
@@ -187,6 +208,8 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 12px;
   padding-top: max(16px, env(safe-area-inset-top));
+  position: relative;
+  z-index: 5;
 }
 
 .mission-area {
@@ -197,6 +220,8 @@ onUnmounted(() => {
   justify-content: center;
   gap: 16px;
   touch-action: none;
+  position: relative;
+  z-index: 5;
 }
 
 .mission-content {
@@ -206,7 +231,7 @@ onUnmounted(() => {
 .phase-badge {
   font-size: 24px;
   font-weight: 700;
-  color: var(--muted);
+  color: var(--arc-muted);
   min-height: 32px;
   display: flex;
   align-items: center;
@@ -214,14 +239,18 @@ onUnmounted(() => {
 }
 
 .phase-badge.success {
-  color: var(--success);
+  color: var(--arc-green);
   font-size: 32px;
-  text-shadow: 0 0 20px rgba(0, 230, 118, 0.5);
+  text-shadow:
+    0 0 12px var(--arc-green-glow),
+    0 0 40px rgba(57, 255, 20, 0.2);
 }
 
 .phase-badge.fail {
-  color: var(--danger);
+  color: var(--arc-danger);
   font-size: 32px;
-  text-shadow: 0 0 20px rgba(255, 59, 92, 0.5);
+  text-shadow:
+    0 0 12px var(--arc-danger-glow),
+    0 0 40px rgba(255, 59, 92, 0.2);
 }
 </style>

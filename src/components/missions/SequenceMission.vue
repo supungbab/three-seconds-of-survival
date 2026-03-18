@@ -55,9 +55,9 @@ function getIcon(step: SequenceStep): string {
 .step {
   width: 64px;
   height: 64px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 3px solid var(--muted);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid var(--arc-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,14 +66,16 @@ function getIcon(step: SequenceStep): string {
 }
 
 .step.done {
-  border-color: var(--success);
-  background: rgba(0, 230, 118, 0.15);
-  opacity: 0.6;
+  border-color: var(--arc-green);
+  background: rgba(57, 255, 20, 0.08);
+  opacity: 0.5;
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.15);
 }
 
 .step.active {
-  border-color: var(--accent);
+  border-color: var(--arc-amber);
   animation: pulse 0.8s ease-in-out infinite;
+  box-shadow: 0 0 16px var(--arc-amber-glow);
 }
 
 .step-icon {
@@ -82,6 +84,6 @@ function getIcon(step: SequenceStep): string {
 
 .sequence-hint {
   font-size: 16px;
-  color: var(--muted);
+  color: var(--arc-muted);
 }
 </style>

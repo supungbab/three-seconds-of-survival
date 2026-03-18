@@ -52,5 +52,6 @@ defineProps<{
   height: 8px;
   border-radius: 50%;
   animation: particle-fly 0.5s ease-out forwards;
+  box-shadow: 0 0 6px currentColor;
 }
 </style>
