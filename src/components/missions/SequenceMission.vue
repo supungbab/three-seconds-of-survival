@@ -55,27 +55,36 @@ function getIcon(step: SequenceStep): string {
 .step {
   width: 64px;
   height: 64px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 2px solid var(--arc-muted);
+  border-radius: 0;
+  background: #121214;
+  border: 2px solid #4a4a46;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
   transition: all 0.2s;
+  box-shadow:
+    0 0 0 2px #0a0a0c,
+    inset 1px 1px 0 #3a3a38,
+    inset -1px -1px 0 #1a1a1c;
 }
 
 .step.done {
-  border-color: var(--arc-green);
-  background: rgba(57, 255, 20, 0.08);
+  border-color: #4a5648;
+  background: #0c140c;
   opacity: 0.5;
-  box-shadow: 0 0 8px rgba(57, 255, 20, 0.15);
+  box-shadow:
+    0 0 0 2px #111311,
+    0 0 8px rgba(57, 255, 20, 0.1),
+    inset 1px 1px 0 #3a4a38;
 }
 
 .step.active {
   border-color: var(--arc-amber);
   animation: pulse 0.8s ease-in-out infinite;
-  box-shadow: 0 0 16px var(--arc-amber-glow);
+  box-shadow:
+    0 0 0 2px #111311,
+    0 0 16px var(--arc-amber-glow);
 }
 
 .step-icon {

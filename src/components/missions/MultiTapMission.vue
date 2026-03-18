@@ -57,16 +57,19 @@ const progressPercent = computed(() =>
 .tap-progress-bar {
   width: 200px;
   height: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 4px;
+  background: #0c140c;
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 2px solid #3a4a38;
+  box-shadow:
+    0 0 0 2px #111311,
+    inset 1px 1px 0 #2a322a;
 }
 
 .tap-progress-fill {
   height: 100%;
   background: var(--arc-green);
-  border-radius: 4px;
+  border-radius: 0;
   transition: width 0.05s linear;
   box-shadow: 0 0 8px var(--arc-green-glow);
 }

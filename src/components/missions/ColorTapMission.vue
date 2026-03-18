@@ -71,10 +71,13 @@ function handleTap(color: MissionColor) {
 .color-circle {
   width: 80px;
   height: 80px;
-  border-radius: 16px;
-  border: 2px solid;
+  border-radius: 0;
+  border: 3px solid;
   cursor: pointer;
   transition: transform 0.1s;
+  box-shadow:
+    0 0 0 2px #111311,
+    inset 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .color-circle:active {

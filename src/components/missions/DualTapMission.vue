@@ -33,15 +33,19 @@
 .dual-circle {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  background: rgba(57, 255, 20, 0.04);
-  border: 2px solid var(--arc-green);
+  border-radius: 0;
+  background: #0c140c;
+  border: 3px solid #4a5648;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
   animation: pulse 1s ease-in-out infinite;
-  box-shadow: 0 0 16px rgba(57, 255, 20, 0.12);
+  box-shadow:
+    0 0 0 2px #111311,
+    inset 1px 1px 0 #5a6858,
+    inset -1px -1px 0 #2a322a,
+    0 0 12px rgba(57, 255, 20, 0.08);
 }
 
 .dual-circle.right {

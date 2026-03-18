@@ -18,20 +18,39 @@ const home = usePressable(() => emit('home'))
 <template>
   <div class="result-overlay" :class="{ show: true }">
     <div class="result-card fade-in">
-      <div class="result-label">GAME OVER</div>
-      <div class="result-score">{{ score }}</div>
-      <div class="result-best">
-        최고 기록: <span class="best-value">{{ bestScore }}</span>
+      <!-- Scanline texture on card -->
+      <div class="card-scanlines" />
+
+      <!-- Header -->
+      <div class="result-header">
+        <span class="pixel-skull"></span>
+        <div class="result-label">GAME OVER</div>
       </div>
-      <div v-if="score >= bestScore && score > 0" class="new-record">
-        NEW RECORD!
+
+      <!-- Pixel divider -->
+      <div class="pixel-divider" />
+
+      <!-- Score section -->
+      <div class="result-score-section">
+        <div class="result-score">{{ score }}</div>
+        <div class="result-best">
+          BEST <span class="best-value">{{ bestScore }}</span>
+        </div>
+        <div v-if="score >= bestScore && score > 0" class="new-record">
+          ★ NEW RECORD ★
+        </div>
       </div>
+
+      <!-- Pixel divider -->
+      <div class="pixel-divider" />
+
+      <!-- Actions -->
       <div class="result-actions">
         <button class="arc-btn arc-btn--primary" @click="restart.onClick">
-          다시 하기
+          <span class="btn-icon">▶</span> 다시 하기
         </button>
         <button class="arc-btn arc-btn--ghost" @click="home.onClick">
-          홈으로
+          <span class="btn-icon">◀</span> 홈으로
         </button>
       </div>
     </div>
@@ -42,7 +61,7 @@ const home = usePressable(() => emit('home'))
 .result-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 8, 15, 0.9);
+  background: rgba(4, 2, 6, 0.94);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,105 +77,195 @@ const home = usePressable(() => emit('home'))
   opacity: 1;
 }
 
+/* ─── Card ─── */
 .result-card {
-  background: var(--arc-surface);
-  border: 2px solid var(--arc-surface-light);
-  border-radius: 8px;
-  padding: 40px 32px;
+  background: #0a0a0c;
+  border: 3px solid #3a3a38;
+  border-radius: 0;
+  padding: 0;
   text-align: center;
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
+  position: relative;
+  overflow: hidden;
   box-shadow:
-    0 0 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 0 0 3px #060608,
+    inset 1px 1px 0 #4a4a48,
+    inset -1px -1px 0 #1a1a1c,
+    0 0 80px rgba(0, 0, 0, 0.7);
+}
+
+.card-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Header ─── */
+.result-header {
+  padding: 24px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.pixel-skull {
+  display: block;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow:
+    /* top row */
+    3px 0 0 #ff3b5c, 6px 0 0 #ff3b5c, 9px 0 0 #ff3b5c, 12px 0 0 #ff3b5c,
+    /* eyes row */
+    0 3px 0 #ff3b5c, 3px 3px 0 #ff3b5c, 6px 3px 0 #0a0a0c, 9px 3px 0 #ff3b5c,
+    12px 3px 0 #0a0a0c, 15px 3px 0 #ff3b5c,
+    /* nose */
+    0 6px 0 #ff3b5c, 3px 6px 0 #ff3b5c, 6px 6px 0 #ff3b5c,
+    9px 6px 0 #ff3b5c, 12px 6px 0 #ff3b5c, 15px 6px 0 #ff3b5c,
+    /* mouth */
+    3px 9px 0 #cc2244, 6px 9px 0 #cc2244, 9px 9px 0 #cc2244, 12px 9px 0 #cc2244;
+  flex-shrink: 0;
 }
 
 .result-label {
-  font-size: 16px;
-  color: var(--arc-muted);
-  letter-spacing: 4px;
-  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #ff3b5c;
+  letter-spacing: 6px;
+  text-shadow: 0 0 16px rgba(255, 59, 92, 0.4);
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Pixel Divider ─── */
+.pixel-divider {
+  height: 2px;
+  margin: 0 16px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      #3a3a38 0px,
+      #3a3a38 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  opacity: 0.6;
+}
+
+/* ─── Score Section ─── */
+.result-score-section {
+  padding: 20px 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .result-score {
-  font-size: 72px;
+  font-size: 80px;
   font-weight: 900;
   color: var(--arc-amber);
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-shadow:
     0 0 24px var(--arc-amber-glow),
-    0 0 60px rgba(255, 184, 0, 0.15);
+    0 0 60px rgba(255, 184, 0, 0.2);
 }
 
 .result-best {
-  font-size: 14px;
-  color: var(--arc-muted);
-  margin-bottom: 8px;
+  font-size: 13px;
+  color: #606060;
+  letter-spacing: 2px;
 }
 
 .best-value {
-  color: var(--arc-green);
+  color: #8a8a80;
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }
 
 .new-record {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
   color: var(--arc-amber);
+  letter-spacing: 3px;
   text-shadow:
     0 0 12px var(--arc-amber-glow),
     0 0 30px rgba(255, 184, 0, 0.2);
-  margin-bottom: 16px;
+  margin-top: 12px;
   animation: pulse 0.6s ease-in-out infinite;
 }
 
+/* ─── Actions ─── */
 .result-actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 8px;
+  padding: 16px 20px 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .arc-btn {
-  padding: 14px 24px;
-  font-size: 18px;
+  padding: 12px 20px;
+  font-size: 16px;
   font-weight: 700;
   font-family: 'Galmuri11', monospace;
   cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.15s ease;
+  border-radius: 0;
+  transition: background 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .arc-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
+}
+
+.btn-icon {
+  font-size: 12px;
 }
 
 .arc-btn--primary {
-  background: rgba(57, 255, 20, 0.08);
-  color: var(--arc-green);
-  border: 2px solid var(--arc-green);
+  background: #0c140c;
+  color: #8cc890;
+  border: 2px solid #4a5648;
   box-shadow:
-    0 0 12px rgba(57, 255, 20, 0.15),
-    inset 0 0 12px rgba(57, 255, 20, 0.05);
+    inset 1px 1px 0 #5a6858,
+    inset -1px -1px 0 #2a322a;
 }
 
 .arc-btn--primary:hover {
-  background: rgba(57, 255, 20, 0.15);
+  background: #101c10;
+  border-color: #5a6a56;
+  color: #a0dca4;
   box-shadow:
-    0 0 20px rgba(57, 255, 20, 0.25),
-    inset 0 0 16px rgba(57, 255, 20, 0.08);
+    0 0 12px rgba(57, 255, 20, 0.08),
+    inset 1px 1px 0 #6a7a66,
+    inset -1px -1px 0 #3a4a3a;
 }
 
 .arc-btn--ghost {
-  background: transparent;
-  color: var(--arc-muted);
-  border: 1px solid var(--arc-surface-light);
+  background: #0c0c0e;
+  color: #706e68;
+  border: 2px solid #333330;
+  box-shadow:
+    inset 1px 1px 0 #2a2a28,
+    inset -1px -1px 0 #141416;
 }
 
 .arc-btn--ghost:hover {
-  color: var(--arc-text);
-  border-color: var(--arc-muted);
+  color: #9a9890;
+  border-color: #4a4a46;
+  background: #141416;
 }
 </style>

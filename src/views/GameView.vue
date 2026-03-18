@@ -182,10 +182,10 @@ onUnmounted(() => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background: var(--arc-bg);
+  background: #0a0610;
   background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(255, 184, 0, 0.03) 0%, transparent 40%);
+    radial-gradient(ellipse at 50% 100%, rgba(255, 80, 20, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.03) 0%, transparent 40%);
 }
 
 .scanlines {
@@ -195,8 +195,8 @@ onUnmounted(() => {
     to bottom,
     transparent 0px,
     transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 4px
+    rgba(0, 0, 0, 0.22) 2px,
+    rgba(0, 0, 0, 0.22) 4px
   );
   pointer-events: none;
   z-index: 10;
@@ -239,11 +239,11 @@ onUnmounted(() => {
 }
 
 .phase-badge.success {
-  color: var(--arc-green);
+  color: #8cc890;
   font-size: 32px;
   text-shadow:
-    0 0 12px var(--arc-green-glow),
-    0 0 40px rgba(57, 255, 20, 0.2);
+    0 0 12px rgba(57, 255, 20, 0.3),
+    0 0 40px rgba(57, 255, 20, 0.15);
 }
 
 .phase-badge.fail {

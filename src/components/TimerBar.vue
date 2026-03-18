@@ -18,19 +18,23 @@ defineProps<{
 <style scoped>
 .timer-bar-container {
   width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
+  height: 8px;
+  background: #0c140c;
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 2px solid #3a4a38;
+  box-shadow:
+    0 0 0 2px #111311,
+    inset 1px 1px 0 #2a322a;
 }
 
 .timer-bar-fill {
   height: 100%;
   background: var(--arc-green);
-  border-radius: 3px;
+  border-radius: 0;
   transition: none;
   will-change: width;
+  image-rendering: pixelated;
 }
 
 .timer-bar-fill.active {
