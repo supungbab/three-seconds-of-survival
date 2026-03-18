@@ -123,6 +123,7 @@ const home = usePressable(() => emit('home'))
   width: 3px;
   height: 3px;
   background: transparent;
+  transform: translate(-8px, -5px);
   box-shadow:
     /* top row */
     3px 0 0 #ff3b5c, 6px 0 0 #ff3b5c, 9px 0 0 #ff3b5c, 12px 0 0 #ff3b5c,

@@ -814,6 +814,7 @@ onMounted(async () => {
   width: 2px;
   height: 2px;
   background: transparent;
+  transform: translate(-8px, -7px);
   box-shadow:
     /* head */
     8px 0 0 currentColor, 10px 0 0 currentColor,
@@ -909,6 +910,7 @@ onMounted(async () => {
   width: 2px;
   height: 2px;
   background: transparent;
+  transform: translate(-6px, -3px);
   box-shadow:
     /* crown tips */
     0 0 0 #b8a060, 6px 0 0 #b8a060, 12px 0 0 #b8a060,
@@ -929,6 +931,7 @@ onMounted(async () => {
   width: 2px;
   height: 2px;
   background: transparent;
+  transform: translate(-6px, -6px);
   box-shadow:
     /* top */
     4px 0 0 #9a9690, 6px 0 0 #9a9690, 8px 0 0 #9a9690,
