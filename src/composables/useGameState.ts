@@ -9,6 +9,7 @@ import { useAudio } from './useAudio'
 import { useFeedback } from './useFeedback'
 
 const SHOWING_DURATION = 500
+const SUB_SHOWING_DURATION = 200
 const ACTING_DURATION = 2500
 const SUCCESS_DELAY = 300
 
@@ -17,6 +18,11 @@ export function useGameState() {
   const score = ref(0)
   const mission = shallowRef<MissionParams | null>(null)
   const missionKey = ref(0)
+
+  // 다중 미션 상태
+  const roundMissions = shallowRef<MissionParams[]>([])
+  const subMissionIndex = ref(0)
+  const subMissionCount = ref(1)
 
   const timer = useTimer()
   const pool = useMissionPool()
@@ -49,22 +55,31 @@ export function useGameState() {
     pendingTimers.length = 0
   }
 
+  function resetSubMissionState() {
+    colorTapCorrect = false
+    multiTapCount = 0
+    sequenceIndex.value = 0
+  }
+
   function startGame() {
     clearAllTimers()
     audio.ensureContext()
     score.value = 0
     pool.reset()
     phase.value = 'IDLE'
-    nextMission()
+    nextRound()
   }
 
-  function nextMission() {
-    const m = pool.pickMission(score.value)
+  function nextRound() {
+    const missions = pool.pickMissions(score.value)
+    roundMissions.value = missions
+    subMissionIndex.value = 0
+    subMissionCount.value = missions.length
+
+    const m = missions[0]
     mission.value = m
     missionKey.value++
-    colorTapCorrect = false
-    multiTapCount = 0
-    sequenceIndex.value = 0
+    resetSubMissionState()
     phase.value = 'SHOWING'
 
     // After showing delay, enable input
@@ -74,6 +89,23 @@ export function useGameState() {
         timer.start(ACTING_DURATION, onTimeout)
       }
     }, SHOWING_DURATION)
+  }
+
+  function advanceSubMission() {
+    const nextIdx = subMissionIndex.value + 1
+    subMissionIndex.value = nextIdx
+    const m = roundMissions.value[nextIdx]
+    mission.value = m
+    missionKey.value++
+    resetSubMissionState()
+    phase.value = 'SUB_SHOWING'
+
+    // Short showing for sub-missions, timer keeps running
+    safeTimeout(() => {
+      if (phase.value === 'SUB_SHOWING') {
+        phase.value = 'ACTING'
+      }
+    }, SUB_SHOWING_DURATION)
   }
 
   function onTimeout() {
@@ -159,6 +191,13 @@ export function useGameState() {
   }
 
   function handleSuccess() {
+    // 남은 서브미션이 있으면 다음 서브미션으로
+    if (subMissionIndex.value < subMissionCount.value - 1) {
+      advanceSubMission()
+      return
+    }
+
+    // 라운드 완료
     timer.stop()
     phase.value = 'SUCCESS'
     score.value++
@@ -167,7 +206,7 @@ export function useGameState() {
 
     safeTimeout(() => {
       if (phase.value === 'SUCCESS') {
-        nextMission()
+        nextRound()
       }
     }, SUCCESS_DELAY)
   }
@@ -194,6 +233,8 @@ export function useGameState() {
     score,
     mission,
     missionKey,
+    subMissionIndex,
+    subMissionCount,
     timer,
     feedback,
     storage,

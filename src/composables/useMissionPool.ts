@@ -16,6 +16,18 @@ const BRACKETS: DifficultyBracket[] = [
   { maxScore: Infinity, missionTypes: ['COLOR_TAP', 'SWIPE', 'REVERSE_SWIPE', 'MULTI_TAP', 'LONG_PRESS', 'DUAL_TAP', 'DO_NOTHING', 'SEQUENCE', 'COLOR_TAP_NEGATIVE'], maxDifficulty: 'HARD' },
 ]
 
+/** 다중 미션 시 제외할 타입 */
+const MULTI_MISSION_EXCLUDE: MissionType[] = ['DO_NOTHING', 'LONG_PRESS']
+/** 3개 이상 미션 시 추가 제외 */
+const TRIPLE_MISSION_EXCLUDE: MissionType[] = ['SEQUENCE']
+
+export function getMissionCount(score: number): number {
+  if (score <= 5) return 1
+  if (score <= 15) return 2
+  if (score <= 30) return 3
+  return 4
+}
+
 export function useMissionPool() {
   let lastMissionType: MissionType | null = null
 
@@ -45,9 +57,54 @@ export function useMissionPool() {
     return mission
   }
 
+  function pickMissions(score: number): MissionParams[] {
+    const count = getMissionCount(score)
+    if (count === 1) return [pickMission(score)]
+
+    const bracket = BRACKETS.find((b) => score <= b.maxScore) ?? BRACKETS[BRACKETS.length - 1]
+    let availableTypes = bracket.missionTypes.filter(
+      (t) => !MULTI_MISSION_EXCLUDE.includes(t),
+    )
+    if (count >= 3) {
+      availableTypes = availableTypes.filter(
+        (t) => !TRIPLE_MISSION_EXCLUDE.includes(t),
+      )
+    }
+
+    const missions: MissionParams[] = []
+    let prevType: MissionType | null = lastMissionType
+
+    for (let i = 0; i < count; i++) {
+      const filtered = availableTypes.length > 1
+        ? availableTypes.filter((t) => t !== prevType)
+        : availableTypes
+
+      const chosenType = filtered[Math.floor(Math.random() * filtered.length)]
+      const matching = MISSION_REGISTRY.filter(
+        (d) => d.type === chosenType && DIFFICULTY_ORDER[d.difficulty] <= DIFFICULTY_ORDER[bracket.maxDifficulty],
+      )
+      const definition = matching.length > 1
+        ? matching[Math.floor(Math.random() * matching.length)]
+        : matching[0]
+      let mission = definition.generate()
+
+      // 다중 미션 시 MULTI_TAP tapCount 축소 (2~3)
+      if (mission.type === 'MULTI_TAP' && mission.tapCount && mission.tapCount > 3) {
+        const reducedCount = Math.random() < 0.5 ? 2 : 3
+        mission = { ...mission, tapCount: reducedCount, text: `${reducedCount}번 탭!` }
+      }
+
+      missions.push(mission)
+      prevType = chosenType
+    }
+
+    lastMissionType = prevType
+    return missions
+  }
+
   function reset() {
     lastMissionType = null
   }
 
-  return { pickMission, getAvailableTypes, reset }
+  return { pickMission, pickMissions, getAvailableTypes, reset }
 }

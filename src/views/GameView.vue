@@ -26,6 +26,8 @@ const {
   score,
   mission,
   missionKey,
+  subMissionIndex,
+  subMissionCount,
   timer,
   feedback,
   storage,
@@ -42,7 +44,8 @@ const isBlocked = () =>
   phase.value === 'GAME_OVER' ||
   phase.value === 'IDLE' ||
   phase.value === 'FAIL' ||
-  phase.value === 'SHOWING'
+  phase.value === 'SHOWING' ||
+  phase.value === 'SUB_SHOWING'
 
 const { tapCount, isPressed, bind, resetTapCount } = useInputDetector((action) => {
   handleInput(action)
@@ -92,18 +95,19 @@ onUnmounted(() => {
     <div class="game-header">
       <TimerBar
         :progress="timer.progress.value"
-        :active="phase === 'ACTING'"
+        :active="phase === 'ACTING' || phase === 'SUB_SHOWING'"
       />
       <ScoreDisplay :score="score" />
     </div>
 
     <!-- Mission area: 터치 핸들러는 여기에만 바인딩 (the-perfect: 캔버스에만 바인딩) -->
     <div ref="missionArea" class="mission-area">
-      <template v-if="mission && (phase === 'SHOWING' || phase === 'ACTING' || phase === 'SUCCESS')">
+      <template v-if="mission && (phase === 'SHOWING' || phase === 'SUB_SHOWING' || phase === 'ACTING' || phase === 'SUCCESS')">
         <MissionText
           :key="missionKey"
           :text="mission.text"
-          :showing="phase === 'SHOWING'"
+          :showing="phase === 'SHOWING' || phase === 'SUB_SHOWING'"
+          :quick="phase === 'SUB_SHOWING'"
         />
 
         <div class="mission-content" :key="'content-' + missionKey">
@@ -152,9 +156,23 @@ onUnmounted(() => {
         </div>
       </template>
 
+      <!-- Sub-mission progress dots -->
+      <div v-if="subMissionCount > 1" class="sub-dots">
+        <span
+          v-for="i in subMissionCount"
+          :key="i"
+          class="sub-dot"
+          :class="{
+            done: i - 1 < subMissionIndex,
+            active: i - 1 === subMissionIndex && (phase === 'ACTING' || phase === 'SUB_SHOWING'),
+          }"
+        />
+      </div>
+
       <!-- Phase indicator -->
       <div class="phase-badge" :class="{ success: phase === 'SUCCESS', fail: phase === 'FAIL' }">
         <template v-if="phase === 'SHOWING'">준비...</template>
+        <template v-else-if="phase === 'SUB_SHOWING'">다음!</template>
         <template v-else-if="phase === 'SUCCESS'">+1</template>
         <template v-else-if="phase === 'FAIL'">실패!</template>
         <template v-else>&nbsp;</template>
@@ -248,6 +266,39 @@ onUnmounted(() => {
   text-shadow:
     0 0 12px rgba(140, 200, 144, 0.3),
     0 0 40px rgba(140, 200, 144, 0.15);
+}
+
+.sub-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--arc-muted);
+  opacity: 0.3;
+  transition: all 0.2s ease;
+}
+
+.sub-dot.done {
+  background: var(--px-green);
+  opacity: 1;
+  box-shadow: 0 0 6px rgba(140, 200, 144, 0.4);
+}
+
+.sub-dot.active {
+  background: var(--arc-text);
+  opacity: 1;
+  animation: dot-pulse 0.4s ease infinite alternate;
+}
+
+@keyframes dot-pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.3); }
 }
 
 .phase-badge.fail {
