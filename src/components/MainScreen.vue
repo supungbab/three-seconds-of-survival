@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { usePressable } from '@/composables/usePressable'
 import { useSettings } from '@/composables/useSettings'
+import { useI18n } from '@/composables/useI18n'
 import { useAudio } from '@/composables/useAudio'
 import { useBgm } from '@/composables/useBgm'
 import { ref, onMounted } from 'vue'
@@ -21,9 +22,16 @@ const mounted = ref(false)
 const showOptions = ref(false)
 const showRankingToast = ref(false)
 
-const { soundEnabled, volume, bgmEnabled, bgmVolume } = useSettings()
+const { soundEnabled, volume, bgmEnabled, bgmVolume, locale } = useSettings()
+const { t } = useI18n()
 const { playTick } = useAudio()
 const bgm = useBgm()
+
+function toggleLocale(e: Event) {
+  e.stopPropagation()
+  playTick()
+  locale.value = locale.value === 'ko' ? 'en' : 'ko'
+}
 
 function openOptions(e: Event) {
   e.stopPropagation()
@@ -168,10 +176,10 @@ onMounted(async () => {
       <!-- Title block -->
       <div class="title-block">
         <div class="title-big">
-          <span class="title-num">3</span><span class="title-unit">초</span>
+          <span class="title-num">3</span><span class="title-unit">{{ t('초') }}</span>
         </div>
-        <div class="title-sub">생존</div>
-        <div class="title-tagline">미션을 3초 안에 클리어하라!</div>
+        <div class="title-sub">{{ t('생존') }}</div>
+        <div class="title-tagline">{{ t('미션을 3초 안에 클리어하라!') }}</div>
       </div>
 
       <!-- Button group -->
@@ -179,7 +187,7 @@ onMounted(async () => {
       <button class="arcade-btn arcade-btn--primary" @click="start.onClick">
         <span class="arcade-btn__icon"><svg class="pixel-human" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="2" width="4" height="4" fill="currentColor"/><rect x="7" y="7" width="10" height="2" fill="currentColor"/><rect x="9" y="9" width="2" height="7" fill="currentColor"/><rect x="13" y="9" width="2" height="7" fill="currentColor"/><rect x="9" y="16" width="2" height="6" fill="currentColor"/><rect x="13" y="16" width="2" height="6" fill="currentColor"/><rect x="11" y="14" width="2" height="2" fill="currentColor"/><rect x="5" y="5" width="2" height="2" fill="currentColor"/><rect x="3" y="3" width="2" height="2" fill="currentColor"/><rect x="17" y="5" width="2" height="2" fill="currentColor"/><rect x="19" y="3" width="2" height="2" fill="currentColor"/></svg></span>
         <span class="arcade-btn__text">
-          <span class="arcade-btn__label">게임 시작</span>
+          <span class="arcade-btn__label">{{ t('게임 시작') }}</span>
           <span class="arcade-btn__sub">START GAME</span>
         </span>
       </button>
@@ -188,14 +196,14 @@ onMounted(async () => {
         <button class="arcade-btn arcade-btn--sub" @click="openRanking">
           <span class="arcade-btn__icon-sm"><svg class="pixel-crown" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="2" height="12" fill="currentColor"/><rect x="19" y="3" width="2" height="12" fill="currentColor"/><rect x="11" y="3" width="2" height="2" fill="currentColor"/><rect x="9" y="5" width="2" height="2" fill="currentColor"/><rect x="5" y="5" width="2" height="2" fill="currentColor"/><rect x="3" y="3" width="2" height="2" fill="currentColor"/><rect x="7" y="7" width="2" height="2" fill="currentColor"/><rect x="13" y="5" width="2" height="2" fill="currentColor"/><rect x="15" y="7" width="2" height="2" fill="currentColor"/><rect x="17" y="5" width="2" height="2" fill="currentColor"/><rect x="3" y="15" width="18" height="2" fill="currentColor"/><rect x="3" y="19" width="18" height="2" fill="currentColor"/></svg></span>
           <span class="arcade-btn__text-sm">
-            <span class="arcade-btn__label-sm">랭킹</span>
+            <span class="arcade-btn__label-sm">{{ t('랭킹') }}</span>
             <span class="arcade-btn__sub-sm">RANKING</span>
           </span>
         </button>
         <button class="arcade-btn arcade-btn--sub" @click="openOptions">
           <span class="arcade-btn__icon-sm"><svg class="pixel-gear" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip-gear)"><rect x="9" width="6" height="2" fill="currentColor"/><rect x="15" y="24" width="6" height="2" transform="rotate(180 15 24)" fill="currentColor"/><rect y="15" width="6" height="2" transform="rotate(-90 0 15)" fill="currentColor"/><rect x="24" y="9" width="6" height="2" transform="rotate(90 24 9)" fill="currentColor"/><rect x="9" y="2" width="2" height="4" fill="currentColor"/><rect x="15" y="22" width="2" height="4" transform="rotate(180 15 22)" fill="currentColor"/><rect x="2" y="15" width="2" height="4" transform="rotate(-90 2 15)" fill="currentColor"/><rect x="22" y="9" width="2" height="4" transform="rotate(90 22 9)" fill="currentColor"/><rect x="13" y="2" width="2" height="4" fill="currentColor"/><rect x="11" y="22" width="2" height="4" transform="rotate(180 11 22)" fill="currentColor"/><rect x="2" y="11" width="2" height="4" transform="rotate(-90 2 11)" fill="currentColor"/><rect x="22" y="13" width="2" height="4" transform="rotate(90 22 13)" fill="currentColor"/><rect x="7" y="4" width="2" height="2" fill="currentColor"/><rect width="2" height="2" transform="matrix(-1 0 0 1 17 4)" fill="currentColor"/><rect x="17" y="20" width="2" height="2" transform="rotate(180 17 20)" fill="currentColor"/><rect width="2" height="2" transform="matrix(1 0 0 -1 7 20)" fill="currentColor"/><rect x="2" y="2" width="5" height="2" fill="currentColor"/><rect width="5" height="2" transform="matrix(-1 0 0 1 22 2)" fill="currentColor"/><rect x="22" y="22" width="5" height="2" transform="rotate(180 22 22)" fill="currentColor"/><rect width="5" height="2" transform="matrix(1 0 0 -1 2 22)" fill="currentColor"/><rect x="2" y="2" width="2" height="5" fill="currentColor"/><rect width="2" height="5" transform="matrix(-1 0 0 1 22 2)" fill="currentColor"/><rect x="22" y="22" width="2" height="5" transform="rotate(180 22 22)" fill="currentColor"/><rect width="2" height="5" transform="matrix(1 0 0 -1 2 22)" fill="currentColor"/><rect x="4" y="7" width="2" height="2" fill="currentColor"/><rect width="2" height="2" transform="matrix(-1 0 0 1 20 7)" fill="currentColor"/><rect x="20" y="17" width="2" height="2" transform="rotate(180 20 17)" fill="currentColor"/><rect width="2" height="2" transform="matrix(1 0 0 -1 4 17)" fill="currentColor"/><rect x="10" y="8" width="4" height="2" fill="currentColor"/><rect x="10" y="14" width="4" height="2" fill="currentColor"/><rect x="8" y="10" width="2" height="4" fill="currentColor"/><rect x="14" y="10" width="2" height="4" fill="currentColor"/></g><defs><clipPath id="clip-gear"><rect width="24" height="24" fill="white"/></clipPath></defs></svg></span>
           <span class="arcade-btn__text-sm">
-            <span class="arcade-btn__label-sm">옵션</span>
+            <span class="arcade-btn__label-sm">{{ t('옵션') }}</span>
             <span class="arcade-btn__sub-sm">OPTIONS</span>
           </span>
         </button>
@@ -204,17 +212,17 @@ onMounted(async () => {
 
       <!-- Best score -->
       <div v-if="bestScore > 0" class="best-score">
-        <span class="best-score__label">BEST</span>
+        <span class="best-score__label">{{ t('BEST') }}</span>
         <span class="best-score__value">{{ bestScore }}</span>
       </div>
 
-      <div v-else class="first-play">첫 도전을 시작하세요!</div>
+      <div v-else class="first-play">{{ t('첫 도전을 시작하세요!') }}</div>
     </div>
 
     <!-- Ranking toast -->
     <Transition name="toast">
       <div v-if="showRankingToast" class="toast">
-        준비 중입니다
+        {{ t('준비 중입니다') }}
       </div>
     </Transition>
 
@@ -223,14 +231,14 @@ onMounted(async () => {
       <div v-if="showOptions" class="modal-overlay" @click.self="closeOptions">
         <div class="modal-card">
           <div class="modal-header">
-            <span class="modal-title">옵션</span>
+            <span class="modal-title">{{ t('옵션') }}</span>
             <button class="modal-close" @click="closeOptions">✕</button>
           </div>
 
           <div class="modal-body">
             <!-- BGM toggle -->
             <div class="option-row">
-              <span class="option-label">배경음악</span>
+              <span class="option-label">{{ t('배경음악') }}</span>
               <button
                 class="toggle-btn"
                 :class="{ active: bgmEnabled }"
@@ -245,7 +253,7 @@ onMounted(async () => {
 
             <!-- BGM Volume slider -->
             <div class="option-row" :class="{ disabled: !bgmEnabled }">
-              <span class="option-label">BGM 볼륨</span>
+              <span class="option-label">{{ t('BGM 볼륨') }}</span>
               <div class="volume-control">
                 <input
                   type="range"
@@ -266,7 +274,7 @@ onMounted(async () => {
 
             <!-- Sound toggle -->
             <div class="option-row">
-              <span class="option-label">효과음</span>
+              <span class="option-label">{{ t('효과음') }}</span>
               <button
                 class="toggle-btn"
                 :class="{ active: soundEnabled }"
@@ -281,7 +289,7 @@ onMounted(async () => {
 
             <!-- Volume slider -->
             <div class="option-row" :class="{ disabled: !soundEnabled }">
-              <span class="option-label">볼륨</span>
+              <span class="option-label">{{ t('볼륨') }}</span>
               <div class="volume-control">
                 <input
                   type="range"
@@ -297,13 +305,30 @@ onMounted(async () => {
               </div>
             </div>
 
+            <!-- Divider -->
+            <div class="option-divider" />
+
+            <!-- Language toggle -->
+            <div class="option-row">
+              <span class="option-label">{{ t('언어') }}</span>
+              <button
+                class="toggle-btn active"
+                @click="toggleLocale"
+              >
+                <span class="lang-badge">{{ locale === 'ko' ? '한' : 'EN' }}</span>
+              </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="option-divider" />
+
             <!-- Test sound -->
             <button
               class="test-sound-btn"
               :disabled="!soundEnabled"
               @click="testSound"
             >
-              🔊 소리 테스트
+              {{ t('소리 테스트') }}
             </button>
           </div>
         </div>
@@ -1178,6 +1203,23 @@ onMounted(async () => {
 .test-sound-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+/* ─── Language Badge ─── */
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 24px;
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Galmuri11', monospace;
+  color: var(--px-green);
+  background: var(--px-green-bg);
+  border: 2px solid var(--px-green-border);
+  letter-spacing: 1px;
 }
 
 /* ─── Modal Transition ─── */

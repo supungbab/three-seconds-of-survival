@@ -1,4 +1,4 @@
-import type { Difficulty, MissionColor, SequenceStep, SwipeDirection } from './game'
+import type { Difficulty, MissionColor, SwipeDirection } from './game'
 
 const DIRECTION_ICONS: Record<SwipeDirection, string> = {
   UP: '↑',
@@ -8,35 +8,6 @@ const DIRECTION_ICONS: Record<SwipeDirection, string> = {
 }
 
 export type MissionType =
-  | 'COLOR_TAP'
-  | 'SWIPE'
-  | 'REVERSE_SWIPE'
-  | 'MULTI_TAP'
-  | 'LONG_PRESS'
-  | 'DUAL_TAP'
-  | 'DO_NOTHING'
-  | 'COLOR_TAP_NEGATIVE'
-  | 'SEQUENCE'
-  | 'TAP_ZONE'
-  | 'SIZE_TAP'
-  | 'SWIPE_MATCH'
-  | 'DOUBLE_SWIPE'
-  | 'ODD_ONE_OUT'
-  | 'MATH_TAP'
-  | 'MIRROR_SWIPE'
-  | 'QUICK_TAP'
-  | 'CATCH'
-  | 'COUNT_TAP'
-  | 'PATTERN_TAP'
-  | 'SIMON'
-  | 'FAKE_OUT'
-  | 'DRAG_TO'
-  | 'PINCH'
-  | 'ROTATE'
-  | 'COLOR_SWIPE'
-  | 'HOLD_AND_TAP'
-  | 'DUAL_SWIPE'
-  | 'RHYTHM'
   | 'TUNE'
   | 'POWER_UP'
   | 'WIRE_CUT'
@@ -75,12 +46,71 @@ export type MissionType =
   | 'SPLICE'
   | 'DISTRESS'
   | 'ELEVATOR'
+  | 'SCRAMBLE'
+  | 'SIGNAL_INTERCEPT'
+  | 'PURIFY'
+  | 'BARTER'
+  | 'FORAGE'
+  | 'DEGAUSS'
+  | 'REBOOT'
+  | 'IGNITE'
+  | 'BIOS_ERROR'
+  | 'MUTANT_DETECT'
+  | 'CALIBRATE'
+  | 'FUSE_REPLACE'
+  | 'TRUST_KNOCK'
+  | 'COUNTDOWN_ZERO'
+  | 'INFECTED_SCAN'
+  | 'CURFEW'
+  | 'BLACKBOX'
+  | 'DEFRAG'
+  | 'FALLOUT_DODGE'
+  | 'TRIPWIRE'
+  | 'WELD'
+  | 'CRANK_START'
+  | 'RATION_SPLIT'
+  | 'NOISE_JAM'
+  | 'PACKET_SNIFF'
+  | 'BOOT_SEQUENCE'
+  | 'PIXEL_FIX'
+  | 'ANTENNA_ALIGN'
+  | 'TRANSFUSE'
+  | 'PULSE_CHECK'
+  | 'SPLINT'
+  | 'ANTIDOTE'
+  | 'RELOAD'
+  | 'SCOPE'
+  | 'GRENADE_PIN'
+  | 'BARRICADE'
+  | 'FLARE_LAUNCH'
+  | 'WATER_LEVEL'
+  | 'BRIDGE_CROSS'
+  | 'DUST_STORM'
+  | 'INTERLACE'
+  | 'VSYNC'
+  | 'COLOR_BLEED'
+  | 'BURN_IN'
+  | 'SEMAPHORE'
+  | 'CIPHER_WHEEL'
+  | 'BEACON'
+  | 'GENERATOR'
+  | 'HATCH_SEAL'
+  | 'PERIMETER'
+  | 'SOLAR_PANEL'
+  | 'PH_TEST'
+  | 'CENTRIFUGE'
+  | 'ISOTOPE'
+  | 'AUTOPILOT'
+  | 'DOCKING'
+  | 'MINEFIELD'
+  | 'CAPACITOR'
+  | 'SOLDER'
+  | 'FIRMWARE'
+  | 'TUBE_REPLACE'
+  | 'RATION_VOTE'
+  | 'SACRIFICE'
+  | 'MIMIC'
 
-export type TapZone = 'LEFT' | 'RIGHT'
-export type SizeTarget = 'BIG' | 'SMALL'
-export type OddVariant = 'color' | 'size' | 'shape'
-export type PinchDirection = 'IN' | 'OUT'
-export type RotateDirection = 'CW' | 'CCW'
 
 export interface MissionParams {
   type: MissionType
@@ -90,43 +120,6 @@ export interface MissionParams {
   colors?: MissionColor[]
   swipeDirection?: SwipeDirection
   tapCount?: number
-  negative?: boolean
-  sequence?: SequenceStep[]
-  // TAP_ZONE
-  targetZone?: TapZone
-  // SIZE_TAP
-  targetSize?: SizeTarget
-  sizes?: number[]
-  // DOUBLE_SWIPE
-  swipeCount?: number
-  // ODD_ONE_OUT
-  oddVariant?: OddVariant
-  itemCount?: number
-  oddIndex?: number
-  // MATH_TAP
-  mathExpression?: string
-  mathAnswer?: number
-  mathChoices?: number[]
-  // COUNT_TAP
-  countItems?: number
-  // PATTERN_TAP
-  patternLength?: number
-  // SIMON
-  simonSequence?: number[]
-  simonButtons?: number
-  // FAKE_OUT
-  fakeText?: string
-  // PINCH
-  pinchDirection?: PinchDirection
-  // ROTATE
-  rotateDirection?: RotateDirection
-  // COLOR_SWIPE
-  colorSwipeRule?: { color: MissionColor; direction: SwipeDirection }[]
-  // DUAL_SWIPE
-  dualSwipeDirections?: [SwipeDirection, SwipeDirection]
-  // RHYTHM
-  beatCount?: number
-  beatInterval?: number
   // WIRE_CUT
   wireCount?: number
   // MORSE
@@ -171,6 +164,38 @@ export interface MissionParams {
   elevatorTarget?: number
   // CRANK
   crankRotations?: number
+  // SCRAMBLE
+  scrambleWord?: string
+  scrambleLetters?: string[]
+  // BARTER
+  barterLeft?: number
+  barterRight?: number
+  barterFair?: boolean
+  // BIOS_ERROR
+  biosCode?: number[]
+  // MUTANT_DETECT
+  mutantCount?: number
+  mutantIndex?: number
+  // FUSE_REPLACE
+  fuseCount?: number
+  brokenIndex?: number
+  // TRUST_KNOCK
+  knockPattern?: number[]
+  // INFECTED_SCAN
+  infectedCount?: number
+  infectedIndex?: number
+  // IGNITE
+  igniteSwipes?: number
+  // CRANK_START
+  crankStartTarget?: number
+  // RATION_SPLIT
+  rationSplitTotal?: number
+  rationSplitParts?: number
+  // BARRICADE
+  barricadeCount?: number
+  // SEMAPHORE
+  semaphoreLeft?: SwipeDirection
+  semaphoreRight?: SwipeDirection
 }
 
 export interface MissionDefinition {
@@ -216,494 +241,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-function generateColorChoices(target: MissionColor, count: number): MissionColor[] {
-  const others = ALL_COLORS.filter((c) => c !== target)
-  const distractors = shuffle(others).slice(0, count - 1)
-  return shuffle([target, ...distractors])
-}
-
 export const MISSION_REGISTRY: MissionDefinition[] = [
-  // COLOR_TAP - EASY
-  {
-    type: 'COLOR_TAP',
-    difficulty: 'EASY',
-    generate() {
-      const target = pickRandom(ALL_COLORS)
-      return {
-        type: 'COLOR_TAP',
-        difficulty: 'EASY',
-        text: `${COLOR_NAMES[target]} TAP`,
-        targetColor: target,
-        colors: generateColorChoices(target, 3),
-      }
-    },
-  },
-  // SWIPE - EASY
-  {
-    type: 'SWIPE',
-    difficulty: 'EASY',
-    generate() {
-      const dir = pickRandom<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT'])
-      return {
-        type: 'SWIPE',
-        difficulty: 'EASY',
-        text: DIRECTION_NAMES[dir],
-        swipeDirection: dir,
-      }
-    },
-  },
-  // REVERSE_SWIPE - NORMAL
-  {
-    type: 'REVERSE_SWIPE',
-    difficulty: 'NORMAL',
-    generate() {
-      const dir = pickRandom<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT'])
-      return {
-        type: 'REVERSE_SWIPE',
-        difficulty: 'NORMAL',
-        text: `REVERSE ${DIRECTION_NAMES[dir]}`,
-        swipeDirection: OPPOSITE[dir],
-      }
-    },
-  },
-  // MULTI_TAP - NORMAL
-  {
-    type: 'MULTI_TAP',
-    difficulty: 'NORMAL',
-    generate() {
-      const count = pickRandom([5, 7, 10])
-      return {
-        type: 'MULTI_TAP',
-        difficulty: 'NORMAL',
-        text: `TAP x${count}`,
-        tapCount: count,
-      }
-    },
-  },
-  // LONG_PRESS - NORMAL
-  {
-    type: 'LONG_PRESS',
-    difficulty: 'NORMAL',
-    generate() {
-      return {
-        type: 'LONG_PRESS',
-        difficulty: 'NORMAL',
-        text: 'HOLD',
-      }
-    },
-  },
-  // DUAL_TAP - HARD
-  {
-    type: 'DUAL_TAP',
-    difficulty: 'HARD',
-    generate() {
-      return {
-        type: 'DUAL_TAP',
-        difficulty: 'HARD',
-        text: 'DUAL TAP',
-      }
-    },
-  },
-  // DOUBLE_TAP (MULTI_TAP tapCount=2) - EASY
-  {
-    type: 'MULTI_TAP',
-    difficulty: 'EASY',
-    generate() {
-      return {
-        type: 'MULTI_TAP',
-        difficulty: 'EASY',
-        text: 'TAP x2',
-        tapCount: 2,
-      }
-    },
-  },
-  // DO_NOTHING - HARD
-  {
-    type: 'DO_NOTHING',
-    difficulty: 'HARD',
-    generate() {
-      return {
-        type: 'DO_NOTHING',
-        difficulty: 'HARD',
-        text: 'STANDBY',
-      }
-    },
-  },
-  // COLOR_TAP_NEGATIVE - HARD
-  {
-    type: 'COLOR_TAP_NEGATIVE',
-    difficulty: 'HARD',
-    generate() {
-      const target = pickRandom(ALL_COLORS)
-      return {
-        type: 'COLOR_TAP_NEGATIVE',
-        difficulty: 'HARD',
-        text: `NOT ${COLOR_NAMES[target]}`,
-        targetColor: target,
-        colors: shuffle(ALL_COLORS),
-        negative: true,
-      }
-    },
-  },
-  // SEQUENCE - HARD
-  {
-    type: 'SEQUENCE',
-    difficulty: 'HARD',
-    generate() {
-      const actions: SequenceStep[] = []
-      const pool: SequenceStep[] = [
-        { action: 'TAP' },
-        { action: 'SWIPE', direction: 'UP' },
-        { action: 'SWIPE', direction: 'DOWN' },
-        { action: 'SWIPE', direction: 'LEFT' },
-        { action: 'SWIPE', direction: 'RIGHT' },
-      ]
-      const stepCount = pickRandom([2, 3])
-      for (let i = 0; i < stepCount; i++) {
-        actions.push(pickRandom(pool))
-      }
-      const text = actions
-        .map((s) => (s.action === 'TAP' ? '■' : DIRECTION_ICONS[s.direction]))
-        .join(' → ')
-      return {
-        type: 'SEQUENCE',
-        difficulty: 'HARD',
-        text,
-        sequence: actions,
-      }
-    },
-  },
-  // TAP_ZONE - EASY
-  {
-    type: 'TAP_ZONE',
-    difficulty: 'EASY',
-    generate() {
-      const zone = pickRandom<TapZone>(['LEFT', 'RIGHT'])
-      return {
-        type: 'TAP_ZONE',
-        difficulty: 'EASY',
-        text: zone === 'LEFT' ? '◀ LEFT' : 'RIGHT ▶',
-        targetZone: zone,
-      }
-    },
-  },
-  // SIZE_TAP - EASY
-  {
-    type: 'SIZE_TAP',
-    difficulty: 'EASY',
-    generate() {
-      const target = pickRandom<SizeTarget>(['BIG', 'SMALL'])
-      const count = pickRandom([2, 3])
-      // 겹치지 않는 크기 생성 (40~100px 범위, 최소 20px 차이)
-      const baseSizes = shuffle([40, 56, 72, 88, 100]).slice(0, count)
-      baseSizes.sort((a, b) => a - b)
-      return {
-        type: 'SIZE_TAP',
-        difficulty: 'EASY',
-        text: target === 'BIG' ? 'TAP MAX' : 'TAP MIN',
-        targetSize: target,
-        sizes: shuffle(baseSizes),
-      }
-    },
-  },
-  // SWIPE_MATCH - EASY
-  {
-    type: 'SWIPE_MATCH',
-    difficulty: 'EASY',
-    generate() {
-      const dir = pickRandom<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT'])
-      return {
-        type: 'SWIPE_MATCH',
-        difficulty: 'EASY',
-        text: '',
-        swipeDirection: dir,
-      }
-    },
-  },
-  // DOUBLE_SWIPE - EASY
-  {
-    type: 'DOUBLE_SWIPE',
-    difficulty: 'EASY',
-    generate() {
-      const dir = pickRandom<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT'])
-      return {
-        type: 'DOUBLE_SWIPE',
-        difficulty: 'EASY',
-        text: `${DIRECTION_ICONS[dir]} x2`,
-        swipeDirection: dir,
-        swipeCount: 2,
-      }
-    },
-  },
-  // ODD_ONE_OUT - NORMAL
-  {
-    type: 'ODD_ONE_OUT',
-    difficulty: 'NORMAL',
-    generate() {
-      const variant = pickRandom<OddVariant>(['color', 'size', 'shape'])
-      const count = pickRandom([4, 5, 6])
-      const oddIdx = Math.floor(Math.random() * count)
-      return {
-        type: 'ODD_ONE_OUT',
-        difficulty: 'NORMAL',
-        text: 'ANOMALY DETECT',
-        oddVariant: variant,
-        itemCount: count,
-        oddIndex: oddIdx,
-      }
-    },
-  },
-  // MATH_TAP - HARD
-  {
-    type: 'MATH_TAP',
-    difficulty: 'HARD',
-    generate() {
-      const ops = ['+', '-'] as const
-      const op = pickRandom([...ops])
-      let a: number, b: number, answer: number
-      if (op === '+') {
-        a = Math.floor(Math.random() * 8) + 1 // 1~8
-        b = Math.floor(Math.random() * 8) + 1
-        answer = a + b
-      } else {
-        a = Math.floor(Math.random() * 8) + 3 // 3~10
-        b = Math.floor(Math.random() * (a - 1)) + 1 // 1~(a-1), 결과 항상 양수
-        answer = a - b
-      }
-      // 오답 생성: 정답 근처 값 (겹치지 않게)
-      const wrongSet = new Set<number>()
-      while (wrongSet.size < 2) {
-        const offset = pickRandom([-3, -2, -1, 1, 2, 3])
-        const wrong = answer + offset
-        if (wrong !== answer && wrong > 0) wrongSet.add(wrong)
-      }
-      const choices = shuffle([answer, ...wrongSet])
-      return {
-        type: 'MATH_TAP',
-        difficulty: 'HARD',
-        text: `${a} ${op} ${b} = ?`,
-        mathExpression: `${a} ${op} ${b}`,
-        mathAnswer: answer,
-        mathChoices: choices,
-      }
-    },
-  },
-  // MIRROR_SWIPE - HARD
-  {
-    type: 'MIRROR_SWIPE',
-    difficulty: 'HARD',
-    generate() {
-      // 좌우만 반전, 상하는 그대로
-      const dir = pickRandom<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT'])
-      const MIRROR: Record<SwipeDirection, SwipeDirection> = {
-        UP: 'UP',
-        DOWN: 'DOWN',
-        LEFT: 'RIGHT',
-        RIGHT: 'LEFT',
-      }
-      return {
-        type: 'MIRROR_SWIPE',
-        difficulty: 'HARD',
-        text: `MIRROR ${DIRECTION_NAMES[dir]}`,
-        swipeDirection: MIRROR[dir],
-      }
-    },
-  },
-  // QUICK_TAP - EASY
-  {
-    type: 'QUICK_TAP',
-    difficulty: 'EASY',
-    generate() {
-      return {
-        type: 'QUICK_TAP',
-        difficulty: 'EASY',
-        text: 'NOW!',
-      }
-    },
-  },
-  // CATCH - EASY
-  {
-    type: 'CATCH',
-    difficulty: 'EASY',
-    generate() {
-      return {
-        type: 'CATCH',
-        difficulty: 'EASY',
-        text: 'INTERCEPT',
-      }
-    },
-  },
-  // COUNT_TAP - NORMAL
-  {
-    type: 'COUNT_TAP',
-    difficulty: 'NORMAL',
-    generate() {
-      const count = pickRandom([2, 3, 4, 5])
-      return {
-        type: 'COUNT_TAP',
-        difficulty: 'NORMAL',
-        text: 'COUNT & TAP',
-        tapCount: count,
-        countItems: count,
-      }
-    },
-  },
-  // PATTERN_TAP - NORMAL
-  {
-    type: 'PATTERN_TAP',
-    difficulty: 'NORMAL',
-    generate() {
-      const length = pickRandom([2, 3])
-      return {
-        type: 'PATTERN_TAP',
-        difficulty: 'NORMAL',
-        text: 'SEQUENCE',
-        patternLength: length,
-      }
-    },
-  },
-  // SIMON - HARD
-  {
-    type: 'SIMON',
-    difficulty: 'HARD',
-    generate() {
-      const btnCount = 4
-      const seqLength = pickRandom([2, 3])
-      const seq: number[] = []
-      for (let i = 0; i < seqLength; i++) {
-        seq.push(Math.floor(Math.random() * btnCount))
-      }
-      return {
-        type: 'SIMON',
-        difficulty: 'HARD',
-        text: 'MEMORIZE',
-        simonSequence: seq,
-        simonButtons: btnCount,
-      }
-    },
-  },
-  // FAKE_OUT - HARD
-  {
-    type: 'FAKE_OUT',
-    difficulty: 'HARD',
-    generate() {
-      const dirs: SwipeDirection[] = ['UP', 'DOWN', 'LEFT', 'RIGHT']
-      const realDir = pickRandom(dirs)
-      const fakeDir = pickRandom(dirs.filter(d => d !== realDir))
-      return {
-        type: 'FAKE_OUT',
-        difficulty: 'HARD',
-        text: '',
-        swipeDirection: realDir,
-        fakeText: DIRECTION_NAMES[fakeDir],
-      }
-    },
-  },
-  // DRAG_TO - EASY
-  {
-    type: 'DRAG_TO',
-    difficulty: 'EASY',
-    generate() {
-      return {
-        type: 'DRAG_TO',
-        difficulty: 'EASY',
-        text: 'DRAG',
-      }
-    },
-  },
-  // PINCH - NORMAL
-  {
-    type: 'PINCH',
-    difficulty: 'NORMAL',
-    generate() {
-      const dir = pickRandom<PinchDirection>(['IN', 'OUT'])
-      return {
-        type: 'PINCH',
-        difficulty: 'NORMAL',
-        text: dir === 'IN' ? 'PINCH IN' : 'PINCH OUT',
-        pinchDirection: dir,
-      }
-    },
-  },
-  // ROTATE - NORMAL
-  {
-    type: 'ROTATE',
-    difficulty: 'NORMAL',
-    generate() {
-      const dir = pickRandom<RotateDirection>(['CW', 'CCW'])
-      return {
-        type: 'ROTATE',
-        difficulty: 'NORMAL',
-        text: dir === 'CW' ? 'ROTATE ↻' : 'ROTATE ↺',
-        rotateDirection: dir,
-      }
-    },
-  },
-  // COLOR_SWIPE - NORMAL
-  {
-    type: 'COLOR_SWIPE',
-    difficulty: 'NORMAL',
-    generate() {
-      const colors = shuffle<MissionColor>(['red', 'blue', 'yellow', 'green']).slice(0, 2)
-      const dirs = shuffle<SwipeDirection>(['UP', 'DOWN', 'LEFT', 'RIGHT']).slice(0, 2)
-      const rule = colors.map((c, i) => ({ color: c, direction: dirs[i] }))
-      const targetIdx = Math.random() < 0.5 ? 0 : 1
-      return {
-        type: 'COLOR_SWIPE',
-        difficulty: 'NORMAL',
-        text: '',
-        swipeDirection: dirs[targetIdx],
-        targetColor: colors[targetIdx],
-        colorSwipeRule: rule,
-      }
-    },
-  },
-  // HOLD_AND_TAP - NORMAL
-  {
-    type: 'HOLD_AND_TAP',
-    difficulty: 'NORMAL',
-    generate() {
-      return {
-        type: 'HOLD_AND_TAP',
-        difficulty: 'NORMAL',
-        text: 'HOLD + TAP',
-      }
-    },
-  },
-  // DUAL_SWIPE - HARD
-  {
-    type: 'DUAL_SWIPE',
-    difficulty: 'HARD',
-    generate() {
-      const pairs: [SwipeDirection, SwipeDirection][] = [
-        ['UP', 'DOWN'], ['DOWN', 'UP'],
-        ['LEFT', 'RIGHT'], ['RIGHT', 'LEFT'],
-      ]
-      const pair = pickRandom(pairs)
-      const ARROW: Record<SwipeDirection, string> = { UP: '↑', DOWN: '↓', LEFT: '←', RIGHT: '→' }
-      return {
-        type: 'DUAL_SWIPE',
-        difficulty: 'HARD',
-        text: `${ARROW[pair[0]]}${ARROW[pair[1]]} DUAL`,
-        dualSwipeDirections: pair,
-      }
-    },
-  },
-  // RHYTHM - HARD
-  {
-    type: 'RHYTHM',
-    difficulty: 'HARD',
-    generate() {
-      const count = pickRandom([2, 3])
-      return {
-        type: 'RHYTHM',
-        difficulty: 'HARD',
-        text: 'SYNC PULSE',
-        beatCount: count,
-        beatInterval: 700,
-      }
-    },
-  },
   // TUNE - NORMAL
   {
     type: 'TUNE',
@@ -1249,6 +787,824 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
         text: `FLOOR ${target}`,
         elevatorCurrent: current,
         elevatorTarget: target,
+      }
+    },
+  },
+  // SCRAMBLE - HARD
+  {
+    type: 'SCRAMBLE',
+    difficulty: 'HARD',
+    generate() {
+      const words = ['EVAC', 'HELP', 'SAFE', 'OPEN', 'EXIT', 'FUEL', 'SEND', 'MOVE']
+      const word = pickRandom(words)
+      const letters = shuffle(word.split(''))
+      return {
+        type: 'SCRAMBLE',
+        difficulty: 'HARD',
+        text: 'UNSCRAMBLE',
+        scrambleWord: word,
+        scrambleLetters: letters,
+      }
+    },
+  },
+  // SIGNAL_INTERCEPT - NORMAL
+  {
+    type: 'SIGNAL_INTERCEPT',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'SIGNAL_INTERCEPT',
+        difficulty: 'NORMAL',
+        text: 'INTERCEPT',
+      }
+    },
+  },
+  // PURIFY - EASY
+  {
+    type: 'PURIFY',
+    difficulty: 'EASY',
+    generate() {
+      return {
+        type: 'PURIFY',
+        difficulty: 'EASY',
+        text: 'PURIFY',
+      }
+    },
+  },
+  // BARTER - NORMAL
+  {
+    type: 'BARTER',
+    difficulty: 'NORMAL',
+    generate() {
+      const left = pickRandom([2, 3, 4, 5])
+      const fair = Math.random() < 0.5
+      const right = fair ? left : left + pickRandom([-2, -1, 1, 2])
+      return {
+        type: 'BARTER',
+        difficulty: 'NORMAL',
+        text: 'FAIR TRADE?',
+        barterLeft: left,
+        barterRight: Math.max(1, right),
+        barterFair: fair,
+      }
+    },
+  },
+  // FORAGE - EASY
+  {
+    type: 'FORAGE',
+    difficulty: 'EASY',
+    generate() {
+      return {
+        type: 'FORAGE',
+        difficulty: 'EASY',
+        text: 'FORAGE',
+      }
+    },
+  },
+  // DEGAUSS - EASY
+  {
+    type: 'DEGAUSS',
+    difficulty: 'EASY',
+    generate() {
+      return {
+        type: 'DEGAUSS',
+        difficulty: 'EASY',
+        text: 'DEGAUSS',
+      }
+    },
+  },
+  // REBOOT - EASY
+  {
+    type: 'REBOOT',
+    difficulty: 'EASY',
+    generate() {
+      return {
+        type: 'REBOOT',
+        difficulty: 'EASY',
+        text: 'REBOOT?',
+      }
+    },
+  },
+  // IGNITE - NORMAL
+  {
+    type: 'IGNITE',
+    difficulty: 'NORMAL',
+    generate() {
+      const swipes = pickRandom([4, 5, 6])
+      return {
+        type: 'IGNITE',
+        difficulty: 'NORMAL',
+        text: 'IGNITE',
+        igniteSwipes: swipes,
+      }
+    },
+  },
+  // BIOS_ERROR - HARD
+  {
+    type: 'BIOS_ERROR',
+    difficulty: 'HARD',
+    generate() {
+      const length = pickRandom([2, 3])
+      const code: number[] = []
+      for (let i = 0; i < length; i++) {
+        code.push(Math.floor(Math.random() * 4))
+      }
+      return {
+        type: 'BIOS_ERROR',
+        difficulty: 'HARD',
+        text: 'BIOS ERROR',
+        biosCode: code,
+      }
+    },
+  },
+  // MUTANT_DETECT - NORMAL
+  {
+    type: 'MUTANT_DETECT',
+    difficulty: 'NORMAL',
+    generate() {
+      const count = pickRandom([4, 5, 6])
+      const idx = Math.floor(Math.random() * count)
+      return {
+        type: 'MUTANT_DETECT',
+        difficulty: 'NORMAL',
+        text: 'FIND MUTANT',
+        mutantCount: count,
+        mutantIndex: idx,
+      }
+    },
+  },
+  // CALIBRATE - NORMAL
+  {
+    type: 'CALIBRATE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'CALIBRATE',
+        difficulty: 'NORMAL',
+        text: 'CALIBRATE',
+      }
+    },
+  },
+  // FUSE_REPLACE - NORMAL
+  {
+    type: 'FUSE_REPLACE',
+    difficulty: 'NORMAL',
+    generate() {
+      const count = pickRandom([3, 4, 5])
+      const idx = Math.floor(Math.random() * count)
+      return {
+        type: 'FUSE_REPLACE',
+        difficulty: 'NORMAL',
+        text: 'REPLACE FUSE',
+        fuseCount: count,
+        brokenIndex: idx,
+      }
+    },
+  },
+  // TRUST_KNOCK - HARD
+  {
+    type: 'TRUST_KNOCK',
+    difficulty: 'HARD',
+    generate() {
+      const patterns: number[][] = [
+        [300, 300],
+        [200, 500],
+        [400, 200],
+        [300, 300, 300],
+        [200, 400, 200],
+      ]
+      return {
+        type: 'TRUST_KNOCK',
+        difficulty: 'HARD',
+        text: 'TRUST?',
+        knockPattern: pickRandom(patterns),
+      }
+    },
+  },
+  // COUNTDOWN_ZERO - NORMAL
+  {
+    type: 'COUNTDOWN_ZERO',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'COUNTDOWN_ZERO',
+        difficulty: 'NORMAL',
+        text: 'HIT ZERO',
+      }
+    },
+  },
+  // INFECTED_SCAN - NORMAL
+  {
+    type: 'INFECTED_SCAN',
+    difficulty: 'NORMAL',
+    generate() {
+      const count = pickRandom([4, 5, 6])
+      const idx = Math.floor(Math.random() * count)
+      return {
+        type: 'INFECTED_SCAN',
+        difficulty: 'NORMAL',
+        text: 'FIND INFECTED',
+        infectedCount: count,
+        infectedIndex: idx,
+      }
+    },
+  },
+  // CURFEW - HARD
+  {
+    type: 'CURFEW',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'CURFEW',
+        difficulty: 'HARD',
+        text: 'CURFEW',
+      }
+    },
+  },
+  // BLACKBOX - NORMAL
+  {
+    type: 'BLACKBOX',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'BLACKBOX',
+        difficulty: 'NORMAL',
+        text: 'BLACKBOX',
+      }
+    },
+  },
+  // DEFRAG - NORMAL
+  {
+    type: 'DEFRAG',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'DEFRAG',
+        difficulty: 'NORMAL',
+        text: 'DEFRAG',
+      }
+    },
+  },
+  // FALLOUT_DODGE - HARD
+  {
+    type: 'FALLOUT_DODGE',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'FALLOUT_DODGE',
+        difficulty: 'HARD',
+        text: 'TAKE COVER',
+      }
+    },
+  },
+  // TRIPWIRE - HARD
+  {
+    type: 'TRIPWIRE',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'TRIPWIRE',
+        difficulty: 'HARD',
+        text: 'TRIPWIRE',
+      }
+    },
+  },
+  // WELD - NORMAL
+  {
+    type: 'WELD',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'WELD',
+        difficulty: 'NORMAL',
+        text: 'WELD',
+      }
+    },
+  },
+  // CRANK_START - NORMAL
+  {
+    type: 'CRANK_START',
+    difficulty: 'NORMAL',
+    generate() {
+      const target = pickRandom([2, 3])
+      return {
+        type: 'CRANK_START',
+        difficulty: 'NORMAL',
+        text: 'CRANK START',
+        crankStartTarget: target,
+      }
+    },
+  },
+  // RATION_SPLIT - HARD
+  {
+    type: 'RATION_SPLIT',
+    difficulty: 'HARD',
+    generate() {
+      const parts = pickRandom([2, 3, 4])
+      const total = parts * pickRandom([2, 3, 4, 5])
+      return {
+        type: 'RATION_SPLIT',
+        difficulty: 'HARD',
+        text: 'SPLIT RATIONS',
+        rationSplitTotal: total,
+        rationSplitParts: parts,
+      }
+    },
+  },
+  // NOISE_JAM - HARD
+  {
+    type: 'NOISE_JAM',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'NOISE_JAM',
+        difficulty: 'HARD',
+        text: 'FIND SIGNAL',
+      }
+    },
+  },
+  // PACKET_SNIFF - NORMAL
+  {
+    type: 'PACKET_SNIFF',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'PACKET_SNIFF',
+        difficulty: 'NORMAL',
+        text: 'SNIFF PACKET',
+      }
+    },
+  },
+  // BOOT_SEQUENCE - NORMAL
+  {
+    type: 'BOOT_SEQUENCE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'BOOT_SEQUENCE',
+        difficulty: 'NORMAL',
+        text: 'CATCH ERROR',
+      }
+    },
+  },
+  // PIXEL_FIX - EASY
+  {
+    type: 'PIXEL_FIX',
+    difficulty: 'EASY',
+    generate() {
+      return {
+        type: 'PIXEL_FIX',
+        difficulty: 'EASY',
+        text: 'FIX PIXEL',
+      }
+    },
+  },
+  // ANTENNA_ALIGN - NORMAL
+  {
+    type: 'ANTENNA_ALIGN',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'ANTENNA_ALIGN',
+        difficulty: 'NORMAL',
+        text: 'ALIGN ANTENNA',
+      }
+    },
+  },
+  // TRANSFUSE - NORMAL
+  {
+    type: 'TRANSFUSE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'TRANSFUSE',
+        difficulty: 'NORMAL',
+        text: 'TRANSFUSE',
+      }
+    },
+  },
+  // PULSE_CHECK - NORMAL
+  {
+    type: 'PULSE_CHECK',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'PULSE_CHECK',
+        difficulty: 'NORMAL',
+        text: 'CHECK PULSE',
+      }
+    },
+  },
+  // SPLINT - NORMAL
+  {
+    type: 'SPLINT',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'SPLINT',
+        difficulty: 'NORMAL',
+        text: 'SPLINT',
+      }
+    },
+  },
+  // ANTIDOTE - HARD
+  {
+    type: 'ANTIDOTE',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'ANTIDOTE',
+        difficulty: 'HARD',
+        text: 'ANTIDOTE',
+      }
+    },
+  },
+  // RELOAD - NORMAL
+  {
+    type: 'RELOAD',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'RELOAD',
+        difficulty: 'NORMAL',
+        text: 'RELOAD',
+      }
+    },
+  },
+  // SCOPE - NORMAL
+  {
+    type: 'SCOPE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'SCOPE',
+        difficulty: 'NORMAL',
+        text: 'FIRE',
+      }
+    },
+  },
+  // GRENADE_PIN - HARD
+  {
+    type: 'GRENADE_PIN',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'GRENADE_PIN',
+        difficulty: 'HARD',
+        text: 'PULL PIN',
+      }
+    },
+  },
+  // BARRICADE - HARD
+  {
+    type: 'BARRICADE',
+    difficulty: 'HARD',
+    generate() {
+      const count = pickRandom([3, 4])
+      return {
+        type: 'BARRICADE',
+        difficulty: 'HARD',
+        text: 'BARRICADE',
+        barricadeCount: count,
+      }
+    },
+  },
+  // FLARE_LAUNCH - NORMAL
+  {
+    type: 'FLARE_LAUNCH',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'FLARE_LAUNCH',
+        difficulty: 'NORMAL',
+        text: 'LAUNCH FLARE',
+      }
+    },
+  },
+  // WATER_LEVEL - HARD
+  {
+    type: 'WATER_LEVEL',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'WATER_LEVEL',
+        difficulty: 'HARD',
+        text: 'CLOSE VALVES',
+      }
+    },
+  },
+  // BRIDGE_CROSS - HARD
+  {
+    type: 'BRIDGE_CROSS',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'BRIDGE_CROSS',
+        difficulty: 'HARD',
+        text: 'CROSS BRIDGE',
+      }
+    },
+  },
+  // DUST_STORM - HARD
+  {
+    type: 'DUST_STORM',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'DUST_STORM',
+        difficulty: 'HARD',
+        text: 'FIND SHELTER',
+      }
+    },
+  },
+  // INTERLACE - NORMAL
+  {
+    type: 'INTERLACE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'INTERLACE',
+        difficulty: 'NORMAL',
+        text: 'FIX INTERLACE',
+      }
+    },
+  },
+  // VSYNC - NORMAL
+  {
+    type: 'VSYNC',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'VSYNC',
+        difficulty: 'NORMAL',
+        text: 'VSYNC',
+      }
+    },
+  },
+  // COLOR_BLEED - HARD
+  {
+    type: 'COLOR_BLEED',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'COLOR_BLEED',
+        difficulty: 'HARD',
+        text: 'FIX RGB',
+      }
+    },
+  },
+  // BURN_IN - HARD
+  {
+    type: 'BURN_IN',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'BURN_IN',
+        difficulty: 'HARD',
+        text: 'FIND REAL',
+      }
+    },
+  },
+  // SEMAPHORE - HARD
+  {
+    type: 'SEMAPHORE',
+    difficulty: 'HARD',
+    generate() {
+      const dirs: SwipeDirection[] = ['UP', 'DOWN', 'LEFT', 'RIGHT']
+      return {
+        type: 'SEMAPHORE',
+        difficulty: 'HARD',
+        text: 'SEMAPHORE',
+        semaphoreLeft: pickRandom(dirs),
+        semaphoreRight: pickRandom(dirs),
+      }
+    },
+  },
+  // CIPHER_WHEEL - HARD
+  {
+    type: 'CIPHER_WHEEL',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'CIPHER_WHEEL',
+        difficulty: 'HARD',
+        text: 'DECRYPT',
+      }
+    },
+  },
+  // BEACON - NORMAL
+  {
+    type: 'BEACON',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'BEACON',
+        difficulty: 'NORMAL',
+        text: 'COUNT FLASHES',
+      }
+    },
+  },
+  // GENERATOR - NORMAL
+  {
+    type: 'GENERATOR',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'GENERATOR',
+        difficulty: 'NORMAL',
+        text: 'STABILIZE',
+      }
+    },
+  },
+  // HATCH_SEAL - HARD
+  {
+    type: 'HATCH_SEAL',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'HATCH_SEAL',
+        difficulty: 'HARD',
+        text: 'SEAL HATCH',
+      }
+    },
+  },
+  // PERIMETER - NORMAL
+  {
+    type: 'PERIMETER',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'PERIMETER',
+        difficulty: 'NORMAL',
+        text: 'PATCH FENCE',
+      }
+    },
+  },
+  // SOLAR_PANEL - NORMAL
+  {
+    type: 'SOLAR_PANEL',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'SOLAR_PANEL',
+        difficulty: 'NORMAL',
+        text: 'ALIGN PANEL',
+      }
+    },
+  },
+  // PH_TEST - NORMAL
+  {
+    type: 'PH_TEST',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'PH_TEST',
+        difficulty: 'NORMAL',
+        text: 'PH TEST',
+      }
+    },
+  },
+  // CENTRIFUGE - NORMAL
+  {
+    type: 'CENTRIFUGE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'CENTRIFUGE',
+        difficulty: 'NORMAL',
+        text: 'CENTRIFUGE',
+      }
+    },
+  },
+  // ISOTOPE - NORMAL
+  {
+    type: 'ISOTOPE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'ISOTOPE',
+        difficulty: 'NORMAL',
+        text: 'HALF-LIFE',
+      }
+    },
+  },
+  // AUTOPILOT - NORMAL
+  {
+    type: 'AUTOPILOT',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'AUTOPILOT',
+        difficulty: 'NORMAL',
+        text: 'CORRECT COURSE',
+      }
+    },
+  },
+  // DOCKING - NORMAL
+  {
+    type: 'DOCKING',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'DOCKING',
+        difficulty: 'NORMAL',
+        text: 'DOCK',
+      }
+    },
+  },
+  // MINEFIELD - HARD
+  {
+    type: 'MINEFIELD',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'MINEFIELD',
+        difficulty: 'HARD',
+        text: 'SAFE STEP',
+      }
+    },
+  },
+  // CAPACITOR - NORMAL
+  {
+    type: 'CAPACITOR',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'CAPACITOR',
+        difficulty: 'NORMAL',
+        text: 'DISCHARGE',
+      }
+    },
+  },
+  // SOLDER - HARD
+  {
+    type: 'SOLDER',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'SOLDER',
+        difficulty: 'HARD',
+        text: 'SOLDER',
+      }
+    },
+  },
+  // FIRMWARE - NORMAL
+  {
+    type: 'FIRMWARE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'FIRMWARE',
+        difficulty: 'NORMAL',
+        text: 'UPLOAD',
+      }
+    },
+  },
+  // TUBE_REPLACE - NORMAL
+  {
+    type: 'TUBE_REPLACE',
+    difficulty: 'NORMAL',
+    generate() {
+      return {
+        type: 'TUBE_REPLACE',
+        difficulty: 'NORMAL',
+        text: 'REPLACE TUBE',
+      }
+    },
+  },
+  // RATION_VOTE - HARD
+  {
+    type: 'RATION_VOTE',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'RATION_VOTE',
+        difficulty: 'HARD',
+        text: 'VOTE',
+      }
+    },
+  },
+  // SACRIFICE - HARD
+  {
+    type: 'SACRIFICE',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'SACRIFICE',
+        difficulty: 'HARD',
+        text: 'CHOOSE',
+      }
+    },
+  },
+  // MIMIC - HARD
+  {
+    type: 'MIMIC',
+    difficulty: 'HARD',
+    generate() {
+      return {
+        type: 'MIMIC',
+        difficulty: 'HARD',
+        text: 'FIND MIMIC',
       }
     },
   },

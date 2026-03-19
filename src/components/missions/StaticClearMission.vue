@@ -103,7 +103,7 @@ onUnmounted(() => {
     <div class="clear-progress">
       <div class="clear-fill" :style="{ width: `${progress * 100}%` }" />
     </div>
-    <div class="clear-hint">문질러!</div>
+    <div class="clear-hint">SWEEP</div>
   </div>
 </template>
 

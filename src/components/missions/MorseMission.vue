@@ -99,7 +99,7 @@ onUnmounted(() => {
     </div>
 
     <div class="morse-hint">
-      짧게=· 길게=—
+      SHORT=· LONG=—
     </div>
   </div>
 </template>

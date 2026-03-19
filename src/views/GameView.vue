@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import type { MissionType } from '@/types/mission'
 import { useGameState } from '@/composables/useGameState'
+import { useI18n } from '@/composables/useI18n'
 import { useInputDetector } from '@/composables/useInputDetector'
 import { useSceneTransition } from '@/composables/useSceneTransition'
 import TimerBar from '@/components/TimerBar.vue'
@@ -10,31 +11,6 @@ import ScoreDisplay from '@/components/ScoreDisplay.vue'
 import MissionText from '@/components/MissionText.vue'
 import FeedbackLayer from '@/components/FeedbackLayer.vue'
 import ResultOverlay from '@/components/ResultOverlay.vue'
-import ColorTapMission from '@/components/missions/ColorTapMission.vue'
-import SwipeMission from '@/components/missions/SwipeMission.vue'
-import MultiTapMission from '@/components/missions/MultiTapMission.vue'
-import LongPressMission from '@/components/missions/LongPressMission.vue'
-import DualTapMission from '@/components/missions/DualTapMission.vue'
-import DoNothingMission from '@/components/missions/DoNothingMission.vue'
-import SequenceMission from '@/components/missions/SequenceMission.vue'
-import TapZoneMission from '@/components/missions/TapZoneMission.vue'
-import SizeTapMission from '@/components/missions/SizeTapMission.vue'
-import DoubleSwipeMission from '@/components/missions/DoubleSwipeMission.vue'
-import OddOneOutMission from '@/components/missions/OddOneOutMission.vue'
-import MathTapMission from '@/components/missions/MathTapMission.vue'
-import QuickTapMission from '@/components/missions/QuickTapMission.vue'
-import CatchMission from '@/components/missions/CatchMission.vue'
-import CountTapMission from '@/components/missions/CountTapMission.vue'
-import PatternTapMission from '@/components/missions/PatternTapMission.vue'
-import SimonMission from '@/components/missions/SimonMission.vue'
-import FakeOutMission from '@/components/missions/FakeOutMission.vue'
-import DragToMission from '@/components/missions/DragToMission.vue'
-import PinchMission from '@/components/missions/PinchMission.vue'
-import RotateMission from '@/components/missions/RotateMission.vue'
-import ColorSwipeMission from '@/components/missions/ColorSwipeMission.vue'
-import HoldAndTapMission from '@/components/missions/HoldAndTapMission.vue'
-import DualSwipeMission from '@/components/missions/DualSwipeMission.vue'
-import RhythmMission from '@/components/missions/RhythmMission.vue'
 import TuneMission from '@/components/missions/TuneMission.vue'
 import PowerUpMission from '@/components/missions/PowerUpMission.vue'
 import WireCutMission from '@/components/missions/WireCutMission.vue'
@@ -73,7 +49,72 @@ import PressureMission from '@/components/missions/PressureMission.vue'
 import SpliceMission from '@/components/missions/SpliceMission.vue'
 import DistressMission from '@/components/missions/DistressMission.vue'
 import ElevatorMission from '@/components/missions/ElevatorMission.vue'
+import ScrambleMission from '@/components/missions/ScrambleMission.vue'
+import SignalInterceptMission from '@/components/missions/SignalInterceptMission.vue'
+import PurifyMission from '@/components/missions/PurifyMission.vue'
+import BarterMission from '@/components/missions/BarterMission.vue'
+import ForageMission from '@/components/missions/ForageMission.vue'
+import DegaussMission from '@/components/missions/DegaussMission.vue'
+import RebootMission from '@/components/missions/RebootMission.vue'
+import IgniteMission from '@/components/missions/IgniteMission.vue'
+import BiosErrorMission from '@/components/missions/BiosErrorMission.vue'
+import MutantDetectMission from '@/components/missions/MutantDetectMission.vue'
+import CalibrateMission from '@/components/missions/CalibrateMission.vue'
+import FuseReplaceMission from '@/components/missions/FuseReplaceMission.vue'
+import TrustKnockMission from '@/components/missions/TrustKnockMission.vue'
+import CountdownZeroMission from '@/components/missions/CountdownZeroMission.vue'
+import InfectedScanMission from '@/components/missions/InfectedScanMission.vue'
+import CurfewMission from '@/components/missions/CurfewMission.vue'
+import BlackboxMission from '@/components/missions/BlackboxMission.vue'
+import DefragMission from '@/components/missions/DefragMission.vue'
+import FalloutDodgeMission from '@/components/missions/FalloutDodgeMission.vue'
+import TripwireMission from '@/components/missions/TripwireMission.vue'
+import WeldMission from '@/components/missions/WeldMission.vue'
+import CrankStartMission from '@/components/missions/CrankStartMission.vue'
+import RationSplitMission from '@/components/missions/RationSplitMission.vue'
+import NoiseJamMission from '@/components/missions/NoiseJamMission.vue'
+import PacketSniffMission from '@/components/missions/PacketSniffMission.vue'
+import BootSequenceMission from '@/components/missions/BootSequenceMission.vue'
+import PixelFixMission from '@/components/missions/PixelFixMission.vue'
+import AntennaAlignMission from '@/components/missions/AntennaAlignMission.vue'
+import TransfuseMission from '@/components/missions/TransfuseMission.vue'
+import PulseCheckMission from '@/components/missions/PulseCheckMission.vue'
+import SplintMission from '@/components/missions/SplintMission.vue'
+import AntidoteMission from '@/components/missions/AntidoteMission.vue'
+import ReloadMission from '@/components/missions/ReloadMission.vue'
+import ScopeMission from '@/components/missions/ScopeMission.vue'
+import GrenadePinMission from '@/components/missions/GrenadePinMission.vue'
+import BarricadeMission from '@/components/missions/BarricadeMission.vue'
+import FlareLaunchMission from '@/components/missions/FlareLaunchMission.vue'
+import WaterLevelMission from '@/components/missions/WaterLevelMission.vue'
+import BridgeCrossMission from '@/components/missions/BridgeCrossMission.vue'
+import DustStormMission from '@/components/missions/DustStormMission.vue'
+import InterlaceMission from '@/components/missions/InterlaceMission.vue'
+import VsyncMission from '@/components/missions/VsyncMission.vue'
+import ColorBleedMission from '@/components/missions/ColorBleedMission.vue'
+import BurnInMission from '@/components/missions/BurnInMission.vue'
+import SemaphoreMission from '@/components/missions/SemaphoreMission.vue'
+import CipherWheelMission from '@/components/missions/CipherWheelMission.vue'
+import BeaconMission from '@/components/missions/BeaconMission.vue'
+import GeneratorMission from '@/components/missions/GeneratorMission.vue'
+import HatchSealMission from '@/components/missions/HatchSealMission.vue'
+import PerimeterMission from '@/components/missions/PerimeterMission.vue'
+import SolarPanelMission from '@/components/missions/SolarPanelMission.vue'
+import PhTestMission from '@/components/missions/PhTestMission.vue'
+import CentrifugeMission from '@/components/missions/CentrifugeMission.vue'
+import IsotopeMission from '@/components/missions/IsotopeMission.vue'
+import AutopilotMission from '@/components/missions/AutopilotMission.vue'
+import DockingMission from '@/components/missions/DockingMission.vue'
+import MinefieldMission from '@/components/missions/MinefieldMission.vue'
+import CapacitorMission from '@/components/missions/CapacitorMission.vue'
+import SolderMission from '@/components/missions/SolderMission.vue'
+import FirmwareMission from '@/components/missions/FirmwareMission.vue'
+import TubeReplaceMission from '@/components/missions/TubeReplaceMission.vue'
+import RationVoteMission from '@/components/missions/RationVoteMission.vue'
+import SacrificeMission from '@/components/missions/SacrificeMission.vue'
+import MimicMission from '@/components/missions/MimicMission.vue'
 
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const { transition, afterTransition } = useSceneTransition()
@@ -92,9 +133,6 @@ const {
   startGame,
   handleInput,
   setColorTapResult,
-  setSimonReady,
-  sequenceIndex,
-  doubleSwipeCount,
   restart,
   clearAllTimers,
   setForcedMission,
@@ -108,7 +146,7 @@ const isBlocked = () =>
   phase.value === 'SHOWING' ||
   phase.value === 'SUB_SHOWING'
 
-const { tapCount, isPressed, bind, resetTapCount } = useInputDetector((action) => {
+const { bind, resetTapCount } = useInputDetector((action) => {
   handleInput(action)
 }, isBlocked)
 
@@ -178,157 +216,8 @@ onUnmounted(() => {
         />
 
         <div class="mission-content" :key="'content-' + missionKey">
-          <ColorTapMission
-            v-if="mission.type === 'COLOR_TAP'"
-            :target-color="mission.targetColor!"
-            :colors="mission.colors!"
-            @tap="handleColorTap"
-          />
-          <ColorTapMission
-            v-else-if="mission.type === 'COLOR_TAP_NEGATIVE'"
-            :target-color="mission.targetColor!"
-            :colors="mission.colors!"
-            negative
-            @tap="handleColorTap"
-          />
-          <SwipeMission
-            v-else-if="mission.type === 'SWIPE'"
-            :direction="mission.swipeDirection!"
-          />
-          <SwipeMission
-            v-else-if="mission.type === 'REVERSE_SWIPE'"
-            :direction="mission.swipeDirection!"
-            reverse
-          />
-          <MultiTapMission
-            v-else-if="mission.type === 'MULTI_TAP'"
-            :tap-count="mission.tapCount!"
-            :current-taps="tapCount"
-          />
-          <LongPressMission
-            v-else-if="mission.type === 'LONG_PRESS'"
-            :is-pressed="isPressed"
-          />
-          <DualTapMission
-            v-else-if="mission.type === 'DUAL_TAP'"
-          />
-          <DoNothingMission
-            v-else-if="mission.type === 'DO_NOTHING'"
-          />
-          <SequenceMission
-            v-else-if="mission.type === 'SEQUENCE'"
-            :steps="mission.sequence!"
-            :current-step="sequenceIndex"
-          />
-          <TapZoneMission
-            v-else-if="mission.type === 'TAP_ZONE'"
-            :target-zone="mission.targetZone!"
-            @tap="handleColorTap"
-          />
-          <SizeTapMission
-            v-else-if="mission.type === 'SIZE_TAP'"
-            :target-size="mission.targetSize!"
-            :sizes="mission.sizes!"
-            @tap="handleColorTap"
-          />
-          <SwipeMission
-            v-else-if="mission.type === 'SWIPE_MATCH'"
-            :direction="mission.swipeDirection!"
-            icon-only
-          />
-          <DoubleSwipeMission
-            v-else-if="mission.type === 'DOUBLE_SWIPE'"
-            :direction="mission.swipeDirection!"
-            :swipe-count="mission.swipeCount!"
-            :current-swipes="doubleSwipeCount"
-          />
-          <OddOneOutMission
-            v-else-if="mission.type === 'ODD_ONE_OUT'"
-            :odd-variant="mission.oddVariant!"
-            :item-count="mission.itemCount!"
-            :odd-index="mission.oddIndex!"
-            @tap="handleColorTap"
-          />
-          <MathTapMission
-            v-else-if="mission.type === 'MATH_TAP'"
-            :math-expression="mission.mathExpression!"
-            :math-answer="mission.mathAnswer!"
-            :math-choices="mission.mathChoices!"
-            @tap="handleColorTap"
-          />
-          <SwipeMission
-            v-else-if="mission.type === 'MIRROR_SWIPE'"
-            :direction="mission.swipeDirection!"
-            mirror
-          />
-          <QuickTapMission
-            v-else-if="mission.type === 'QUICK_TAP'"
-            @tap="handleColorTap"
-          />
-          <CatchMission
-            v-else-if="mission.type === 'CATCH'"
-            @tap="handleColorTap"
-          />
-          <CountTapMission
-            v-else-if="mission.type === 'COUNT_TAP'"
-            :count-items="mission.countItems!"
-            :current-taps="tapCount"
-          />
-          <PatternTapMission
-            v-else-if="mission.type === 'PATTERN_TAP'"
-            :pattern-length="mission.patternLength!"
-            :current-step="sequenceIndex"
-            @tap="handleColorTap"
-          />
-          <SimonMission
-            v-else-if="mission.type === 'SIMON'"
-            :simon-sequence="mission.simonSequence!"
-            :simon-buttons="mission.simonButtons!"
-            :current-step="sequenceIndex"
-            @tap="handleColorTap"
-            @ready="setSimonReady"
-          />
-          <FakeOutMission
-            v-else-if="mission.type === 'FAKE_OUT'"
-            :real-direction="mission.swipeDirection!"
-            :fake-text="mission.fakeText!"
-          />
-          <DragToMission
-            v-else-if="mission.type === 'DRAG_TO'"
-            @tap="handleColorTap"
-          />
-          <PinchMission
-            v-else-if="mission.type === 'PINCH'"
-            :pinch-direction="mission.pinchDirection!"
-            @tap="handleColorTap"
-          />
-          <RotateMission
-            v-else-if="mission.type === 'ROTATE'"
-            :rotate-direction="mission.rotateDirection!"
-            @tap="handleColorTap"
-          />
-          <ColorSwipeMission
-            v-else-if="mission.type === 'COLOR_SWIPE'"
-            :target-color="mission.targetColor!"
-            :color-swipe-rule="mission.colorSwipeRule!"
-          />
-          <HoldAndTapMission
-            v-else-if="mission.type === 'HOLD_AND_TAP'"
-            @tap="handleColorTap"
-          />
-          <DualSwipeMission
-            v-else-if="mission.type === 'DUAL_SWIPE'"
-            :dual-swipe-directions="mission.dualSwipeDirections!"
-            @tap="handleColorTap"
-          />
-          <RhythmMission
-            v-else-if="mission.type === 'RHYTHM'"
-            :beat-count="mission.beatCount!"
-            :beat-interval="mission.beatInterval!"
-            @tap="handleColorTap"
-          />
           <TuneMission
-            v-else-if="mission.type === 'TUNE'"
+            v-if="mission.type === 'TUNE'"
             @tap="handleColorTap"
           />
           <PowerUpMission
@@ -505,6 +394,282 @@ onUnmounted(() => {
             :elevator-target="mission.elevatorTarget!"
             @tap="handleColorTap"
           />
+          <ScrambleMission
+            v-else-if="mission.type === 'SCRAMBLE'"
+            :scramble-word="mission.scrambleWord!"
+            :scramble-letters="mission.scrambleLetters!"
+            @tap="handleColorTap"
+          />
+          <SignalInterceptMission
+            v-else-if="mission.type === 'SIGNAL_INTERCEPT'"
+            @tap="handleColorTap"
+          />
+          <PurifyMission
+            v-else-if="mission.type === 'PURIFY'"
+            @tap="handleColorTap"
+          />
+          <BarterMission
+            v-else-if="mission.type === 'BARTER'"
+            :barter-left="mission.barterLeft!"
+            :barter-right="mission.barterRight!"
+            :barter-fair="mission.barterFair!"
+            @tap="handleColorTap"
+          />
+          <ForageMission
+            v-else-if="mission.type === 'FORAGE'"
+            @tap="handleColorTap"
+          />
+          <DegaussMission
+            v-else-if="mission.type === 'DEGAUSS'"
+            @tap="handleColorTap"
+          />
+          <RebootMission
+            v-else-if="mission.type === 'REBOOT'"
+            @tap="handleColorTap"
+          />
+          <IgniteMission
+            v-else-if="mission.type === 'IGNITE'"
+            :ignite-swipes="mission.igniteSwipes!"
+            @tap="handleColorTap"
+          />
+          <BiosErrorMission
+            v-else-if="mission.type === 'BIOS_ERROR'"
+            :bios-code="mission.biosCode!"
+            @tap="handleColorTap"
+          />
+          <MutantDetectMission
+            v-else-if="mission.type === 'MUTANT_DETECT'"
+            :mutant-count="mission.mutantCount!"
+            :mutant-index="mission.mutantIndex!"
+            @tap="handleColorTap"
+          />
+          <CalibrateMission
+            v-else-if="mission.type === 'CALIBRATE'"
+            @tap="handleColorTap"
+          />
+          <FuseReplaceMission
+            v-else-if="mission.type === 'FUSE_REPLACE'"
+            :fuse-count="mission.fuseCount!"
+            :broken-index="mission.brokenIndex!"
+            @tap="handleColorTap"
+          />
+          <TrustKnockMission
+            v-else-if="mission.type === 'TRUST_KNOCK'"
+            :knock-pattern="mission.knockPattern!"
+            @tap="handleColorTap"
+          />
+          <CountdownZeroMission
+            v-else-if="mission.type === 'COUNTDOWN_ZERO'"
+            @tap="handleColorTap"
+          />
+          <InfectedScanMission
+            v-else-if="mission.type === 'INFECTED_SCAN'"
+            :infected-count="mission.infectedCount!"
+            :infected-index="mission.infectedIndex!"
+            @tap="handleColorTap"
+          />
+          <CurfewMission
+            v-else-if="mission.type === 'CURFEW'"
+            @tap="handleColorTap"
+          />
+          <BlackboxMission
+            v-else-if="mission.type === 'BLACKBOX'"
+            @tap="handleColorTap"
+          />
+          <DefragMission
+            v-else-if="mission.type === 'DEFRAG'"
+            @tap="handleColorTap"
+          />
+          <FalloutDodgeMission
+            v-else-if="mission.type === 'FALLOUT_DODGE'"
+            @tap="handleColorTap"
+          />
+          <TripwireMission
+            v-else-if="mission.type === 'TRIPWIRE'"
+            @tap="handleColorTap"
+          />
+          <WeldMission
+            v-else-if="mission.type === 'WELD'"
+            @tap="handleColorTap"
+          />
+          <CrankStartMission
+            v-else-if="mission.type === 'CRANK_START'"
+            :crank-target="mission.crankStartTarget!"
+            @tap="handleColorTap"
+          />
+          <RationSplitMission
+            v-else-if="mission.type === 'RATION_SPLIT'"
+            :ration-total="mission.rationSplitTotal!"
+            :ration-parts="mission.rationSplitParts!"
+            @tap="handleColorTap"
+          />
+          <NoiseJamMission
+            v-else-if="mission.type === 'NOISE_JAM'"
+            @tap="handleColorTap"
+          />
+          <PacketSniffMission
+            v-else-if="mission.type === 'PACKET_SNIFF'"
+            @tap="handleColorTap"
+          />
+          <BootSequenceMission
+            v-else-if="mission.type === 'BOOT_SEQUENCE'"
+            @tap="handleColorTap"
+          />
+          <PixelFixMission
+            v-else-if="mission.type === 'PIXEL_FIX'"
+            @tap="handleColorTap"
+          />
+          <AntennaAlignMission
+            v-else-if="mission.type === 'ANTENNA_ALIGN'"
+            @tap="handleColorTap"
+          />
+          <TransfuseMission
+            v-else-if="mission.type === 'TRANSFUSE'"
+            @tap="handleColorTap"
+          />
+          <PulseCheckMission
+            v-else-if="mission.type === 'PULSE_CHECK'"
+            @tap="handleColorTap"
+          />
+          <SplintMission
+            v-else-if="mission.type === 'SPLINT'"
+            @tap="handleColorTap"
+          />
+          <AntidoteMission
+            v-else-if="mission.type === 'ANTIDOTE'"
+            @tap="handleColorTap"
+          />
+          <ReloadMission
+            v-else-if="mission.type === 'RELOAD'"
+            @tap="handleColorTap"
+          />
+          <ScopeMission
+            v-else-if="mission.type === 'SCOPE'"
+            @tap="handleColorTap"
+          />
+          <GrenadePinMission
+            v-else-if="mission.type === 'GRENADE_PIN'"
+            @tap="handleColorTap"
+          />
+          <BarricadeMission
+            v-else-if="mission.type === 'BARRICADE'"
+            :barricade-count="mission.barricadeCount!"
+            @tap="handleColorTap"
+          />
+          <FlareLaunchMission
+            v-else-if="mission.type === 'FLARE_LAUNCH'"
+            @tap="handleColorTap"
+          />
+          <WaterLevelMission
+            v-else-if="mission.type === 'WATER_LEVEL'"
+            @tap="handleColorTap"
+          />
+          <BridgeCrossMission
+            v-else-if="mission.type === 'BRIDGE_CROSS'"
+            @tap="handleColorTap"
+          />
+          <DustStormMission
+            v-else-if="mission.type === 'DUST_STORM'"
+            @tap="handleColorTap"
+          />
+          <InterlaceMission
+            v-else-if="mission.type === 'INTERLACE'"
+            @tap="handleColorTap"
+          />
+          <VsyncMission
+            v-else-if="mission.type === 'VSYNC'"
+            @tap="handleColorTap"
+          />
+          <ColorBleedMission
+            v-else-if="mission.type === 'COLOR_BLEED'"
+            @tap="handleColorTap"
+          />
+          <BurnInMission
+            v-else-if="mission.type === 'BURN_IN'"
+            @tap="handleColorTap"
+          />
+          <SemaphoreMission
+            v-else-if="mission.type === 'SEMAPHORE'"
+            :semaphore-left="mission.semaphoreLeft!"
+            :semaphore-right="mission.semaphoreRight!"
+            @tap="handleColorTap"
+          />
+          <CipherWheelMission
+            v-else-if="mission.type === 'CIPHER_WHEEL'"
+            @tap="handleColorTap"
+          />
+          <BeaconMission
+            v-else-if="mission.type === 'BEACON'"
+            @tap="handleColorTap"
+          />
+          <GeneratorMission
+            v-else-if="mission.type === 'GENERATOR'"
+            @tap="handleColorTap"
+          />
+          <HatchSealMission
+            v-else-if="mission.type === 'HATCH_SEAL'"
+            @tap="handleColorTap"
+          />
+          <PerimeterMission
+            v-else-if="mission.type === 'PERIMETER'"
+            @tap="handleColorTap"
+          />
+          <SolarPanelMission
+            v-else-if="mission.type === 'SOLAR_PANEL'"
+            @tap="handleColorTap"
+          />
+          <PhTestMission
+            v-else-if="mission.type === 'PH_TEST'"
+            @tap="handleColorTap"
+          />
+          <CentrifugeMission
+            v-else-if="mission.type === 'CENTRIFUGE'"
+            @tap="handleColorTap"
+          />
+          <IsotopeMission
+            v-else-if="mission.type === 'ISOTOPE'"
+            @tap="handleColorTap"
+          />
+          <AutopilotMission
+            v-else-if="mission.type === 'AUTOPILOT'"
+            @tap="handleColorTap"
+          />
+          <DockingMission
+            v-else-if="mission.type === 'DOCKING'"
+            @tap="handleColorTap"
+          />
+          <MinefieldMission
+            v-else-if="mission.type === 'MINEFIELD'"
+            @tap="handleColorTap"
+          />
+          <CapacitorMission
+            v-else-if="mission.type === 'CAPACITOR'"
+            @tap="handleColorTap"
+          />
+          <SolderMission
+            v-else-if="mission.type === 'SOLDER'"
+            @tap="handleColorTap"
+          />
+          <FirmwareMission
+            v-else-if="mission.type === 'FIRMWARE'"
+            @tap="handleColorTap"
+          />
+          <TubeReplaceMission
+            v-else-if="mission.type === 'TUBE_REPLACE'"
+            @tap="handleColorTap"
+          />
+          <RationVoteMission
+            v-else-if="mission.type === 'RATION_VOTE'"
+            @tap="handleColorTap"
+          />
+          <SacrificeMission
+            v-else-if="mission.type === 'SACRIFICE'"
+            @tap="handleColorTap"
+          />
+          <MimicMission
+            v-else-if="mission.type === 'MIMIC'"
+            @tap="handleColorTap"
+          />
         </div>
       </template>
 
@@ -523,10 +688,10 @@ onUnmounted(() => {
 
       <!-- Phase indicator -->
       <div class="phase-badge" :class="{ success: phase === 'SUCCESS', fail: phase === 'FAIL' }">
-        <template v-if="phase === 'SHOWING'">READY...</template>
-        <template v-else-if="phase === 'SUB_SHOWING'">NEXT!</template>
-        <template v-else-if="phase === 'SUCCESS'">+1</template>
-        <template v-else-if="phase === 'FAIL'">FAIL</template>
+        <template v-if="phase === 'SHOWING'">{{ t('READY...') }}</template>
+        <template v-else-if="phase === 'SUB_SHOWING'">{{ t('NEXT!') }}</template>
+        <template v-else-if="phase === 'SUCCESS'">{{ t('+1') }}</template>
+        <template v-else-if="phase === 'FAIL'">{{ t('FAIL') }}</template>
         <template v-else>&nbsp;</template>
       </div>
     </div>

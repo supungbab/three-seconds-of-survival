@@ -84,7 +84,7 @@ onUnmounted(() => {
     </div>
 
     <div class="broadcast-btn" :class="{ active: isHolding }">
-      {{ phase === 'idle' ? '꾹 눌러' : isHolding ? '피크에서 떼!' : '···' }}
+      {{ phase === 'idle' ? 'HOLD TO TX' : isHolding ? 'RELEASE AT PEAK' : '···' }}
     </div>
   </div>
 </template>

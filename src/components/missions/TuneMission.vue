@@ -9,76 +9,91 @@ const emit = defineEmits<{
 }>()
 
 const containerEl = ref<HTMLElement | null>(null)
-const targetFreq = ref(50) // target position 0-100
-const currentFreq = ref(20) // current needle position
-const isDragging = ref(false)
+const targetFreq = ref(50) // 타겟 위치 0-100
+const currentFreq = ref(0) // 바늘 현재 위치
+const isHolding = ref(false)
 let resolved = false
+let raf = 0
+let direction = 1 // 1=오른쪽, -1=왼쪽
+const SPEED = 150 // 초당 이동 %
+let lastTime = 0
 
 function getProximity(): number {
   const diff = Math.abs(currentFreq.value - targetFreq.value)
   return Math.max(0, 1 - diff / 50)
 }
 
-function checkLock() {
+function animate(now: number) {
   if (resolved) return
-  const diff = Math.abs(currentFreq.value - targetFreq.value)
-  if (diff < 4) {
-    resolved = true
-    playTick()
-    emit('tap', true)
+  if (!isHolding.value) {
+    raf = requestAnimationFrame(animate)
+    lastTime = now
+    return
   }
+
+  const dt = (now - lastTime) / 1000
+  lastTime = now
+
+  currentFreq.value += direction * SPEED * dt
+
+  // 벽에서 반전
+  if (currentFreq.value >= 100) {
+    currentFreq.value = 100
+    direction = -1
+  } else if (currentFreq.value <= 0) {
+    currentFreq.value = 0
+    direction = 1
+  }
+
+  raf = requestAnimationFrame(animate)
 }
 
 function onStart(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
-  isDragging.value = true
-  updateFromEvent(e)
-}
-
-function onMove(e: TouchEvent | MouseEvent) {
-  e.stopPropagation()
-  if (e.cancelable) e.preventDefault()
-  if (!isDragging.value || resolved) return
-  updateFromEvent(e)
-  checkLock()
+  if (resolved) return
+  isHolding.value = true
 }
 
 function onEnd(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
-  isDragging.value = false
-}
+  if (resolved || !isHolding.value) return
+  isHolding.value = false
+  resolved = true
 
-function updateFromEvent(e: TouchEvent | MouseEvent) {
-  if (!containerEl.value) return
-  const rect = containerEl.value.getBoundingClientRect()
-  const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX
-  const pct = ((clientX - rect.left) / rect.width) * 100
-  currentFreq.value = Math.max(0, Math.min(100, pct))
+  const diff = Math.abs(currentFreq.value - targetFreq.value)
+  if (diff < 6) {
+    playTick()
+    emit('tap', true)
+  } else {
+    emit('tap', false)
+  }
 }
 
 onMounted(() => {
   targetFreq.value = 25 + Math.random() * 50
-  currentFreq.value = Math.random() < 0.5 ? 5 + Math.random() * 15 : 85 + Math.random() * 10
+  // 바늘 시작: 타겟 반대편
+  currentFreq.value = targetFreq.value > 50 ? 5 + Math.random() * 10 : 90 + Math.random() * 5
+  direction = targetFreq.value > currentFreq.value ? 1 : -1
+  lastTime = performance.now()
+  raf = requestAnimationFrame(animate)
+
   if (!containerEl.value) return
   const el = containerEl.value
   el.addEventListener('touchstart', onStart, { passive: false })
-  el.addEventListener('touchmove', onMove, { passive: false })
   el.addEventListener('touchend', onEnd, { passive: false })
   el.addEventListener('mousedown', onStart)
-  el.addEventListener('mousemove', onMove)
   el.addEventListener('mouseup', onEnd)
 })
 
 onUnmounted(() => {
+  cancelAnimationFrame(raf)
   if (!containerEl.value) return
   const el = containerEl.value
   el.removeEventListener('touchstart', onStart)
-  el.removeEventListener('touchmove', onMove)
   el.removeEventListener('touchend', onEnd)
   el.removeEventListener('mousedown', onStart)
-  el.removeEventListener('mousemove', onMove)
   el.removeEventListener('mouseup', onEnd)
 })
 </script>
@@ -104,12 +119,16 @@ onUnmounted(() => {
 
     <!-- Target zone -->
     <div class="freq-bar">
-      <div class="target-zone" :style="{ left: `${targetFreq - 4}%`, width: '8%' }" />
-      <div class="needle" :class="{ locked: Math.abs(currentFreq - targetFreq) < 4 }" :style="{ left: `${currentFreq}%` }" />
+      <div class="target-zone" :style="{ left: `${targetFreq - 5}%`, width: '10%' }" />
+      <div
+        class="needle"
+        :class="{ moving: isHolding, locked: resolved && Math.abs(currentFreq - targetFreq) < 6 }"
+        :style="{ left: `${currentFreq}%` }"
+      />
     </div>
 
-    <div class="proximity-label" :style="{ opacity: 0.4 + getProximity() * 0.6 }">
-      {{ getProximity() > 0.9 ? '■■■■■' : getProximity() > 0.7 ? '■■■■□' : getProximity() > 0.5 ? '■■■□□' : getProximity() > 0.3 ? '■■□□□' : '■□□□□' }}
+    <div class="tune-hint">
+      {{ resolved ? (Math.abs(currentFreq - targetFreq) < 6 ? 'LOCKED' : 'MISS') : isHolding ? 'RELEASE AT TARGET' : 'HOLD TO TUNE' }}
     </div>
   </div>
 </template>
@@ -168,7 +187,10 @@ onUnmounted(() => {
   background: var(--px-green-bright);
   transform: translateX(-50%);
   box-shadow: 0 0 8px var(--px-green-glow);
-  transition: left 0.05s linear;
+}
+
+.needle.moving {
+  box-shadow: 0 0 12px var(--px-green-glow-strong);
 }
 
 .needle.locked {
@@ -176,10 +198,11 @@ onUnmounted(() => {
   box-shadow: 0 0 16px var(--px-green-glow-strong), 0 0 32px var(--px-green-glow);
 }
 
-.proximity-label {
-  font-size: 18px;
+.tune-hint {
+  font-size: 16px;
+  font-weight: 700;
   color: var(--px-green-bright);
-  letter-spacing: 4px;
+  text-shadow: 0 0 8px var(--px-green-glow);
   font-family: monospace;
 }
 </style>

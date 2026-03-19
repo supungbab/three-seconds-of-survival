@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { usePressable } from '@/composables/usePressable'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
 
 defineProps<{
   score: number
@@ -24,7 +27,7 @@ const home = usePressable(() => emit('home'))
       <!-- Header -->
       <div class="result-header">
         <svg class="pixel-skull" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="0" width="8" height="2" fill="currentColor"/><rect x="6" y="2" width="12" height="2" fill="currentColor"/><rect x="4" y="4" width="7" height="4" fill="currentColor"/><rect x="13" y="4" width="7" height="4" fill="currentColor"/><rect x="4" y="8" width="4" height="2" fill="currentColor"/><rect x="16" y="8" width="4" height="2" fill="currentColor"/><rect x="4" y="10" width="7" height="2" fill="currentColor"/><rect x="13" y="10" width="7" height="2" fill="currentColor"/><rect x="4" y="12" width="7" height="6" fill="currentColor"/><rect x="13" y="12" width="7" height="6" fill="currentColor"/><rect x="4" y="18" width="16" height="2" fill="currentColor"/><rect x="2" y="20" width="20" height="4" fill="currentColor"/></svg>
-        <div class="result-label">GAME OVER</div>
+        <div class="result-label">{{ t('GAME OVER') }}</div>
       </div>
 
       <!-- Pixel divider -->
@@ -34,10 +37,10 @@ const home = usePressable(() => emit('home'))
       <div class="result-score-section">
         <div class="result-score">{{ score }}</div>
         <div class="result-best">
-          BEST <span class="best-value">{{ bestScore }}</span>
+          {{ t('BEST') }} <span class="best-value">{{ bestScore }}</span>
         </div>
         <div v-if="score >= bestScore && score > 0" class="new-record">
-          ★ NEW RECORD ★
+          {{ t('★ NEW RECORD ★') }}
         </div>
       </div>
 
@@ -47,10 +50,10 @@ const home = usePressable(() => emit('home'))
       <!-- Actions -->
       <div class="result-actions">
         <button class="arc-btn arc-btn--primary" @click="restart.onClick">
-          <span class="btn-icon">▶</span> 다시 하기
+          <span class="btn-icon">▶</span> {{ t('다시 하기') }}
         </button>
         <button class="arc-btn arc-btn--ghost" @click="home.onClick">
-          <span class="btn-icon">◀</span> 홈으로
+          <span class="btn-icon">◀</span> {{ t('홈으로') }}
         </button>
       </div>
     </div>

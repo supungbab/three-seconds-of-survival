@@ -15,10 +15,10 @@ const emit = defineEmits<{
 type WireColor = 'red' | 'blue' | 'yellow' | 'green'
 const WIRE_COLORS: WireColor[] = ['red', 'blue', 'yellow', 'green']
 const WIRE_NAMES: Record<WireColor, string> = {
-  red: '빨강',
-  blue: '파랑',
-  yellow: '노랑',
-  green: '초록',
+  red: 'R',
+  blue: 'B',
+  yellow: 'Y',
+  green: 'G',
 }
 const WIRE_CSS: Record<WireColor, string> = {
   red: '#ff3b5c',

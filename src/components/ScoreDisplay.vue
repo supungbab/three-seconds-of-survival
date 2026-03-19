@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   score: number
@@ -17,7 +20,7 @@ watch(() => props.score, () => {
 
 <template>
   <div class="score-row">
-    <span class="score-label">점수:</span>
+    <span class="score-label">{{ t('점수:') }}</span>
     <span class="score-value" :class="{ 'score-pop': isPop }">{{ score }}</span>
   </div>
 </template>
