@@ -47,16 +47,12 @@
   --px-neutral-frame: #0a0a0c;
 
   /* ─── Accent colors ─── */
-  --arc-green: #a0dca4;
-  --arc-green-dim: #5a7a5c;
-  --arc-green-glow: rgba(140, 200, 144, 0.4);
   --arc-amber: #ffb800;
   --arc-amber-glow: rgba(255, 184, 0, 0.3);
   --arc-cyan: #00e5ff;
 
   --arc-danger: #ff3b5c;
   --arc-danger-glow: rgba(255, 59, 92, 0.4);
-  --arc-success: #a0dca4;
   --arc-warning: #ffab00;
 
   /* Game mission colors */

@@ -30,7 +30,7 @@ defineProps<{
 
 .timer-bar-fill {
   height: 100%;
-  background: var(--arc-green);
+  background: var(--px-green-bright);
   border-radius: 0;
   transition: none;
   will-change: width;
@@ -39,7 +39,7 @@ defineProps<{
 
 .timer-bar-fill.active {
   box-shadow:
-    0 0 8px var(--arc-green-glow),
+    0 0 8px var(--px-green-glow),
     0 0 20px rgba(140, 200, 144, 0.15);
 }
 

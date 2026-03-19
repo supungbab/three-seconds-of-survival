@@ -19,7 +19,7 @@ defineProps<{
   color: var(--arc-text);
   padding: 16px;
   text-shadow:
-    0 0 20px var(--arc-green-glow),
+    0 0 20px var(--px-green-glow),
     0 0 60px rgba(140, 200, 144, 0.12);
 }
 </style>

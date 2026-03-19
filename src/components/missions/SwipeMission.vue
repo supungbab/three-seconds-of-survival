@@ -35,9 +35,9 @@ const ARROWS: Record<SwipeDirection, string> = {
 .arrow-display {
   font-size: 96px;
   line-height: 1;
-  color: var(--arc-green);
+  color: var(--px-green-bright);
   text-shadow:
-    0 0 20px var(--arc-green-glow),
+    0 0 20px var(--px-green-glow),
     0 0 60px rgba(140, 200, 144, 0.15);
 }
 

@@ -41,8 +41,8 @@ const progressPercent = computed(() =>
 }
 
 .current {
-  color: var(--arc-green);
-  text-shadow: 0 0 12px var(--arc-green-glow);
+  color: var(--px-green-bright);
+  text-shadow: 0 0 12px var(--px-green-glow);
 }
 
 .separator {
@@ -68,10 +68,10 @@ const progressPercent = computed(() =>
 
 .tap-progress-fill {
   height: 100%;
-  background: var(--arc-green);
+  background: var(--px-green-bright);
   border-radius: 0;
   transition: width 0.05s linear;
-  box-shadow: 0 0 8px var(--arc-green-glow);
+  box-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .tap-hint {
