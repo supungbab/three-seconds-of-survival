@@ -56,25 +56,18 @@
 | `--px-neutral-bevel-dark` | `#1a1a1c` | 베벨 섀도 |
 | `--px-neutral-frame` | `#0a0a0c` | 외곽 프레임 |
 
-### Pixel Icon Colors
-
-| Token | Value | Usage |
-|---|---|---|
-| `--px-crown` | `#b8a060` | 왕관 아이콘 밝은 부분 |
-| `--px-crown-dark` | `#9a8450` | 왕관 아이콘 어두운 부분 |
-
 ### System Colors
 
 | Token | Value | Usage |
 |---|---|---|
 | `--arc-bg` | `#0a0610` | 전체 배경 (딥 퍼플-블랙) |
-| `--arc-surface` | `#111827` | 카드, 오버레이 배경 |
-| `--arc-surface-light` | `#1e293b` | 보더, 구분선 |
 | `--arc-text` | `#e2e8f0` | 기본 텍스트 (흰색 계열) |
 | `--arc-muted` | `#64748b` | 보조 텍스트, "꺼진" 상태 |
 | `--arc-danger` | `#ff3b5c` | 실패, GAME OVER |
 | `--arc-danger-glow` | `rgba(255,59,92,0.4)` | 위험 글로우 |
+| `--arc-amber` | `#ffb800` | 앰버 액센트 |
 | `--arc-cyan` | `#00e5ff` | 보조 액센트 (롱프레스 등) |
+| `--arc-warning` | `#ffab00` | 경고 |
 
 ### Game Mission Colors
 
@@ -129,13 +122,13 @@
 ### Primary 버튼 (그린)
 - 배경: `--px-green-bg` / 텍스트: `--px-green`
 - 보더: `--px-green-border` (3px)
-- 좌측 아이콘 구분선 + CSS pixel-art 아이콘 (러닝맨)
+- 좌측 인라인 SVG 아이콘 (pixel-human, 24x24, currentColor)
 - `btn-pulse` 애니메이션
 
 ### Sub 버튼 (뉴트럴)
 - 배경: `--px-neutral-bg` / 텍스트: `--px-neutral`
 - 보더: `--px-neutral-border` (2px)
-- CSS pixel-art 아이콘 (왕관, 기어)
+- 인라인 SVG 아이콘 (pixel-crown, pixel-gear, 24x24, currentColor)
 
 ### Result 버튼
 - "다시 하기": primary 스타일 (2px 보더)
@@ -267,7 +260,7 @@ SVG fractalNoise 노이즈 + 화재 톤 그라데이션.
 - 반투명 다크 오버레이 (`rgba(4,2,6,0.94)`)
 - 뉴트럴 톤 카드 (`#0a0a0c` bg, `#3a3a38` border)
 - 카드 내 스캔라인 텍스처
-- 헤더: 픽셀 해골 아이콘 + "GAME OVER" (`--arc-danger`)
+- 헤더: 픽셀 비석 SVG 아이콘 (십자가 음각) + "GAME OVER" (`--arc-danger`)
 - 점선 디바이더로 섹션 구분
 - 점수: `--px-green-bright`, BEST: `--px-neutral-dim`
 - NEW RECORD: `--px-green` + 펄스
