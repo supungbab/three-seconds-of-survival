@@ -121,6 +121,43 @@ const missions: MissionInfo[] = [
   { type: 'RATION_VOTE', name: '보급 투표', input: 'O/X', difficulty: 'HARD', category: '심리' },
   { type: 'SACRIFICE', name: '선택', input: '탭', difficulty: 'HARD', category: '심리' },
   { type: 'MIMIC', name: '가짜 찾기', input: '탭', difficulty: 'HARD', category: '심리' },
+  // CRT/레트로
+  { type: 'KERNEL_PANIC', name: '커널 패닉', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'BLUE_SCREEN', name: '블루스크린', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'SEGFAULT', name: '세그폴트', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'TAPE_SPLICE', name: '테이프 접합', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'CORE_DUMP', name: '코어 덤프', input: '탭', difficulty: 'HARD', category: 'CRT' },
+  { type: 'SIGNAL_BOOST', name: '신호 증폭', input: '스와이프', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'VOLTAGE_MATCH', name: '전압 맞추기', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'DEAD_PIXEL', name: '데드 픽셀', input: '탭', difficulty: 'EASY', category: 'CRT' },
+  { type: 'CIRCUIT_BRIDGE', name: '회로 연결', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  { type: 'MEMORY_LEAK', name: '메모리 누수', input: '탭', difficulty: 'HARD', category: 'CRT' },
+  { type: 'STACK_OVERFLOW', name: '스택 오버플로우', input: '탭', difficulty: 'NORMAL', category: 'CRT' },
+  // 생존/의료
+  { type: 'TOURNIQUET', name: '지혈대', input: '탭', difficulty: 'EASY', category: '의료' },
+  { type: 'DEFIBRILLATE', name: '제세동', input: '탭', difficulty: 'HARD', category: '의료' },
+  { type: 'HAZMAT_SEAL', name: '방호복 밀봉', input: '탭', difficulty: 'NORMAL', category: '의료' },
+  { type: 'CRYO_THAW', name: '냉동 해동', input: '탭', difficulty: 'NORMAL', category: '의료' },
+  { type: 'OXYGEN_MIX', name: '산소 배합', input: '탭', difficulty: 'NORMAL', category: '의료' },
+  { type: 'VACCINE_MIX', name: '백신 조합', input: '탭', difficulty: 'HARD', category: '의료' },
+  { type: 'GENE_SPLICE', name: 'DNA 절단', input: '스와이프', difficulty: 'HARD', category: '의료' },
+  { type: 'AMPUTATE', name: '절단', input: '스와이프', difficulty: 'HARD', category: '의료' },
+  { type: 'DISTILL', name: '증류', input: '탭', difficulty: 'NORMAL', category: '의료' },
+  // 전투/전술
+  { type: 'DEAD_MAN_SWITCH', name: '데드맨 스위치', input: '홀드', difficulty: 'HARD', category: '전투' },
+  { type: 'TRAP_ARM', name: '함정 설치', input: '순차탭', difficulty: 'HARD', category: '전투' },
+  { type: 'THERMAL_SCAN', name: '열화상', input: '탭', difficulty: 'NORMAL', category: '전투' },
+  { type: 'EMP_SHIELD', name: 'EMP 방어', input: '탭', difficulty: 'HARD', category: '전투' },
+  { type: 'CLAYMORE_AIM', name: '클레이모어', input: '탭', difficulty: 'HARD', category: '전투' },
+  { type: 'BREACH_CHARGE', name: '돌파', input: '순차탭', difficulty: 'HARD', category: '전투' },
+  // 자원/공학
+  { type: 'AIRDROP', name: '보급 투하', input: '탭', difficulty: 'EASY', category: '자원' },
+  { type: 'TUNNEL_DIG', name: '터널 파기', input: '교대스와이프', difficulty: 'NORMAL', category: '자원' },
+  { type: 'PLASMA_CUT', name: '플라즈마 절단', input: '순차탭', difficulty: 'NORMAL', category: '자원' },
+  { type: 'FUEL_MIX', name: '연료 이송', input: '탭', difficulty: 'NORMAL', category: '자원' },
+  { type: 'BAIT_SET', name: '미끼 설치', input: '탭', difficulty: 'NORMAL', category: '전투' },
+  { type: 'SONAR_PING', name: '소나', input: '탭', difficulty: 'NORMAL', category: '전투' },
+  { type: 'FREQUENCY_LOCK', name: '주파수 고정', input: '탭', difficulty: 'HARD', category: 'CRT' },
 ]
 
 const categories = [...new Set(missions.map(m => m.category))]

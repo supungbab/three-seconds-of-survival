@@ -113,6 +113,39 @@ import TubeReplaceMission from '@/components/missions/TubeReplaceMission.vue'
 import RationVoteMission from '@/components/missions/RationVoteMission.vue'
 import SacrificeMission from '@/components/missions/SacrificeMission.vue'
 import MimicMission from '@/components/missions/MimicMission.vue'
+import KernelPanicMission from '@/components/missions/KernelPanicMission.vue'
+import BlueScreenMission from '@/components/missions/BlueScreenMission.vue'
+import SegfaultMission from '@/components/missions/SegfaultMission.vue'
+import TapeSpliceMission from '@/components/missions/TapeSpliceMission.vue'
+import CoreDumpMission from '@/components/missions/CoreDumpMission.vue'
+import SignalBoostMission from '@/components/missions/SignalBoostMission.vue'
+import VoltageMatchMission from '@/components/missions/VoltageMatchMission.vue'
+import TourniquetMission from '@/components/missions/TourniquetMission.vue'
+import DefibrillateMission from '@/components/missions/DefibrillateMission.vue'
+import HazmatSealMission from '@/components/missions/HazmatSealMission.vue'
+import CryoThawMission from '@/components/missions/CryoThawMission.vue'
+import OxygenMixMission from '@/components/missions/OxygenMixMission.vue'
+import AirdropMission from '@/components/missions/AirdropMission.vue'
+import TunnelDigMission from '@/components/missions/TunnelDigMission.vue'
+import DeadManSwitchMission from '@/components/missions/DeadManSwitchMission.vue'
+import TrapArmMission from '@/components/missions/TrapArmMission.vue'
+import ThermalScanMission from '@/components/missions/ThermalScanMission.vue'
+import EmpShieldMission from '@/components/missions/EmpShieldMission.vue'
+import VaccineMixMission from '@/components/missions/VaccineMixMission.vue'
+import GeneSpliceMission from '@/components/missions/GeneSpliceMission.vue'
+import DistillMission from '@/components/missions/DistillMission.vue'
+import PlasmaCutMission from '@/components/missions/PlasmaCutMission.vue'
+import FuelMixMission from '@/components/missions/FuelMixMission.vue'
+import ClaymoreAimMission from '@/components/missions/ClaymoreAimMission.vue'
+import BreachChargeMission from '@/components/missions/BreachChargeMission.vue'
+import AmputateMission from '@/components/missions/AmputateMission.vue'
+import DeadPixelMission from '@/components/missions/DeadPixelMission.vue'
+import CircuitBridgeMission from '@/components/missions/CircuitBridgeMission.vue'
+import MemoryLeakMission from '@/components/missions/MemoryLeakMission.vue'
+import StackOverflowMission from '@/components/missions/StackOverflowMission.vue'
+import BaitSetMission from '@/components/missions/BaitSetMission.vue'
+import SonarPingMission from '@/components/missions/SonarPingMission.vue'
+import FrequencyLockMission from '@/components/missions/FrequencyLockMission.vue'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -668,6 +701,138 @@ onUnmounted(() => {
           />
           <MimicMission
             v-else-if="mission.type === 'MIMIC'"
+            @tap="handleColorTap"
+          />
+          <KernelPanicMission
+            v-else-if="mission.type === 'KERNEL_PANIC'"
+            @tap="handleColorTap"
+          />
+          <BlueScreenMission
+            v-else-if="mission.type === 'BLUE_SCREEN'"
+            @tap="handleColorTap"
+          />
+          <SegfaultMission
+            v-else-if="mission.type === 'SEGFAULT'"
+            @tap="handleColorTap"
+          />
+          <TapeSpliceMission
+            v-else-if="mission.type === 'TAPE_SPLICE'"
+            @tap="handleColorTap"
+          />
+          <CoreDumpMission
+            v-else-if="mission.type === 'CORE_DUMP'"
+            @tap="handleColorTap"
+          />
+          <SignalBoostMission
+            v-else-if="mission.type === 'SIGNAL_BOOST'"
+            @tap="handleColorTap"
+          />
+          <VoltageMatchMission
+            v-else-if="mission.type === 'VOLTAGE_MATCH'"
+            @tap="handleColorTap"
+          />
+          <TourniquetMission
+            v-else-if="mission.type === 'TOURNIQUET'"
+            @tap="handleColorTap"
+          />
+          <DefibrillateMission
+            v-else-if="mission.type === 'DEFIBRILLATE'"
+            @tap="handleColorTap"
+          />
+          <HazmatSealMission
+            v-else-if="mission.type === 'HAZMAT_SEAL'"
+            @tap="handleColorTap"
+          />
+          <CryoThawMission
+            v-else-if="mission.type === 'CRYO_THAW'"
+            @tap="handleColorTap"
+          />
+          <OxygenMixMission
+            v-else-if="mission.type === 'OXYGEN_MIX'"
+            @tap="handleColorTap"
+          />
+          <AirdropMission
+            v-else-if="mission.type === 'AIRDROP'"
+            @tap="handleColorTap"
+          />
+          <TunnelDigMission
+            v-else-if="mission.type === 'TUNNEL_DIG'"
+            @tap="handleColorTap"
+          />
+          <DeadManSwitchMission
+            v-else-if="mission.type === 'DEAD_MAN_SWITCH'"
+            @tap="handleColorTap"
+          />
+          <TrapArmMission
+            v-else-if="mission.type === 'TRAP_ARM'"
+            @tap="handleColorTap"
+          />
+          <ThermalScanMission
+            v-else-if="mission.type === 'THERMAL_SCAN'"
+            @tap="handleColorTap"
+          />
+          <EmpShieldMission
+            v-else-if="mission.type === 'EMP_SHIELD'"
+            @tap="handleColorTap"
+          />
+          <VaccineMixMission
+            v-else-if="mission.type === 'VACCINE_MIX'"
+            @tap="handleColorTap"
+          />
+          <GeneSpliceMission
+            v-else-if="mission.type === 'GENE_SPLICE'"
+            @tap="handleColorTap"
+          />
+          <DistillMission
+            v-else-if="mission.type === 'DISTILL'"
+            @tap="handleColorTap"
+          />
+          <PlasmaCutMission
+            v-else-if="mission.type === 'PLASMA_CUT'"
+            @tap="handleColorTap"
+          />
+          <FuelMixMission
+            v-else-if="mission.type === 'FUEL_MIX'"
+            @tap="handleColorTap"
+          />
+          <ClaymoreAimMission
+            v-else-if="mission.type === 'CLAYMORE_AIM'"
+            @tap="handleColorTap"
+          />
+          <BreachChargeMission
+            v-else-if="mission.type === 'BREACH_CHARGE'"
+            @tap="handleColorTap"
+          />
+          <AmputateMission
+            v-else-if="mission.type === 'AMPUTATE'"
+            @tap="handleColorTap"
+          />
+          <DeadPixelMission
+            v-else-if="mission.type === 'DEAD_PIXEL'"
+            @tap="handleColorTap"
+          />
+          <CircuitBridgeMission
+            v-else-if="mission.type === 'CIRCUIT_BRIDGE'"
+            @tap="handleColorTap"
+          />
+          <MemoryLeakMission
+            v-else-if="mission.type === 'MEMORY_LEAK'"
+            @tap="handleColorTap"
+          />
+          <StackOverflowMission
+            v-else-if="mission.type === 'STACK_OVERFLOW'"
+            @tap="handleColorTap"
+          />
+          <BaitSetMission
+            v-else-if="mission.type === 'BAIT_SET'"
+            @tap="handleColorTap"
+          />
+          <SonarPingMission
+            v-else-if="mission.type === 'SONAR_PING'"
+            @tap="handleColorTap"
+          />
+          <FrequencyLockMission
+            v-else-if="mission.type === 'FREQUENCY_LOCK'"
             @tap="handleColorTap"
           />
         </div>

@@ -110,6 +110,39 @@ export type MissionType =
   | 'RATION_VOTE'
   | 'SACRIFICE'
   | 'MIMIC'
+  | 'KERNEL_PANIC'
+  | 'BLUE_SCREEN'
+  | 'SEGFAULT'
+  | 'TAPE_SPLICE'
+  | 'CORE_DUMP'
+  | 'SIGNAL_BOOST'
+  | 'VOLTAGE_MATCH'
+  | 'TOURNIQUET'
+  | 'DEFIBRILLATE'
+  | 'HAZMAT_SEAL'
+  | 'CRYO_THAW'
+  | 'OXYGEN_MIX'
+  | 'AIRDROP'
+  | 'TUNNEL_DIG'
+  | 'DEAD_MAN_SWITCH'
+  | 'TRAP_ARM'
+  | 'THERMAL_SCAN'
+  | 'EMP_SHIELD'
+  | 'VACCINE_MIX'
+  | 'GENE_SPLICE'
+  | 'DISTILL'
+  | 'PLASMA_CUT'
+  | 'FUEL_MIX'
+  | 'CLAYMORE_AIM'
+  | 'BREACH_CHARGE'
+  | 'AMPUTATE'
+  | 'DEAD_PIXEL'
+  | 'CIRCUIT_BRIDGE'
+  | 'MEMORY_LEAK'
+  | 'STACK_OVERFLOW'
+  | 'BAIT_SET'
+  | 'SONAR_PING'
+  | 'FREQUENCY_LOCK'
 
 
 export interface MissionParams {
@@ -1606,6 +1639,270 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
         difficulty: 'HARD',
         text: 'FIND MIMIC',
       }
+    },
+  },
+  // KERNEL_PANIC - NORMAL
+  {
+    type: 'KERNEL_PANIC',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'KERNEL_PANIC', difficulty: 'NORMAL', text: 'KERNEL PANIC' }
+    },
+  },
+  // BLUE_SCREEN - NORMAL
+  {
+    type: 'BLUE_SCREEN',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'BLUE_SCREEN', difficulty: 'NORMAL', text: 'BSOD' }
+    },
+  },
+  // SEGFAULT - NORMAL
+  {
+    type: 'SEGFAULT',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'SEGFAULT', difficulty: 'NORMAL', text: 'SEGFAULT' }
+    },
+  },
+  // TAPE_SPLICE - NORMAL
+  {
+    type: 'TAPE_SPLICE',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'TAPE_SPLICE', difficulty: 'NORMAL', text: 'SPLICE TAPE' }
+    },
+  },
+  // CORE_DUMP - HARD
+  {
+    type: 'CORE_DUMP',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'CORE_DUMP', difficulty: 'HARD', text: 'CATCH ERROR' }
+    },
+  },
+  // SIGNAL_BOOST - NORMAL
+  {
+    type: 'SIGNAL_BOOST',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'SIGNAL_BOOST', difficulty: 'NORMAL', text: 'BOOST SIGNAL' }
+    },
+  },
+  // VOLTAGE_MATCH - NORMAL
+  {
+    type: 'VOLTAGE_MATCH',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'VOLTAGE_MATCH', difficulty: 'NORMAL', text: 'MATCH VOLTAGE' }
+    },
+  },
+  // TOURNIQUET - EASY
+  {
+    type: 'TOURNIQUET',
+    difficulty: 'EASY',
+    generate() {
+      return { type: 'TOURNIQUET', difficulty: 'EASY', text: 'TOURNIQUET' }
+    },
+  },
+  // DEFIBRILLATE - HARD
+  {
+    type: 'DEFIBRILLATE',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'DEFIBRILLATE', difficulty: 'HARD', text: 'SHOCK' }
+    },
+  },
+  // HAZMAT_SEAL - NORMAL
+  {
+    type: 'HAZMAT_SEAL',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'HAZMAT_SEAL', difficulty: 'NORMAL', text: 'SEAL SUIT' }
+    },
+  },
+  // CRYO_THAW - NORMAL
+  {
+    type: 'CRYO_THAW',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'CRYO_THAW', difficulty: 'NORMAL', text: 'THAW' }
+    },
+  },
+  // OXYGEN_MIX - NORMAL
+  {
+    type: 'OXYGEN_MIX',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'OXYGEN_MIX', difficulty: 'NORMAL', text: 'MIX O2' }
+    },
+  },
+  // AIRDROP - EASY
+  {
+    type: 'AIRDROP',
+    difficulty: 'EASY',
+    generate() {
+      return { type: 'AIRDROP', difficulty: 'EASY', text: 'CATCH DROP' }
+    },
+  },
+  // TUNNEL_DIG - NORMAL
+  {
+    type: 'TUNNEL_DIG',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'TUNNEL_DIG', difficulty: 'NORMAL', text: 'DIG' }
+    },
+  },
+  // DEAD_MAN_SWITCH - HARD
+  {
+    type: 'DEAD_MAN_SWITCH',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'DEAD_MAN_SWITCH', difficulty: 'HARD', text: 'HOLD!' }
+    },
+  },
+  // TRAP_ARM - HARD
+  {
+    type: 'TRAP_ARM',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'TRAP_ARM', difficulty: 'HARD', text: 'ARM TRAP' }
+    },
+  },
+  // THERMAL_SCAN - NORMAL
+  {
+    type: 'THERMAL_SCAN',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'THERMAL_SCAN', difficulty: 'NORMAL', text: 'FIND HUMAN' }
+    },
+  },
+  // EMP_SHIELD - HARD
+  {
+    type: 'EMP_SHIELD',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'EMP_SHIELD', difficulty: 'HARD', text: 'SHIELD!' }
+    },
+  },
+  // VACCINE_MIX - HARD
+  {
+    type: 'VACCINE_MIX',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'VACCINE_MIX', difficulty: 'HARD', text: 'MIX VACCINE' }
+    },
+  },
+  // GENE_SPLICE - HARD
+  {
+    type: 'GENE_SPLICE',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'GENE_SPLICE', difficulty: 'HARD', text: 'CUT MUTANT' }
+    },
+  },
+  // DISTILL - NORMAL
+  {
+    type: 'DISTILL',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'DISTILL', difficulty: 'NORMAL', text: 'DISTILL' }
+    },
+  },
+  // PLASMA_CUT - NORMAL
+  {
+    type: 'PLASMA_CUT',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'PLASMA_CUT', difficulty: 'NORMAL', text: 'CUT' }
+    },
+  },
+  // FUEL_MIX - NORMAL
+  {
+    type: 'FUEL_MIX',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'FUEL_MIX', difficulty: 'NORMAL', text: 'TRANSFER FUEL' }
+    },
+  },
+  // CLAYMORE_AIM - HARD
+  {
+    type: 'CLAYMORE_AIM',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'CLAYMORE_AIM', difficulty: 'HARD', text: 'AIM CLAYMORE' }
+    },
+  },
+  // BREACH_CHARGE - HARD
+  {
+    type: 'BREACH_CHARGE',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'BREACH_CHARGE', difficulty: 'HARD', text: 'BREACH' }
+    },
+  },
+  // AMPUTATE - HARD
+  {
+    type: 'AMPUTATE',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'AMPUTATE', difficulty: 'HARD', text: 'AMPUTATE' }
+    },
+  },
+  // DEAD_PIXEL - EASY
+  {
+    type: 'DEAD_PIXEL',
+    difficulty: 'EASY',
+    generate() {
+      return { type: 'DEAD_PIXEL', difficulty: 'EASY', text: 'FIX DEAD PIXEL' }
+    },
+  },
+  // CIRCUIT_BRIDGE - NORMAL
+  {
+    type: 'CIRCUIT_BRIDGE',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'CIRCUIT_BRIDGE', difficulty: 'NORMAL', text: 'BRIDGE CIRCUIT' }
+    },
+  },
+  // MEMORY_LEAK - HARD
+  {
+    type: 'MEMORY_LEAK',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'MEMORY_LEAK', difficulty: 'HARD', text: 'PATCH LEAK' }
+    },
+  },
+  // STACK_OVERFLOW - NORMAL
+  {
+    type: 'STACK_OVERFLOW',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'STACK_OVERFLOW', difficulty: 'NORMAL', text: 'POP STACK' }
+    },
+  },
+  // BAIT_SET - NORMAL
+  {
+    type: 'BAIT_SET',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'BAIT_SET', difficulty: 'NORMAL', text: 'SET BAIT' }
+    },
+  },
+  // SONAR_PING - NORMAL
+  {
+    type: 'SONAR_PING',
+    difficulty: 'NORMAL',
+    generate() {
+      return { type: 'SONAR_PING', difficulty: 'NORMAL', text: 'SONAR' }
+    },
+  },
+  // FREQUENCY_LOCK - HARD
+  {
+    type: 'FREQUENCY_LOCK',
+    difficulty: 'HARD',
+    generate() {
+      return { type: 'FREQUENCY_LOCK', difficulty: 'HARD', text: 'LOCK FREQ' }
     },
   },
 ]
