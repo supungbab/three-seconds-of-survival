@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -160,7 +162,7 @@ onUnmounted(() => {
       :style="{ left: `${safeZone.x}%`, top: `${safeZone.y}%` }"
     >
       <span class="zone-symbol">□</span>
-      <span class="zone-label">SAFE</span>
+      <span class="zone-label">{{ t('안전') }}</span>
     </div>
 
     <div

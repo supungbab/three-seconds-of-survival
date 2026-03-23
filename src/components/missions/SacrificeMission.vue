@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -58,21 +60,21 @@ function handlePick(index: number, e: Event) {
 
 <template>
   <div class="sacrifice-mission">
-    <div class="sacrifice-label">CHOOSE YOUR LOSS</div>
+    <div class="sacrifice-label">{{ t('손실을 선택하세요') }}</div>
     <div class="options-row">
       <button class="option-card" @pointerdown="handlePick(0, $event)">
         <div class="option-icon">{{ optionA.icon }}</div>
         <div class="option-item">{{ optionA.item }}</div>
         <div class="option-cost">-{{ optionA.cost }}</div>
       </button>
-      <div class="vs-divider">OR</div>
+      <div class="vs-divider">{{ t('또는') }}</div>
       <button class="option-card" @pointerdown="handlePick(1, $event)">
         <div class="option-icon">{{ optionB.icon }}</div>
         <div class="option-item">{{ optionB.item }}</div>
         <div class="option-cost">-{{ optionB.cost }}</div>
       </button>
     </div>
-    <div class="sacrifice-hint">PICK LOWER COST</div>
+    <div class="sacrifice-hint">{{ t('낮은 비용을 선택하세요') }}</div>
   </div>
 </template>
 

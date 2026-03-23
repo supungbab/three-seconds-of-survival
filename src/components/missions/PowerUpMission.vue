@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   requiredSwipes: number
@@ -81,7 +83,7 @@ onUnmounted(() => {
 <template>
   <div ref="containerEl" class="power-up-mission">
     <div class="crt-screen" :style="{ opacity: brightness }">
-      <div class="crt-text">POWER</div>
+      <div class="crt-text">{{ t('전력') }}</div>
     </div>
 
     <div class="battery">

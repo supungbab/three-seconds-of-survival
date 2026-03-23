@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -51,7 +53,7 @@ onUnmounted(() => {
 <template>
   <div class="claymore-mission" @pointerdown="handleTap">
     <div class="enemy-indicator">
-      <span class="enemy-label">ENEMY</span>
+      <span class="enemy-label">{{ t('적') }}</span>
       <span class="enemy-dir">{{ DIRECTIONS[enemyIndex] }}</span>
     </div>
     <div class="mine-area">
@@ -69,7 +71,7 @@ onUnmounted(() => {
         {{ d }}
       </div>
     </div>
-    <div class="hint">TAP WHEN AIMED</div>
+    <div class="hint">{{ t('조준되면 탭하세요') }}</div>
   </div>
 </template>
 

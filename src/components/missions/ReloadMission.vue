@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -116,7 +118,7 @@ onUnmounted(() => {
     <div class="reload-display">
       <div class="slot-area">
         <span class="slot-icon">▣</span>
-        <span class="slot-label">CHAMBER</span>
+        <span class="slot-label">{{ t('약실') }}</span>
       </div>
 
       <div class="timing-bar-container">
@@ -134,16 +136,16 @@ onUnmounted(() => {
 
       <div class="magazine-area" :class="{ loaded: success, miss: failed }">
         <span class="mag-icon">▥</span>
-        <span class="mag-label">MAG</span>
+        <span class="mag-label">{{ t('탄창') }}</span>
       </div>
     </div>
 
     <div class="swipe-hint" :class="{ hidden: resolved }">
-      ↑ SWIPE UP TO RELOAD
+      ↑ {{ t('위로 스와이프하여 장전') }}
     </div>
 
-    <div v-if="success" class="result-flash success-flash">LOADED</div>
-    <div v-if="failed" class="result-flash fail-flash">JAMMED</div>
+    <div v-if="success" class="result-flash success-flash">{{ t('장전 완료') }}</div>
+    <div v-if="failed" class="result-flash fail-flash">{{ t('걸림') }}</div>
   </div>
 </template>
 

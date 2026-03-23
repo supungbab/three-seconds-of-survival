@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -66,7 +68,7 @@ onUnmounted(() => {
     <div class="readout">
       O2: {{ indicatorPos.toFixed(0) }}% / N2: {{ (100 - indicatorPos).toFixed(0) }}%
     </div>
-    <div class="hint">TAP TO LOCK MIX</div>
+    <div class="hint">{{ t('탭하여 혼합 잠금') }}</div>
   </div>
 </template>
 

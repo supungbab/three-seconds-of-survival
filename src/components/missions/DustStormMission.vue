@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -59,9 +61,9 @@ onUnmounted(() => {
       class="hidden-text"
       :style="{ left: `${textX}%`, top: `${textY}%` }"
     >
-      SHELTER
+      {{ t('대피소') }}
     </div>
-    <div class="hint-label">FIND THE SIGNAL</div>
+    <div class="hint-label">{{ t('신호를 찾으세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -128,7 +130,7 @@ onUnmounted(() => {
     </div>
 
     <div class="tune-hint">
-      {{ resolved ? (Math.abs(currentFreq - targetFreq) < 6 ? 'LOCKED' : 'MISS') : isHolding ? 'RELEASE AT TARGET' : 'HOLD TO TUNE' }}
+      {{ resolved ? (Math.abs(currentFreq - targetFreq) < 6 ? t('잠김') : t('빗나감')) : isHolding ? t('타겟에서 떼기') : t('홀드하여 조정') }}
     </div>
   </div>
 </template>

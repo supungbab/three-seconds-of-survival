@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -54,7 +56,7 @@ onUnmounted(() => {
 
 <template>
   <div class="emp-mission">
-    <div class="label">EMP INCOMING — ACTIVATE SHIELD</div>
+    <div class="label">{{ t('EMP 수신 — 방어막 가동') }}</div>
     <div class="radar">
       <div
         class="wave"
@@ -65,7 +67,7 @@ onUnmounted(() => {
         ⛨
       </button>
     </div>
-    <div class="hint">TAP WHEN WAVE IS CLOSE</div>
+    <div class="hint">{{ t('파동이 가까울 때 탭하세요') }}</div>
   </div>
 </template>
 

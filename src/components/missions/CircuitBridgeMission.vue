@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -59,7 +61,7 @@ function handleBreakTap(index: number, e: PointerEvent) {
         <span class="chip">▦</span>
       </div>
       <div class="power-indicator" :class="{ on: breaks.every(b => b.fixed) }">
-        {{ breaks.every(b => b.fixed) ? 'CIRCUIT OK' : 'OPEN CIRCUIT' }}
+        {{ breaks.every(b => b.fixed) ? t('회로 정상') : t('회로 끊김') }}
       </div>
     </div>
     <div class="status-dots">
@@ -70,7 +72,7 @@ function handleBreakTap(index: number, e: PointerEvent) {
         :class="{ done: bp.fixed }"
       >{{ bp.fixed ? '●' : '○' }}</span>
     </div>
-    <div class="hint">TAP BREAKS TO BRIDGE</div>
+    <div class="hint">{{ t('끊어진 곳을 탭하여 연결하세요') }}</div>
   </div>
 </template>
 

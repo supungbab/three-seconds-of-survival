@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -30,7 +32,7 @@ function handleTap(e: Event) {
 
 <template>
   <div class="countdown-zero-mission" @pointerdown="handleTap">
-    <div class="countdown-label">TAP AT ZERO</div>
+    <div class="countdown-label">{{ t('제로에서 탭하세요') }}</div>
     <div
       class="countdown-number"
       :class="{ zero: currentNumber === 0, negative: currentNumber < 0 }"

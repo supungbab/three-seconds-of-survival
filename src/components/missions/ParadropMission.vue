@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { SwipeDirection } from '@/types/game'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   direction: SwipeDirection
@@ -81,7 +84,7 @@ const isHorizontalWind = windDirection === 'LEFT' || windDirection === 'RIGHT'
 
     <!-- Wind label -->
     <div class="wind-label">
-      WIND {{ windArrow }}
+      {{ t('바람') }} {{ windArrow }}
     </div>
   </div>
 </template>

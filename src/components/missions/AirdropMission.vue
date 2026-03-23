@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -69,7 +71,7 @@ onUnmounted(() => {
         <span class="lz-label">LZ</span>
       </div>
     </div>
-    <div class="hint">TAP WHEN OVER LZ</div>
+    <div class="hint">{{ t('착륙 지점 위에서 탭하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = withDefaults(
   defineProps<{
@@ -109,7 +111,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="ignite-hint">SWIPE UP ↑</div>
+    <div class="ignite-hint">{{ t('↑ 위로 스와이프') }}</div>
   </div>
 </template>
 

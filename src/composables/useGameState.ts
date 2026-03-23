@@ -114,7 +114,18 @@ export function useGameState() {
     const m = mission.value
     if (!m) return
 
-    // Component-validated single-tap missions
+    // Validator-managed missions: raw input goes directly to validator
+    if (m.type === 'PARADROP' || m.type === 'COMPASS' || m.type === 'VENT') {
+      const isCorrect = validator.validate(m, action)
+      if (isCorrect) {
+        handleSuccess()
+      } else {
+        handleFail()
+      }
+      return
+    }
+
+    // WIRE_CUT: component-validated but wrong tap = immediate fail
     if (m.type === 'WIRE_CUT' && action.type === 'TAP') {
       if (colorTapCorrect) {
         handleSuccess()
@@ -124,49 +135,12 @@ export function useGameState() {
       return
     }
 
-    // Component-managed missions: only component emit succeeds, raw input ignored
-    // These use stopPropagation internally; raw events reach here only from outside the component area
-    if (
-      m.type === 'TUNE' || m.type === 'POWER_UP' || m.type === 'STATIC_CLEAR'
-      || m.type === 'BROADCAST' || m.type === 'SCAN' || m.type === 'SHELTER'
-      || m.type === 'MORSE'
-      || m.type === 'IGNITE' || m.type === 'DEFRAG' || m.type === 'FALLOUT_DODGE'
-      || m.type === 'TRIPWIRE' || m.type === 'WELD' || m.type === 'CRANK_START'
-      || m.type === 'RATION_SPLIT'
-      || m.type === 'SCRAMBLE' || m.type === 'SIGNAL_INTERCEPT' || m.type === 'PURIFY'
-      || m.type === 'BARTER' || m.type === 'FORAGE' || m.type === 'DEGAUSS'
-      || m.type === 'REBOOT' || m.type === 'BIOS_ERROR' || m.type === 'MUTANT_DETECT'
-      || m.type === 'CALIBRATE' || m.type === 'FUSE_REPLACE' || m.type === 'TRUST_KNOCK'
-      || m.type === 'COUNTDOWN_ZERO' || m.type === 'INFECTED_SCAN' || m.type === 'CURFEW'
-      || m.type === 'BLACKBOX' || m.type === 'NOISE_JAM'
-      || m.type === 'PACKET_SNIFF' || m.type === 'BOOT_SEQUENCE' || m.type === 'PIXEL_FIX'
-      || m.type === 'ANTENNA_ALIGN' || m.type === 'TRANSFUSE' || m.type === 'PULSE_CHECK'
-      || m.type === 'SPLINT' || m.type === 'ANTIDOTE' || m.type === 'RELOAD'
-      || m.type === 'SCOPE' || m.type === 'GRENADE_PIN' || m.type === 'BARRICADE'
-      || m.type === 'FLARE_LAUNCH' || m.type === 'WATER_LEVEL' || m.type === 'BRIDGE_CROSS'
-      || m.type === 'DUST_STORM' || m.type === 'INTERLACE' || m.type === 'VSYNC'
-      || m.type === 'COLOR_BLEED' || m.type === 'BURN_IN'
-      || m.type === 'SEMAPHORE' || m.type === 'CIPHER_WHEEL' || m.type === 'BEACON'
-      || m.type === 'GENERATOR' || m.type === 'HATCH_SEAL' || m.type === 'PERIMETER'
-      || m.type === 'SOLAR_PANEL' || m.type === 'PH_TEST' || m.type === 'CENTRIFUGE'
-      || m.type === 'ISOTOPE' || m.type === 'AUTOPILOT' || m.type === 'DOCKING'
-      || m.type === 'MINEFIELD' || m.type === 'CAPACITOR' || m.type === 'SOLDER'
-      || m.type === 'FIRMWARE' || m.type === 'TUBE_REPLACE' || m.type === 'RATION_VOTE'
-      || m.type === 'SACRIFICE' || m.type === 'MIMIC'
-    ) {
-      if (action.type === 'TAP' && colorTapCorrect) {
-        handleSuccess()
-      }
-      // all other raw inputs → ignore (timeout handles fail)
-      return
-    }
-
-    const isCorrect = validator.validate(m, action)
-    if (isCorrect) {
+    // All other missions: component-managed via @tap emit
+    // Raw events that bubble here are ignored; only component emits set colorTapCorrect
+    if (action.type === 'TAP' && colorTapCorrect) {
       handleSuccess()
-    } else {
-      handleFail()
     }
+    // all other raw inputs → ignore (timeout handles fail)
   }
 
   function setColorTapResult(correct: boolean) {

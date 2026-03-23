@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -50,7 +52,7 @@ function handleTap(e: PointerEvent, block: MemBlock) {
 <template>
   <div class="segfault-mission">
     <div class="seg-header">SEGMENTATION FAULT</div>
-    <div class="seg-hint">ISOLATE CORRUPTED BLOCK</div>
+    <div class="seg-hint">{{ t('손상된 블록 격리') }}</div>
     <div class="mem-grid">
       <button
         v-for="(block, i) in blocks"

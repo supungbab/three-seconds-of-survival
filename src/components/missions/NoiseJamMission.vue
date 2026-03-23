@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -95,7 +97,7 @@ onUnmounted(() => {
 
 <template>
   <div class="noise-jam-mission">
-    <div class="noise-label">FIND SIGNAL</div>
+    <div class="noise-label">{{ t('신호 찾기') }}</div>
     <div class="noise-grid">
       <div
         v-for="btn in buttons"
@@ -112,7 +114,7 @@ onUnmounted(() => {
         <span v-if="!btn.isReal" class="btn-glitch">{{ btn.glitchLabel }}</span>
       </div>
     </div>
-    <div class="noise-hint">TAP THE REAL SIGNAL</div>
+    <div class="noise-hint">{{ t('진짜 신호를 탭하세요') }}</div>
   </div>
 </template>
 

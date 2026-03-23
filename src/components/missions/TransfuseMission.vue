@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -59,7 +61,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="transfuse-mission">
-    <div class="hint-label">TAP IN THE ZONE</div>
+    <div class="hint-label">{{ t('구간 안에서 탭하세요') }}</div>
     <div class="gauge-container">
       <div class="gauge">
         <div

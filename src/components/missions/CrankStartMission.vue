@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = withDefaults(
   defineProps<{
@@ -115,7 +117,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="crank-start-mission">
-    <div class="crank-label">CRANK START</div>
+    <div class="crank-label">{{ t('크랭크 시동') }}</div>
     <div class="crank-dial" :style="{ transform: `rotate(${currentAngle}deg)` }">
       <div class="crank-handle">◆</div>
       <div class="crank-center">⊕</div>
@@ -124,7 +126,7 @@ onUnmounted(() => {
     <div class="crank-progress-bar">
       <div class="crank-progress-fill" :style="{ width: `${progress * 100}%` }" />
     </div>
-    <div class="crank-hint">ROTATE CLOCKWISE</div>
+    <div class="crank-hint">{{ t('시계 방향으로 회전') }}</div>
   </div>
 </template>
 

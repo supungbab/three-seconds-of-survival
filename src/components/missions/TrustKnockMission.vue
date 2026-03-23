@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   knockPattern: number[]
@@ -81,11 +83,11 @@ function patternToDots(pattern: number[]): string[] {
 <template>
   <div class="trust-knock-mission">
     <div v-if="phase === 'playing'" class="knock-phase">
-      <div class="knock-label">LISTEN...</div>
+      <div class="knock-label">{{ t('듣는 중...') }}</div>
       <div class="knock-flash" :class="{ active: flashActive }">◈</div>
     </div>
     <div v-else class="choose-phase">
-      <div class="choose-label">WHICH PATTERN?</div>
+      <div class="choose-label">{{ t('어떤 패턴?') }}</div>
       <div class="options-row">
         <button
           v-for="(opt, i) in options"

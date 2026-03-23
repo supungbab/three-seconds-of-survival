@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -50,7 +52,7 @@ const ecgPath = 'M0,30 L60,30 L70,30 L80,28 L90,32 L100,30 L120,30 L130,8 L140,5
 
 <template>
   <div class="defib-mission" @pointerdown="handleTap">
-    <div class="defib-header">DEFIBRILLATE</div>
+    <div class="defib-header">{{ t('제세동') }}</div>
     <div class="ecg-viewport">
       <svg viewBox="0 0 280 60" class="ecg-svg" preserveAspectRatio="none">
         <path
@@ -70,7 +72,7 @@ const ecgPath = 'M0,30 L60,30 L70,30 L80,28 L90,32 L100,30 L120,30 L130,8 L140,5
       </svg>
       <div class="heart-icon" :class="{ peak: peakActive }">&#9829;</div>
     </div>
-    <div class="defib-hint">TAP ON PULSE PEAK</div>
+    <div class="defib-hint">{{ t('맥박 피크에 탭하세요') }}</div>
   </div>
 </template>
 

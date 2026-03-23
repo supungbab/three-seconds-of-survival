@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -16,8 +18,8 @@ let timer1: ReturnType<typeof setTimeout> | null = null
 let timer2: ReturnType<typeof setTimeout> | null = null
 const timers: ReturnType<typeof setTimeout>[] = []
 
-const TEXT1 = 'SYSTEM FAILURE'
-const TEXT2 = 'REBOOT? [Y/N]'
+const TEXT1 = t('시스템 장애')
+const TEXT2 = t('재부팅? [Y/N]')
 
 function typewrite(text: string, target: typeof line1, delay: number): Promise<void> {
   return new Promise((resolve) => {

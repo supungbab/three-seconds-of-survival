@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -122,7 +124,7 @@ const sliderPercent = computed(() => (panelAngle.value / 180) * 100)
 
     <!-- Confirm -->
     <button class="confirm-btn" @pointerdown="handleConfirm">
-      ALIGN ■
+      {{ t('■ 정렬') }}
     </button>
   </div>
 </template>

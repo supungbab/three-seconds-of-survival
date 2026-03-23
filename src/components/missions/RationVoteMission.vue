@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -34,20 +36,20 @@ function handleVote(choice: 'yes' | 'no', e: Event) {
 
 <template>
   <div class="ration-vote-mission">
-    <div class="scenario-text">SHARE SUPPLIES?</div>
-    <div class="survivor-info">{{ survivorCount }} SURVIVOR{{ survivorCount > 1 ? 'S' : '' }}</div>
+    <div class="scenario-text">{{ t('보급품 공유?') }}</div>
+    <div class="survivor-info">{{ t('생존자') }} {{ survivorCount }}{{ t('명') }}</div>
     <div class="vote-buttons">
       <button
         class="vote-btn yes-btn"
         @pointerdown="handleVote('yes', $event)"
       >
-        YES ✓
+        {{ t('예') }} ✓
       </button>
       <button
         class="vote-btn no-btn"
         @pointerdown="handleVote('no', $event)"
       >
-        NO ✗
+        {{ t('아니오') }} ✗
       </button>
     </div>
   </div>

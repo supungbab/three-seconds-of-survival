@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -84,7 +86,7 @@ onUnmounted(() => {
 
 <template>
   <div class="solder-mission">
-    <div class="board-label">SOLDER POINTS</div>
+    <div class="board-label">{{ t('납땜 포인트') }}</div>
     <div class="circuit-board">
       <div class="trace-line" />
       <div class="solder-points">
@@ -110,7 +112,7 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
-    <div class="solder-hint">HOLD EACH POINT</div>
+    <div class="solder-hint">{{ t('각 포인트를 누르세요') }}</div>
   </div>
 </template>
 

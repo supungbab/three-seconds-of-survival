@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -167,7 +169,7 @@ onUnmounted(() => {
     <div class="tripwire-progress-bar">
       <div class="tripwire-progress-fill" :style="{ width: `${progress}%` }" />
     </div>
-    <div class="tripwire-hint">SWIPE THROUGH GAPS</div>
+    <div class="tripwire-hint">{{ t('틈 사이로 스와이프') }}</div>
   </div>
 </template>
 

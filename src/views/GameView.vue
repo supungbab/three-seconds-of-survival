@@ -243,7 +243,7 @@ onUnmounted(() => {
       <template v-if="mission && (phase === 'SHOWING' || phase === 'SUB_SHOWING' || phase === 'ACTING' || phase === 'SUCCESS')">
         <MissionText
           :key="missionKey"
-          :text="mission.text"
+          :text="t(mission.text)"
           :showing="phase === 'SHOWING' || phase === 'SUB_SHOWING'"
           :quick="phase === 'SUB_SHOWING'"
         />

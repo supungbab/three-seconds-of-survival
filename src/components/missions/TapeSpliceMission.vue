@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -44,21 +46,21 @@ function handleSplice(e: PointerEvent) {
 
 <template>
   <div class="tape-splice-mission">
-    <div class="splice-label">SPLICE TAPE</div>
+    <div class="splice-label">{{ t('테이프를 이어 붙이세요') }}</div>
     <div class="tape-area">
       <div class="tape-end left" :style="{ transform: `translateY(${leftY}px)` }">
         <div class="tape-strip" />
         <div class="tape-edge right-edge" />
       </div>
       <button class="splice-zone" @pointerdown="handleSplice">
-        SPLICE
+        {{ t('접합') }}
       </button>
       <div class="tape-end right" :style="{ transform: `translateY(${rightY}px)` }">
         <div class="tape-edge left-edge" />
         <div class="tape-strip" />
       </div>
     </div>
-    <div class="splice-hint">TAP WHEN ALIGNED</div>
+    <div class="splice-hint">{{ t('정렬되면 탭하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -52,10 +54,10 @@ function handleTap(e: Event) {
       :class="{ active: buttonActive, hidden: !buttonActive }"
       @pointerdown="handleTap"
     >
-      DEGAUSS
+      {{ t('디가우스') }}
     </button>
 
-    <div class="degauss-hint">TAP WHEN LIT</div>
+    <div class="degauss-hint">{{ t('불이 켜졌을 때 탭하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -45,7 +47,7 @@ function handleDir(dir: Direction, e: Event) {
 
 <template>
   <div class="autopilot-mission">
-    <div class="label">CORRECT COURSE</div>
+    <div class="label">{{ t('항로 수정') }}</div>
     <div class="compass">
       <div class="target-arrow">▲</div>
       <div

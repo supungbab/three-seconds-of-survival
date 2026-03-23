@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -107,7 +109,7 @@ onUnmounted(() => {
     </div>
 
     <button class="confirm-btn" :class="{ aligned: isAligned }" @pointerdown="handleConfirm">
-      CONFIRM
+      {{ t('확인') }}
     </button>
   </div>
 </template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -78,7 +80,7 @@ onUnmounted(() => {
       </svg>
 
       <div class="monitor-label">
-        {{ phase === 'beating' ? 'VITALS' : phase === 'flatline' ? 'FLATLINE' : phase === 'revived' ? 'REVIVED' : 'SIGNAL LOST' }}
+        {{ phase === 'beating' ? t('생체신호') : phase === 'flatline' ? t('무신호') : phase === 'revived' ? t('회복') : t('신호 없음') }}
       </div>
     </div>
 
@@ -87,11 +89,11 @@ onUnmounted(() => {
       class="revive-btn"
       @pointerdown="handleRevive"
     >
-      REVIVE
+      {{ t('소생') }}
     </button>
 
     <div v-else-if="phase === 'lost'" class="lost-hint">
-      NO PULSE
+      {{ t('맥박 없음') }}
     </div>
   </div>
 </template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -96,14 +98,14 @@ onUnmounted(() => {
     <div class="static-screen">
       <div class="noise-layer" :style="{ opacity: noiseOpacity }" />
       <div class="clear-text" :style="{ opacity: progress }">
-        SIGNAL OK
+        {{ t('신호 정상') }}
       </div>
     </div>
 
     <div class="clear-progress">
       <div class="clear-fill" :style="{ width: `${progress * 100}%` }" />
     </div>
-    <div class="clear-hint">SWEEP</div>
+    <div class="clear-hint">{{ t('스위프') }}</div>
   </div>
 </template>
 

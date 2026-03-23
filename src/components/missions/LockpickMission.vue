@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   lockpickSteps: number
@@ -183,7 +185,7 @@ onUnmounted(() => {
     </div>
 
     <div class="lockpick-progress">{{ progress }}</div>
-    <div class="lockpick-hint">TAP IN ZONE</div>
+    <div class="lockpick-hint">{{ t('구역 안에서 탭') }}</div>
   </div>
 </template>
 

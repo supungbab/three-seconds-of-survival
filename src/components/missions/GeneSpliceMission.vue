@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -104,7 +106,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="gene-mission">
-    <div class="label">SPLICE MUTANT SECTION</div>
+    <div class="label">{{ t('변이 구간을 잘라내세요') }}</div>
     <div class="dna-strip">
       <div
         v-for="(base, i) in sequence"
@@ -118,7 +120,7 @@ onUnmounted(() => {
         {{ base.letter }}
       </div>
     </div>
-    <div class="hint">SWIPE ACROSS HIGHLIGHTED BASES</div>
+    <div class="hint">{{ t('강조된 염기를 스와이프하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -86,13 +88,13 @@ onUnmounted(() => {
         <div class="limb-segment upper" />
         <div class="cut-line-marker" :style="{ top: `${cutLineY}%` }">
           <span class="cut-dash" />
-          <span class="cut-label">CUT</span>
+          <span class="cut-label">{{ t('절단') }}</span>
         </div>
         <div class="limb-segment lower" />
         <div class="infection-zone" :style="{ height: `${infection}%` }" />
       </div>
     </div>
-    <div class="hint">SWIPE TO AMPUTATE</div>
+    <div class="hint">{{ t('스와이프하여 절단하세요') }}</div>
   </div>
 </template>
 

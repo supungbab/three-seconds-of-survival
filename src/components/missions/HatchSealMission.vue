@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -34,7 +36,7 @@ function handleBolt(index: number, e: Event) {
 
 <template>
   <div class="hatch-seal-mission">
-    <div class="hatch-label">SEAL HATCH ▸ CLOCKWISE</div>
+    <div class="hatch-label">{{ t('해치 밀봉') }} ▸ {{ t('시계 방향') }}</div>
 
     <div class="bolt-grid">
       <button

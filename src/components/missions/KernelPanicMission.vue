@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -28,9 +30,9 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 commands.value = shuffle([
-  { label: 'REBOOT SYS', correct: true },
-  { label: 'FORMAT ALL', correct: false },
-  { label: 'DUMP CORE', correct: false },
+  { label: '시스템 재부팅', correct: true },
+  { label: '전체 포맷', correct: false },
+  { label: '코어 덤프', correct: false },
 ])
 
 function handleTap(e: PointerEvent, cmd: { label: string; correct: boolean }) {
@@ -44,11 +46,11 @@ function handleTap(e: PointerEvent, cmd: { label: string; correct: boolean }) {
 
 <template>
   <div class="kernel-panic-mission">
-    <div class="panic-header">KERNEL PANIC</div>
+    <div class="panic-header">{{ t('커널 패닉') }}</div>
     <div class="error-log">
       <div v-for="(line, i) in ERROR_LINES" :key="i" class="error-line">{{ line }}</div>
     </div>
-    <div class="panic-prompt">SELECT RECOVERY COMMAND:</div>
+    <div class="panic-prompt">{{ t('복구 명령 선택:') }}</div>
     <div class="commands">
       <button
         v-for="(cmd, i) in commands"

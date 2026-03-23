@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -50,7 +52,7 @@ function handleStop(e: Event) {
 
 <template>
   <div class="centrifuge-mission">
-    <div class="target-label">TARGET: {{ targetRpm }} RPM</div>
+    <div class="target-label">{{ t('목표') }}: {{ targetRpm }} RPM</div>
     <div class="disc-container">
       <div class="disc" :style="{ transform: `rotate(${rotation}deg)` }">
         <span class="disc-mark">|</span>
@@ -65,7 +67,7 @@ function handleStop(e: Event) {
       class="stop-btn"
       :disabled="stopped"
       @pointerdown="handleStop"
-    >STOP</button>
+    >{{ t('정지') }}</button>
   </div>
 </template>
 

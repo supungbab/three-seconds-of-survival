@@ -238,20 +238,20 @@ export interface MissionDefinition {
 }
 
 const COLOR_NAMES: Record<MissionColor, string> = {
-  red: 'RED',
-  blue: 'BLUE',
-  yellow: 'YELLOW',
-  green: 'GREEN',
-  purple: 'PURPLE',
+  red: '빨강',
+  blue: '파랑',
+  yellow: '노랑',
+  green: '초록',
+  purple: '보라',
 }
 
 const ALL_COLORS: MissionColor[] = ['red', 'blue', 'yellow', 'green', 'purple']
 
 const DIRECTION_NAMES: Record<SwipeDirection, string> = {
-  UP: '↑ SWIPE',
-  DOWN: '↓ SWIPE',
-  LEFT: '← SWIPE',
-  RIGHT: '→ SWIPE',
+  UP: '↑ 스와이프',
+  DOWN: '↓ 스와이프',
+  LEFT: '← 스와이프',
+  RIGHT: '→ 스와이프',
 }
 
 const OPPOSITE: Record<SwipeDirection, SwipeDirection> = {
@@ -283,7 +283,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TUNE',
         difficulty: 'NORMAL',
-        text: 'TUNE FREQ',
+        text: '주파수 조정',
       }
     },
   },
@@ -296,7 +296,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'POWER_UP',
         difficulty: 'NORMAL',
-        text: 'CHARGE',
+        text: '충전',
         requiredSwipes: swipes,
       }
     },
@@ -310,7 +310,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'WIRE_CUT',
         difficulty: 'HARD',
-        text: 'DISARM',
+        text: '해제',
         wireCount: count,
       }
     },
@@ -323,7 +323,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'STATIC_CLEAR',
         difficulty: 'EASY',
-        text: 'CLEAR STATIC',
+        text: '잡음 제거',
       }
     },
   },
@@ -335,7 +335,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BROADCAST',
         difficulty: 'HARD',
-        text: 'BROADCAST',
+        text: '방송',
       }
     },
   },
@@ -347,7 +347,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SCAN',
         difficulty: 'EASY',
-        text: 'SCAN',
+        text: '스캔',
       }
     },
   },
@@ -359,7 +359,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SHELTER',
         difficulty: 'NORMAL',
-        text: 'EVACUATE',
+        text: '대피',
       }
     },
   },
@@ -379,7 +379,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'MORSE',
         difficulty: 'HARD',
-        text: 'MORSE CODE',
+        text: '모스 부호',
         morsePattern: pat,
       }
     },
@@ -392,7 +392,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'HEARTBEAT',
         difficulty: 'EASY',
-        text: 'REVIVE',
+        text: '소생',
       }
     },
   },
@@ -404,7 +404,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'VENT',
         difficulty: 'EASY',
-        text: '↑ VENT',
+        text: '↑ 환기',
         swipeDirection: 'UP' as SwipeDirection,
       }
     },
@@ -417,7 +417,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FLICKER_TAP',
         difficulty: 'EASY',
-        text: 'CATCH SIGNAL',
+        text: '신호 포착',
       }
     },
   },
@@ -436,7 +436,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DECRYPT',
         difficulty: 'NORMAL',
-        text: 'DECRYPT',
+        text: '복호화',
         decryptScrambled: scrambled,
         decryptAnswer: answer,
         decryptChoices: choices,
@@ -451,7 +451,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'GEIGER',
         difficulty: 'NORMAL',
-        text: 'MARK HOTSPOT',
+        text: '핫스팟 표시',
       }
     },
   },
@@ -464,7 +464,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'LOCKPICK',
         difficulty: 'NORMAL',
-        text: 'UNLOCK',
+        text: '잠금 해제',
         lockpickSteps: steps,
       }
     },
@@ -478,7 +478,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DECONTAM',
         difficulty: 'NORMAL',
-        text: 'DECONTAM',
+        text: '제독',
         decontamCount: count,
       }
     },
@@ -495,7 +495,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BLOOD_TYPE',
         difficulty: 'NORMAL',
-        text: `MATCH ${target}`,
+        text: `${target} 수혈`,
         bloodTarget: target,
         bloodChoices: choices,
       }
@@ -510,7 +510,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'POWER_GRID',
         difficulty: 'NORMAL',
-        text: 'RESTORE POWER',
+        text: '전력 복구',
         gridSwitchCount: count,
       }
     },
@@ -524,7 +524,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DEFUSE',
         difficulty: 'HARD',
-        text: 'DEFUSE',
+        text: '해체',
         wireCount: count,
       }
     },
@@ -538,7 +538,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TRIAGE',
         difficulty: 'HARD',
-        text: 'TRIAGE',
+        text: '분류',
         triageCount: count,
       }
     },
@@ -552,7 +552,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PARADROP',
         difficulty: 'HARD',
-        text: 'PARADROP',
+        text: '낙하',
         swipeDirection: OPPOSITE[windDir],
       }
     },
@@ -565,7 +565,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'QUARANTINE',
         difficulty: 'HARD',
-        text: 'QUARANTINE',
+        text: '격리',
       }
     },
   },
@@ -580,7 +580,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DEAD_DROP',
         difficulty: 'HARD',
-        text: `GRID ${col + 1},${row + 1}`,
+        text: `좌표 ${col + 1},${row + 1}`,
         deadDropCoord: [row, col],
         deadDropGridSize: size,
       }
@@ -594,7 +594,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FREQUENCY_JAM',
         difficulty: 'HARD',
-        text: 'JAM SIGNAL',
+        text: '신호 교란',
       }
     },
   },
@@ -618,7 +618,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'AIRLOCK',
         difficulty: 'EASY',
-        text: 'AIRLOCK',
+        text: '에어록',
       }
     },
   },
@@ -630,7 +630,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'RADAR_PING',
         difficulty: 'EASY',
-        text: 'PING',
+        text: '핑',
       }
     },
   },
@@ -642,7 +642,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SIPHON',
         difficulty: 'NORMAL',
-        text: 'SIPHON FUEL',
+        text: '연료 흡입',
       }
     },
   },
@@ -655,7 +655,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FIREWALL',
         difficulty: 'NORMAL',
-        text: 'BLOCK VIRUS',
+        text: '바이러스 차단',
         firewallCount: count,
       }
     },
@@ -669,7 +669,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'COMPASS',
         difficulty: 'NORMAL',
-        text: 'FOLLOW COMPASS',
+        text: '나침반 따라가기',
         swipeDirection: dir,
       }
     },
@@ -683,7 +683,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CRANK',
         difficulty: 'NORMAL',
-        text: 'CRANK',
+        text: '크랭크',
         crankRotations: rotations,
       }
     },
@@ -705,7 +705,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'RATION',
         difficulty: 'NORMAL',
-        text: `${people}人 × ${per}EA`,
+        text: `${people}명 × ${per}개`,
         rationPeople: people,
         rationPerPerson: per,
         rationChoices: shuffle([answer, ...wrongSet]),
@@ -723,7 +723,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DETOX',
         difficulty: 'NORMAL',
-        text: `${COLOR_NAMES[target]} DETOX`,
+        text: `${COLOR_NAMES[target]} 해독`,
         detoxColor: target,
         detoxChoices: shuffle(choices),
       }
@@ -737,7 +737,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BLACKOUT',
         difficulty: 'HARD',
-        text: 'BLACKOUT',
+        text: '정전',
       }
     },
   },
@@ -753,7 +753,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'OVERRIDE',
         difficulty: 'HARD',
-        text: 'OVERRIDE',
+        text: '오버라이드',
         overrideCode: code,
       }
     },
@@ -766,7 +766,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PRESSURE',
         difficulty: 'HARD',
-        text: 'PRESSURE',
+        text: '압력',
       }
     },
   },
@@ -779,7 +779,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SPLICE',
         difficulty: 'HARD',
-        text: 'SPLICE',
+        text: '접합',
         spliceColors: colors,
       }
     },
@@ -799,7 +799,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DISTRESS',
         difficulty: 'HARD',
-        text: 'DISTRESS',
+        text: '조난',
         distressPattern: pickRandom(patterns),
       }
     },
@@ -817,7 +817,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'ELEVATOR',
         difficulty: 'HARD',
-        text: `FLOOR ${target}`,
+        text: `${target}층`,
         elevatorCurrent: current,
         elevatorTarget: target,
       }
@@ -834,7 +834,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SCRAMBLE',
         difficulty: 'HARD',
-        text: 'UNSCRAMBLE',
+        text: '글자 맞추기',
         scrambleWord: word,
         scrambleLetters: letters,
       }
@@ -848,7 +848,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SIGNAL_INTERCEPT',
         difficulty: 'NORMAL',
-        text: 'INTERCEPT',
+        text: '가로채기',
       }
     },
   },
@@ -860,7 +860,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PURIFY',
         difficulty: 'EASY',
-        text: 'PURIFY',
+        text: '정수',
       }
     },
   },
@@ -875,7 +875,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BARTER',
         difficulty: 'NORMAL',
-        text: 'FAIR TRADE?',
+        text: '공정 거래?',
         barterLeft: left,
         barterRight: Math.max(1, right),
         barterFair: fair,
@@ -890,7 +890,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FORAGE',
         difficulty: 'EASY',
-        text: 'FORAGE',
+        text: '채집',
       }
     },
   },
@@ -902,7 +902,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DEGAUSS',
         difficulty: 'EASY',
-        text: 'DEGAUSS',
+        text: '디가우스',
       }
     },
   },
@@ -914,7 +914,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'REBOOT',
         difficulty: 'EASY',
-        text: 'REBOOT?',
+        text: '재부팅?',
       }
     },
   },
@@ -927,7 +927,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'IGNITE',
         difficulty: 'NORMAL',
-        text: 'IGNITE',
+        text: '점화',
         igniteSwipes: swipes,
       }
     },
@@ -945,7 +945,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BIOS_ERROR',
         difficulty: 'HARD',
-        text: 'BIOS ERROR',
+        text: 'BIOS 오류',
         biosCode: code,
       }
     },
@@ -960,7 +960,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'MUTANT_DETECT',
         difficulty: 'NORMAL',
-        text: 'FIND MUTANT',
+        text: '변이체 찾기',
         mutantCount: count,
         mutantIndex: idx,
       }
@@ -974,7 +974,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CALIBRATE',
         difficulty: 'NORMAL',
-        text: 'CALIBRATE',
+        text: '보정',
       }
     },
   },
@@ -988,7 +988,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FUSE_REPLACE',
         difficulty: 'NORMAL',
-        text: 'REPLACE FUSE',
+        text: '퓨즈 교체',
         fuseCount: count,
         brokenIndex: idx,
       }
@@ -1009,7 +1009,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TRUST_KNOCK',
         difficulty: 'HARD',
-        text: 'TRUST?',
+        text: '신뢰?',
         knockPattern: pickRandom(patterns),
       }
     },
@@ -1022,7 +1022,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'COUNTDOWN_ZERO',
         difficulty: 'NORMAL',
-        text: 'HIT ZERO',
+        text: '제로에 맞춰',
       }
     },
   },
@@ -1036,7 +1036,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'INFECTED_SCAN',
         difficulty: 'NORMAL',
-        text: 'FIND INFECTED',
+        text: '감염자 찾기',
         infectedCount: count,
         infectedIndex: idx,
       }
@@ -1050,7 +1050,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CURFEW',
         difficulty: 'HARD',
-        text: 'CURFEW',
+        text: '통금',
       }
     },
   },
@@ -1062,7 +1062,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BLACKBOX',
         difficulty: 'NORMAL',
-        text: 'BLACKBOX',
+        text: '블랙박스',
       }
     },
   },
@@ -1074,7 +1074,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DEFRAG',
         difficulty: 'NORMAL',
-        text: 'DEFRAG',
+        text: '조각 모음',
       }
     },
   },
@@ -1086,7 +1086,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FALLOUT_DODGE',
         difficulty: 'HARD',
-        text: 'TAKE COVER',
+        text: '엄폐',
       }
     },
   },
@@ -1098,7 +1098,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TRIPWIRE',
         difficulty: 'HARD',
-        text: 'TRIPWIRE',
+        text: '지뢰줄',
       }
     },
   },
@@ -1110,7 +1110,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'WELD',
         difficulty: 'NORMAL',
-        text: 'WELD',
+        text: '용접',
       }
     },
   },
@@ -1123,7 +1123,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CRANK_START',
         difficulty: 'NORMAL',
-        text: 'CRANK START',
+        text: '크랭크 시동',
         crankStartTarget: target,
       }
     },
@@ -1138,7 +1138,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'RATION_SPLIT',
         difficulty: 'HARD',
-        text: 'SPLIT RATIONS',
+        text: '배급 분배',
         rationSplitTotal: total,
         rationSplitParts: parts,
       }
@@ -1152,7 +1152,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'NOISE_JAM',
         difficulty: 'HARD',
-        text: 'FIND SIGNAL',
+        text: '신호 찾기',
       }
     },
   },
@@ -1164,7 +1164,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PACKET_SNIFF',
         difficulty: 'NORMAL',
-        text: 'SNIFF PACKET',
+        text: '패킷 스니핑',
       }
     },
   },
@@ -1176,7 +1176,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BOOT_SEQUENCE',
         difficulty: 'NORMAL',
-        text: 'CATCH ERROR',
+        text: '에러 잡기',
       }
     },
   },
@@ -1188,7 +1188,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PIXEL_FIX',
         difficulty: 'EASY',
-        text: 'FIX PIXEL',
+        text: '픽셀 수리',
       }
     },
   },
@@ -1200,7 +1200,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'ANTENNA_ALIGN',
         difficulty: 'NORMAL',
-        text: 'ALIGN ANTENNA',
+        text: '안테나 정렬',
       }
     },
   },
@@ -1212,7 +1212,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TRANSFUSE',
         difficulty: 'NORMAL',
-        text: 'TRANSFUSE',
+        text: '수혈',
       }
     },
   },
@@ -1224,7 +1224,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PULSE_CHECK',
         difficulty: 'NORMAL',
-        text: 'CHECK PULSE',
+        text: '맥박 확인',
       }
     },
   },
@@ -1236,7 +1236,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SPLINT',
         difficulty: 'NORMAL',
-        text: 'SPLINT',
+        text: '부목',
       }
     },
   },
@@ -1248,7 +1248,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'ANTIDOTE',
         difficulty: 'HARD',
-        text: 'ANTIDOTE',
+        text: '해독제',
       }
     },
   },
@@ -1260,7 +1260,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'RELOAD',
         difficulty: 'NORMAL',
-        text: 'RELOAD',
+        text: '재장전',
       }
     },
   },
@@ -1272,7 +1272,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SCOPE',
         difficulty: 'NORMAL',
-        text: 'FIRE',
+        text: '발사',
       }
     },
   },
@@ -1284,7 +1284,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'GRENADE_PIN',
         difficulty: 'HARD',
-        text: 'PULL PIN',
+        text: '핀 뽑기',
       }
     },
   },
@@ -1297,7 +1297,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BARRICADE',
         difficulty: 'HARD',
-        text: 'BARRICADE',
+        text: '바리케이드',
         barricadeCount: count,
       }
     },
@@ -1310,7 +1310,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FLARE_LAUNCH',
         difficulty: 'NORMAL',
-        text: 'LAUNCH FLARE',
+        text: '조명탄 발사',
       }
     },
   },
@@ -1322,7 +1322,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'WATER_LEVEL',
         difficulty: 'HARD',
-        text: 'CLOSE VALVES',
+        text: '밸브 잠금',
       }
     },
   },
@@ -1334,7 +1334,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BRIDGE_CROSS',
         difficulty: 'HARD',
-        text: 'CROSS BRIDGE',
+        text: '다리 건너기',
       }
     },
   },
@@ -1346,7 +1346,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DUST_STORM',
         difficulty: 'HARD',
-        text: 'FIND SHELTER',
+        text: '대피소 찾기',
       }
     },
   },
@@ -1358,7 +1358,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'INTERLACE',
         difficulty: 'NORMAL',
-        text: 'FIX INTERLACE',
+        text: '인터레이스 수리',
       }
     },
   },
@@ -1382,7 +1382,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'COLOR_BLEED',
         difficulty: 'HARD',
-        text: 'FIX RGB',
+        text: 'RGB 수리',
       }
     },
   },
@@ -1394,7 +1394,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BURN_IN',
         difficulty: 'HARD',
-        text: 'FIND REAL',
+        text: '진짜 찾기',
       }
     },
   },
@@ -1407,7 +1407,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SEMAPHORE',
         difficulty: 'HARD',
-        text: 'SEMAPHORE',
+        text: '수기 신호',
         semaphoreLeft: pickRandom(dirs),
         semaphoreRight: pickRandom(dirs),
       }
@@ -1421,7 +1421,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CIPHER_WHEEL',
         difficulty: 'HARD',
-        text: 'DECRYPT',
+        text: '암호 해독',
       }
     },
   },
@@ -1433,7 +1433,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'BEACON',
         difficulty: 'NORMAL',
-        text: 'COUNT FLASHES',
+        text: '섬광 세기',
       }
     },
   },
@@ -1445,7 +1445,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'GENERATOR',
         difficulty: 'NORMAL',
-        text: 'STABILIZE',
+        text: '안정화',
       }
     },
   },
@@ -1457,7 +1457,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'HATCH_SEAL',
         difficulty: 'HARD',
-        text: 'SEAL HATCH',
+        text: '해치 봉인',
       }
     },
   },
@@ -1469,7 +1469,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PERIMETER',
         difficulty: 'NORMAL',
-        text: 'PATCH FENCE',
+        text: '울타리 수리',
       }
     },
   },
@@ -1481,7 +1481,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SOLAR_PANEL',
         difficulty: 'NORMAL',
-        text: 'ALIGN PANEL',
+        text: '패널 정렬',
       }
     },
   },
@@ -1493,7 +1493,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'PH_TEST',
         difficulty: 'NORMAL',
-        text: 'PH TEST',
+        text: 'PH 테스트',
       }
     },
   },
@@ -1505,7 +1505,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CENTRIFUGE',
         difficulty: 'NORMAL',
-        text: 'CENTRIFUGE',
+        text: '원심분리',
       }
     },
   },
@@ -1517,7 +1517,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'ISOTOPE',
         difficulty: 'NORMAL',
-        text: 'HALF-LIFE',
+        text: '반감기',
       }
     },
   },
@@ -1529,7 +1529,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'AUTOPILOT',
         difficulty: 'NORMAL',
-        text: 'CORRECT COURSE',
+        text: '항로 수정',
       }
     },
   },
@@ -1541,7 +1541,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'DOCKING',
         difficulty: 'NORMAL',
-        text: 'DOCK',
+        text: '도킹',
       }
     },
   },
@@ -1553,7 +1553,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'MINEFIELD',
         difficulty: 'HARD',
-        text: 'SAFE STEP',
+        text: '안전한 발걸음',
       }
     },
   },
@@ -1565,7 +1565,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'CAPACITOR',
         difficulty: 'NORMAL',
-        text: 'DISCHARGE',
+        text: '방전',
       }
     },
   },
@@ -1577,7 +1577,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SOLDER',
         difficulty: 'HARD',
-        text: 'SOLDER',
+        text: '납땜',
       }
     },
   },
@@ -1589,7 +1589,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'FIRMWARE',
         difficulty: 'NORMAL',
-        text: 'UPLOAD',
+        text: '업로드',
       }
     },
   },
@@ -1601,7 +1601,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'TUBE_REPLACE',
         difficulty: 'NORMAL',
-        text: 'REPLACE TUBE',
+        text: '튜브 교체',
       }
     },
   },
@@ -1613,7 +1613,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'RATION_VOTE',
         difficulty: 'HARD',
-        text: 'VOTE',
+        text: '투표',
       }
     },
   },
@@ -1625,7 +1625,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'SACRIFICE',
         difficulty: 'HARD',
-        text: 'CHOOSE',
+        text: '선택',
       }
     },
   },
@@ -1637,7 +1637,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
       return {
         type: 'MIMIC',
         difficulty: 'HARD',
-        text: 'FIND MIMIC',
+        text: '미믹 찾기',
       }
     },
   },
@@ -1646,7 +1646,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'KERNEL_PANIC',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'KERNEL_PANIC', difficulty: 'NORMAL', text: 'KERNEL PANIC' }
+      return { type: 'KERNEL_PANIC', difficulty: 'NORMAL', text: '커널 패닉' }
     },
   },
   // BLUE_SCREEN - NORMAL
@@ -1670,7 +1670,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'TAPE_SPLICE',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'TAPE_SPLICE', difficulty: 'NORMAL', text: 'SPLICE TAPE' }
+      return { type: 'TAPE_SPLICE', difficulty: 'NORMAL', text: '테이프 접합' }
     },
   },
   // CORE_DUMP - HARD
@@ -1678,7 +1678,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'CORE_DUMP',
     difficulty: 'HARD',
     generate() {
-      return { type: 'CORE_DUMP', difficulty: 'HARD', text: 'CATCH ERROR' }
+      return { type: 'CORE_DUMP', difficulty: 'HARD', text: '에러 잡기' }
     },
   },
   // SIGNAL_BOOST - NORMAL
@@ -1686,7 +1686,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'SIGNAL_BOOST',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'SIGNAL_BOOST', difficulty: 'NORMAL', text: 'BOOST SIGNAL' }
+      return { type: 'SIGNAL_BOOST', difficulty: 'NORMAL', text: '신호 증폭' }
     },
   },
   // VOLTAGE_MATCH - NORMAL
@@ -1694,7 +1694,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'VOLTAGE_MATCH',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'VOLTAGE_MATCH', difficulty: 'NORMAL', text: 'MATCH VOLTAGE' }
+      return { type: 'VOLTAGE_MATCH', difficulty: 'NORMAL', text: '전압 맞추기' }
     },
   },
   // TOURNIQUET - EASY
@@ -1702,7 +1702,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'TOURNIQUET',
     difficulty: 'EASY',
     generate() {
-      return { type: 'TOURNIQUET', difficulty: 'EASY', text: 'TOURNIQUET' }
+      return { type: 'TOURNIQUET', difficulty: 'EASY', text: '지혈대' }
     },
   },
   // DEFIBRILLATE - HARD
@@ -1710,7 +1710,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'DEFIBRILLATE',
     difficulty: 'HARD',
     generate() {
-      return { type: 'DEFIBRILLATE', difficulty: 'HARD', text: 'SHOCK' }
+      return { type: 'DEFIBRILLATE', difficulty: 'HARD', text: '전기 충격' }
     },
   },
   // HAZMAT_SEAL - NORMAL
@@ -1718,7 +1718,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'HAZMAT_SEAL',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'HAZMAT_SEAL', difficulty: 'NORMAL', text: 'SEAL SUIT' }
+      return { type: 'HAZMAT_SEAL', difficulty: 'NORMAL', text: '방호복 밀봉' }
     },
   },
   // CRYO_THAW - NORMAL
@@ -1726,7 +1726,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'CRYO_THAW',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'CRYO_THAW', difficulty: 'NORMAL', text: 'THAW' }
+      return { type: 'CRYO_THAW', difficulty: 'NORMAL', text: '해동' }
     },
   },
   // OXYGEN_MIX - NORMAL
@@ -1734,7 +1734,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'OXYGEN_MIX',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'OXYGEN_MIX', difficulty: 'NORMAL', text: 'MIX O2' }
+      return { type: 'OXYGEN_MIX', difficulty: 'NORMAL', text: '산소 혼합' }
     },
   },
   // AIRDROP - EASY
@@ -1742,7 +1742,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'AIRDROP',
     difficulty: 'EASY',
     generate() {
-      return { type: 'AIRDROP', difficulty: 'EASY', text: 'CATCH DROP' }
+      return { type: 'AIRDROP', difficulty: 'EASY', text: '보급품 잡기' }
     },
   },
   // TUNNEL_DIG - NORMAL
@@ -1750,7 +1750,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'TUNNEL_DIG',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'TUNNEL_DIG', difficulty: 'NORMAL', text: 'DIG' }
+      return { type: 'TUNNEL_DIG', difficulty: 'NORMAL', text: '굴 파기' }
     },
   },
   // DEAD_MAN_SWITCH - HARD
@@ -1758,7 +1758,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'DEAD_MAN_SWITCH',
     difficulty: 'HARD',
     generate() {
-      return { type: 'DEAD_MAN_SWITCH', difficulty: 'HARD', text: 'HOLD!' }
+      return { type: 'DEAD_MAN_SWITCH', difficulty: 'HARD', text: '누르고 있어!' }
     },
   },
   // TRAP_ARM - HARD
@@ -1766,7 +1766,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'TRAP_ARM',
     difficulty: 'HARD',
     generate() {
-      return { type: 'TRAP_ARM', difficulty: 'HARD', text: 'ARM TRAP' }
+      return { type: 'TRAP_ARM', difficulty: 'HARD', text: '함정 설치' }
     },
   },
   // THERMAL_SCAN - NORMAL
@@ -1774,7 +1774,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'THERMAL_SCAN',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'THERMAL_SCAN', difficulty: 'NORMAL', text: 'FIND HUMAN' }
+      return { type: 'THERMAL_SCAN', difficulty: 'NORMAL', text: '생존자 찾기' }
     },
   },
   // EMP_SHIELD - HARD
@@ -1782,7 +1782,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'EMP_SHIELD',
     difficulty: 'HARD',
     generate() {
-      return { type: 'EMP_SHIELD', difficulty: 'HARD', text: 'SHIELD!' }
+      return { type: 'EMP_SHIELD', difficulty: 'HARD', text: '방어!' }
     },
   },
   // VACCINE_MIX - HARD
@@ -1790,7 +1790,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'VACCINE_MIX',
     difficulty: 'HARD',
     generate() {
-      return { type: 'VACCINE_MIX', difficulty: 'HARD', text: 'MIX VACCINE' }
+      return { type: 'VACCINE_MIX', difficulty: 'HARD', text: '백신 혼합' }
     },
   },
   // GENE_SPLICE - HARD
@@ -1798,7 +1798,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'GENE_SPLICE',
     difficulty: 'HARD',
     generate() {
-      return { type: 'GENE_SPLICE', difficulty: 'HARD', text: 'CUT MUTANT' }
+      return { type: 'GENE_SPLICE', difficulty: 'HARD', text: '변이 절제' }
     },
   },
   // DISTILL - NORMAL
@@ -1806,7 +1806,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'DISTILL',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'DISTILL', difficulty: 'NORMAL', text: 'DISTILL' }
+      return { type: 'DISTILL', difficulty: 'NORMAL', text: '증류' }
     },
   },
   // PLASMA_CUT - NORMAL
@@ -1814,7 +1814,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'PLASMA_CUT',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'PLASMA_CUT', difficulty: 'NORMAL', text: 'CUT' }
+      return { type: 'PLASMA_CUT', difficulty: 'NORMAL', text: '절단' }
     },
   },
   // FUEL_MIX - NORMAL
@@ -1822,7 +1822,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'FUEL_MIX',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'FUEL_MIX', difficulty: 'NORMAL', text: 'TRANSFER FUEL' }
+      return { type: 'FUEL_MIX', difficulty: 'NORMAL', text: '연료 이송' }
     },
   },
   // CLAYMORE_AIM - HARD
@@ -1830,7 +1830,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'CLAYMORE_AIM',
     difficulty: 'HARD',
     generate() {
-      return { type: 'CLAYMORE_AIM', difficulty: 'HARD', text: 'AIM CLAYMORE' }
+      return { type: 'CLAYMORE_AIM', difficulty: 'HARD', text: '클레이모어 조준' }
     },
   },
   // BREACH_CHARGE - HARD
@@ -1838,7 +1838,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'BREACH_CHARGE',
     difficulty: 'HARD',
     generate() {
-      return { type: 'BREACH_CHARGE', difficulty: 'HARD', text: 'BREACH' }
+      return { type: 'BREACH_CHARGE', difficulty: 'HARD', text: '돌파' }
     },
   },
   // AMPUTATE - HARD
@@ -1846,7 +1846,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'AMPUTATE',
     difficulty: 'HARD',
     generate() {
-      return { type: 'AMPUTATE', difficulty: 'HARD', text: 'AMPUTATE' }
+      return { type: 'AMPUTATE', difficulty: 'HARD', text: '절단술' }
     },
   },
   // DEAD_PIXEL - EASY
@@ -1854,7 +1854,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'DEAD_PIXEL',
     difficulty: 'EASY',
     generate() {
-      return { type: 'DEAD_PIXEL', difficulty: 'EASY', text: 'FIX DEAD PIXEL' }
+      return { type: 'DEAD_PIXEL', difficulty: 'EASY', text: '데드 픽셀 수리' }
     },
   },
   // CIRCUIT_BRIDGE - NORMAL
@@ -1862,7 +1862,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'CIRCUIT_BRIDGE',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'CIRCUIT_BRIDGE', difficulty: 'NORMAL', text: 'BRIDGE CIRCUIT' }
+      return { type: 'CIRCUIT_BRIDGE', difficulty: 'NORMAL', text: '회로 연결' }
     },
   },
   // MEMORY_LEAK - HARD
@@ -1870,7 +1870,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'MEMORY_LEAK',
     difficulty: 'HARD',
     generate() {
-      return { type: 'MEMORY_LEAK', difficulty: 'HARD', text: 'PATCH LEAK' }
+      return { type: 'MEMORY_LEAK', difficulty: 'HARD', text: '메모리 누수 패치' }
     },
   },
   // STACK_OVERFLOW - NORMAL
@@ -1878,7 +1878,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'STACK_OVERFLOW',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'STACK_OVERFLOW', difficulty: 'NORMAL', text: 'POP STACK' }
+      return { type: 'STACK_OVERFLOW', difficulty: 'NORMAL', text: '스택 정리' }
     },
   },
   // BAIT_SET - NORMAL
@@ -1886,7 +1886,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'BAIT_SET',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'BAIT_SET', difficulty: 'NORMAL', text: 'SET BAIT' }
+      return { type: 'BAIT_SET', difficulty: 'NORMAL', text: '미끼 설치' }
     },
   },
   // SONAR_PING - NORMAL
@@ -1894,7 +1894,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'SONAR_PING',
     difficulty: 'NORMAL',
     generate() {
-      return { type: 'SONAR_PING', difficulty: 'NORMAL', text: 'SONAR' }
+      return { type: 'SONAR_PING', difficulty: 'NORMAL', text: '소나' }
     },
   },
   // FREQUENCY_LOCK - HARD
@@ -1902,7 +1902,7 @@ export const MISSION_REGISTRY: MissionDefinition[] = [
     type: 'FREQUENCY_LOCK',
     difficulty: 'HARD',
     generate() {
-      return { type: 'FREQUENCY_LOCK', difficulty: 'HARD', text: 'LOCK FREQ' }
+      return { type: 'FREQUENCY_LOCK', difficulty: 'HARD', text: '주파수 잠금' }
     },
   },
 ]

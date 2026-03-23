@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -51,7 +53,7 @@ function handleTap(e: PointerEvent, choice: { code: string; correct: boolean }) 
       <div class="error-code">*** STOP: {{ targetCode }}</div>
       <div class="error-desc">IRQL_NOT_LESS_OR_EQUAL</div>
     </div>
-    <div class="bsod-prompt">MATCH ERROR CODE:</div>
+    <div class="bsod-prompt">{{ t('에러 코드를 맞추세요:') }}</div>
     <div class="choices">
       <button
         v-for="(c, i) in choices"

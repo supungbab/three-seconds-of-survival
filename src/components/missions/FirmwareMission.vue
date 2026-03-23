@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -65,7 +67,7 @@ onUnmounted(() => {
 
 <template>
   <div class="firmware-mission" @pointerdown="handleTap">
-    <div class="fw-label">FIRMWARE UPLOAD</div>
+    <div class="fw-label">{{ t('펌웨어 업로드') }}</div>
     <div class="progress-track">
       <div
         class="progress-fill"
@@ -83,10 +85,10 @@ onUnmounted(() => {
         {{ Math.floor(Math.min(progress, 100)) }}%
       </template>
       <template v-else>
-        OVERFLOW
+        {{ t('오버플로우') }}
       </template>
     </div>
-    <div class="fw-hint">TAP AT 100%</div>
+    <div class="fw-hint">{{ t('100%에서 탭하세요') }}</div>
   </div>
 </template>
 

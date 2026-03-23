@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
 }>()
 
 const step = ref<0 | 1 | 2 | 3>(0) // 0=place, 1=arm, 2=detonate, 3=done
-const LABELS = ['PLACE CHARGE', 'ARM', 'DETONATE']
+const LABELS = ['폭약 설치', '장전', '폭파']
 
 function handlePlace(e: PointerEvent) {
   e.stopPropagation()
@@ -57,13 +59,13 @@ function handleDetonate(e: PointerEvent) {
         v-if="step === 1"
         class="action-btn arm"
         @pointerdown="handleArm"
-      >ARM</button>
+      >{{ t('장전') }}</button>
       <button
         v-else-if="step === 2"
         class="action-btn detonate"
         @pointerdown="handleDetonate"
-      >DETONATE</button>
-      <div v-else-if="step === 3" class="boom">█ BREACH █</div>
+      >{{ t('폭파') }}</button>
+      <div v-else-if="step === 3" class="boom">{{ t('█ 돌파 █') }}</div>
     </div>
 
     <div class="step-indicator">

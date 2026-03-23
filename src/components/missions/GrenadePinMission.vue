@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -90,7 +92,7 @@ onUnmounted(() => {
         <span v-if="!resolved" class="pin-symbol">⌐</span>
         <span v-if="success" class="pin-gone">✕</span>
       </div>
-      <div class="grenade-label">GRENADE</div>
+      <div class="grenade-label">{{ t('수류탄') }}</div>
     </div>
 
     <div class="gauge-container">
@@ -112,10 +114,10 @@ onUnmounted(() => {
     </div>
 
     <div v-if="!resolved" class="pull-hint">
-      HOLD TO PULL PIN
+      {{ t('길게 눌러 핀 뽑기') }}
     </div>
-    <div v-if="success" class="result-text ok">PIN PULLED</div>
-    <div v-if="failed" class="result-text bad">{{ gauge >= 100 ? 'OVERCOOKED' : 'TOO EARLY' }}</div>
+    <div v-if="success" class="result-text ok">{{ t('핀 제거 완료') }}</div>
+    <div v-if="failed" class="result-text bad">{{ gauge >= 100 ? t('과열') : t('너무 이름') }}</div>
   </div>
 </template>
 

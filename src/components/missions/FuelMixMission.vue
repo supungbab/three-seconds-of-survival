@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -45,7 +47,7 @@ function handleValve(e: PointerEvent) {
       </div>
       <div class="valve-area">
         <button class="valve-btn" @pointerdown="handleValve">
-          ⟩⟩<br>VALVE
+          ⟩⟩<br>{{ t('밸브') }}
         </button>
       </div>
       <div class="tank">
@@ -59,7 +61,7 @@ function handleValve(e: PointerEvent) {
         <div class="tank-val">{{ Math.round(nitroLevel) }}%</div>
       </div>
     </div>
-    <div class="hint">TAP VALVE TO FILL</div>
+    <div class="hint">{{ t('밸브를 탭하여 채우세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -89,10 +91,10 @@ onUnmounted(() => {
       >
         <span v-if="!leak.patched" class="drip">💧</span>
         <span v-else class="patched-icon">✓</span>
-        <span class="leak-label">{{ leak.patched ? 'FIXED' : 'LEAK' }}</span>
+        <span class="leak-label">{{ leak.patched ? t('수정됨') : t('누수') }}</span>
       </div>
     </div>
-    <div class="hint">TAP LEAKS TO PATCH</div>
+    <div class="hint">{{ t('누수를 탭하여 패치하세요') }}</div>
   </div>
 </template>
 

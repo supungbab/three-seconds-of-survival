@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -39,7 +41,7 @@ function handleTap(button: 'open' | 'seal', e: Event) {
 
 <template>
   <div class="airlock-mission">
-    <div class="airlock-header">AIRLOCK SEQUENCE</div>
+    <div class="airlock-header">{{ t('에어락 시퀀스') }}</div>
 
     <div class="airlock-buttons">
       <button
@@ -51,7 +53,7 @@ function handleTap(button: 'open' | 'seal', e: Event) {
         @pointerdown="handleTap('open', $event)"
       >
         <span class="btn-icon">▲</span>
-        <span class="btn-label">OPEN</span>
+        <span class="btn-label">{{ t('열기') }}</span>
       </button>
 
       <div class="airlock-divider">
@@ -69,12 +71,12 @@ function handleTap(button: 'open' | 'seal', e: Event) {
         @pointerdown="handleTap('seal', $event)"
       >
         <span class="btn-icon">▼</span>
-        <span class="btn-label">SEAL</span>
+        <span class="btn-label">{{ t('밀봉') }}</span>
       </button>
     </div>
 
     <div class="airlock-status">
-      {{ currentStep === 0 ? '1/2 OPEN HATCH' : currentStep === 1 ? '2/2 SEAL HATCH' : 'LOCKED' }}
+      {{ currentStep === 0 ? t('1/2 해치 열기') : currentStep === 1 ? t('2/2 해치 밀봉') : t('잠김') }}
     </div>
   </div>
 </template>

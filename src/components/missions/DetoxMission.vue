@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   detoxColor: string
@@ -66,7 +68,7 @@ onUnmounted(() => {
 
 <template>
   <div class="detox-mission">
-    <div class="toxin-label">☣ {{ detoxColor.toUpperCase() }} DETOX</div>
+    <div class="toxin-label">☣ {{ detoxColor.toUpperCase() }} {{ t('해독') }}</div>
 
     <div class="toxin-bar">
       <div

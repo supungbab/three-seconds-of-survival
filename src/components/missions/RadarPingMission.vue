@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -138,7 +140,7 @@ onUnmounted(() => {
     </div>
 
     <div class="radar-hint">
-      {{ blipVisible ? 'TAP WHEN SWEEP HITS BLIP' : 'SCANNING...' }}
+      {{ blipVisible ? t('스윕이 블립에 닿으면 탭') : t('스캔 중...') }}
     </div>
   </div>
 </template>

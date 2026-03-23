@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   biosCode: number[]
@@ -30,7 +32,7 @@ function handleBtnTap(e: Event, num: number) {
 
 <template>
   <div class="bios-error-mission">
-    <div class="bios-header">BIOS ERROR</div>
+    <div class="bios-header">{{ t('BIOS 오류') }}</div>
     <div class="bios-progress">
       <span
         v-for="(code, i) in biosCode"

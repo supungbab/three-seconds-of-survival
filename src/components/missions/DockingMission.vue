@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -76,7 +78,7 @@ function handleTap(e: Event) {
 
 <template>
   <div class="docking-mission">
-    <div class="label">DOCK SPACECRAFT</div>
+    <div class="label">{{ t('우주선 도킹') }}</div>
     <div
       class="dock-area"
       :style="{ width: `${containerSize}px`, height: `${containerSize}px` }"
@@ -103,7 +105,7 @@ function handleTap(e: Event) {
         }"
       >◆</div>
     </div>
-    <div class="hint">TAP TO DOCK</div>
+    <div class="hint">{{ t('탭하여 도킹') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -69,7 +71,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="tunnel-mission">
-    <div class="depth-label">DEPTH: {{ depth }}m</div>
+    <div class="depth-label">{{ t('깊이') }}: {{ depth }}m</div>
     <div class="progress-track">
       <div class="progress-fill" :style="{ width: `${progress * 100}%` }" />
     </div>
@@ -84,7 +86,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="hint">
-      ← SWIPE {{ lastDirection === 'left' || lastDirection === null ? 'RIGHT →' : '← LEFT' }}
+      ← {{ t('스와이프') }} {{ lastDirection === 'left' || lastDirection === null ? t('오른쪽') + ' →' : '← ' + t('왼쪽') }}
     </div>
   </div>
 </template>

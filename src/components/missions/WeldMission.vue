@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -154,7 +156,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="weld-mission">
-    <div class="weld-label">WELD CRACK</div>
+    <div class="weld-label">{{ t('균열 용접') }}</div>
     <div class="weld-area">
       <svg class="weld-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
         <path
@@ -198,7 +200,7 @@ onUnmounted(() => {
     <div class="weld-progress-bar">
       <div class="weld-progress-fill" :style="{ width: `${traceProgress * 100}%` }" />
     </div>
-    <div class="weld-hint">TRACE THE CRACK</div>
+    <div class="weld-hint">{{ t('균열을 따라 그리세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -59,7 +61,7 @@ function handleTap(m: Mushroom, e: Event) {
 
 <template>
   <div class="forage-mission">
-    <div class="forage-label">FORAGE: TAP SAFE</div>
+    <div class="forage-label">{{ t('채집: 안전한 것을 탭하세요') }}</div>
     <div class="forage-field">
       <button
         v-for="m in mushrooms"

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -80,7 +82,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="interlace-mission">
-    <div class="hint-label">ALIGN THE SIGNAL</div>
+    <div class="hint-label">{{ t('신호 정렬') }}</div>
     <div class="interlace-screen">
       <div class="scanlines" />
       <div class="half top-half" :style="{ transform: `translateX(${topOffset}%)` }">
@@ -92,7 +94,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="align-indicator" :class="{ close: Math.abs(topOffset) < TOLERANCE * 2 }">
-      OFFSET: {{ Math.round(topOffset) }}
+      {{ t('오프셋') }}: {{ Math.round(topOffset) }}
     </div>
   </div>
 </template>

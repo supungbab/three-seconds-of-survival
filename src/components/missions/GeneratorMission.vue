@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -49,7 +51,7 @@ function handleTap(e: Event) {
 
 <template>
   <div class="generator-mission">
-    <div class="gauge-label">RPM STABILIZE</div>
+    <div class="gauge-label">RPM {{ t('안정화') }}</div>
 
     <div class="gauge-container" @pointerdown="handleTap">
       <!-- Gauge arc background -->
@@ -87,7 +89,7 @@ function handleTap(e: Event) {
       </svg>
     </div>
 
-    <div class="gauge-hint">TAP IN GREEN ZONE</div>
+    <div class="gauge-hint">{{ t('녹색 구간에서 탭하세요') }}</div>
   </div>
 </template>
 

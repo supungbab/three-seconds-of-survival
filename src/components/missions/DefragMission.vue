@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -141,7 +143,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="defrag-mission">
-    <div class="defrag-label">DEFRAGMENT</div>
+    <div class="defrag-label">{{ t('디스크 조각 모음') }}</div>
     <div class="defrag-grid">
       <div
         v-for="(cell, i) in grid"
@@ -159,7 +161,7 @@ onUnmounted(() => {
         </span>
       </div>
     </div>
-    <div class="defrag-hint">DRAG BLOCK TO EMPTY SLOT</div>
+    <div class="defrag-hint">{{ t('블록을 빈 칸으로 드래그') }}</div>
   </div>
 </template>
 

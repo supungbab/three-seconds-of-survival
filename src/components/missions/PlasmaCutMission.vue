@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -86,7 +88,7 @@ onUnmounted(() => {
     <div class="progress-dots">
       <span v-for="(h, i) in hitMarks" :key="i" class="dot" :class="{ done: h }">{{ h ? '●' : '○' }}</span>
     </div>
-    <div class="hint">TAP AT MARKS</div>
+    <div class="hint">{{ t('표시에서 탭하세요') }}</div>
   </div>
 </template>
 

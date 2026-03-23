@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   fuseCount: number
@@ -21,7 +23,7 @@ function handleTap(e: Event, index: number) {
 
 <template>
   <div class="fuse-replace-mission">
-    <div class="fuse-header">REPLACE FUSE</div>
+    <div class="fuse-header">{{ t('퓨즈 교체') }}</div>
     <div class="fuse-row">
       <button
         v-for="i in fuseCount"

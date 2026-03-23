@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   overrideCode: number[]
@@ -61,7 +63,7 @@ function handleKeyTap(digit: number) {
   <div class="override-mission">
     <!-- SHOW phase: display the code -->
     <template v-if="phase === 'SHOW'">
-      <div class="override-label">MEMORIZE CODE</div>
+      <div class="override-label">{{ t('코드 암기') }}</div>
       <div class="code-display show-phase">
         <span
           v-for="(d, i) in props.overrideCode"
@@ -75,7 +77,7 @@ function handleKeyTap(digit: number) {
 
     <!-- INPUT phase -->
     <template v-else>
-      <div class="override-label">ENTER CODE</div>
+      <div class="override-label">{{ t('코드 입력') }}</div>
       <div class="code-display input-phase">
         <span
           v-for="(_, i) in props.overrideCode"

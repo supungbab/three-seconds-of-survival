@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   decontamCount: number
@@ -86,7 +88,7 @@ function handleSpotTap(spot: Spot) {
       </button>
     </div>
     <div class="decontam-hint">
-      DECONTAM {{ currentStep }}/{{ decontamCount }}
+      {{ t('오염제거') }} {{ currentStep }}/{{ decontamCount }}
     </div>
   </div>
 </template>

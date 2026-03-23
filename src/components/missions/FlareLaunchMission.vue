@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -146,14 +148,14 @@ onUnmounted(() => {
 
     <div class="flare-gun">
       <span class="gun-icon">▲</span>
-      <span class="gun-label">FLARE</span>
+      <span class="gun-label">{{ t('조명탄') }}</span>
     </div>
 
     <div v-if="!resolved" class="swipe-hint">
-      ↑ SWIPE UP TO LAUNCH
+      ↑ {{ t('위로 스와이프하여 발사') }}
     </div>
-    <div v-if="success" class="result-text ok">FLARE SENT</div>
-    <div v-if="failed" class="result-text bad">OFF TARGET</div>
+    <div v-if="success" class="result-text ok">{{ t('조명탄 발사 완료') }}</div>
+    <div v-if="failed" class="result-text bad">{{ t('빗나감') }}</div>
   </div>
 </template>
 

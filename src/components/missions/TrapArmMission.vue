@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -37,7 +39,7 @@ function handleTap(index: number, e: PointerEvent) {
 
 <template>
   <div class="trap-mission">
-    <div class="label">ARM TRAP: TAP 1 → 2 → 3</div>
+    <div class="label">{{ t('트랩 설치: 1 → 2 → 3 탭') }}</div>
     <div class="field">
       <svg class="wire-lines" viewBox="0 0 100 100">
         <line

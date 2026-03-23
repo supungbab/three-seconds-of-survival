@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = withDefaults(
   defineProps<{
@@ -108,7 +110,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="ration-split-mission">
-    <div class="ration-label">SPLIT RATIONS: {{ rationTotal }} / {{ rationParts }}</div>
+    <div class="ration-label">{{ t('식량 분배') }}: {{ rationTotal }} / {{ rationParts }}</div>
     <div class="ration-bar">
       <div class="ration-fill" :style="{ width: `${dividerPos}%` }" />
       <div
@@ -131,7 +133,7 @@ onUnmounted(() => {
       @touchstart.stop.prevent="onConfirm"
       @mousedown.stop.prevent="onConfirm"
     >
-      CONFIRM
+      {{ t('확인') }}
     </button>
   </div>
 </template>

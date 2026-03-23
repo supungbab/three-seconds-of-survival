@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -39,7 +41,7 @@ function barPercent(): number {
 
 <template>
   <div class="isotope-mission" @pointerdown="handleTap">
-    <div class="label">RADIATION DECAY</div>
+    <div class="label">{{ t('방사선 감쇠') }}</div>
     <div class="gauge-container">
       <div class="gauge-bar">
         <div
@@ -48,7 +50,7 @@ function barPercent(): number {
           :style="{ height: `${barPercent()}%` }"
         ></div>
         <div class="safe-line" :style="{ bottom: `${(safeThreshold / 999) * 100}%` }">
-          <span class="safe-label">SAFE</span>
+          <span class="safe-label">{{ t('안전') }}</span>
         </div>
       </div>
       <div class="value-display">
@@ -56,7 +58,7 @@ function barPercent(): number {
         <span class="unit">mSv</span>
       </div>
     </div>
-    <div class="hint">TAP WHEN SAFE</div>
+    <div class="hint">{{ t('안전할 때 탭하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -74,7 +76,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="blackbox-mission">
-    <div class="waveform-label">SIGNAL ANALYSIS</div>
+    <div class="waveform-label">{{ t('신호 분석') }}</div>
     <div class="waveform-container">
       <div
         class="target-zone"
@@ -92,7 +94,7 @@ onUnmounted(() => {
         :style="{ left: `${playheadX}%` }"
       />
     </div>
-    <div class="tap-hint">TAP IN TARGET ZONE</div>
+    <div class="tap-hint">{{ t('타겟 영역에서 탭하세요') }}</div>
   </div>
 </template>
 

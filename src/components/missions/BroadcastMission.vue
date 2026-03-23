@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -84,7 +86,7 @@ onUnmounted(() => {
     </div>
 
     <div class="broadcast-btn" :class="{ active: isHolding }">
-      {{ phase === 'idle' ? 'HOLD TO TX' : isHolding ? 'RELEASE AT PEAK' : '···' }}
+      {{ phase === 'idle' ? t('홀드하여 송신') : isHolding ? t('피크에서 떼기') : '···' }}
     </div>
   </div>
 </template>

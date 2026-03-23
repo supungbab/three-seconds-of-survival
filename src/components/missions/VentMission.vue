@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -9,15 +12,15 @@
         <div class="slat" />
         <div class="slat" />
       </div>
-      <div class="hatch-label">VENT HATCH</div>
+      <div class="hatch-label">{{ t('환기구') }}</div>
     </div>
 
     <div class="radiation-zone">
       <div class="rad-icon">☢</div>
-      <div class="rad-label">RADIATION DETECTED</div>
+      <div class="rad-label">{{ t('방사능 감지') }}</div>
     </div>
 
-    <div class="swipe-hint">↑ SWIPE TO VENT</div>
+    <div class="swipe-hint">{{ t('↑ 스와이프하여 환기') }}</div>
   </div>
 </template>
 

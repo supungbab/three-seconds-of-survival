@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -76,7 +78,7 @@ onUnmounted(() => {
 <template>
   <div class="bridge-cross-mission">
     <div class="bridge-header">
-      <span class="header-label">BRIDGE</span>
+      <span class="header-label">{{ t('다리') }}</span>
       <span class="header-progress">{{ currentPlank }} / {{ TOTAL_PLANKS }}</span>
     </div>
 
@@ -98,7 +100,7 @@ onUnmounted(() => {
         >
           <span class="plank-icon">{{ plank.crossed ? '■' : '▬' }}</span>
           <span v-if="plank.current && !resolved" class="plank-status">
-            {{ plank.stable ? 'STABLE' : 'SHAKING' }}
+            {{ plank.stable ? t('안정') : t('흔들림') }}
           </span>
         </button>
       </div>
@@ -106,10 +108,10 @@ onUnmounted(() => {
     </div>
 
     <div v-if="!resolved" class="hint-text">
-      TAP WHEN PLANK IS STABLE
+      {{ t('널빤지가 안정될 때 탭하세요') }}
     </div>
-    <div v-if="resolved && !failed" class="result-text ok">CROSSED</div>
-    <div v-if="failed" class="result-text bad">FELL</div>
+    <div v-if="resolved && !failed" class="result-text ok">{{ t('건넘') }}</div>
+    <div v-if="failed" class="result-text bad">{{ t('추락') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -80,7 +82,7 @@ onUnmounted(() => {
         :class="{ done: c.fixed }"
       >{{ c.fixed ? '■' : '□' }}</span>
     </div>
-    <div class="hint">TAP DEAD PIXELS</div>
+    <div class="hint">{{ t('죽은 픽셀을 탭하세요') }}</div>
   </div>
 </template>
 

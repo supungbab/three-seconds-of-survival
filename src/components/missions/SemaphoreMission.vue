@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   semaphoreLeft: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'
@@ -48,18 +50,18 @@ function handleDirection(dir: string, e: Event) {
   <div class="semaphore-mission">
     <div class="signal-display">
       <div class="flag-group">
-        <span class="flag-label">L</span>
+        <span class="flag-label">{{ t('좌') }}</span>
         <span class="flag-arrow" :class="{ done: leftDone }">{{ ARROWS[semaphoreLeft] }}</span>
       </div>
       <div class="flag-divider">┃</div>
       <div class="flag-group">
-        <span class="flag-label">R</span>
+        <span class="flag-label">{{ t('우') }}</span>
         <span class="flag-arrow dim">{{ ARROWS[semaphoreRight] }}</span>
       </div>
     </div>
 
     <div class="phase-label">
-      {{ phase === 'left' ? '◄ LEFT HAND' : 'RIGHT HAND ►' }}
+      {{ phase === 'left' ? `◄ ${t('왼손')}` : `${t('오른손')} ►` }}
     </div>
 
     <div class="direction-grid">

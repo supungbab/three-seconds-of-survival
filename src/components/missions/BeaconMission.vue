@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -52,7 +54,7 @@ function handleChoice(n: number, e: Event) {
 
 <template>
   <div class="beacon-mission">
-    <div class="beacon-label">COUNT THE FLASHES</div>
+    <div class="beacon-label">{{ t('점멸 횟수를 세세요') }}</div>
 
     <div class="beacon-light" :class="{ on: beaconOn }">
       <span class="beacon-core">●</span>
@@ -68,7 +70,7 @@ function handleChoice(n: number, e: Event) {
         {{ n }}
       </button>
     </div>
-    <div v-else class="beacon-wait">OBSERVING...</div>
+    <div v-else class="beacon-wait">{{ t('관측 중...') }}</div>
   </div>
 </template>
 

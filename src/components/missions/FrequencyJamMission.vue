@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -95,7 +97,7 @@ onUnmounted(() => {
       </div>
 
       <div class="sync-indicator" :class="{ synced: Math.abs(barA - barB) <= 0.10 }">
-        {{ Math.abs(barA - barB) <= 0.10 ? 'SYNC' : '···' }}
+        {{ Math.abs(barA - barB) <= 0.10 ? t('동기화') : '···' }}
       </div>
 
       <div class="freq-bar-wrap">
@@ -107,7 +109,7 @@ onUnmounted(() => {
     </div>
 
     <div class="jam-hint" :class="{ active: isHolding }">
-      {{ isHolding ? 'RELEASE WHEN SYNCED' : 'HOLD TO JAM' }}
+      {{ isHolding ? t('동기화되면 놓으세요') : t('길게 눌러 방해') }}
     </div>
   </div>
 </template>

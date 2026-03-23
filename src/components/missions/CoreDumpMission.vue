@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -75,7 +77,7 @@ function handleTap(e: PointerEvent) {
 
 <template>
   <div class="core-dump-mission" @pointerdown="handleTap">
-    <div class="dump-header">CORE DUMP — TAP ON ERR</div>
+    <div class="dump-header">{{ t('코어 덤프 — 에러를 탭하세요') }}</div>
     <div class="dump-viewport">
       <div class="dump-scroll" :style="{ transform: `translateY(-${scrollOffset}px)` }">
         <div

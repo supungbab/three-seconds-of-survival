@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -47,20 +49,20 @@ function handleTap(e: PointerEvent) {
 
 <template>
   <div class="voltage-match-mission">
-    <div class="volt-header">MATCH VOLTAGE</div>
+    <div class="volt-header">{{ t('전압 맞추기') }}</div>
     <div class="volt-displays">
       <div class="volt-box target">
-        <div class="volt-label">TARGET</div>
+        <div class="volt-label">{{ t('목표') }}</div>
         <div class="volt-value">{{ targetVoltage.toFixed(1) }}V</div>
       </div>
       <div class="volt-arrow">⟶</div>
       <div class="volt-box current">
-        <div class="volt-label">CURRENT</div>
+        <div class="volt-label">{{ t('현재') }}</div>
         <div class="volt-value">{{ currentVoltage.toFixed(1) }}V</div>
       </div>
     </div>
-    <button class="lock-btn" @pointerdown="handleTap">LOCK</button>
-    <div class="volt-hint">TAP WHEN VALUES MATCH</div>
+    <button class="lock-btn" @pointerdown="handleTap">{{ t('잠금') }}</button>
+    <div class="volt-hint">{{ t('값이 같을 때 탭하세요') }}</div>
   </div>
 </template>
 

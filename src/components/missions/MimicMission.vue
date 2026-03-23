@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -67,7 +69,7 @@ function handleTap(index: number, e: Event) {
 
 <template>
   <div class="mimic-mission">
-    <div class="mimic-label">FIND THE MIMIC</div>
+    <div class="mimic-label">{{ t('진짜를 찾으세요') }}</div>
     <div class="item-grid">
       <button
         v-for="i in 4"

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -62,7 +64,7 @@ function handleTap(blob: Blob, e: PointerEvent) {
 
 <template>
   <div class="thermal-mission">
-    <div class="label">THERMAL SCAN — FIND HUMAN</div>
+    <div class="label">{{ t('열 감지 — 사람을 찾으세요') }}</div>
     <div class="scan-field">
       <button
         v-for="(blob, i) in blobs"

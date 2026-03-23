@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -45,24 +47,24 @@ function handleChoice(choice: PhCategory, e: Event) {
 
 <template>
   <div class="ph-test-mission">
-    <div class="label">CLASSIFY SAMPLE</div>
+    <div class="label">{{ t('시료 분류') }}</div>
     <div class="strip-container">
       <div class="strip" :style="{ background: stripColor }"></div>
-      <div class="strip-label">pH STRIP</div>
+      <div class="strip-label">pH {{ t('시험지') }}</div>
     </div>
     <div class="btn-row">
       <button
         class="ph-btn acid"
         @pointerdown="(e) => handleChoice('ACID', e)"
-      >ACID</button>
+      >{{ t('산성') }}</button>
       <button
         class="ph-btn neutral"
         @pointerdown="(e) => handleChoice('NEUTRAL', e)"
-      >NEUTRAL</button>
+      >{{ t('중성') }}</button>
       <button
         class="ph-btn alkali"
         @pointerdown="(e) => handleChoice('ALKALI', e)"
-      >ALKALI</button>
+      >{{ t('알칼리') }}</button>
     </div>
   </div>
 </template>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   decryptScrambled: string

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -73,7 +75,7 @@ function handleFenceTap(e: Event) {
 
 <template>
   <div class="perimeter-mission">
-    <div class="perimeter-label">PATCH BREACHES</div>
+    <div class="perimeter-label">{{ t('침입구 수리') }}</div>
 
     <div class="fence-area" @pointerdown="handleFenceTap">
       <!-- Fence lines -->
@@ -104,7 +106,7 @@ function handleFenceTap(e: Event) {
     </div>
 
     <div class="perimeter-status">
-      {{ patchedCount }}/{{ totalHoles }} SEALED
+      {{ patchedCount }}/{{ totalHoles }} {{ t('밀봉됨') }}
     </div>
   </div>
 </template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   elevatorCurrent: number
@@ -55,7 +57,7 @@ function handleDown() {
   <div class="elevator-mission">
     <div class="elevator-panel">
       <div class="target-display">
-        TARGET: <span class="target-floor">{{ props.elevatorTarget }}F</span>
+        {{ t('목표') }}: <span class="target-floor">{{ props.elevatorTarget }}F</span>
       </div>
 
       <div class="floor-display">

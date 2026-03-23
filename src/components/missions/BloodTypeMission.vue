@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   bloodTarget: string
@@ -27,7 +29,7 @@ function handleChoice(choice: string) {
     <div class="blood-bag">
       <div class="bag-icon">🩸</div>
       <div class="bag-label">{{ bloodTarget }}</div>
-      <div class="bag-sub">NEEDED</div>
+      <div class="bag-sub">{{ t('필요') }}</div>
     </div>
 
     <div class="blood-choices">

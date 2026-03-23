@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -43,7 +45,7 @@ function handleCell(index: number, e: Event) {
 
 <template>
   <div class="minefield-mission">
-    <div class="label">{{ revealing ? 'MEMORIZE MINES' : 'TAP SAFE CELL' }}</div>
+    <div class="label">{{ revealing ? t('지뢰 위치 기억') : t('안전한 칸을 탭하세요') }}</div>
     <div class="grid">
       <button
         v-for="(isMine, i) in cells"

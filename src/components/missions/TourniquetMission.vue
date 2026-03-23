@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -30,7 +32,7 @@ const circumference = 2 * Math.PI * 44
 
 <template>
   <div class="tourniquet-mission" @pointerdown="handleTap">
-    <div class="tq-header">APPLY TOURNIQUET</div>
+    <div class="tq-header">{{ t('지혈대 적용') }}</div>
     <div class="ring-container">
       <svg viewBox="0 0 100 100" class="ring-svg">
         <circle
@@ -54,7 +56,7 @@ const circumference = 2 * Math.PI * 44
         <div class="tap-count">{{ tapCount }}/{{ REQUIRED_TAPS }}</div>
       </div>
     </div>
-    <div class="tq-hint">TAP RAPIDLY</div>
+    <div class="tq-hint">{{ t('빠르게 탭하세요') }}</div>
   </div>
 </template>
 

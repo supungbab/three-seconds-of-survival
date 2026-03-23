@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -55,7 +57,7 @@ function handleDiagnosis(e: Event, diagnosisNormal: boolean) {
 
 <template>
   <div class="pulse-check-mission">
-    <div class="ecg-header">[ VITAL SIGNS ]</div>
+    <div class="ecg-header">{{ t('[ 생체 신호 ]') }}</div>
     <div class="ecg-monitor">
       <div class="ecg-waveform">
         <div
@@ -72,10 +74,10 @@ function handleDiagnosis(e: Event, diagnosisNormal: boolean) {
     </div>
     <div class="diagnosis-buttons">
       <button class="diag-btn normal" @pointerdown="(e) => handleDiagnosis(e, true)">
-        NORMAL
+        {{ t('정상') }}
       </button>
       <button class="diag-btn abnormal" @pointerdown="(e) => handleDiagnosis(e, false)">
-        ABNORMAL
+        {{ t('비정상') }}
       </button>
     </div>
   </div>

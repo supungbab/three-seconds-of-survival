@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -33,7 +35,7 @@ function handleTap(e: Event) {
     <div class="searchlight-area">
       <div v-if="sweeping" class="searchlight" />
       <div class="curfew-text">
-        {{ sweeping ? 'WAIT...' : 'GO!' }}
+        {{ sweeping ? t('대기...') : t('출발!') }}
       </div>
     </div>
   </div>

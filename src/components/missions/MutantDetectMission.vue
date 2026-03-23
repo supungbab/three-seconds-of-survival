@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   mutantCount: number
@@ -21,7 +23,7 @@ function handleTap(e: Event, index: number) {
 
 <template>
   <div class="mutant-detect-mission">
-    <div class="mutant-header">SCAN SUBJECTS</div>
+    <div class="mutant-header">{{ t('대상 스캔') }}</div>
     <div class="mutant-row">
       <button
         v-for="i in mutantCount"

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 type MorseChar = 'DOT' | 'DASH'
 
@@ -99,7 +101,7 @@ onUnmounted(() => {
     </div>
 
     <div class="morse-hint">
-      SHORT=· LONG=—
+      {{ t('짧게=· 길게=—') }}
     </div>
   </div>
 </template>

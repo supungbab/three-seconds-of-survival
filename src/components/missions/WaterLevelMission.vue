@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -105,7 +107,7 @@ onUnmounted(() => {
           <span class="mark-line" style="bottom: 50%" />
           <span class="mark-line" style="bottom: 75%" />
         </div>
-        <div class="tank-label">WATER</div>
+        <div class="tank-label">{{ t('수위') }}</div>
       </div>
 
       <button
@@ -119,7 +121,7 @@ onUnmounted(() => {
     </div>
 
     <div class="hint-text">
-      TAP BOTH VALVES AT ONCE
+      {{ t('양쪽 밸브를 동시에 탭하세요') }}
     </div>
   </div>
 </template>

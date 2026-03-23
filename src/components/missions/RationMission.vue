@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   rationPeople: number
@@ -32,7 +34,7 @@ function handleTap(choice: number) {
     </div>
 
     <div class="ration-info">
-      &times;{{ rationPerPerson }} EA
+      &times;{{ rationPerPerson }} {{ t('개씩') }}
     </div>
 
     <div class="ration-choices">

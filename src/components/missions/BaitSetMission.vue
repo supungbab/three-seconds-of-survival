@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -41,7 +43,7 @@ function handleTap(r: number, c: number, e: Event) {
 
 <template>
   <div class="bait-mission">
-    <div class="bait-hint">PLACE BAIT ON TRAIL END</div>
+    <div class="bait-hint">{{ t('흔적 끝에 미끼를 놓으세요') }}</div>
     <div class="bait-grid">
       <template v-for="r in GRID" :key="'row'+r">
         <button

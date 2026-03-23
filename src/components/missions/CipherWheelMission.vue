@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -44,17 +46,17 @@ function handleChoice(n: number, e: Event) {
   <div class="cipher-wheel-mission">
     <div class="cipher-display">
       <div class="cipher-col">
-        <span class="cipher-label">ENC</span>
+        <span class="cipher-label">{{ t('암호') }}</span>
         <span class="cipher-letter bright">{{ encryptedLetter }}</span>
       </div>
       <span class="cipher-arrow">→</span>
       <div class="cipher-col">
-        <span class="cipher-label">DEC</span>
+        <span class="cipher-label">{{ t('해독') }}</span>
         <span class="cipher-letter dim">{{ targetLetter }}</span>
       </div>
     </div>
 
-    <div class="cipher-hint">SHIFT = ?</div>
+    <div class="cipher-hint">{{ t('시프트') }} = ?</div>
 
     <div class="cipher-choices">
       <button

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -72,10 +74,10 @@ onUnmounted(() => {
   <div ref="containerEl" class="deadman-mission">
     <div class="switch-btn" :class="{ active: isHolding }">
       <div class="fill-bar" :style="{ height: `${fillProgress * 100}%` }" />
-      <span class="btn-text">{{ isHolding ? 'HOLDING...' : 'HOLD' }}</span>
+      <span class="btn-text">{{ isHolding ? t('유지 중...') : t('누르기') }}</span>
     </div>
     <div class="timer">{{ (fillProgress * 100).toFixed(0) }}%</div>
-    <div class="hint">DO NOT RELEASE</div>
+    <div class="hint">{{ t('놓지 마세요') }}</div>
   </div>
 </template>
 

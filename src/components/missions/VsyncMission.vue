@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -51,7 +53,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="vsync-mission">
-    <div class="hint-label">TAP WHEN CENTERED</div>
+    <div class="hint-label">{{ t('중앙에 올 때 탭하세요') }}</div>
     <div class="vsync-screen">
       <div class="screen-content">
         <span class="screen-text">VSYNC</span>
@@ -68,7 +70,7 @@ onUnmounted(() => {
       <div class="scanlines" />
     </div>
     <div class="position-readout">
-      TEAR: {{ Math.round(tearY) }}%
+      {{ t('찢어짐') }}: {{ Math.round(tearY) }}%
     </div>
   </div>
 </template>

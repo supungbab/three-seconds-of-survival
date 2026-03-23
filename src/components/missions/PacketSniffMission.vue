@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -47,7 +49,7 @@ function handleTap(e: Event, pkt: Packet) {
 
 <template>
   <div class="packet-sniff-mission">
-    <div class="terminal-header">[ PACKET MONITOR ]</div>
+    <div class="terminal-header">{{ t('[ 패킷 모니터 ]') }}</div>
     <div class="packet-log">
       <button
         v-for="(pkt, i) in packets"
@@ -59,7 +61,7 @@ function handleTap(e: Event, pkt: Packet) {
       >
         <span class="pkt-id">{{ pkt.id }}</span>
         <span class="pkt-status" :class="pkt.infected ? 'status-bad' : 'status-ok'">
-          {{ pkt.infected ? 'INFECTED' : 'OK' }}
+          {{ pkt.infected ? t('감염') : 'OK' }}
         </span>
       </button>
     </div>

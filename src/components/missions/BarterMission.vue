@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   barterLeft: number
@@ -26,7 +28,7 @@ function handleChoice(isFair: boolean, e: Event) {
 
 <template>
   <div class="barter-mission">
-    <div class="barter-label">FAIR?</div>
+    <div class="barter-label">{{ t('공정한가?') }}</div>
 
     <div class="barter-sides">
       <div class="barter-side">

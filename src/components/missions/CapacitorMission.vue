@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -55,10 +57,10 @@ function zoneClass(): string {
 
 <template>
   <div class="capacitor-mission">
-    <div class="label">CAPACITOR CHARGE</div>
+    <div class="label">{{ t('커패시터 충전') }}</div>
     <div class="gauge-outer">
       <div class="zone-marks">
-        <div class="zone safe-zone" style="bottom: 70%; height: 15%;">SAFE</div>
+        <div class="zone safe-zone" style="bottom: 70%; height: 15%;">{{ t('안전') }}</div>
         <div class="zone danger-zone" style="bottom: 90%; height: 10%;">!</div>
       </div>
       <div class="gauge-track">
@@ -77,7 +79,7 @@ function zoneClass(): string {
       class="discharge-btn"
       :disabled="discharged"
       @pointerdown="handleDischarge"
-    >DISCHARGE</button>
+    >{{ t('방전') }}</button>
   </div>
 </template>
 

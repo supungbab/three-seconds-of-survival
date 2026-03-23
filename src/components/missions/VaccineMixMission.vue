@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -11,10 +13,10 @@ const emit = defineEmits<{
 type Vial = { id: number; color: string; label: string }
 
 const ALL_VIALS: Vial[] = [
-  { id: 0, color: '#ff3b5c', label: 'RED' },
-  { id: 1, color: '#4a9eff', label: 'BLUE' },
-  { id: 2, color: '#ffd644', label: 'YEL' },
-  { id: 3, color: '#8cc890', label: 'GRN' },
+  { id: 0, color: '#ff3b5c', label: '빨강' },
+  { id: 1, color: '#4a9eff', label: '파랑' },
+  { id: 2, color: '#ffd644', label: '노랑' },
+  { id: 3, color: '#8cc890', label: '초록' },
 ]
 
 const vials = ref<Vial[]>([])
@@ -38,7 +40,7 @@ onMounted(() => {
   target.value = indices
   const a = ALL_VIALS[indices[0]]
   const b = ALL_VIALS[indices[1]]
-  prompt.value = `MIX: ${a.label} + ${b.label}`
+  prompt.value = `${t('혼합')}: ${a.label} + ${b.label}`
 })
 
 function handleTap(vial: Vial, e: PointerEvent) {
@@ -79,7 +81,7 @@ function handleTap(vial: Vial, e: PointerEvent) {
       </button>
     </div>
     <div class="status">
-      {{ selected.length }} / 2 SELECTED
+      {{ selected.length }} / 2 {{ t('선택됨') }}
     </div>
   </div>
 </template>

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -33,7 +35,7 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
 
 <template>
   <div class="color-bleed-mission">
-    <div class="hint-label">ALIGN CHANNELS: R &rarr; G &rarr; B</div>
+    <div class="hint-label">{{ t('채널 정렬') }}: R &rarr; G &rarr; B</div>
     <div class="rgb-display">
       <span
         class="channel channel-r"
@@ -63,7 +65,7 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
       </button>
     </div>
     <div class="step-indicator">
-      {{ step }}/3 ALIGNED
+      {{ step }}/3 {{ t('정렬 완료') }}
     </div>
   </div>
 </template>

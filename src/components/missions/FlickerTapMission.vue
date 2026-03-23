@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -78,7 +80,7 @@ onUnmounted(() => {
         <span class="target-char">{{ TARGET_SYMBOL }}</span>
       </div>
     </div>
-    <div class="flicker-hint">TAP WHEN VISIBLE</div>
+    <div class="flicker-hint">{{ t('보일 때 탭하세요') }}</div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   firewallCount: number
@@ -170,7 +172,7 @@ function onMouseUp(e: MouseEvent) {
       </div>
     </div>
 
-    <div class="hint">SWIPE {{ currentPacket ?? '' }}</div>
+    <div class="hint">{{ t('스와이프') }} {{ currentPacket ?? '' }}</div>
   </div>
 </template>
 

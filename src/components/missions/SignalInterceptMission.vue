@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -85,7 +87,7 @@ onUnmounted(() => {
 
 <template>
   <div class="signal-intercept-mission" @pointerdown="handleTap">
-    <div class="signal-label">INTERCEPT SIGNAL</div>
+    <div class="signal-label">{{ t('신호 가로채기') }}</div>
     <div class="ticker-viewport">
       <div
         ref="tickerEl"
@@ -102,7 +104,7 @@ onUnmounted(() => {
         </template>
       </div>
     </div>
-    <div class="signal-hint">TAP WHEN「{{ keyword }}」VISIBLE</div>
+    <div class="signal-hint">{{ t(`「${keyword}」이 보일 때 탭하세요`) }}</div>
   </div>
 </template>
 

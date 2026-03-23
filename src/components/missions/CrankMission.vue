@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   crankRotations: number
@@ -144,10 +146,10 @@ onUnmounted(() => {
     </div>
 
     <div class="crank-progress">
-      {{ completedRotations }}/{{ crankRotations }} ROTATIONS
+      {{ completedRotations }}/{{ crankRotations }} {{ t('회전') }}
     </div>
 
-    <div class="crank-hint">CRANK</div>
+    <div class="crank-hint">{{ t('크랭크') }}</div>
   </div>
 </template>
 

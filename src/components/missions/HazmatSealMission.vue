@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -38,7 +40,7 @@ function handleSeal(e: PointerEvent, index: number) {
 
 <template>
   <div class="hazmat-seal-mission">
-    <div class="hz-header">SEAL HAZMAT SUIT</div>
+    <div class="hz-header">{{ t('방호복 밀봉') }}</div>
     <div class="suit-outline">
       <svg viewBox="0 0 100 110" class="suit-svg">
         <!-- Simple body outline -->
@@ -65,7 +67,7 @@ function handleSeal(e: PointerEvent, index: number) {
         <span v-else class="seal-icon">✓</span>
       </button>
     </div>
-    <div class="hz-status">{{ tears.filter(t => t.sealed).length }} / {{ tears.length }} SEALED</div>
+    <div class="hz-status">{{ tears.filter(t => t.sealed).length }} / {{ tears.length }} {{ t('밀봉됨') }}</div>
   </div>
 </template>
 

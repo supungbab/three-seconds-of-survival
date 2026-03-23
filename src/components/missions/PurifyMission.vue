@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -45,7 +47,7 @@ onUnmounted(() => {
 
 <template>
   <div class="purify-mission" @pointerdown="handleTap">
-    <div class="purify-label">PURIFY</div>
+    <div class="purify-label">{{ t('정화') }}</div>
     <div class="purify-bar">
       <div class="purify-safe-zone" />
       <div
@@ -53,7 +55,7 @@ onUnmounted(() => {
         :style="{ left: `${(position + 1) * 50}%` }"
       />
     </div>
-    <div class="purify-hint">TAP IN GREEN ZONE</div>
+    <div class="purify-hint">{{ t('녹색 영역에서 탭하세요') }}</div>
   </div>
 </template>
 

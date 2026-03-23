@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   infectedCount: number
@@ -21,7 +23,7 @@ function handleTap(e: Event, index: number) {
 
 <template>
   <div class="infected-scan-mission">
-    <div class="scan-header">BIO-SCAN</div>
+    <div class="scan-header">{{ t('바이오 스캔') }}</div>
     <div class="scan-row">
       <button
         v-for="i in infectedCount"

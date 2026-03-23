@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -53,7 +55,7 @@ onUnmounted(() => {
 
 <template>
   <div class="cryo-mission" @pointerdown="handleTap">
-    <div class="label">CRYO THAW — TAP IN SAFE ZONE</div>
+    <div class="label">{{ t('냉동 해동 — 안전 구역에서 탭하세요') }}</div>
     <div class="gauge-track">
       <div
         class="safe-zone"

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -81,7 +83,7 @@ const isAligned = computed(() => Math.abs(topOffsetX.value) <= TOLERANCE)
 
 <template>
   <div class="splint-mission">
-    <div class="splint-header">[ BONE ALIGNMENT ]</div>
+    <div class="splint-header">{{ t('[ 뼈 정렬 ]') }}</div>
 
     <div ref="containerEl" class="bone-area" :style="{ touchAction: 'none' }">
       <!-- Top bone fragment -->
@@ -108,7 +110,7 @@ const isAligned = computed(() => Math.abs(topOffsetX.value) <= TOLERANCE)
       </div>
     </div>
 
-    <div class="splint-hint">DRAG TO ALIGN</div>
+    <div class="splint-hint">{{ t('드래그하여 정렬') }}</div>
   </div>
 </template>
 

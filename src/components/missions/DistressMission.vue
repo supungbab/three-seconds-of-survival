@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   distressPattern: number[]
@@ -129,7 +131,7 @@ function onMouse(e: MouseEvent) {
 
 <template>
   <div ref="containerEl" class="distress-mission">
-    <div class="phase-label">{{ phase === 'WATCH' ? 'OBSERVE' : 'REPEAT' }}</div>
+    <div class="phase-label">{{ phase === 'WATCH' ? t('관찰') : t('반복') }}</div>
 
     <div class="beacon-container">
       <div class="beacon" :class="{ on: beaconOn }" />
@@ -146,7 +148,7 @@ function onMouse(e: MouseEvent) {
     </div>
 
     <div class="distress-hint">
-      {{ phase === 'WATCH' ? 'INCOMING SIGNAL' : 'TAP TO TRANSMIT' }}
+      {{ phase === 'WATCH' ? t('수신 신호') : t('탭하여 송신') }}
     </div>
   </div>
 </template>

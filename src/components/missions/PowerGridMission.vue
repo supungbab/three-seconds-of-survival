@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   gridSwitchCount: number
@@ -59,7 +61,7 @@ function handleSwitch(index: number) {
 <template>
   <div class="power-grid-mission">
     <div class="grid-header">
-      <span class="grid-title">GRID CONTROL</span>
+      <span class="grid-title">{{ t('전력망 제어') }}</span>
       <span class="grid-status">{{ currentStep }}/{{ gridSwitchCount }}</span>
     </div>
 

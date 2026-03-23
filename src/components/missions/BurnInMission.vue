@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -67,7 +69,7 @@ function handleTap(e: Event, btn: ButtonInfo) {
 
 <template>
   <div class="burn-in-mission">
-    <div class="hint-label">TAP THE REAL BUTTON</div>
+    <div class="hint-label">{{ t('진짜 버튼을 탭하세요') }}</div>
     <div class="burn-screen">
       <button
         v-for="(btn, i) in buttons"

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -69,7 +71,7 @@ function handleTubeTap(index: number, e: Event) {
 
 <template>
   <div class="tube-replace-mission">
-    <div class="tube-label">REPLACE BROKEN TUBE</div>
+    <div class="tube-label">{{ t('고장난 진공관 교체') }}</div>
     <div class="tubes-row">
       <button
         v-for="(opacity, i) in tubeOpacities"

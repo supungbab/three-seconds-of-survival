@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -71,7 +73,7 @@ function handleTap(e: Event) {
 
 <template>
   <div class="boot-sequence-mission" @pointerdown="handleTap">
-    <div class="boot-header">[ SYSTEM POST ]</div>
+    <div class="boot-header">{{ t('[ 시스템 POST ]') }}</div>
     <div class="boot-log">
       <div
         v-for="(line, i) in visibleLines"
@@ -83,7 +85,7 @@ function handleTap(e: Event) {
       </div>
       <span class="cursor-blink">_</span>
     </div>
-    <div class="boot-hint">TAP WHEN ERROR APPEARS</div>
+    <div class="boot-hint">{{ t('오류 발생 시 탭하세요') }}</div>
   </div>
 </template>
 

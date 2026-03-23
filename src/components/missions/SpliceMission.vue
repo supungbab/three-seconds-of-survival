@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   spliceColors: string[]
@@ -77,7 +79,7 @@ function cssColor(name: string): string {
 
 <template>
   <div class="splice-mission">
-    <div class="splice-label">SPLICE CABLES</div>
+    <div class="splice-label">{{ t('케이블 접합') }}</div>
 
     <div class="splice-board">
       <div class="cable-column left-column">

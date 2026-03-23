@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -73,7 +75,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="signal-boost-mission">
-    <div class="boost-header">BOOST SIGNAL</div>
+    <div class="boost-header">{{ t('신호 증폭') }}</div>
     <div class="signal-display">
       <div class="bar-container">
         <div
@@ -87,7 +89,7 @@ onUnmounted(() => {
       <div class="strength-value">{{ Math.round(strength) }}%</div>
     </div>
     <div class="swipe-count">{{ swipeCount }} / {{ REQUIRED_SWIPES }}</div>
-    <div class="boost-hint">SWIPE UP</div>
+    <div class="boost-hint">{{ t('위로 스와이프') }}</div>
   </div>
 </template>
 

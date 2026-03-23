@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -106,7 +108,7 @@ onUnmounted(() => {
         ··· — — — ···
       </div>
       <div v-else-if="phase === 'prompt'" class="sos-prompt">
-        TAP NOW
+        {{ t('지금 탭하세요') }}
       </div>
       <div v-else class="sos-lost">
         ···

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const props = defineProps<{
   barricadeCount: number
@@ -62,7 +64,7 @@ function handlePieceTap(e: PointerEvent, num: number) {
 <template>
   <div class="barricade-mission">
     <div class="barricade-header">
-      <span class="header-label">BARRICADE</span>
+      <span class="header-label">{{ t('바리케이드') }}</span>
       <span class="header-progress">{{ currentStep }} / {{ totalPieces }}</span>
     </div>
 
@@ -83,7 +85,7 @@ function handlePieceTap(e: PointerEvent, num: number) {
       </button>
     </div>
 
-    <div v-if="failed" class="result-text bad">WRONG ORDER</div>
+    <div v-if="failed" class="result-text bad">{{ t('순서 틀림') }}</div>
   </div>
 </template>
 

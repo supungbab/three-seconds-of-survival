@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -118,7 +120,7 @@ onUnmounted(() => {
     </div>
 
     <div class="geiger-hint">
-      {{ phase === 'peak' ? 'TAP NOW!' : 'WAIT...' }}
+      {{ phase === 'peak' ? t('지금 탭!') : t('대기...') }}
     </div>
   </div>
 </template>

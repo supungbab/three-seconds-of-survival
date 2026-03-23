@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -16,10 +18,10 @@ interface PoisonEntry {
 }
 
 const POISON_MAP: PoisonEntry[] = [
-  { name: 'RED', color: '#ff3b5c', antidoteName: 'GREEN', antidoteColor: '#39e75f' },
-  { name: 'BLUE', color: '#4a9eff', antidoteName: 'YELLOW', antidoteColor: '#ffd644' },
-  { name: 'GREEN', color: '#39e75f', antidoteName: 'RED', antidoteColor: '#ff3b5c' },
-  { name: 'PURPLE', color: '#b44aff', antidoteName: 'YELLOW', antidoteColor: '#ffd644' },
+  { name: '빨강', color: '#ff3b5c', antidoteName: '초록', antidoteColor: '#39e75f' },
+  { name: '파랑', color: '#4a9eff', antidoteName: '노랑', antidoteColor: '#ffd644' },
+  { name: '초록', color: '#39e75f', antidoteName: '빨강', antidoteColor: '#ff3b5c' },
+  { name: '보라', color: '#b44aff', antidoteName: '노랑', antidoteColor: '#ffd644' },
 ]
 
 interface Vial {
@@ -52,11 +54,11 @@ onMounted(() => {
 
   // Build wrong options from other antidote colors (excluding duplicates)
   const allColors = [
-    { name: 'RED', color: '#ff3b5c' },
-    { name: 'BLUE', color: '#4a9eff' },
-    { name: 'GREEN', color: '#39e75f' },
-    { name: 'YELLOW', color: '#ffd644' },
-    { name: 'PURPLE', color: '#b44aff' },
+    { name: '빨강', color: '#ff3b5c' },
+    { name: '파랑', color: '#4a9eff' },
+    { name: '초록', color: '#39e75f' },
+    { name: '노랑', color: '#ffd644' },
+    { name: '보라', color: '#b44aff' },
   ]
 
   const wrongOptions = allColors
@@ -76,7 +78,7 @@ function handleTap(e: Event, vial: Vial) {
 
 <template>
   <div class="antidote-mission">
-    <div class="antidote-header">[ ANTIDOTE SELECT ]</div>
+    <div class="antidote-header">{{ t('[ 해독제 선택 ]') }}</div>
 
     <div class="poison-display">
       <div class="vial-icon poison" :style="{ '--vial-color': poison.color }">
@@ -84,7 +86,7 @@ function handleTap(e: Event, vial: Vial) {
         <div class="vial-cap" />
       </div>
       <div class="poison-label">
-        POISON: <span :style="{ color: poison.color }">{{ poison.name }}</span>
+        {{ t('독: ') }}<span :style="{ color: poison.color }">{{ poison.name }}</span>
       </div>
     </div>
 

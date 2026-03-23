@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -32,7 +34,7 @@ function handlePixelTap(e: Event, index: number) {
 
 <template>
   <div class="pixel-fix-mission">
-    <div class="pixel-header">[ DEAD PIXEL SCAN ]</div>
+    <div class="pixel-header">{{ t('[ 불량 화소 스캔 ]') }}</div>
     <div class="pixel-grid">
       <button
         v-for="i in totalPixels"
@@ -42,7 +44,7 @@ function handlePixelTap(e: Event, index: number) {
         @pointerdown="(e) => handlePixelTap(e, i - 1)"
       />
     </div>
-    <div class="pixel-hint">TAP THE HOT PIXEL</div>
+    <div class="pixel-hint">{{ t('불량 화소를 탭하세요') }}</div>
   </div>
 </template>
 

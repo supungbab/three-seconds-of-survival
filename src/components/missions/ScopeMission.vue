@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -74,10 +76,10 @@ onUnmounted(() => {
         :style="{ left: `${targetX}%`, top: `${targetY}%` }"
       />
 
-      <div class="scope-label">SCOPE</div>
+      <div class="scope-label">{{ t('조준경') }}</div>
     </div>
 
-    <div class="scope-hint">TAP WHEN TARGET IS CENTERED</div>
+    <div class="scope-hint">{{ t('목표가 중앙에 올 때 탭하세요') }}</div>
   </div>
 </template>
 

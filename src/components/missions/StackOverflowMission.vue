@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -74,7 +76,7 @@ onUnmounted(() => {
     <div class="pop-counter">
       POP {{ popsDone }}/{{ popsNeeded }}
     </div>
-    <div class="hint">TAP POP TO CLEAR STACK</div>
+    <div class="hint">{{ t('POP을 탭하여 스택을 비우세요') }}</div>
   </div>
 </template>
 

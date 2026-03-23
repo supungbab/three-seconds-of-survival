@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
@@ -101,7 +103,7 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="pressure-mission">
-    <div class="pressure-label">MAINTAIN PRESSURE</div>
+    <div class="pressure-label">{{ t('압력 유지') }}</div>
 
     <div class="gauges">
       <!-- Left gauge -->
@@ -145,7 +147,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="pressure-hint">TAP LEFT / RIGHT</div>
+    <div class="pressure-hint">{{ t('왼쪽 / 오른쪽 탭') }}</div>
   </div>
 </template>
 
