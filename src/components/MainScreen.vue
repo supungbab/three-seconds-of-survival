@@ -359,7 +359,6 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: 'Galmuri11', monospace;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -761,7 +760,6 @@ onMounted(async () => {
   border-radius: 0;
   background: var(--px-green-bg);
   color: var(--px-green);
-  font-family: 'Galmuri11', monospace;
   cursor: pointer;
   position: relative;
   transition: background 0.15s, box-shadow 0.15s;
@@ -980,7 +978,6 @@ onMounted(async () => {
   border-radius: 0;
   color: var(--px-neutral);
   font-size: 14px;
-  font-family: 'Galmuri11', monospace;
   z-index: 20;
   box-shadow: 0 0 0 2px var(--px-neutral-frame);
 }
@@ -1037,7 +1034,6 @@ onMounted(async () => {
   font-size: 18px;
   cursor: pointer;
   padding: 4px 8px;
-  font-family: 'Galmuri11', monospace;
   transition: color 0.15s;
 }
 
@@ -1086,7 +1082,6 @@ onMounted(async () => {
   border: none;
   cursor: pointer;
   padding: 0;
-  font-family: 'Galmuri11', monospace;
 }
 
 .toggle-track {
@@ -1186,7 +1181,6 @@ onMounted(async () => {
   border-radius: 0;
   color: var(--px-neutral);
   font-size: 13px;
-  font-family: 'Galmuri11', monospace;
   cursor: pointer;
   transition: all 0.15s;
   box-shadow:
@@ -1215,7 +1209,6 @@ onMounted(async () => {
   padding: 0 8px;
   font-size: 13px;
   font-weight: 700;
-  font-family: 'Galmuri11', monospace;
   color: var(--px-green);
   background: var(--px-green-bg);
   border: 2px solid var(--px-green-border);

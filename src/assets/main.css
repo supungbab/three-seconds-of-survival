@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Galmuri11';
-  src: url('./fonts/Galmuri11.woff2') format('woff2');
+  font-family: 'Mulmaru';
+  src: url('./fonts/Mulmaru.woff2') format('woff2');
   font-weight: normal;
   font-display: swap;
 }
@@ -69,13 +69,17 @@ body {
     radial-gradient(ellipse at 50% 0%, rgba(140, 200, 144, 0.06) 0%, transparent 60%),
     radial-gradient(ellipse at 50% 100%, rgba(255, 184, 0, 0.04) 0%, transparent 50%);
   color: var(--arc-text);
-  font-family: 'Galmuri11', monospace;
+  font-family: 'Mulmaru', monospace;
   height: 100dvh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   touch-action: none;
   user-select: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 #app {

@@ -209,7 +209,6 @@ const home = usePressable(() => emit('home'))
   padding: 12px 20px;
   font-size: 16px;
   font-weight: 700;
-  font-family: 'Galmuri11', monospace;
   cursor: pointer;
   border-radius: 0;
   transition: background 0.15s, box-shadow 0.15s;
