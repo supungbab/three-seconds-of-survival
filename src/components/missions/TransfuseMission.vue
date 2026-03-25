@@ -17,6 +17,7 @@ const targetMax = ref(80)
 let animFrame: number | null = null
 let startTime = 0
 const FILL_DURATION = 2200
+let resolved = false
 
 onMounted(() => {
   targetMin.value = 55 + Math.random() * 10
@@ -37,8 +38,10 @@ function updateFluid() {
 function handleTap(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
+  if (resolved) return
 
   const inZone = fluidLevel.value >= targetMin.value && fluidLevel.value <= targetMax.value
+  resolved = true
   playTick()
   emit('tap', inZone)
 }

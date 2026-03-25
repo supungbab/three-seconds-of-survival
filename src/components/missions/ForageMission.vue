@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle, pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -21,14 +22,6 @@ interface Mushroom {
 const mushrooms = ref<Mushroom[]>([])
 let resolved = false
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
 
 onMounted(() => {
   const count = 3 + Math.floor(Math.random() * 2) // 3 or 4
@@ -44,7 +37,7 @@ onMounted(() => {
       y: 10 + Math.random() * 50,
       color: i === safeIdx
         ? 'var(--px-green-bright)'
-        : poisonColors[Math.floor(Math.random() * poisonColors.length)],
+        : pickRandom(poisonColors),
     })
   }
   mushrooms.value = shuffle(items)

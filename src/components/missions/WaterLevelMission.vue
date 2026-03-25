@@ -11,7 +11,7 @@ const emit = defineEmits<{
 }>()
 
 const waterLevel = ref(10)
-const resolved = ref(false)
+let resolved = false
 const leftPressed = ref(false)
 const rightPressed = ref(false)
 
@@ -21,17 +21,17 @@ let animId: number | null = null
 const SIMULTANEOUS_MS = 200
 
 function riseWater() {
-  if (resolved.value) return
+  if (resolved) return
   waterLevel.value = Math.min(100, waterLevel.value + 0.3)
   animId = requestAnimationFrame(riseWater)
 }
 
 function checkBothValves() {
-  if (resolved.value) return
+  if (resolved) return
   if (leftPressed.value && rightPressed.value) {
     const diff = Math.abs(leftTime - rightTime)
     if (diff <= SIMULTANEOUS_MS) {
-      resolved.value = true
+      resolved = true
       playTick()
       emit('tap', true)
     }
@@ -40,7 +40,7 @@ function checkBothValves() {
 
 function onLeftTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
   leftPressed.value = true
   leftTime = Date.now()
   checkBothValves()
@@ -48,7 +48,7 @@ function onLeftTap(e: PointerEvent) {
 
 function onRightTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
   rightPressed.value = true
   rightTime = Date.now()
   checkBothValves()
@@ -59,7 +59,7 @@ let resetTimer: ReturnType<typeof setTimeout> | null = null
 function scheduleReset() {
   if (resetTimer) clearTimeout(resetTimer)
   resetTimer = setTimeout(() => {
-    if (!resolved.value) {
+    if (!resolved) {
       leftPressed.value = false
       rightPressed.value = false
     }

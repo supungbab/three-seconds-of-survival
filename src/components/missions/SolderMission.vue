@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
 
@@ -14,7 +14,7 @@ const currentPoint = ref(0)
 const holding = ref(false)
 const holdProgress = ref(0)
 const completed = ref([false, false, false])
-const resolved = ref(false)
+let resolved = false
 
 const HOLD_DURATION = 300
 const TICK_INTERVAL = 16
@@ -30,10 +30,10 @@ function clearHoldTimer() {
 
 function handlePointerDown(index: number, e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
 
   if (index !== currentPoint.value) {
-    resolved.value = true
+    resolved = true
     emit('tap', false)
     return
   }
@@ -57,7 +57,7 @@ function handlePointerDown(index: number, e: Event) {
       playTick()
 
       if (currentPoint.value >= 2) {
-        resolved.value = true
+        resolved = true
         emit('tap', true)
       } else {
         currentPoint.value++
@@ -68,13 +68,13 @@ function handlePointerDown(index: number, e: Event) {
 
 function handlePointerUp(index: number, e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
 
   if (holding.value && index === currentPoint.value) {
     clearHoldTimer()
     holding.value = false
     holdProgress.value = 0
-    resolved.value = true
+    resolved = true
     emit('tap', false)
   }
 }

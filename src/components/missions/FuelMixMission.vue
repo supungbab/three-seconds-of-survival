@@ -14,22 +14,22 @@ const hydroLevel = ref(100)
 const nitroLevel = ref(0)
 const targetLevel = 50
 const TRANSFER_AMOUNT = 12
-const resolved = ref(false)
+let resolved = false
 const TOLERANCE = 6
 
 function handleValve(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
   playTick()
   const transfer = Math.min(TRANSFER_AMOUNT, hydroLevel.value)
   hydroLevel.value -= transfer
   nitroLevel.value += transfer
 
   if (Math.abs(nitroLevel.value - targetLevel) <= TOLERANCE) {
-    resolved.value = true
+    resolved = true
     emit('tap', true)
   } else if (nitroLevel.value > targetLevel + TOLERANCE) {
-    resolved.value = true
+    resolved = true
     emit('tap', false)
   }
 }

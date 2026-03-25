@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { getRelativePos } from '@/utils/dom'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -50,17 +51,6 @@ onMounted(() => {
   el.addEventListener('mouseup', onEnd)
 })
 
-function getRelativePos(e: TouchEvent | MouseEvent): { x: number; y: number } | null {
-  if (!containerEl.value) return null
-  const rect = containerEl.value.getBoundingClientRect()
-  const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX
-  const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : e.clientY
-  return {
-    x: ((clientX - rect.left) / rect.width) * 100,
-    y: ((clientY - rect.top) / rect.height) * 100,
-  }
-}
-
 function checkWireCollision(x: number, y: number): boolean {
   for (const wire of wires.value) {
     const wireX = wire.y
@@ -77,8 +67,8 @@ function onStart(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
   if (resolved) return
-  const pos = getRelativePos(e)
-  if (!pos) return
+  if (!containerEl.value) return
+  const pos = getRelativePos(containerEl.value, e)
   if (pos.x < 15) {
     isTracing.value = true
     traceX.value = pos.x
@@ -91,8 +81,8 @@ function onMove(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
   if (!isTracing.value || resolved) return
-  const pos = getRelativePos(e)
-  if (!pos) return
+  if (!containerEl.value) return
+  const pos = getRelativePos(containerEl.value, e)
 
   traceX.value = pos.x
   traceY.value = pos.y

@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -17,15 +18,6 @@ const emit = defineEmits<{
 const switchStates = ref<boolean[]>([])
 const activationOrder = ref<number[]>([])
 const currentStep = ref(0)
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
 
 onMounted(() => {
   const count = props.gridSwitchCount

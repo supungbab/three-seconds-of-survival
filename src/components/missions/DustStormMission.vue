@@ -13,6 +13,7 @@ const emit = defineEmits<{
 const containerEl = ref<HTMLElement | null>(null)
 const textX = ref(50)
 const textY = ref(50)
+let resolved = false
 
 onMounted(() => {
   textX.value = 15 + Math.random() * 70
@@ -22,6 +23,7 @@ onMounted(() => {
 function handleTap(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
+  if (resolved) return
   if (!containerEl.value) return
 
   const rect = containerEl.value.getBoundingClientRect()
@@ -34,6 +36,7 @@ function handleTap(e: TouchEvent | MouseEvent) {
   const dy = tapY - textY.value
   const dist = Math.sqrt(dx * dx + dy * dy)
 
+  resolved = true
   playTick()
   emit('tap', dist < 20)
 }

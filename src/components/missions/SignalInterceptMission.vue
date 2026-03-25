@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -11,7 +12,7 @@ const emit = defineEmits<{
 }>()
 
 const KEYWORDS = ['SOS', 'EVAC', 'HELP', 'SAFE']
-const keyword = KEYWORDS[Math.floor(Math.random() * KEYWORDS.length)]
+const keyword = pickRandom(KEYWORDS)
 
 const tickerEl = ref<HTMLElement | null>(null)
 const scrollOffset = ref(0)

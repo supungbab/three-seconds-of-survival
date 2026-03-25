@@ -18,7 +18,7 @@ interface Leak {
 
 const memUsage = ref(30)
 const leaks = ref<Leak[]>([])
-const resolved = ref(false)
+let resolved = false
 let raf = 0
 let lastTime = 0
 const FILL_RATE = 18 // percent per second
@@ -30,7 +30,7 @@ function generateLeaks() {
 }
 
 function animate(now: number) {
-  if (resolved.value) return
+  if (resolved) return
   if (!lastTime) lastTime = now
   const dt = (now - lastTime) / 1000
   lastTime = now
@@ -39,7 +39,7 @@ function animate(now: number) {
   memUsage.value = Math.min(MAX_MEM, memUsage.value + dt * FILL_RATE * (activeLeaks / 3))
 
   if (memUsage.value >= MAX_MEM) {
-    resolved.value = true
+    resolved = true
     emit('tap', false)
     return
   }
@@ -48,11 +48,11 @@ function animate(now: number) {
 
 function handlePatch(index: number, e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value || leaks.value[index].patched) return
+  if (resolved || leaks.value[index].patched) return
   playTick()
   leaks.value[index].patched = true
   if (leaks.value.every(l => l.patched)) {
-    resolved.value = true
+    resolved = true
     emit('tap', true)
   }
 }

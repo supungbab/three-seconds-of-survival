@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { getRelativePos } from '@/utils/dom'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -49,22 +50,12 @@ onMounted(() => {
   el.addEventListener('mouseup', onEnd)
 })
 
-function getRelativePos(e: TouchEvent | MouseEvent): { x: number; y: number } | null {
-  if (!containerEl.value) return null
-  const rect = containerEl.value.getBoundingClientRect()
-  const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX
-  const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : e.clientY
-  return {
-    x: ((clientX - rect.left) / rect.width) * 100,
-    y: ((clientY - rect.top) / rect.height) * 100,
-  }
-}
-
 function onStart(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
   if (resolved) return
-  const pos = getRelativePos(e)
+  if (!containerEl.value) return
+  const pos = getRelativePos(containerEl.value, e)
   if (!pos) return
   const dx = pos.x - playerX.value
   const dy = pos.y - playerY.value
@@ -77,8 +68,8 @@ function onMove(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
   if (!isDragging.value || resolved) return
-  const pos = getRelativePos(e)
-  if (!pos) return
+  if (!containerEl.value) return
+  const pos = getRelativePos(containerEl.value, e)
   playerX.value = Math.max(5, Math.min(95, pos.x))
   playerY.value = Math.max(5, Math.min(95, pos.y))
 
@@ -112,12 +103,9 @@ function animate() {
     })
   }
 
-  const updated: Particle[] = []
-  for (const p of particles.value) {
+  for (let i = particles.value.length - 1; i >= 0; i--) {
+    const p = particles.value[i]
     p.y += p.speed
-    if (p.y < 105) {
-      updated.push(p)
-    }
 
     const dx = p.x - playerX.value
     const dy = p.y - playerY.value
@@ -127,8 +115,11 @@ function animate() {
       emit('tap', false)
       return
     }
+
+    if (p.y >= 105) {
+      particles.value.splice(i, 1)
+    }
   }
-  particles.value = updated
 
   animFrame = requestAnimationFrame(animate)
 }

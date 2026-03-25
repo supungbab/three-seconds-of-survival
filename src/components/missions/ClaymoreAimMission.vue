@@ -14,14 +14,14 @@ const DIRECTIONS = ['↑', '→', '↓', '←'] as const
 const ANGLES = [0, 90, 180, 270]
 const enemyIndex = ref(Math.floor(Math.random() * 4))
 const arrowAngle = ref(0)
-const resolved = ref(false)
+let resolved = false
 let raf = 0
 let startTime = 0
 const ROTATION_SPEED = 180 // degrees per second
 const TOLERANCE = 30
 
 function animate(now: number) {
-  if (resolved.value) return
+  if (resolved) return
   if (!startTime) startTime = now
   const elapsed = (now - startTime) / 1000
   arrowAngle.value = (elapsed * ROTATION_SPEED) % 360
@@ -30,8 +30,8 @@ function animate(now: number) {
 
 function handleTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   cancelAnimationFrame(raf)
   playTick()
 

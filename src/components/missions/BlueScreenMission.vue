@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -22,17 +23,11 @@ const choices = ref<{ code: string; correct: boolean }[]>([])
 function init() {
   const wrong1 = randomHex()
   const wrong2 = randomHex()
-  const items = [
+  choices.value = shuffle([
     { code: targetCode.value, correct: true },
     { code: wrong1, correct: false },
     { code: wrong2, correct: false },
-  ]
-  // shuffle
-  for (let i = items.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[items[i], items[j]] = [items[j], items[i]]
-  }
-  choices.value = items
+  ])
 }
 
 init()

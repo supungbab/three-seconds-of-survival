@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
 
@@ -21,6 +21,7 @@ const confirmedCount = ref(0)
 let resolved = false
 
 const SHOW_DURATION = 1200 // ms
+let showTimerId: ReturnType<typeof setTimeout> | null = null
 
 const keypadRows = [
   [1, 2, 3],
@@ -30,11 +31,15 @@ const keypadRows = [
 ]
 
 onMounted(() => {
-  setTimeout(() => {
+  showTimerId = setTimeout(() => {
     if (!resolved) {
       phase.value = 'INPUT'
     }
   }, SHOW_DURATION)
+})
+
+onUnmounted(() => {
+  if (showTimerId !== null) clearTimeout(showTimerId)
 })
 
 function handleKeyTap(digit: number) {

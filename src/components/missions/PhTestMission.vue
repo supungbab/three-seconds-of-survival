@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -20,13 +21,13 @@ function randomPh(): { color: string; category: PhCategory } {
   const roll = Math.random()
   if (roll < 0.33) {
     const colors = ['#ff2222', '#ff5500', '#ff8800', '#cc3300']
-    return { color: colors[Math.floor(Math.random() * colors.length)], category: 'ACID' }
+    return { color: pickRandom(colors), category: 'ACID' }
   } else if (roll < 0.66) {
     const colors = ['#33cc33', '#66dd44', '#88cc22', '#44bb44']
-    return { color: colors[Math.floor(Math.random() * colors.length)], category: 'NEUTRAL' }
+    return { color: pickRandom(colors), category: 'NEUTRAL' }
   } else {
     const colors = ['#2244ff', '#4466ee', '#6633cc', '#8844dd']
-    return { color: colors[Math.floor(Math.random() * colors.length)], category: 'ALKALI' }
+    return { color: pickRandom(colors), category: 'ALKALI' }
   }
 }
 

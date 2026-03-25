@@ -16,7 +16,7 @@ interface BreakPoint {
 }
 
 const breaks = ref<BreakPoint[]>([])
-const resolved = ref(false)
+let resolved = false
 
 onMounted(() => {
   breaks.value = [
@@ -27,11 +27,11 @@ onMounted(() => {
 
 function handleBreakTap(index: number, e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value || breaks.value[index].fixed) return
+  if (resolved || breaks.value[index].fixed) return
   playTick()
   breaks.value[index].fixed = true
   if (breaks.value.every(b => b.fixed)) {
-    resolved.value = true
+    resolved = true
     emit('tap', true)
   }
 }

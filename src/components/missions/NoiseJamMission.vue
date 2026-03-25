@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle, pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -38,7 +39,7 @@ function randomGlitch(len: number): string {
 onMounted(() => {
   const count = 5
   const realIndex = Math.floor(Math.random() * count)
-  const shuffled = [...FAKE_LABELS].sort(() => Math.random() - 0.5)
+  const shuffled = shuffle([...FAKE_LABELS])
 
   const generated: ButtonData[] = []
   for (let i = 0; i < count; i++) {
@@ -59,7 +60,7 @@ onMounted(() => {
         btn.glitchLabel = randomGlitch(4)
         btn.label = Math.random() > 0.3
           ? randomGlitch(4)
-          : FAKE_LABELS[Math.floor(Math.random() * FAKE_LABELS.length)]
+          : pickRandom(FAKE_LABELS)
         btn.offsetX = (Math.random() - 0.5) * 6
         btn.offsetY = (Math.random() - 0.5) * 4
       } else {

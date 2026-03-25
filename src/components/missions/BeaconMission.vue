@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { randomInt } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -14,10 +15,6 @@ const flashCount = ref(0)
 const beaconOn = ref(false)
 const showButtons = ref(false)
 const timers: ReturnType<typeof setTimeout>[] = []
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
 
 onMounted(() => {
   const count = randomInt(2, 5)

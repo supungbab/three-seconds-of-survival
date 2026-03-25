@@ -13,7 +13,7 @@ const emit = defineEmits<{
 const scopeEl = ref<HTMLElement | null>(null)
 const targetX = ref(0)
 const targetY = ref(50)
-const resolved = ref(false)
+let resolved = false
 
 let animId: number | null = null
 let startTime = 0
@@ -23,7 +23,7 @@ const CENTER = 50
 const HIT_RADIUS = 15
 
 function animateTarget() {
-  if (resolved.value) return
+  if (resolved) return
   const elapsed = Date.now() - startTime
   const t = elapsed / 1000
   targetX.value = 50 + 40 * Math.sin(t * 2.2)
@@ -33,8 +33,8 @@ function animateTarget() {
 
 function handleTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
 
   const dx = targetX.value - CENTER
   const dy = targetY.value - CENTER

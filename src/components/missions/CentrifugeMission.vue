@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -19,7 +20,7 @@ let animId: number | null = null
 
 onMounted(() => {
   const targets = [300, 400, 500, 600, 700, 800]
-  targetRpm.value = targets[Math.floor(Math.random() * targets.length)]
+  targetRpm.value = pickRandom(targets)
 
   intervalId = setInterval(() => {
     if (stopped.value) return
@@ -27,9 +28,8 @@ onMounted(() => {
   }, 150)
 
   function spin() {
-    if (!stopped.value) {
-      rotation.value += currentRpm.value * 0.02
-    }
+    if (stopped.value) return
+    rotation.value += currentRpm.value * 0.02
     animId = requestAnimationFrame(spin)
   }
   animId = requestAnimationFrame(spin)

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -64,7 +65,7 @@ function spreadInfection() {
   const openCells = adj.filter((i) => cells.value[i] === 'empty')
   if (openCells.length > 0) {
     // Infection spreads to an open adjacent cell — fail
-    const target = openCells[Math.floor(Math.random() * openCells.length)]
+    const target = pickRandom(openCells)
     cells.value[target] = 'infected'
     resolved = true
     emit('tap', false)

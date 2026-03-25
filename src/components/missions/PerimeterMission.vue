@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { randomInt, shuffle } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -23,16 +24,12 @@ const patchedCount = ref(0)
 const timers: ReturnType<typeof setTimeout>[] = []
 let resolved = false
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 onMounted(() => {
   const count = randomInt(2, 3)
   totalHoles.value = count
 
   const positions = [15, 35, 55, 75]
-  const shuffled = positions.sort(() => Math.random() - 0.5).slice(0, count)
+  const shuffled = shuffle(positions).slice(0, count)
 
   const holeList: Hole[] = shuffled.map((x, i) => ({
     id: i,

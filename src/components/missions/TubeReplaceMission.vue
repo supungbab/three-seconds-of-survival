@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const brokenIndex = ref(0)
 const tubeOpacities = ref([1, 1, 1, 1])
-const resolved = ref(false)
+let resolved = false
 
 let flickerTimers: ReturnType<typeof setTimeout>[] = []
 let animFrame: ReturnType<typeof requestAnimationFrame> | null = null
@@ -34,7 +34,7 @@ function brokenFlicker(index: number) {
 }
 
 function runFlicker() {
-  if (resolved.value) return
+  if (resolved) return
   for (let i = 0; i < 4; i++) {
     if (i === brokenIndex.value) {
       brokenFlicker(i)
@@ -62,8 +62,8 @@ onUnmounted(() => {
 
 function handleTubeTap(index: number, e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', index === brokenIndex.value)
 }

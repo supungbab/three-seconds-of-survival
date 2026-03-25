@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -37,7 +38,7 @@ onMounted(() => {
   emptyIndex.value = emptyIdx
 
   const adjacent = getAdjacent(emptyIdx)
-  const targetIdx = adjacent[Math.floor(Math.random() * adjacent.length)]
+  const targetIdx = pickRandom(adjacent)
   cells[targetIdx].isTarget = true
   targetIndex.value = targetIdx
 

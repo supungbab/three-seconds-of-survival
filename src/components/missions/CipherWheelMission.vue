@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { randomInt } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -14,10 +15,6 @@ const encryptedLetter = ref('')
 const targetLetter = ref('')
 const correctShift = ref(0)
 const choices = ref<number[]>([])
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
 
 onMounted(() => {
   const shift = randomInt(1, 5)

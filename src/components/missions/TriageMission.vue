@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
+import { shuffle, pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 
@@ -26,14 +27,6 @@ interface Survivor {
   resolved: boolean
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
 
 const survivors = ref<Survivor[]>([])
 const expectedOrder = ref<Severity[]>([])
@@ -45,7 +38,7 @@ onMounted(() => {
   // If triageCount is 4, duplicate one severity
   const assigned: Severity[] = [...severities]
   if (props.triageCount > 3) {
-    assigned.push(severities[Math.floor(Math.random() * severities.length)])
+    assigned.push(pickRandom(severities))
   }
 
   // Build expected order: CRITICAL first, then SEVERE, then MINOR

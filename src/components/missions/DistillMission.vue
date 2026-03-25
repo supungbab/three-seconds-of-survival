@@ -14,18 +14,18 @@ const temperature = ref(20)
 const targetMin = 80
 const targetMax = 90
 const maxTemp = 110
-const resolved = ref(false)
+let resolved = false
 let raf = 0
 let startTime = 0
 const RISE_SPEED = 35 // degrees per second
 
 function animate(now: number) {
-  if (resolved.value) return
+  if (resolved) return
   if (!startTime) startTime = now
   const elapsed = (now - startTime) / 1000
   temperature.value = Math.min(maxTemp, 20 + elapsed * RISE_SPEED)
   if (temperature.value >= maxTemp) {
-    resolved.value = true
+    resolved = true
     emit('tap', false)
     return
   }
@@ -34,8 +34,8 @@ function animate(now: number) {
 
 function handleTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   cancelAnimationFrame(raf)
   playTick()
   const t = temperature.value

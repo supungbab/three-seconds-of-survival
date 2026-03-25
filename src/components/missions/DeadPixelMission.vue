@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
 
@@ -17,8 +17,7 @@ interface Cluster {
 }
 
 const clusters = ref<Cluster[]>([])
-const resolved = ref(false)
-let noiseRaf = 0
+let resolved = false
 
 function generateClusters() {
   const spots: Cluster[] = []
@@ -35,26 +34,17 @@ function generateClusters() {
 
 function handleClusterTap(index: number, e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value || clusters.value[index].fixed) return
+  if (resolved || clusters.value[index].fixed) return
   playTick()
   clusters.value[index].fixed = true
   if (clusters.value.every(c => c.fixed)) {
-    resolved.value = true
+    resolved = true
     emit('tap', true)
   }
 }
 
-function animateNoise() {
-  noiseRaf = requestAnimationFrame(animateNoise)
-}
-
 onMounted(() => {
   generateClusters()
-  noiseRaf = requestAnimationFrame(animateNoise)
-})
-
-onUnmounted(() => {
-  cancelAnimationFrame(noiseRaf)
 })
 </script>
 

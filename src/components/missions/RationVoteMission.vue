@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const survivorCount = ref(3)
 const correctAnswer = ref<'yes' | 'no'>('yes')
-const resolved = ref(false)
+let resolved = false
 
 onMounted(() => {
   const isShare = Math.random() < 0.5
@@ -27,8 +27,8 @@ onMounted(() => {
 
 function handleVote(choice: 'yes' | 'no', e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', choice === correctAnswer.value)
 }

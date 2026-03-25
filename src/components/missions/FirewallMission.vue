@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -30,16 +31,13 @@ const DIR_TRANSLATE: Record<Direction, string> = {
   RIGHT: 'translateX(80px)',
 }
 
-function pickRandom<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]
-}
-
 const containerEl = ref<HTMLElement | null>(null)
 const packets = ref<Direction[]>([])
 const currentIndex = ref(0)
 const blocked = ref<boolean[]>([])
 const showShield = ref(false)
 let resolved = false
+let shieldTimerId: ReturnType<typeof setTimeout> | null = null
 
 // Swipe detection state
 let touchStartX = 0
@@ -69,6 +67,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  if (shieldTimerId !== null) clearTimeout(shieldTimerId)
   if (!containerEl.value) return
   const el = containerEl.value
   el.removeEventListener('touchstart', onTouchStart)
@@ -97,7 +96,7 @@ function handleSwipe(dir: Direction) {
     blocked.value[currentIndex.value] = true
     showShield.value = true
     playTick()
-    setTimeout(() => { showShield.value = false }, 200)
+    shieldTimerId = setTimeout(() => { showShield.value = false }, 200)
     currentIndex.value++
     if (currentIndex.value >= props.firewallCount) {
       resolved = true

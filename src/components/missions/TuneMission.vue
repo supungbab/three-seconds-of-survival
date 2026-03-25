@@ -26,12 +26,7 @@ function getProximity(): number {
 }
 
 function animate(now: number) {
-  if (resolved) return
-  if (!isHolding.value) {
-    raf = requestAnimationFrame(animate)
-    lastTime = now
-    return
-  }
+  if (resolved || !isHolding.value) return
 
   const dt = (now - lastTime) / 1000
   lastTime = now
@@ -55,6 +50,8 @@ function onStart(e: TouchEvent | MouseEvent) {
   if (e.cancelable) e.preventDefault()
   if (resolved) return
   isHolding.value = true
+  lastTime = performance.now()
+  raf = requestAnimationFrame(animate)
 }
 
 function onEnd(e: TouchEvent | MouseEvent) {
@@ -62,6 +59,7 @@ function onEnd(e: TouchEvent | MouseEvent) {
   if (e.cancelable) e.preventDefault()
   if (resolved || !isHolding.value) return
   isHolding.value = false
+  cancelAnimationFrame(raf)
   resolved = true
 
   const diff = Math.abs(currentFreq.value - targetFreq.value)
@@ -78,9 +76,6 @@ onMounted(() => {
   // 바늘 시작: 타겟 반대편
   currentFreq.value = targetFreq.value > 50 ? 5 + Math.random() * 10 : 90 + Math.random() * 5
   direction = targetFreq.value > currentFreq.value ? 1 : -1
-  lastTime = performance.now()
-  raf = requestAnimationFrame(animate)
-
   if (!containerEl.value) return
   const el = containerEl.value
   el.addEventListener('touchstart', onStart, { passive: false })

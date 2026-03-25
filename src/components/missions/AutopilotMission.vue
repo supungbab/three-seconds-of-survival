@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -32,7 +33,7 @@ const driftOffsets: Record<Direction, { x: number; y: number }> = {
 
 onMounted(() => {
   const dirs: Direction[] = ['LEFT', 'RIGHT', 'UP', 'DOWN']
-  drift.value = dirs[Math.floor(Math.random() * dirs.length)]
+  drift.value = pickRandom(dirs)
   correctDir.value = driftMap[drift.value]
 })
 

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { randomInt } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -15,10 +16,6 @@ const panelAngle = ref(90)
 const dragging = ref(false)
 let animFrame = 0
 let startTime = 0
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
 
 const sunSpeed = randomInt(15, 30)
 const sunStartAngle = randomInt(20, 60)

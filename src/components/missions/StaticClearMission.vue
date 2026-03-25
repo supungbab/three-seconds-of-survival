@@ -18,9 +18,7 @@ let lastX = 0
 let lastY = 0
 let isMoving = false
 let resolved = false
-let noiseFrame = 0
 const noiseOpacity = ref(1)
-let raf = 0
 
 function onStart(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
@@ -62,14 +60,7 @@ function onEnd(e: TouchEvent | MouseEvent) {
   isMoving = false
 }
 
-// Animated noise effect
-function animateNoise() {
-  noiseFrame++
-  raf = requestAnimationFrame(animateNoise)
-}
-
 onMounted(() => {
-  raf = requestAnimationFrame(animateNoise)
   if (!containerEl.value) return
   const el = containerEl.value
   el.addEventListener('touchstart', onStart, { passive: false })
@@ -81,7 +72,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  cancelAnimationFrame(raf)
   if (!containerEl.value) return
   const el = containerEl.value
   el.removeEventListener('touchstart', onStart)

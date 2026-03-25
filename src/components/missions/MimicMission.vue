@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -25,7 +26,7 @@ const mimicIndex = ref(0)
 const diffType = ref<DiffType>('letter')
 const word = ref('AMMO')
 const mimicWord = ref('AMM0')
-const resolved = ref(false)
+let resolved = false
 
 function getStyle(index: number): Record<string, string> {
   if (index !== mimicIndex.value) return {}
@@ -51,17 +52,17 @@ onMounted(() => {
   mimicIndex.value = Math.floor(Math.random() * 4)
 
   const types: DiffType[] = ['size', 'spacing', 'letter']
-  diffType.value = types[Math.floor(Math.random() * types.length)]
+  diffType.value = pickRandom(types)
 
-  const w = WORDS[Math.floor(Math.random() * WORDS.length)]
+  const w = pickRandom(WORDS)
   word.value = w
   mimicWord.value = LETTER_SWAPS[w] || w
 })
 
 function handleTap(index: number, e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', index === mimicIndex.value)
 }

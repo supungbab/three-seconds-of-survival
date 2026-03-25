@@ -14,29 +14,29 @@ const stackHeight = ref(2)
 const maxStack = 8
 const popsNeeded = 4
 const popsDone = ref(0)
-const resolved = ref(false)
+let resolved = false
 let growTimer = 0
 const GROW_INTERVAL = 600 // ms
 
 function handlePop(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
   if (stackHeight.value <= 0) return
   playTick()
   stackHeight.value = Math.max(0, stackHeight.value - 1)
   popsDone.value++
   if (popsDone.value >= popsNeeded) {
-    resolved.value = true
+    resolved = true
     clearInterval(growTimer)
     emit('tap', true)
   }
 }
 
 function growStack() {
-  if (resolved.value) return
+  if (resolved) return
   stackHeight.value++
   if (stackHeight.value >= maxStack) {
-    resolved.value = true
+    resolved = true
     clearInterval(growTimer)
     emit('tap', false)
   }

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -32,7 +33,7 @@ onMounted(() => {
   const seq: Base[] = []
   for (let i = 0; i < len; i++) {
     seq.push({
-      letter: BASES[Math.floor(Math.random() * BASES.length)],
+      letter: pickRandom(BASES),
       mutant: i >= mStart && i <= mStart + mLen - 1,
     })
   }

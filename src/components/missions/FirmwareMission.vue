@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const progress = ref(0)
 const overflowed = ref(false)
-const resolved = ref(false)
+let resolved = false
 
 const DURATION = 2200
 const MAX_PROGRESS = 110
@@ -31,9 +31,9 @@ onMounted(() => {
       overflowed.value = true
     }
 
-    if (pct >= MAX_PROGRESS && !resolved.value) {
+    if (pct >= MAX_PROGRESS && !resolved) {
       clearTimer()
-      resolved.value = true
+      resolved = true
       emit('tap', false)
     }
   }, TICK_INTERVAL)
@@ -48,8 +48,8 @@ function clearTimer() {
 
 function handleTap(e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   clearTimer()
   playTick()
 

@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle, pickRandom } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -33,18 +34,8 @@ interface Vial {
 const poison = ref<PoisonEntry>(POISON_MAP[0])
 const antidotes = ref<Vial[]>([])
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
 onMounted(() => {
-  const idx = Math.floor(Math.random() * POISON_MAP.length)
-  poison.value = POISON_MAP[idx]
+  poison.value = pickRandom(POISON_MAP)
 
   const correctVial: Vial = {
     name: poison.value.antidoteName,

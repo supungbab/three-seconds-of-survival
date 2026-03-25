@@ -13,19 +13,19 @@ const emit = defineEmits<{
 const cutterPos = ref(0) // 0~100 percent along the line
 const marks = [25, 55, 80]
 const hitMarks = ref<boolean[]>([false, false, false])
-const resolved = ref(false)
+let resolved = false
 let raf = 0
 let startTime = 0
 const SPEED = 40 // percent per second
 const HIT_TOLERANCE = 8
 
 function animate(now: number) {
-  if (resolved.value) return
+  if (resolved) return
   if (!startTime) startTime = now
   const elapsed = (now - startTime) / 1000
   cutterPos.value = (elapsed * SPEED) % 100
-  if (elapsed * SPEED > 100 && !resolved.value) {
-    resolved.value = true
+  if (elapsed * SPEED > 100 && !resolved) {
+    resolved = true
     emit('tap', false)
     return
   }
@@ -34,7 +34,7 @@ function animate(now: number) {
 
 function handleTap(e: PointerEvent) {
   e.stopPropagation()
-  if (resolved.value) return
+  if (resolved) return
   playTick()
   const pos = cutterPos.value
   let hit = false
@@ -46,13 +46,13 @@ function handleTap(e: PointerEvent) {
     }
   }
   if (!hit) {
-    resolved.value = true
+    resolved = true
     cancelAnimationFrame(raf)
     emit('tap', false)
     return
   }
   if (hitMarks.value.every(Boolean)) {
-    resolved.value = true
+    resolved = true
     cancelAnimationFrame(raf)
     emit('tap', true)
   }

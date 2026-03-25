@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -28,10 +29,10 @@ const ITEMS = [
 const optionA = ref<OptionData>({ item: 'AMMO', icon: '⁍', cost: 2 })
 const optionB = ref<OptionData>({ item: 'MEDKIT', icon: '+', cost: 3 })
 const correctIndex = ref(0)
-const resolved = ref(false)
+let resolved = false
 
 onMounted(() => {
-  const shuffled = [...ITEMS].sort(() => Math.random() - 0.5)
+  const shuffled = shuffle([...ITEMS])
   const itemA = shuffled[0]
   const itemB = shuffled[1]
 
@@ -51,8 +52,8 @@ onMounted(() => {
 
 function handlePick(index: number, e: Event) {
   e.stopPropagation()
-  if (resolved.value) return
-  resolved.value = true
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', index === correctIndex.value)
 }

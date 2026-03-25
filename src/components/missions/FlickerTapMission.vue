@@ -13,7 +13,7 @@ const emit = defineEmits<{
 const targetVisible = ref(false)
 const noiseChars = ref('')
 let flickerTimer: ReturnType<typeof setTimeout> | null = null
-let noiseRaf = 0
+let noiseInterval: ReturnType<typeof setInterval> | null = null
 let resolved = false
 
 const NOISE_POOL = '█▓▒░▐▌▄▀■□◆◇●○╳╬╫╪┼┤├─│┌┐└┘'
@@ -44,9 +44,11 @@ function scheduleFlicker() {
   }, 800)
 }
 
-function animateNoise() {
+function startNoise() {
   noiseChars.value = generateNoise()
-  noiseRaf = requestAnimationFrame(animateNoise)
+  noiseInterval = setInterval(() => {
+    noiseChars.value = generateNoise()
+  }, 100)
 }
 
 function handleTap(e: Event) {
@@ -63,12 +65,12 @@ function handleTap(e: Event) {
 }
 
 onMounted(() => {
-  noiseRaf = requestAnimationFrame(animateNoise)
+  startNoise()
   scheduleFlicker()
 })
 
 onUnmounted(() => {
-  cancelAnimationFrame(noiseRaf)
+  if (noiseInterval) clearInterval(noiseInterval)
   if (flickerTimer) clearTimeout(flickerTimer)
 })
 </script>

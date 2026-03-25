@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
 import { useI18n } from '@/composables/useI18n'
+import { shuffle } from '@/utils/random'
 
 const { playTick } = useAudio()
 const { t } = useI18n()
@@ -21,11 +22,7 @@ const options = ref<number[][]>([])
 const timers: ReturnType<typeof setTimeout>[] = []
 
 function shufflePattern(pattern: number[]): number[] {
-  const shuffled = [...pattern]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
+  const shuffled = shuffle(pattern)
   // Make sure it's actually different
   if (shuffled.every((v, idx) => v === pattern[idx])) {
     shuffled.reverse()

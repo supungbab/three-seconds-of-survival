@@ -13,7 +13,7 @@ const emit = defineEmits<{
 const containerEl = ref<HTMLElement | null>(null)
 const infection = ref(0) // 0~100, percent from right
 const cutLineY = 65 // percent from top where cut line is
-const resolved = ref(false)
+let resolved = false
 let raf = 0
 let startTime = 0
 let swipeStartX = 0
@@ -22,12 +22,12 @@ const INFECTION_SPEED = 30 // percent per second
 const CUT_LINE_THRESHOLD = 85 // infection must not exceed this
 
 function animate(now: number) {
-  if (resolved.value) return
+  if (resolved) return
   if (!startTime) startTime = now
   const elapsed = (now - startTime) / 1000
   infection.value = Math.min(100, elapsed * INFECTION_SPEED)
   if (infection.value >= CUT_LINE_THRESHOLD) {
-    resolved.value = true
+    resolved = true
     emit('tap', false)
     return
   }
@@ -37,7 +37,7 @@ function animate(now: number) {
 function onStart(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
-  if (resolved.value) return
+  if (resolved) return
   const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : e.clientX
   const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : e.clientY
   swipeStartX = clientX
@@ -47,13 +47,13 @@ function onStart(e: TouchEvent | MouseEvent) {
 function onEnd(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
-  if (resolved.value) return
+  if (resolved) return
   const clientX = 'changedTouches' in e ? (e.changedTouches[0]?.clientX ?? 0) : e.clientX
   const dx = clientX - swipeStartX
   const dy = Math.abs(('changedTouches' in e ? (e.changedTouches[0]?.clientY ?? 0) : e.clientY) - swipeStartY)
 
   if (Math.abs(dx) > 60 && dy < 80) {
-    resolved.value = true
+    resolved = true
     cancelAnimationFrame(raf)
     playTick()
     emit('tap', true)
