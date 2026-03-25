@@ -18,6 +18,7 @@ const startDragX = ref(0)
 const startOffsetX = ref(0)
 
 const TOLERANCE = 8
+let resolved = false
 
 onMounted(() => {
   const dir = Math.random() > 0.5 ? 1 : -1
@@ -52,6 +53,8 @@ function onEnd(e: TouchEvent | MouseEvent) {
 
   const aligned = Math.abs(topOffset.value - targetOffset.value) < TOLERANCE
   if (aligned) {
+    if (resolved) return
+    resolved = true
     playTick()
     emit('tap', true)
   }

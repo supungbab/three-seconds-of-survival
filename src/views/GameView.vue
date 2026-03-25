@@ -293,6 +293,7 @@ onUnmounted(() => {
           <ParadropMission
             v-else-if="mission.type === 'PARADROP'"
             :direction="mission.swipeDirection!"
+            @tap="handleColorTap"
           />
           <HeartbeatMission
             v-else-if="mission.type === 'HEARTBEAT'"
@@ -300,6 +301,7 @@ onUnmounted(() => {
           />
           <VentMission
             v-else-if="mission.type === 'VENT'"
+            @tap="handleColorTap"
           />
           <FlickerTapMission
             v-else-if="mission.type === 'FLICKER_TAP'"
@@ -375,6 +377,7 @@ onUnmounted(() => {
           <CompassMission
             v-else-if="mission.type === 'COMPASS'"
             :direction="mission.swipeDirection!"
+            @tap="handleColorTap"
           />
           <CrankMission
             v-else-if="mission.type === 'CRANK'"

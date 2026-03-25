@@ -32,6 +32,7 @@ const visibleLines = ref<BootLine[]>([])
 const currentIndex = ref(0)
 const shuffled = ref<BootLine[]>([])
 let timer: ReturnType<typeof setInterval> | null = null
+let resolved = false
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
@@ -65,6 +66,8 @@ onUnmounted(() => {
 
 function handleTap(e: Event) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   const lastLine = visibleLines.value[visibleLines.value.length - 1]
   emit('tap', lastLine?.isError === true)

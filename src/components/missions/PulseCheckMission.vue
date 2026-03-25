@@ -12,6 +12,7 @@ const emit = defineEmits<{
 
 const isNormal = ref(true)
 const waveformBars = ref<number[]>([])
+let resolved = false
 
 function generateNormalWaveform(): number[] {
   const bars: number[] = []
@@ -50,6 +51,8 @@ onMounted(() => {
 
 function handleDiagnosis(e: Event, diagnosisNormal: boolean) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', diagnosisNormal === isNormal.value)
 }

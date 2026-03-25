@@ -57,8 +57,10 @@ function onEnd(e: TouchEvent | MouseEvent) {
       resolved = true
       emit('tap', true)
     }
+  } else {
+    resolved = true
+    emit('tap', false)
   }
-  // wrong direction: just ignore, don't fail
 }
 
 onMounted(() => {

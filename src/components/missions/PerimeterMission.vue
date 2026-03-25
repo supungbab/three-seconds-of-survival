@@ -21,6 +21,7 @@ const holes = ref<Hole[]>([])
 const totalHoles = ref(0)
 const patchedCount = ref(0)
 const timers: ReturnType<typeof setTimeout>[] = []
+let resolved = false
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -63,12 +64,16 @@ function handleHoleTap(index: number, e: Event) {
   patchedCount.value++
 
   if (patchedCount.value >= totalHoles.value) {
+    if (resolved) return
+    resolved = true
     emit('tap', true)
   }
 }
 
 function handleFenceTap(e: Event) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   emit('tap', false)
 }
 </script>

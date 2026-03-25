@@ -2,12 +2,52 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { SwipeDirection } from '@/types/game'
 import { useI18n } from '@/composables/useI18n'
+import { useAudio } from '@/composables/useAudio'
 
 const { t } = useI18n()
+const { playTick } = useAudio()
+
+const emit = defineEmits<{
+  tap: [correct: boolean]
+}>()
 
 const props = defineProps<{
   direction: SwipeDirection
 }>()
+
+let resolved = false
+let startX = 0
+let startY = 0
+
+function onStart(e: PointerEvent) {
+  e.stopPropagation()
+  startX = e.clientX
+  startY = e.clientY
+}
+
+function onEnd(e: PointerEvent) {
+  e.stopPropagation()
+  if (resolved) return
+  const dx = e.clientX - startX
+  const dy = e.clientY - startY
+  const dist = Math.sqrt(dx * dx + dy * dy)
+  if (dist < 30) return
+  resolved = true
+  const absDx = Math.abs(dx)
+  const absDy = Math.abs(dy)
+  let dir: SwipeDirection
+  if (absDx > absDy) {
+    dir = dx > 0 ? 'RIGHT' : 'LEFT'
+  } else {
+    dir = dy > 0 ? 'DOWN' : 'UP'
+  }
+  if (dir === props.direction) {
+    playTick()
+    emit('tap', true)
+  } else {
+    emit('tap', false)
+  }
+}
 
 // The correct swipe direction is props.direction (set by parent as OPPOSITE of wind)
 // So wind blows in the OPPOSITE direction of the correct swipe
@@ -53,7 +93,7 @@ const isHorizontalWind = windDirection === 'LEFT' || windDirection === 'RIGHT'
 </script>
 
 <template>
-  <div class="paradrop-mission">
+  <div class="paradrop-mission" @pointerdown="onStart" @pointerup="onEnd">
     <!-- Wind indicator -->
     <div
       class="wind-strip"

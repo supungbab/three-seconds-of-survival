@@ -25,8 +25,12 @@ onUnmounted(() => {
   if (flickerTimer) clearInterval(flickerTimer)
 })
 
+let resolved = false
+
 function handlePixelTap(e: Event, index: number) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', index === hotPixel.value)
 }

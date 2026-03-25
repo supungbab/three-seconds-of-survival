@@ -12,6 +12,7 @@ const emit = defineEmits<{
 
 const currentNumber = ref(9)
 let intervalId: ReturnType<typeof setInterval> | null = null
+let resolved = false
 
 onMounted(() => {
   intervalId = setInterval(() => {
@@ -25,6 +26,8 @@ onUnmounted(() => {
 
 function handleTap(e: Event) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', currentNumber.value === 0)
 }

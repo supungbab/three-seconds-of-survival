@@ -15,16 +15,20 @@ const emit = defineEmits<{
 }>()
 
 const currentStep = ref(0)
+let resolved = false
 
 function handleBtnTap(e: Event, num: number) {
   e.stopPropagation()
+  if (resolved) return
   playTick()
   if (num === props.biosCode[currentStep.value]) {
     currentStep.value++
     if (currentStep.value >= props.biosCode.length) {
+      resolved = true
       emit('tap', true)
     }
   } else {
+    resolved = true
     emit('tap', false)
   }
 }

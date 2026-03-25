@@ -3,7 +3,6 @@ import type { GamePhase, InputAction } from '@/types/game'
 import type { MissionParams } from '@/types/mission'
 import { useTimer } from './useTimer'
 import { useMissionPool } from './useMissionPool'
-import { useMissionValidator } from './useMissionValidator'
 import { useScoreStorage } from './useScoreStorage'
 import { useAudio } from './useAudio'
 import { useFeedback } from './useFeedback'
@@ -20,13 +19,13 @@ export function useGameState() {
 
   const timer = useTimer()
   const pool = useMissionPool()
-  const validator = useMissionValidator()
   const storage = useScoreStorage()
   const audio = useAudio()
   const feedback = useFeedback()
 
   // Color tap / component-validated missions
-  let colorTapCorrect = false
+  // null = component hasn't emitted yet, true/false = component verdict
+  let colorTapResult: boolean | null = null
 
   // Track pending timeouts to prevent ghost timers on restart
   const pendingTimers: number[] = []
@@ -48,7 +47,7 @@ export function useGameState() {
   }
 
   function resetMissionState() {
-    colorTapCorrect = false
+    colorTapResult = null
   }
 
   function startGame() {
@@ -86,37 +85,19 @@ export function useGameState() {
     const m = mission.value
     if (!m) return
 
-    // Validator-managed missions: raw input goes directly to validator
-    if (m.type === 'PARADROP' || m.type === 'COMPASS' || m.type === 'VENT') {
-      const isCorrect = validator.validate(m, action)
-      if (isCorrect) {
+    // All missions: component-validated via @tap emit
+    if (action.type === 'TAP') {
+      if (colorTapResult === true) {
         handleSuccess()
-      } else {
+      } else if (colorTapResult === false) {
         handleFail()
       }
-      return
+      // colorTapResult === null → component hasn't decided yet, ignore raw tap
     }
-
-    // WIRE_CUT: component-validated but wrong tap = immediate fail
-    if (m.type === 'WIRE_CUT' && action.type === 'TAP') {
-      if (colorTapCorrect) {
-        handleSuccess()
-      } else {
-        handleFail()
-      }
-      return
-    }
-
-    // All other missions: component-managed via @tap emit
-    // Raw events that bubble here are ignored; only component emits set colorTapCorrect
-    if (action.type === 'TAP' && colorTapCorrect) {
-      handleSuccess()
-    }
-    // all other raw inputs → ignore (timeout handles fail)
   }
 
   function setColorTapResult(correct: boolean) {
-    colorTapCorrect = correct
+    colorTapResult = correct
   }
 
 

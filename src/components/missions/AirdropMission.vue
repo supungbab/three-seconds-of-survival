@@ -43,8 +43,7 @@ function handleTap(e: PointerEvent) {
   resolved = true
   cancelAnimationFrame(raf)
   const inZoneX = chuteX.value >= landingLeft.value && chuteX.value <= landingLeft.value + LANDING_WIDTH
-  const lowEnough = chuteY.value >= 55
-  if (inZoneX && lowEnough) {
+  if (inZoneX) {
     playTick()
     emit('tap', true)
   } else {

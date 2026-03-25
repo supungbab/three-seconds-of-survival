@@ -49,7 +49,8 @@ function animateNoise() {
   noiseRaf = requestAnimationFrame(animateNoise)
 }
 
-function handleTap() {
+function handleTap(e: Event) {
+  e.stopPropagation()
   if (resolved) return
   resolved = true
 

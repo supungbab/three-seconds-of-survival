@@ -14,7 +14,12 @@ const emit = defineEmits<{
   tap: [correct: boolean]
 }>()
 
-function handleChoice(choice: string) {
+let resolved = false
+
+function handleChoice(e: Event, choice: string) {
+  e.stopPropagation()
+  if (resolved) return
+  resolved = true
   if (choice === props.bloodTarget) {
     playTick()
     emit('tap', true)
@@ -37,7 +42,7 @@ function handleChoice(choice: string) {
         v-for="(choice, i) in bloodChoices"
         :key="i"
         class="blood-btn"
-        @pointerdown="handleChoice(choice)"
+        @pointerdown="(e) => handleChoice(e, choice)"
       >
         <span class="btn-type">{{ choice }}</span>
       </button>

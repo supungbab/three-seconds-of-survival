@@ -15,7 +15,7 @@ let animFrame = 0
 let resolved = false
 let startTime = 0
 
-const SAFE_ZONE = 0.15 // +-15% of center = 30% total
+const SAFE_ZONE = 0.3 // +-30% of center = matches visual green zone
 
 function animate(time: number) {
   if (startTime === 0) startTime = time

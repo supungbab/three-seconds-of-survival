@@ -14,6 +14,7 @@ const crosshairX = ref(50)
 const crosshairY = ref(50)
 let animFrame: number | null = null
 let startTime = 0
+let resolved = false
 
 function animate(time: number) {
   if (!startTime) startTime = time
@@ -33,6 +34,8 @@ onUnmounted(() => {
 
 function handleTap(e: Event) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   const dx = crosshairX.value - 50
   const dy = crosshairY.value - 50

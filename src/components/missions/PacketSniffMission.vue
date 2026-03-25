@@ -40,8 +40,12 @@ onMounted(() => {
   packets.value = result
 })
 
+let resolved = false
+
 function handleTap(e: Event, pkt: Packet) {
   e.stopPropagation()
+  if (resolved) return
+  resolved = true
   playTick()
   emit('tap', pkt.infected)
 }

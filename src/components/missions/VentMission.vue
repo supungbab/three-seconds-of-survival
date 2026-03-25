@@ -1,11 +1,44 @@
 <script setup lang="ts">
 import { useI18n } from '@/composables/useI18n'
+import { useAudio } from '@/composables/useAudio'
 
 const { t } = useI18n()
+const { playTick } = useAudio()
+
+const emit = defineEmits<{
+  tap: [correct: boolean]
+}>()
+
+let resolved = false
+let startX = 0
+let startY = 0
+
+function onStart(e: PointerEvent) {
+  e.stopPropagation()
+  startX = e.clientX
+  startY = e.clientY
+}
+
+function onEnd(e: PointerEvent) {
+  e.stopPropagation()
+  if (resolved) return
+  const dy = e.clientY - startY
+  const dx = e.clientX - startX
+  const dist = Math.sqrt(dx * dx + dy * dy)
+  if (dist < 30) return // too short, not a swipe
+  resolved = true
+  const isUp = Math.abs(dy) > Math.abs(dx) && dy < 0
+  if (isUp) {
+    playTick()
+    emit('tap', true)
+  } else {
+    emit('tap', false)
+  }
+}
 </script>
 
 <template>
-  <div class="vent-mission">
+  <div class="vent-mission" @pointerdown="onStart" @pointerup="onEnd">
     <div class="vent-hatch">
       <div class="hatch-slats">
         <div class="slat" />

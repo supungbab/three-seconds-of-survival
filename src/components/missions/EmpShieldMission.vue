@@ -62,7 +62,8 @@ onUnmounted(() => {
         class="wave"
         :style="{ transform: `scale(${waveScale})`, opacity: 1 - waveScale * 0.6 }"
       />
-      <div class="shield-zone" />
+      <div class="shield-zone-outer" />
+      <div class="shield-zone-inner" />
       <button class="shield-btn" @pointerdown="handleTap">
         ⛨
       </button>
@@ -106,12 +107,20 @@ onUnmounted(() => {
   border-radius: 0;
 }
 
-.shield-zone {
+.shield-zone-outer {
   position: absolute;
-  width: 75%;
-  height: 75%;
+  width: 85%;
+  height: 85%;
   border: 2px dashed var(--px-green-bright);
-  opacity: 0.3;
+  opacity: 0.25;
+  border-radius: 0;
+}
+.shield-zone-inner {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border: 2px dashed var(--px-green-bright);
+  opacity: 0.25;
   border-radius: 0;
 }
 

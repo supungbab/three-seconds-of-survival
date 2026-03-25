@@ -2,12 +2,52 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import type { SwipeDirection } from '@/types/game'
 import { useI18n } from '@/composables/useI18n'
+import { useAudio } from '@/composables/useAudio'
 
 const { t } = useI18n()
+const { playTick } = useAudio()
+
+const emit = defineEmits<{
+  tap: [correct: boolean]
+}>()
 
 const props = defineProps<{
   direction: SwipeDirection
 }>()
+
+let resolved = false
+let startX = 0
+let startY = 0
+
+function onStart(e: PointerEvent) {
+  e.stopPropagation()
+  startX = e.clientX
+  startY = e.clientY
+}
+
+function onEnd(e: PointerEvent) {
+  e.stopPropagation()
+  if (resolved) return
+  const dx = e.clientX - startX
+  const dy = e.clientY - startY
+  const dist = Math.sqrt(dx * dx + dy * dy)
+  if (dist < 30) return
+  resolved = true
+  const absDx = Math.abs(dx)
+  const absDy = Math.abs(dy)
+  let dir: SwipeDirection
+  if (absDx > absDy) {
+    dir = dx > 0 ? 'RIGHT' : 'LEFT'
+  } else {
+    dir = dy > 0 ? 'DOWN' : 'UP'
+  }
+  if (dir === props.direction) {
+    playTick()
+    emit('tap', true)
+  } else {
+    emit('tap', false)
+  }
+}
 
 const DIR_ANGLE: Record<SwipeDirection, number> = {
   UP: 0,      // N = 0°
@@ -70,7 +110,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="compass-mission">
+  <div class="compass-mission" @pointerdown="onStart" @pointerup="onEnd">
     <div class="compass-ring">
       <!-- Cardinal labels -->
       <span class="cardinal n" :class="{ active: settled && direction === 'UP' }">N</span>
