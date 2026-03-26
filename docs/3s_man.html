@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3s_man</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #111;
+  gap: 40px;
+}
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.canvas--512 { width: 512px; height: 512px; }
+.canvas--600 { width: 600px; height: 600px; }
+
+/* ─── Background: 다크 그린/브라운 아포칼립스 ─── */
+.bg {
+  position: absolute;
+  inset: 0;
+  background: #0d110d;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(80, 140, 80, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 70%, rgba(60, 90, 50, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, rgba(90, 70, 40, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 35%, rgba(70, 55, 35, 0.1) 0%, transparent 40%);
+}
+
+/* ─── Character ─── */
+.character {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character img {
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 25px rgba(100, 180, 100, 0.2))
+    drop-shadow(0 0 50px rgba(60, 100, 60, 0.15))
+    drop-shadow(0 6px 20px rgba(0, 0, 0, 0.7));
+}
+
+/* ─── Vignette ─── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.25) 65%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 6;
+}
+
+/* ─── Label ─── */
+.label {
+  text-align: center;
+  color: #64748b;
+  font-family: monospace;
+  font-size: 13px;
+  margin-top: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- 512 -->
+<div>
+  <div class="canvas canvas--512">
+    <div class="bg"></div>
+    <div class="character"><img src="3s_man.svg" alt="3s_man"></div>
+    <div class="vignette"></div>
+  </div>
+  <div class="label">512 × 512</div>
+</div>
+
+<!-- 600 -->
+<div>
+  <div class="canvas canvas--600">
+    <div class="bg"></div>
+    <div class="character"><img src="3s_man.svg" alt="3s_man"></div>
+    <div class="vignette"></div>
+  </div>
+  <div class="label">600 × 600</div>
+</div>
+
+</body>
+</html>
