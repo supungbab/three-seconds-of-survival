@@ -186,14 +186,12 @@ const sliderPercent = computed(() => (panelAngle.value / 180) * 100)
 
 .panel-symbol {
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .angle-readout {
   font-size: 16px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -247,7 +245,6 @@ const sliderPercent = computed(() => (panelAngle.value / 180) * 100)
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -258,7 +255,6 @@ const sliderPercent = computed(() => (panelAngle.value / 180) * 100)
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 16px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 2px;

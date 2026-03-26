@@ -69,7 +69,6 @@ function handleTap(e: PointerEvent, choice: { code: string; correct: boolean }) 
   align-items: center;
   padding: 12px 16px;
   gap: 8px;
-  font-family: monospace;
   background: #000820;
   border: 2px solid #1a3a8a;
   min-height: 180px;
@@ -121,7 +120,6 @@ function handleTap(e: PointerEvent, choice: { code: string; correct: boolean }) 
   background: #0a1a40;
   border: 1px solid #3a6aaa;
   color: #8ac4ff;
-  font-family: monospace;
   font-size: 11px;
   padding: 10px 4px;
   cursor: pointer;

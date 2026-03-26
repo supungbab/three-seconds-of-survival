@@ -109,7 +109,6 @@ onUnmounted(() => {
 .toxin-label {
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 12px var(--arc-danger);
   letter-spacing: 3px;
@@ -176,7 +175,6 @@ onUnmounted(() => {
 .color-tag {
   font-size: 11px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--btn-color);
   letter-spacing: 1px;
   text-shadow: 0 0 6px var(--btn-color);

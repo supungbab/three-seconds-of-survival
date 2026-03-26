@@ -145,7 +145,6 @@ onMounted(() => {
   display: flex;
   gap: 10px;
   font-size: 16px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -157,7 +156,6 @@ onMounted(() => {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes static-shift {

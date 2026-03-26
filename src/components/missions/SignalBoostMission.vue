@@ -100,7 +100,6 @@ onUnmounted(() => {
   align-items: center;
   padding: 16px;
   gap: 10px;
-  font-family: monospace;
   min-height: 180px;
   touch-action: none;
 }

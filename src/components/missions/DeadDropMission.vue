@@ -91,7 +91,6 @@ function handleCellTap(col: number, row: number) {
   justify-content: center;
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -110,7 +109,6 @@ function handleCellTap(col: number, row: number) {
   justify-content: center;
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -141,7 +139,6 @@ function handleCellTap(col: number, row: number) {
 
 .cell-dot {
   font-size: 20px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 </style>

@@ -130,7 +130,6 @@ function handleTap(e: Event) {
   z-index: 1;
   padding: 12px 32px;
   font-size: 22px;
-  font-family: monospace;
   font-weight: 700;
   letter-spacing: 4px;
   border-radius: 0;
@@ -180,7 +179,6 @@ function handleTap(e: Event) {
   position: relative;
   z-index: 1;
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

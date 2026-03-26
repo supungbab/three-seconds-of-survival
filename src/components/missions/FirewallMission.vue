@@ -24,11 +24,17 @@ const DIR_ARROWS: Record<Direction, string> = {
   LEFT: '→',
   RIGHT: '←',
 }
+const DIR_SWIPE_ARROW: Record<Direction, string> = {
+  UP: '↑',
+  DOWN: '↓',
+  LEFT: '←',
+  RIGHT: '→',
+}
 const DIR_TRANSLATE: Record<Direction, string> = {
-  UP: 'translateY(-80px)',
-  DOWN: 'translateY(80px)',
-  LEFT: 'translateX(-80px)',
-  RIGHT: 'translateX(80px)',
+  UP: 'translateY(-56px)',
+  DOWN: 'translateY(56px)',
+  LEFT: 'translateX(-56px)',
+  RIGHT: 'translateX(56px)',
 }
 
 const containerEl = ref<HTMLElement | null>(null)
@@ -156,22 +162,26 @@ function onMouseUp(e: MouseEvent) {
     <div class="progress-label">{{ progress }}</div>
 
     <div class="arena">
+      <div class="grid-bg" />
+      <div class="defense-ring" :class="{ shielded: showShield }" />
+
       <!-- Server core -->
       <div class="server-core" :class="{ shielded: showShield }">
-        <span class="server-icon">◆</span>
+        <span class="server-icon">⬡</span>
       </div>
 
       <!-- Approaching packet -->
       <div
         v-if="currentPacket"
         class="virus-packet"
+        :key="currentIndex"
         :style="{ transform: DIR_TRANSLATE[currentPacket] }"
       >
-        <span class="packet-arrow">{{ DIR_ARROWS[currentPacket] }}</span>
+        <span class="packet-icon">☠</span>
       </div>
     </div>
 
-    <div class="hint">{{ t('스와이프') }} {{ currentPacket ?? '' }}</div>
+    <div class="hint">{{ currentPacket ? DIR_SWIPE_ARROW[currentPacket] : '' }}</div>
   </div>
 </template>
 
@@ -188,7 +198,6 @@ function onMouseUp(e: MouseEvent) {
 }
 
 .progress-label {
-  font-family: monospace;
   font-size: 16px;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
@@ -201,66 +210,98 @@ function onMouseUp(e: MouseEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 30%, rgba(140, 200, 144, 0.03) 70%),
+    repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(140, 200, 144, 0.06) 20px),
+    repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(140, 200, 144, 0.06) 20px);
+  border: 1px solid rgba(140, 200, 144, 0.1);
+}
+
+.defense-ring {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px dashed rgba(140, 200, 144, 0.2);
+  transition: all 0.2s;
+}
+
+.defense-ring.shielded {
+  border-color: var(--px-green-bright);
+  box-shadow: 0 0 20px rgba(140, 200, 144, 0.3);
+  animation: shield-flash 0.2s ease-out;
+}
+
+@keyframes shield-flash {
+  from { box-shadow: 0 0 40px rgba(140, 200, 144, 0.6); }
+  to { box-shadow: 0 0 20px rgba(140, 200, 144, 0.3); }
 }
 
 .server-core {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   border: 2px solid var(--px-green-border);
-  background: var(--px-green-bg);
+  background: rgba(140, 200, 144, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 2px var(--px-green-frame);
+  z-index: 2;
   transition: all 0.2s;
 }
 
 .server-core.shielded {
   border-color: var(--px-green-bright);
-  box-shadow:
-    0 0 0 2px var(--px-green-frame),
-    0 0 24px var(--px-green-glow-strong),
-    0 0 48px rgba(140, 200, 144, 0.15);
+  background: rgba(140, 200, 144, 0.12);
+  box-shadow: 0 0 16px var(--px-green-glow-strong);
 }
 
 .server-icon {
-  font-size: 22px;
+  font-size: 20px;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .virus-packet {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: 2px solid var(--arc-danger);
-  background: rgba(255, 59, 92, 0.15);
+  border-radius: 50%;
+  background: rgba(255, 59, 92, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: packet-pulse 0.5s ease-in-out infinite alternate;
+  z-index: 3;
+  animation: packet-approach 0.3s ease-out, packet-pulse 0.4s ease-in-out 0.3s infinite alternate;
 }
 
-.packet-arrow {
-  font-size: 22px;
+.packet-icon {
+  font-size: 16px;
   color: var(--arc-danger);
-  text-shadow: 0 0 10px var(--arc-danger);
-  font-family: monospace;
-  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 59, 92, 0.8);
 }
 
 .hint {
-  font-family: monospace;
-  font-size: 14px;
-  color: var(--px-green-dim);
+  font-size: 24px;
+  color: var(--px-green-bright);
+  text-shadow: 0 0 8px var(--px-green-glow);
+}
+
+@keyframes packet-approach {
+  from { opacity: 0; scale: 0.5; }
+  to { opacity: 1; scale: 1; }
 }
 
 @keyframes packet-pulse {
-  from {
-    box-shadow: 0 0 6px rgba(255, 59, 92, 0.3);
-  }
-  to {
-    box-shadow: 0 0 16px rgba(255, 59, 92, 0.6);
-  }
+  from { box-shadow: 0 0 6px rgba(255, 59, 92, 0.3); }
+  to { box-shadow: 0 0 20px rgba(255, 59, 92, 0.7); }
 }
 </style>

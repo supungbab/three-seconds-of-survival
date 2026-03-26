@@ -78,7 +78,6 @@ function handleTap(choice: number) {
 .ration-info {
   font-size: 22px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-dim);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;
@@ -98,7 +97,6 @@ function handleTap(choice: number) {
   justify-content: center;
   font-size: 28px;
   font-weight: 900;
-  font-family: monospace;
   color: var(--px-green-bright);
   background: var(--px-green-bg);
   border: 3px solid var(--px-green-border);

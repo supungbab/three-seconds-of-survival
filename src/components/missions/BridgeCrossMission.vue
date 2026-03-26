@@ -133,14 +133,12 @@ onUnmounted(() => {
 
 .header-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
 
 .header-progress {
   font-size: 16px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -218,7 +216,6 @@ onUnmounted(() => {
 
 .plank-icon {
   font-size: 24px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -235,7 +232,6 @@ onUnmounted(() => {
 
 .plank-status {
   font-size: 8px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 1px;
 }
@@ -246,7 +242,6 @@ onUnmounted(() => {
 
 .hint-text {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: hint-blink 1s ease-in-out infinite alternate;
@@ -254,7 +249,6 @@ onUnmounted(() => {
 
 .result-text {
   font-size: 16px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 3px;
   animation: flash-in 0.2s ease-out;

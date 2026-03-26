@@ -97,7 +97,6 @@ function handleTap(index: number, e: Event) {
 
 .mimic-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -116,7 +115,6 @@ function handleTap(index: number, e: Event) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 18px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 2px;

@@ -125,7 +125,6 @@ const isAligned = computed(() => Math.abs(topOffsetX.value) <= TOLERANCE)
 }
 
 .splint-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -163,7 +162,6 @@ const isAligned = computed(() => Math.abs(topOffsetX.value) <= TOLERANCE)
 }
 
 .bone-jagged {
-  font-family: monospace;
   font-size: 14px;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
@@ -190,7 +188,6 @@ const isAligned = computed(() => Math.abs(topOffsetX.value) <= TOLERANCE)
 }
 
 .splint-hint {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 1px;

@@ -107,14 +107,12 @@ function handlePieceTap(e: PointerEvent, num: number) {
 
 .header-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
 
 .header-progress {
   font-size: 16px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -135,7 +133,6 @@ function handlePieceTap(e: PointerEvent, num: number) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 20px;
-  font-family: monospace;
   font-weight: 900;
   cursor: pointer;
   display: flex;
@@ -173,7 +170,6 @@ function handlePieceTap(e: PointerEvent, num: number) {
 
 .result-text.bad {
   font-size: 16px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 3px;
   color: var(--arc-danger);

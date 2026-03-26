@@ -213,7 +213,6 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   font-size: 9px;
-  font-family: monospace;
   color: var(--arc-muted);
   white-space: nowrap;
 }
@@ -227,21 +226,18 @@ onUnmounted(() => {
 
 .gun-icon {
   font-size: 40px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow);
 }
 
 .gun-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .swipe-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: hint-blink 1s ease-in-out infinite alternate;
@@ -249,7 +245,6 @@ onUnmounted(() => {
 
 .result-text {
   font-size: 16px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 3px;
   animation: flash-in 0.2s ease-out;

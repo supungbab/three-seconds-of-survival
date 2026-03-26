@@ -222,7 +222,6 @@ onUnmounted(() => {
 }
 
 .lockpick-progress {
-  font-family: monospace;
   font-size: 22px;
   font-weight: 700;
   color: var(--px-green-bright);
@@ -230,7 +229,6 @@ onUnmounted(() => {
 }
 
 .lockpick-hint {
-  font-family: monospace;
   font-size: 14px;
   color: var(--arc-muted);
 }

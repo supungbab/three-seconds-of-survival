@@ -126,7 +126,6 @@ onUnmounted(() => {
   position: relative;
   z-index: 1;
   font-size: 20px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-danger);
   text-shadow: 0 0 10px var(--arc-danger-glow);
@@ -134,7 +133,6 @@ onUnmounted(() => {
 
 .timer {
   font-size: 18px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -142,7 +140,6 @@ onUnmounted(() => {
 
 .hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-danger);
   animation: blink-warn 0.6s steps(1) infinite;
 }

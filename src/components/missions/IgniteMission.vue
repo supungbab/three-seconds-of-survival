@@ -174,7 +174,6 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
@@ -183,7 +182,6 @@ onUnmounted(() => {
 
 .ignite-hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

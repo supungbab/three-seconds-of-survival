@@ -151,7 +151,6 @@ function handleSurvivorTap(index: number) {
   gap: 4px;
   font-size: 11px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--sev-color);
   text-shadow: 0 0 8px var(--sev-color);
   letter-spacing: 1px;

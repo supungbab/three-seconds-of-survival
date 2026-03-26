@@ -168,7 +168,6 @@ onUnmounted(() => {
   display: flex;
   gap: 12px;
   font-size: 16px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -180,6 +179,5 @@ onUnmounted(() => {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 </style>

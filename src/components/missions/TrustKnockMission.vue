@@ -120,7 +120,6 @@ function patternToDots(pattern: number[]): string[] {
 .choose-label {
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;
@@ -128,7 +127,6 @@ function patternToDots(pattern: number[]): string[] {
 
 .knock-flash {
   font-size: 48px;
-  font-family: monospace;
   color: var(--arc-muted);
   transition: all 0.05s;
 }
@@ -169,7 +167,6 @@ function patternToDots(pattern: number[]): string[] {
 
 .dot {
   font-size: 24px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);

@@ -176,14 +176,12 @@ onUnmounted(() => {
 
 .slot-icon {
   font-size: 40px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
 }
 
 .slot-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -241,21 +239,18 @@ onUnmounted(() => {
 
 .mag-icon {
   font-size: 40px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
 }
 
 .mag-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .swipe-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: hint-blink 1s ease-in-out infinite alternate;
@@ -267,7 +262,6 @@ onUnmounted(() => {
 
 .result-flash {
   font-size: 18px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 4px;
   animation: flash-in 0.2s ease-out;

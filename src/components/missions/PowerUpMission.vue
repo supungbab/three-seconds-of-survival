@@ -132,7 +132,6 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
-  font-family: monospace;
 }
 
 .battery {

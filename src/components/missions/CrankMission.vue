@@ -188,7 +188,6 @@ onUnmounted(() => {
 .crank-progress {
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
   letter-spacing: 2px;
@@ -196,7 +195,6 @@ onUnmounted(() => {
 
 .crank-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }

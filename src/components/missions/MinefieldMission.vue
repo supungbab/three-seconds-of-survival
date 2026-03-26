@@ -75,7 +75,6 @@ function handleCell(index: number, e: Event) {
 }
 
 .label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -93,7 +92,6 @@ function handleCell(index: number, e: Event) {
   border: 2px solid var(--px-green-bright);
   background: var(--px-green-bg);
   color: var(--px-green-bright);
-  font-family: monospace;
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;

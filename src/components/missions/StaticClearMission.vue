@@ -157,7 +157,6 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow);
-  font-family: monospace;
   transition: opacity 0.1s;
 }
 

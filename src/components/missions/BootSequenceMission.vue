@@ -96,7 +96,6 @@ function handleTap(e: Event) {
 }
 
 .boot-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -116,7 +115,6 @@ function handleTap(e: Event) {
 }
 
 .boot-line {
-  font-family: monospace;
   font-size: 12px;
   color: var(--px-green-bright);
   text-shadow: 0 0 4px var(--px-green-glow);
@@ -131,14 +129,12 @@ function handleTap(e: Event) {
 }
 
 .cursor-blink {
-  font-family: monospace;
   font-size: 14px;
   color: var(--px-green-bright);
   animation: blink 0.5s step-end infinite;
 }
 
 .boot-hint {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 1px;

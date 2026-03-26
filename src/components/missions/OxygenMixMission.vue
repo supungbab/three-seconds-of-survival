@@ -88,7 +88,6 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   width: 90%;
-  font-family: monospace;
   font-size: 18px;
   font-weight: 700;
 }
@@ -125,14 +124,12 @@ onUnmounted(() => {
 
 .readout {
   font-size: 14px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
 }
 
 .hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 </style>

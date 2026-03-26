@@ -73,7 +73,6 @@ onUnmounted(() => {
 
 .purify-label {
   font-size: 18px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
@@ -117,7 +116,6 @@ onUnmounted(() => {
 
 .purify-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

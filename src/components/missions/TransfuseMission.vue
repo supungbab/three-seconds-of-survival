@@ -109,7 +109,6 @@ onUnmounted(() => {
 }
 
 .hint-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -175,13 +174,11 @@ onUnmounted(() => {
   position: absolute;
   right: -30px;
   top: -6px;
-  font-family: monospace;
   font-size: 9px;
   color: var(--arc-muted);
 }
 
 .level-readout {
-  font-family: monospace;
   font-size: 16px;
   font-weight: bold;
   color: var(--px-green-bright);

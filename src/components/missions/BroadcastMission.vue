@@ -140,7 +140,6 @@ onUnmounted(() => {
 .meter-label {
   font-size: 16px;
   color: var(--px-green-bright);
-  font-family: monospace;
   min-width: 40px;
 }
 

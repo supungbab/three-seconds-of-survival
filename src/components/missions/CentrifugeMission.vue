@@ -82,7 +82,6 @@ function handleStop(e: Event) {
 }
 
 .target-label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -112,7 +111,6 @@ function handleStop(e: Event) {
 .disc-mark {
   position: absolute;
   top: 2px;
-  font-family: monospace;
   font-size: 18px;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -128,7 +126,6 @@ function handleStop(e: Event) {
   display: flex;
   align-items: baseline;
   gap: 6px;
-  font-family: monospace;
 }
 
 .rpm-value {
@@ -150,7 +147,6 @@ function handleStop(e: Event) {
 }
 
 .stop-btn {
-  font-family: monospace;
   font-size: 16px;
   font-weight: 700;
   padding: 12px 32px;

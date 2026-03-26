@@ -157,14 +157,12 @@ onUnmounted(() => {
   top: 6px;
   right: 8px;
   font-size: 9px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .scope-hint {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

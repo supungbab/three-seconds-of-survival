@@ -78,7 +78,6 @@ function handleSeal(e: PointerEvent, index: number) {
   align-items: center;
   padding: 12px 16px;
   gap: 8px;
-  font-family: monospace;
   min-height: 180px;
 }
 

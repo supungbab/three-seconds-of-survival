@@ -111,7 +111,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-family: monospace;
   color: var(--px-green-bright);
   transition: all 0.15s;
   box-shadow:

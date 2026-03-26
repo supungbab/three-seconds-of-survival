@@ -82,7 +82,6 @@ function handleTap(index: number, e: PointerEvent) {
 
 .label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -110,7 +109,6 @@ function handleTap(index: number, e: PointerEvent) {
   background: #0c140c;
   color: var(--arc-muted);
   font-size: 16px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   display: flex;

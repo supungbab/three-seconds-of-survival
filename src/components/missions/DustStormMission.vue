@@ -141,7 +141,6 @@ onUnmounted(() => {
 .hidden-text {
   position: absolute;
   transform: translate(-50%, -50%);
-  font-family: monospace;
   font-size: 28px;
   font-weight: bold;
   color: var(--px-green-bright);
@@ -157,7 +156,6 @@ onUnmounted(() => {
 .hint-label {
   position: absolute;
   bottom: 8px;
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;

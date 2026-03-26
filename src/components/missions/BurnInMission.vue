@@ -96,7 +96,6 @@ function handleTap(e: Event, btn: ButtonInfo) {
 }
 
 .hint-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -114,7 +113,6 @@ function handleTap(e: Event, btn: ButtonInfo) {
 .screen-btn {
   position: absolute;
   padding: 6px 14px;
-  font-family: monospace;
   font-size: 14px;
   font-weight: bold;
   border-radius: 0;

@@ -102,14 +102,12 @@ function handleDirection(dir: string, e: Event) {
 
 .flag-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .flag-arrow {
   font-size: 36px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
 }
@@ -124,13 +122,11 @@ function handleDirection(dir: string, e: Event) {
 
 .flag-divider {
   font-size: 28px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
 .phase-label {
   font-size: 14px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -151,7 +147,6 @@ function handleDirection(dir: string, e: Event) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 28px;
-  font-family: monospace;
   cursor: pointer;
   display: flex;
   align-items: center;

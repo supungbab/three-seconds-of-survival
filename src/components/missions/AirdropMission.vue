@@ -127,7 +127,6 @@ onUnmounted(() => {
 
 .lz-label {
   font-size: 11px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
@@ -135,7 +134,6 @@ onUnmounted(() => {
 
 .hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 </style>

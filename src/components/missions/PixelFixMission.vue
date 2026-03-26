@@ -63,7 +63,6 @@ function handlePixelTap(e: Event, index: number) {
 }
 
 .pixel-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -97,7 +96,6 @@ function handlePixelTap(e: Event, index: number) {
 }
 
 .pixel-hint {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 1px;

@@ -149,7 +149,6 @@ function handleBreakTap(index: number, e: PointerEvent) {
   text-align: center;
   margin-top: 8px;
   font-size: 12px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-danger);
   text-shadow: 0 0 4px var(--arc-danger-glow);
@@ -165,7 +164,6 @@ function handleBreakTap(index: number, e: PointerEvent) {
   display: flex;
   gap: 10px;
   font-size: 16px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -177,7 +175,6 @@ function handleBreakTap(index: number, e: PointerEvent) {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes blink-break {

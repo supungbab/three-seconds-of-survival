@@ -85,7 +85,6 @@ function handleDir(dir: Direction, e: Event) {
 }
 
 .label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -104,7 +103,6 @@ function handleDir(dir: Direction, e: Event) {
 }
 
 .target-arrow {
-  font-family: monospace;
   font-size: 28px;
   color: var(--arc-muted);
   opacity: 0.3;
@@ -112,7 +110,6 @@ function handleDir(dir: Direction, e: Event) {
 }
 
 .current-arrow {
-  font-family: monospace;
   font-size: 28px;
   color: var(--arc-danger);
   text-shadow: 0 0 10px var(--arc-danger-glow);
@@ -141,7 +138,6 @@ function handleDir(dir: Direction, e: Event) {
 .dir-btn {
   width: 48px;
   height: 48px;
-  font-family: monospace;
   font-size: 22px;
   font-weight: 700;
   border: 2px solid var(--px-green-bright);

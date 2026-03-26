@@ -51,7 +51,6 @@ function handleTap(e: Event, index: number) {
 .mutant-header {
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;
@@ -74,7 +73,6 @@ function handleTap(e: Event, index: number) {
 
 .subject-icon {
   font-size: 32px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   display: block;

@@ -225,6 +225,5 @@ onUnmounted(() => {
 .morse-hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 </style>

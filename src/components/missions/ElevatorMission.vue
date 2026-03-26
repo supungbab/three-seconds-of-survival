@@ -104,7 +104,6 @@ function handleDown() {
 
 .target-display {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 1px;
 }
@@ -130,7 +129,6 @@ function handleDown() {
 .floor-number {
   font-size: 48px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow-strong);
   line-height: 1;
@@ -139,7 +137,6 @@ function handleDown() {
 
 .floor-suffix {
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-dim);
 }
 

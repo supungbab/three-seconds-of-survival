@@ -83,7 +83,6 @@ function handleChoice(e: Event, choice: string) {
 .bag-label {
   font-size: 32px;
   font-weight: 700;
-  font-family: monospace;
   color: #ff3b5c;
   text-shadow: 0 0 12px rgba(255, 59, 92, 0.5);
   line-height: 1;
@@ -91,7 +90,6 @@ function handleChoice(e: Event, choice: string) {
 
 .bag-sub {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -130,7 +128,6 @@ function handleChoice(e: Event, choice: string) {
 .btn-type {
   font-size: 22px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }

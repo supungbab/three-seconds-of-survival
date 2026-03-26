@@ -59,7 +59,6 @@ function handleChoice(isFair: boolean, e: Event) {
 
 .barter-label {
   font-size: 22px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
@@ -82,14 +81,12 @@ function handleChoice(isFair: boolean, e: Event) {
 
 .barter-item {
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .barter-divider {
   font-size: 24px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -103,7 +100,6 @@ function handleChoice(isFair: boolean, e: Event) {
   height: 56px;
   border-radius: 0;
   font-size: 28px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   border: 2px solid;

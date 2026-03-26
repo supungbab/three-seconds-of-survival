@@ -55,7 +55,6 @@ function handleTap(e: Event, index: number) {
 .fuse-header {
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

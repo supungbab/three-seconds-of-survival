@@ -93,14 +93,12 @@ function handleChoice(n: number, e: Event) {
 
 .cipher-label {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .cipher-letter {
   font-size: 48px;
-  font-family: monospace;
   font-weight: 700;
 }
 
@@ -117,14 +115,12 @@ function handleChoice(n: number, e: Event) {
 
 .cipher-arrow {
   font-size: 24px;
-  font-family: monospace;
   color: var(--arc-muted);
   margin-top: 16px;
 }
 
 .cipher-hint {
   font-size: 14px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -144,7 +140,6 @@ function handleChoice(n: number, e: Event) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 24px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   text-shadow: 0 0 8px var(--px-green-glow);

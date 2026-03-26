@@ -137,7 +137,6 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
-  font-family: monospace;
 }
 
 @keyframes radiation-pulse {

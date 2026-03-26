@@ -81,7 +81,6 @@ onUnmounted(() => {
 
 .label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   text-transform: uppercase;
 }
@@ -118,7 +117,6 @@ onUnmounted(() => {
 
 .temp-readout {
   font-size: 20px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 10px var(--px-green-glow);

@@ -95,7 +95,6 @@ onUnmounted(() => {
 
 .enemy-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 6px var(--arc-danger-glow);
 }
@@ -142,7 +141,6 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   transform-origin: 0 0;
   margin-left: -6px;
@@ -158,6 +156,5 @@ onUnmounted(() => {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 </style>

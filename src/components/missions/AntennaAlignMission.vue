@@ -132,7 +132,6 @@ onUnmounted(() => {
 }
 
 .antenna-symbol {
-  font-family: monospace;
 }
 
 .signal-meter {
@@ -161,7 +160,6 @@ onUnmounted(() => {
 }
 
 .angle-display {
-  font-family: monospace;
   font-size: 14px;
   color: var(--arc-muted);
 }
@@ -199,7 +197,6 @@ onUnmounted(() => {
 }
 
 .confirm-btn {
-  font-family: monospace;
   font-size: 14px;
   padding: 8px 24px;
   background: var(--px-green-bg);

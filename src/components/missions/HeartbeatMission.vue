@@ -152,7 +152,6 @@ onUnmounted(() => {
   top: 8px;
   right: 12px;
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-dim);
   text-shadow: 0 0 6px var(--px-green-glow);
   letter-spacing: 2px;
@@ -167,7 +166,6 @@ onUnmounted(() => {
   color: var(--arc-danger);
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
   cursor: pointer;
   letter-spacing: 3px;
   animation: revive-pulse 0.4s ease-in-out infinite alternate;
@@ -184,7 +182,6 @@ onUnmounted(() => {
 
 .lost-hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }

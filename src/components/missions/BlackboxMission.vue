@@ -111,7 +111,6 @@ onUnmounted(() => {
 
 .waveform-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -162,7 +161,6 @@ onUnmounted(() => {
 
 .tap-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

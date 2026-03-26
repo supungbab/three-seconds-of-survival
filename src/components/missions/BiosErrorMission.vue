@@ -73,7 +73,6 @@ function handleBtnTap(e: Event, num: number) {
 .bios-header {
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 12px var(--arc-danger-glow);
   letter-spacing: 3px;
@@ -82,7 +81,6 @@ function handleBtnTap(e: Event, num: number) {
 .bios-progress {
   display: flex;
   gap: 10px;
-  font-family: monospace;
   font-size: 18px;
 }
 
@@ -116,7 +114,6 @@ function handleBtnTap(e: Event, num: number) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 24px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   text-shadow: 0 0 8px var(--px-green-glow);

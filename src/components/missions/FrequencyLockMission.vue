@@ -98,7 +98,6 @@ function handleLock(e: Event) {
 
 .freq-label {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   min-width: 36px;
 }
@@ -126,7 +125,6 @@ function handleLock(e: Event) {
 
 .freq-value {
   font-size: 11px;
-  font-family: monospace;
   color: var(--px-green-bright);
   min-width: 56px;
   text-align: right;
@@ -134,7 +132,6 @@ function handleLock(e: Event) {
 
 .freq-diff {
   font-size: 20px;
-  font-family: monospace;
   font-weight: 900;
   color: var(--arc-danger);
   text-shadow: 0 0 8px var(--arc-danger-glow);
@@ -149,7 +146,6 @@ function handleLock(e: Event) {
 .lock-btn {
   padding: 12px 32px;
   font-size: 18px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 4px;
   background: var(--px-green-bg);

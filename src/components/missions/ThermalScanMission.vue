@@ -85,7 +85,6 @@ function handleTap(blob: Blob, e: PointerEvent) {
 
 .label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 

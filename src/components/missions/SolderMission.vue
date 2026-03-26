@@ -128,7 +128,6 @@ onUnmounted(() => {
 
 .board-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -203,7 +202,6 @@ onUnmounted(() => {
 
 .point-label {
   font-size: 24px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   position: relative;
@@ -212,7 +210,6 @@ onUnmounted(() => {
 
 .solder-hint {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

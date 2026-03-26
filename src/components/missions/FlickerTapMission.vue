@@ -118,7 +118,6 @@ onUnmounted(() => {
 .noise-text {
   font-size: 12px;
   line-height: 1.3;
-  font-family: monospace;
   color: var(--px-green-dim);
   text-shadow: 0 0 2px var(--px-green-glow);
   opacity: 0.5;
@@ -139,7 +138,6 @@ onUnmounted(() => {
 
 .target-char {
   font-size: 56px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow:
     0 0 20px var(--px-green-glow-strong),
@@ -149,7 +147,6 @@ onUnmounted(() => {
 
 .flicker-hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }

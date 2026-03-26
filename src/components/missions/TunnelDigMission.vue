@@ -105,7 +105,6 @@ onUnmounted(() => {
 
 .depth-label {
   font-size: 18px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -130,7 +129,6 @@ onUnmounted(() => {
   display: flex;
   gap: 6px;
   font-size: 24px;
-  font-family: monospace;
 }
 
 .layer {
@@ -145,7 +143,6 @@ onUnmounted(() => {
 
 .hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   animation: blink-hint 0.8s steps(1) infinite;
 }

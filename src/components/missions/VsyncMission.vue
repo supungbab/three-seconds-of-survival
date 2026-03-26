@@ -88,7 +88,6 @@ onUnmounted(() => {
 }
 
 .hint-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -112,7 +111,6 @@ onUnmounted(() => {
 }
 
 .screen-text {
-  font-family: monospace;
   font-size: 36px;
   font-weight: bold;
   color: var(--px-green-bright);
@@ -172,7 +170,6 @@ onUnmounted(() => {
 }
 
 .position-readout {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 1px;

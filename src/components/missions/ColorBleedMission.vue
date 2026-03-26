@@ -81,7 +81,6 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
 }
 
 .hint-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -100,7 +99,6 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
 
 .channel {
   position: absolute;
-  font-family: monospace;
   font-size: 40px;
   font-weight: bold;
   transition: transform 0.3s, opacity 0.3s;
@@ -150,7 +148,6 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
 .channel-btn {
   width: 56px;
   height: 44px;
-  font-family: monospace;
   font-size: 18px;
   font-weight: bold;
   border: 2px solid;
@@ -184,7 +181,6 @@ function handleChannel(e: Event, channel: 'R' | 'G' | 'B') {
 }
 
 .step-indicator {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 1px;

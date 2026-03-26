@@ -97,7 +97,6 @@ function handleTap(button: 'open' | 'seal', e: Event) {
   font-size: 14px;
   font-weight: 700;
   color: var(--arc-muted);
-  font-family: monospace;
   letter-spacing: 2px;
 }
 
@@ -122,7 +121,6 @@ function handleTap(button: 'open' | 'seal', e: Event) {
   color: var(--px-green-dim);
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
   cursor: pointer;
   transition: all 0.2s;
   box-shadow:
@@ -197,7 +195,6 @@ function handleTap(button: 'open' | 'seal', e: Event) {
 .airlock-status {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes btn-pulse {

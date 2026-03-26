@@ -97,7 +97,6 @@ function handleDiagnosis(e: Event, diagnosisNormal: boolean) {
 }
 
 .ecg-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -148,7 +147,6 @@ function handleDiagnosis(e: Event, diagnosisNormal: boolean) {
 }
 
 .diag-btn {
-  font-family: monospace;
   font-size: 13px;
   padding: 8px 16px;
   border-radius: 0;

@@ -102,7 +102,6 @@ function handleTap(e: Event) {
 
 .gauge-label {
   font-size: 13px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -123,7 +122,6 @@ function handleTap(e: Event) {
 
 .gauge-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

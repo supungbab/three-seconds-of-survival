@@ -94,7 +94,6 @@ function handleTap(r: number, c: number, e: Event) {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-family: monospace;
   transition: all 0.3s;
 }
 

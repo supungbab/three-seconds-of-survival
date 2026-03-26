@@ -83,7 +83,6 @@ function handleTap(e: Event, pkt: Packet) {
 }
 
 .terminal-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -107,7 +106,6 @@ function handleTap(e: Event, pkt: Packet) {
   border: 1px solid var(--px-green-bright);
   border-radius: 0;
   color: var(--px-green-bright);
-  font-family: monospace;
   font-size: 13px;
   cursor: pointer;
   animation: scroll-in 0.3s ease-out both;
@@ -120,11 +118,9 @@ function handleTap(e: Event, pkt: Packet) {
 }
 
 .pkt-id {
-  font-family: monospace;
 }
 
 .pkt-status {
-  font-family: monospace;
   font-weight: 700;
   font-size: 11px;
   padding: 2px 6px;

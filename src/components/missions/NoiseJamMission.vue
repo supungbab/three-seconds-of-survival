@@ -132,7 +132,6 @@ onUnmounted(() => {
 
 .noise-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -150,7 +149,6 @@ onUnmounted(() => {
   padding: 10px 18px;
   background: #0c140c;
   border: 2px solid var(--arc-danger);
-  font-family: monospace;
   font-size: 14px;
   color: var(--arc-danger);
   cursor: pointer;
@@ -181,7 +179,6 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: monospace;
   font-size: 14px;
   color: var(--arc-danger);
   opacity: 0.4;
@@ -191,7 +188,6 @@ onUnmounted(() => {
 
 .noise-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

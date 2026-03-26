@@ -84,7 +84,6 @@ function handleTap(letter: string, idx: number, e: Event) {
   display: flex;
   gap: 4px;
   font-size: 28px;
-  font-family: monospace;
   font-weight: 700;
   letter-spacing: 4px;
 }
@@ -116,7 +115,6 @@ function handleTap(letter: string, idx: number, e: Event) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 20px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   text-shadow: 0 0 8px var(--px-green-glow);

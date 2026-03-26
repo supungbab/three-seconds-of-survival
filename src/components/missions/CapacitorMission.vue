@@ -94,7 +94,6 @@ function zoneClass(): string {
 }
 
 .label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -117,7 +116,6 @@ function zoneClass(): string {
   position: absolute;
   left: 0;
   right: 0;
-  font-family: monospace;
   font-size: 9px;
   display: flex;
   align-items: center;
@@ -173,7 +171,6 @@ function zoneClass(): string {
   display: flex;
   align-items: baseline;
   gap: 4px;
-  font-family: monospace;
 }
 
 .pct-value {
@@ -201,7 +198,6 @@ function zoneClass(): string {
 }
 
 .discharge-btn {
-  font-family: monospace;
   font-size: 14px;
   font-weight: 700;
   padding: 10px 28px;

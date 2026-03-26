@@ -84,7 +84,6 @@ function handleTap(e: Event) {
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  font-family: monospace;
   color: var(--arc-muted);
   pointer-events: none;
 }
@@ -93,7 +92,6 @@ function handleTap(e: Event) {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 36px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow);

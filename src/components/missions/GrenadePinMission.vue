@@ -147,7 +147,6 @@ onUnmounted(() => {
 .grenade-icon {
   position: relative;
   font-size: 48px;
-  font-family: monospace;
 }
 
 .grenade-symbol {
@@ -174,7 +173,6 @@ onUnmounted(() => {
 
 .grenade-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -234,14 +232,12 @@ onUnmounted(() => {
 .mark {
   position: absolute;
   font-size: 10px;
-  font-family: monospace;
   color: var(--px-green-bright);
   transform: translateY(50%);
 }
 
 .pull-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: hint-blink 1s ease-in-out infinite alternate;
@@ -249,7 +245,6 @@ onUnmounted(() => {
 
 .result-text {
   font-size: 16px;
-  font-family: monospace;
   font-weight: 900;
   letter-spacing: 3px;
   animation: flash-in 0.2s ease-out;

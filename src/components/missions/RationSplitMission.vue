@@ -151,7 +151,6 @@ onUnmounted(() => {
 
 .ration-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -195,7 +194,6 @@ onUnmounted(() => {
 
 .divider-handle {
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   pointer-events: none;
 }
@@ -204,7 +202,6 @@ onUnmounted(() => {
   display: flex;
   gap: 12px;
   align-items: center;
-  font-family: monospace;
   font-size: 18px;
 }
 
@@ -222,7 +219,6 @@ onUnmounted(() => {
 }
 
 .confirm-btn {
-  font-family: monospace;
   font-size: 14px;
   padding: 8px 24px;
   background: #0c140c;

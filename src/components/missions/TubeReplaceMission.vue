@@ -102,7 +102,6 @@ function handleTubeTap(index: number, e: Event) {
 
 .tube-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -165,7 +164,6 @@ function handleTubeTap(index: number, e: Event) {
 
 .tube-id {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   margin-top: 2px;
 }

@@ -1,66 +1,67 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useAudio } from '@/composables/useAudio'
-import { useI18n } from '@/composables/useI18n'
 
 const { playTick } = useAudio()
-const { t } = useI18n()
 
 const emit = defineEmits<{
   tap: [correct: boolean]
 }>()
 
 const containerEl = ref<HTMLElement | null>(null)
-const dotOpacity = ref(0)
-const dotScale = ref(0.5)
+const screenGlow = ref(0) // 0~1
+const flashOn = ref(false)
+const phase = ref<'buildup' | 'peak' | 'fade'>('buildup')
 
-// Beep timing state
-const TOTAL_DURATION = 2400 // ms total sequence
-const PEAK_START = 1300 // ms when peak window begins
-const PEAK_END = 1800 // ms when peak window ends
-const START_INTERVAL = 600 // ms initial gap
-const MIN_INTERVAL = 80 // ms fastest gap
+const PEAK_START = 1400
+const PEAK_END = 2000
 
 let startTime = 0
 let resolved = false
 let raf = 0
+let lastFlashTime = 0
 
-function getInterval(elapsed: number): number {
-  // Exponential decrease from START_INTERVAL to MIN_INTERVAL
-  const progress = Math.min(1, elapsed / PEAK_START)
-  const eased = progress * progress // accelerating curve
-  const interval = START_INTERVAL - (START_INTERVAL - MIN_INTERVAL) * eased
+function animate(now: number) {
+  if (resolved) return
+  const elapsed = now - startTime
 
-  // After peak, interval increases again
-  if (elapsed > PEAK_END) {
-    const fadeProgress = Math.min(1, (elapsed - PEAK_END) / (TOTAL_DURATION - PEAK_END))
-    return MIN_INTERVAL + (START_INTERVAL - MIN_INTERVAL) * fadeProgress
+  if (elapsed >= PEAK_START && elapsed <= PEAK_END) {
+    phase.value = 'peak'
+  } else if (elapsed > PEAK_END) {
+    phase.value = 'fade'
   }
 
-  return interval
-}
+  // Flash interval: starts slow, gets fast, then slows
+  let interval: number
+  if (elapsed < PEAK_START) {
+    const p = elapsed / PEAK_START
+    interval = 500 - 420 * (p * p) // 500ms → 80ms
+  } else if (elapsed <= PEAK_END) {
+    interval = 60 // rapid strobe at peak
+  } else {
+    const p = Math.min(1, (elapsed - PEAK_END) / 600)
+    interval = 80 + 420 * p // 80ms → 500ms
+  }
 
-function isInPeakWindow(elapsed: number): boolean {
-  return elapsed >= PEAK_START && elapsed <= PEAK_END
-}
+  // Flash toggle
+  if (now - lastFlashTime >= interval) {
+    lastFlashTime = now
+    flashOn.value = !flashOn.value
+  }
 
-function animate() {
-  if (resolved) return
-  const elapsed = performance.now() - startTime
-  const interval = getInterval(elapsed)
+  // Screen glow intensity
+  if (elapsed < PEAK_START) {
+    const p = elapsed / PEAK_START
+    screenGlow.value = flashOn.value ? 0.03 + p * 0.15 : 0
+  } else if (elapsed <= PEAK_END) {
+    // Peak: bright flashes, screen visibly lights up
+    screenGlow.value = flashOn.value ? 0.6 : 0.08
+  } else {
+    const p = Math.min(1, (elapsed - PEAK_END) / 600)
+    screenGlow.value = flashOn.value ? 0.15 * (1 - p) : 0
+  }
 
-  // Calculate dot brightness based on interval (smaller interval = brighter)
-  const normalizedSpeed = 1 - (interval - MIN_INTERVAL) / (START_INTERVAL - MIN_INTERVAL)
-  // Base opacity very dim, gets brighter at peak
-  dotOpacity.value = 0.03 + normalizedSpeed * 0.7
-  dotScale.value = 0.5 + normalizedSpeed * 0.8
-
-  // Pulse effect: flicker the dot
-  const pulsePhase = (elapsed % interval) / interval
-  const pulseMod = pulsePhase < 0.3 ? 1 : 0.15
-  dotOpacity.value *= pulseMod
-
-  if (elapsed > TOTAL_DURATION && !resolved) {
+  if (elapsed > 2600 && !resolved) {
     resolved = true
     emit('tap', false)
     return
@@ -73,11 +74,9 @@ function onTap(e: TouchEvent | MouseEvent) {
   e.stopPropagation()
   if (e.cancelable) e.preventDefault()
   if (resolved) return
-
   resolved = true
-  const elapsed = performance.now() - startTime
 
-  if (isInPeakWindow(elapsed)) {
+  if (phase.value === 'peak') {
     playTick()
     emit('tap', true)
   } else {
@@ -87,6 +86,7 @@ function onTap(e: TouchEvent | MouseEvent) {
 
 onMounted(() => {
   startTime = performance.now()
+  lastFlashTime = startTime
   raf = requestAnimationFrame(animate)
   if (!containerEl.value) return
   const el = containerEl.value
@@ -105,58 +105,147 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerEl" class="blackout-mission">
-    <div class="blackout-void">
+    <!-- Screen flash overlay -->
+    <div class="screen-flash" :style="{ opacity: screenGlow }" />
+
+    <!-- Emergency light -->
+    <div class="emergency-light" :class="{ on: flashOn, peak: phase === 'peak' }" />
+
+    <!-- Content -->
+    <div class="blackout-content">
+      <div class="power-icon" :class="{ peak: phase === 'peak' }">⏻</div>
+      <div class="status-text" :class="phase">
+        {{ phase === 'peak' ? 'POWER DETECTED' : phase === 'fade' ? 'SIGNAL LOST' : 'NO SIGNAL' }}
+      </div>
+    </div>
+
+    <!-- Bottom bar flickers -->
+    <div class="power-bar">
       <div
-        class="beep-dot"
-        :style="{
-          opacity: dotOpacity,
-          transform: `scale(${dotScale})`,
-        }"
+        class="power-segment"
+        v-for="i in 8"
+        :key="i"
+        :class="{ lit: flashOn && phase === 'peak' && i <= 6, dim: flashOn && phase !== 'peak' && i <= 2 }"
       />
     </div>
-    <div class="blackout-hint">{{ t('들어보세요...') }}</div>
   </div>
 </template>
 
 <style scoped>
 .blackout-mission {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px 24px;
-  gap: 12px;
+  padding: 24px;
+  gap: 20px;
   touch-action: none;
   min-height: 200px;
   background: #010101;
-}
-
-.blackout-void {
-  position: relative;
-  width: 100%;
-  height: 140px;
-  background: #010101;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
-.beep-dot {
+.screen-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(140, 200, 144, 0.4), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  will-change: opacity;
+}
+
+.emergency-light {
+  position: absolute;
+  top: 16px;
+  right: 24px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--px-green-bright);
-  box-shadow: 0 0 12px var(--px-green-glow), 0 0 24px var(--px-green-glow-strong);
+  background: #220000;
+  z-index: 2;
   transition: none;
-  will-change: opacity, transform;
 }
 
-.blackout-hint {
-  font-size: 13px;
-  color: var(--px-green-dim);
-  font-family: monospace;
+.emergency-light.on {
+  background: #ff3b3b;
+  box-shadow: 0 0 8px #ff3b3b, 0 0 20px rgba(255, 59, 59, 0.4);
+}
+
+.emergency-light.peak {
+  background: #ff6b6b;
+  box-shadow: 0 0 12px #ff3b3b, 0 0 32px rgba(255, 59, 59, 0.6);
+}
+
+.blackout-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.power-icon {
+  font-size: 48px;
+  color: #111;
+  transition: none;
+  will-change: color, text-shadow;
+}
+
+.power-icon.peak {
+  color: var(--px-green-bright);
+  text-shadow: 0 0 24px var(--px-green-glow-strong), 0 0 60px rgba(140, 200, 144, 0.3);
+}
+
+.status-text {
+  font-size: 11px;
   letter-spacing: 4px;
-  opacity: 0.25;
+  color: #111;
+  transition: none;
+}
+
+.status-text.buildup {
+  color: #1a1a1a;
+}
+
+.status-text.peak {
+  color: var(--px-green-bright);
+  text-shadow: 0 0 8px var(--px-green-glow);
+  animation: text-flicker 0.1s infinite alternate;
+}
+
+.status-text.fade {
+  color: #1a1a1a;
+}
+
+@keyframes text-flicker {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+.power-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+
+.power-segment {
+  width: 16px;
+  height: 6px;
+  background: #0a0a0a;
+  border: 1px solid #151515;
+}
+
+.power-segment.dim {
+  background: rgba(140, 200, 144, 0.08);
+  border-color: rgba(140, 200, 144, 0.15);
+}
+
+.power-segment.lit {
+  background: var(--px-green-bright);
+  border-color: var(--px-green-bright);
+  box-shadow: 0 0 6px var(--px-green-glow);
 }
 </style>

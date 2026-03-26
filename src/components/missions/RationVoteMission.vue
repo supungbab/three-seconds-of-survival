@@ -67,7 +67,6 @@ function handleVote(choice: 'yes' | 'no', e: Event) {
 
 .scenario-text {
   font-size: 20px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
@@ -76,7 +75,6 @@ function handleVote(choice: 'yes' | 'no', e: Event) {
 
 .survivor-info {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
   border: 1px solid var(--arc-muted);
@@ -93,7 +91,6 @@ function handleVote(choice: 'yes' | 'no', e: Event) {
   width: 100px;
   height: 52px;
   font-size: 16px;
-  font-family: monospace;
   font-weight: 700;
   border-radius: 0;
   cursor: pointer;

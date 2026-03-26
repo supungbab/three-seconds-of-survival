@@ -71,7 +71,6 @@ function handleSplice(e: PointerEvent) {
   align-items: center;
   padding: 16px;
   gap: 10px;
-  font-family: monospace;
   min-height: 180px;
 }
 
@@ -124,7 +123,6 @@ function handleSplice(e: PointerEvent) {
   background: rgba(140, 200, 144, 0.08);
   border: 2px dashed var(--px-green-bright);
   color: var(--px-green-bright);
-  font-family: monospace;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;

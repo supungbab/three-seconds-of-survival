@@ -188,7 +188,6 @@ onUnmounted(() => {
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   z-index: 2;
@@ -204,7 +203,6 @@ onUnmounted(() => {
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   z-index: 2;
@@ -229,7 +227,6 @@ onUnmounted(() => {
 
 .tripwire-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

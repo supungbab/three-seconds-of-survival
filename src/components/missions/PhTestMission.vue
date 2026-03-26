@@ -81,7 +81,6 @@ function handleChoice(choice: PhCategory, e: Event) {
 }
 
 .label {
-  font-family: monospace;
   font-size: 14px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -105,7 +104,6 @@ function handleChoice(choice: PhCategory, e: Event) {
 }
 
 .strip-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -117,7 +115,6 @@ function handleChoice(choice: PhCategory, e: Event) {
 }
 
 .ph-btn {
-  font-family: monospace;
   font-size: 13px;
   font-weight: 700;
   padding: 10px 14px;

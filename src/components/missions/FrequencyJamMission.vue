@@ -142,7 +142,6 @@ onUnmounted(() => {
 .freq-label {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -169,7 +168,6 @@ onUnmounted(() => {
 .sync-indicator {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-muted);
   text-align: center;
   min-width: 40px;

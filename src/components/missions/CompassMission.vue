@@ -174,7 +174,6 @@ onUnmounted(() => {
 
 .cardinal {
   position: absolute;
-  font-family: monospace;
   font-size: 14px;
   font-weight: 700;
   color: var(--px-green-dim);
@@ -223,7 +222,6 @@ onUnmounted(() => {
 }
 
 .compass-label {
-  font-family: monospace;
   font-size: 20px;
   font-weight: 700;
   color: var(--px-green-dim);

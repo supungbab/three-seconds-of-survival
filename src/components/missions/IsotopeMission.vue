@@ -74,7 +74,6 @@ function barPercent(): number {
 }
 
 .label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -124,7 +123,6 @@ function barPercent(): number {
   position: absolute;
   right: -42px;
   top: -8px;
-  font-family: monospace;
   font-size: 10px;
   color: var(--px-green-bright);
   letter-spacing: 2px;
@@ -136,7 +134,6 @@ function barPercent(): number {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  font-family: monospace;
 }
 
 .value {
@@ -158,7 +155,6 @@ function barPercent(): number {
 }
 
 .hint {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;

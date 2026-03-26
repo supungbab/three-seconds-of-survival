@@ -181,7 +181,6 @@ onUnmounted(() => {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 8px var(--arc-danger-glow);
   pointer-events: none;
@@ -198,7 +197,6 @@ onUnmounted(() => {
 
 .zone-symbol {
   font-size: 36px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow);
   animation: zone-pulse 1s ease-in-out infinite alternate;
@@ -206,7 +204,6 @@ onUnmounted(() => {
 
 .zone-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--px-green-bright);
   letter-spacing: 2px;
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -216,7 +213,6 @@ onUnmounted(() => {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 28px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
   z-index: 5;

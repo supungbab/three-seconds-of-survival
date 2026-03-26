@@ -144,7 +144,6 @@ onUnmounted(() => {
 
 .crank-label {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -170,20 +169,17 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
 }
 
 .crank-center {
   font-size: 36px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
 .crank-info {
   font-size: 16px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -206,7 +202,6 @@ onUnmounted(() => {
 
 .crank-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

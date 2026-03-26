@@ -83,7 +83,6 @@ const ecgPath = 'M0,30 L60,30 L70,30 L80,28 L90,32 L100,30 L120,30 L130,8 L140,5
   align-items: center;
   padding: 12px 16px;
   gap: 8px;
-  font-family: monospace;
   min-height: 180px;
   cursor: pointer;
 }

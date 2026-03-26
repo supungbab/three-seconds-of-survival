@@ -192,7 +192,6 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   font-size: 8px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -225,21 +224,18 @@ onUnmounted(() => {
 
 .valve-icon {
   font-size: 28px;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 8px var(--arc-danger-glow);
 }
 
 .valve-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
 
 .hint-text {
   font-size: 11px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: hint-blink 1s ease-in-out infinite alternate;

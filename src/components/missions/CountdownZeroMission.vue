@@ -60,7 +60,6 @@ function handleTap(e: Event) {
 .countdown-label {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -68,7 +67,6 @@ function handleTap(e: Event) {
 .countdown-number {
   font-size: 72px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 24px var(--px-green-glow);
   transition: color 0.08s, text-shadow 0.08s;

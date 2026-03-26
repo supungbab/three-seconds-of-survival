@@ -135,7 +135,6 @@ function cssColor(name: string): string {
 
 .splice-label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

@@ -162,7 +162,6 @@ function handleSpotTap(spot: Spot) {
 .spot-number {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: #cfff30;
   text-shadow: 0 0 6px rgba(207, 255, 48, 0.5);
   line-height: 1;
@@ -170,7 +169,6 @@ function handleSpotTap(spot: Spot) {
 
 .decontam-hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 2px;

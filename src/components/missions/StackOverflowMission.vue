@@ -119,7 +119,6 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   font-size: 10px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-danger);
   text-shadow: 0 0 4px var(--arc-danger-glow);
@@ -139,7 +138,6 @@ onUnmounted(() => {
   background: var(--px-green-bg);
   border: 1px solid var(--px-green-bright);
   font-size: 10px;
-  font-family: monospace;
   color: var(--px-green-bright);
   display: flex;
   align-items: center;
@@ -158,7 +156,6 @@ onUnmounted(() => {
 .pop-btn {
   font-size: 18px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   background: var(--px-green-bg);
   border: 2px solid var(--px-green-bright);
@@ -177,14 +174,12 @@ onUnmounted(() => {
 
 .pop-counter {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes stack-in {

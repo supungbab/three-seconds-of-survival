@@ -74,7 +74,6 @@ function handleBolt(index: number, e: Event) {
 
 .hatch-label {
   font-size: 13px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -105,14 +104,12 @@ function handleBolt(index: number, e: Event) {
 
 .bolt-icon {
   font-size: 24px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .bolt-num {
   font-size: 14px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-muted);
 }
@@ -158,7 +155,6 @@ function handleBolt(index: number, e: Event) {
 
 .step-dot {
   font-size: 14px;
-  font-family: monospace;
   color: #1a2a1a;
   transition: color 0.15s;
 }

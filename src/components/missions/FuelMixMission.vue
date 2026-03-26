@@ -92,7 +92,6 @@ function handleValve(e: PointerEvent) {
 .tank-label {
   font-size: 12px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
 }
@@ -138,13 +137,11 @@ function handleValve(e: PointerEvent) {
   right: -28px;
   top: -8px;
   font-size: 10px;
-  font-family: monospace;
   color: var(--px-green-bright);
 }
 
 .tank-val {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 
@@ -156,7 +153,6 @@ function handleValve(e: PointerEvent) {
 .valve-btn {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   background: var(--px-green-bg);
   border: 2px solid var(--px-green-bright);
@@ -177,6 +173,5 @@ function handleValve(e: PointerEvent) {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 </style>

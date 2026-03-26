@@ -110,7 +110,6 @@ function handleTap(e: Event, vial: Vial) {
 }
 
 .antidote-header {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -124,7 +123,6 @@ function handleTap(e: Event, vial: Vial) {
 }
 
 .poison-label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 1px;
@@ -207,7 +205,6 @@ function handleTap(e: Event, vial: Vial) {
 }
 
 .antidote-label {
-  font-family: monospace;
   font-size: 10px;
   color: var(--vial-color);
   font-weight: 700;

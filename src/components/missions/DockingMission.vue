@@ -120,7 +120,6 @@ function handleTap(e: Event) {
 }
 
 .label {
-  font-family: monospace;
   font-size: 13px;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -145,7 +144,6 @@ function handleTap(e: Event) {
 }
 
 .port-mark {
-  font-family: monospace;
   font-size: 12px;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -153,7 +151,6 @@ function handleTap(e: Event) {
 
 .craft {
   position: absolute;
-  font-family: monospace;
   font-size: 16px;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
@@ -163,7 +160,6 @@ function handleTap(e: Event) {
 }
 
 .hint {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 2px;

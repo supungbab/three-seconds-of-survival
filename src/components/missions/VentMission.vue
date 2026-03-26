@@ -98,7 +98,6 @@ function onEnd(e: PointerEvent) {
 
 .hatch-label {
   font-size: 10px;
-  font-family: monospace;
   color: var(--px-green-dim);
   letter-spacing: 2px;
 }
@@ -119,7 +118,6 @@ function onEnd(e: PointerEvent) {
 
 .rad-label {
   font-size: 14px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-danger);
   text-shadow: 0 0 8px rgba(255, 59, 92, 0.4);
@@ -129,7 +127,6 @@ function onEnd(e: PointerEvent) {
 
 .swipe-hint {
   font-size: 18px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow);
   letter-spacing: 3px;

@@ -156,7 +156,6 @@ function handleDetonate(e: PointerEvent) {
 .action-btn {
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   padding: 8px 24px;
   border: 2px solid;
   background: transparent;
@@ -185,7 +184,6 @@ function handleDetonate(e: PointerEvent) {
 .boom {
   font-size: 18px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 16px var(--arc-danger-glow);
 }
@@ -202,7 +200,6 @@ function handleDetonate(e: PointerEvent) {
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  font-family: monospace;
   border: 2px solid var(--arc-muted);
   color: var(--arc-muted);
 }
@@ -222,7 +219,6 @@ function handleDetonate(e: PointerEvent) {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes pulse-x {

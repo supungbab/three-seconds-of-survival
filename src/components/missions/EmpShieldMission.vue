@@ -84,7 +84,6 @@ onUnmounted(() => {
 
 .label {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 6px var(--arc-danger-glow);
 }
@@ -145,7 +144,6 @@ onUnmounted(() => {
 
 .hint {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 </style>

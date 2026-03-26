@@ -86,7 +86,6 @@ function handleTap(m: Mushroom, e: Event) {
 
 .forage-label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -107,7 +106,6 @@ function handleTap(m: Mushroom, e: Event) {
 .forage-mushroom {
   position: absolute;
   font-size: 32px;
-  font-family: monospace;
   font-weight: 700;
   background: none;
   border: none;

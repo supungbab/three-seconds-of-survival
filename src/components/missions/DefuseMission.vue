@@ -131,7 +131,6 @@ function handleWireTap(index: number) {
 .countdown {
   font-size: 28px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 12px var(--px-green-glow-strong);
   letter-spacing: 2px;
@@ -157,7 +156,6 @@ function handleWireTap(index: number) {
   align-items: center;
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
 }
 
 .order-label {
@@ -210,7 +208,6 @@ function handleWireTap(index: number) {
 .wire-label {
   font-size: 14px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--wire-color);
   text-shadow: 0 0 6px var(--wire-color);
   min-width: 20px;

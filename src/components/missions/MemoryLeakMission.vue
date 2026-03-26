@@ -119,7 +119,6 @@ onUnmounted(() => {
 .mem-label {
   font-size: 12px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   min-width: 32px;
 }
@@ -147,7 +146,6 @@ onUnmounted(() => {
 
 .mem-val {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
   min-width: 36px;
   text-align: right;
@@ -191,7 +189,6 @@ onUnmounted(() => {
 
 .leak-label {
   font-size: 10px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-muted);
 }
@@ -203,7 +200,6 @@ onUnmounted(() => {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes drip-anim {

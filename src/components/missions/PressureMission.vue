@@ -11,10 +11,10 @@ const emit = defineEmits<{
 }>()
 
 const containerEl = ref<HTMLElement | null>(null)
-const leftGauge = ref(60)
-const rightGauge = ref(60)
+const leftGauge = ref(35)
+const rightGauge = ref(35)
 
-const DRAIN_RATE = 15 // % per second
+const DRAIN_RATE = 22 // % per second
 const PUMP_AMOUNT = 25 // % per tap
 const DANGER_ZONE = 20 // %
 const SURVIVE_TIME = 2000 // ms
@@ -169,7 +169,6 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
-  font-family: monospace;
   letter-spacing: 2px;
 }
 
@@ -191,7 +190,6 @@ onUnmounted(() => {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 6px var(--px-green-glow);
-  font-family: monospace;
 }
 
 .gauge-track {
@@ -265,7 +263,6 @@ onUnmounted(() => {
   font-size: 14px;
   font-weight: 700;
   color: var(--px-green-bright);
-  font-family: monospace;
   text-shadow: 0 0 6px var(--px-green-glow);
   min-width: 28px;
   text-align: center;
@@ -279,7 +276,6 @@ onUnmounted(() => {
 .pressure-hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes danger-pulse {

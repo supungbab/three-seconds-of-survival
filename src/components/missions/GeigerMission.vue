@@ -197,7 +197,6 @@ onUnmounted(() => {
 }
 
 .gauge-percent {
-  font-family: monospace;
   font-size: 18px;
   font-weight: 700;
   color: var(--px-green-bright);
@@ -238,7 +237,6 @@ onUnmounted(() => {
 }
 
 .geiger-hint {
-  font-family: monospace;
   font-size: 16px;
   font-weight: 700;
   color: var(--arc-muted);

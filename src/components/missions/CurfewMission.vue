@@ -84,7 +84,6 @@ function handleTap(e: Event) {
 .curfew-text {
   font-size: 32px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow);
   letter-spacing: 4px;

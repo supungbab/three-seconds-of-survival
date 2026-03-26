@@ -23,7 +23,7 @@ let resolved = false
 function buildTicker(): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&*'
   let text = ''
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 8; i++) {
     text += chars[Math.floor(Math.random() * chars.length)]
   }
   text += keyword
@@ -34,7 +34,7 @@ function buildTicker(): string {
 }
 
 const tickerText = buildTicker()
-const SPEED = 80 // px per second
+const SPEED = 150 // px per second
 let lastTime = 0
 
 function animate(time: number) {
@@ -51,29 +51,16 @@ function handleTap(e: Event) {
   resolved = true
   playTick()
 
-  // Check if keyword is visible in viewport
-  if (!tickerEl.value) {
-    emit('tap', false)
-    return
-  }
+  // Check if keyword is visible in viewport using scroll offset
+  // Each char ≈ charWidth px (monospace 24px + 3px letter-spacing)
+  const charWidth = 17.4
+  const viewportWidth = 200
+  const keywordStart = 8 * charWidth
+  const keywordEnd = (8 + keyword.length) * charWidth
+  const visibleLeft = scrollOffset.value - 200 // text starts at translateX(200)
+  const visibleRight = visibleLeft + viewportWidth
 
-  const container = tickerEl.value.parentElement
-  if (!container) {
-    emit('tap', false)
-    return
-  }
-
-  const containerRect = container.getBoundingClientRect()
-  const spans = tickerEl.value.querySelectorAll('.keyword-span')
-  let keywordVisible = false
-
-  spans.forEach((span) => {
-    const rect = span.getBoundingClientRect()
-    if (rect.right > containerRect.left && rect.left < containerRect.right) {
-      keywordVisible = true
-    }
-  })
-
+  const keywordVisible = keywordEnd > visibleLeft && keywordStart < visibleRight
   emit('tap', keywordVisible)
 }
 
@@ -95,14 +82,7 @@ onUnmounted(() => {
         class="ticker-content"
         :style="{ transform: `translateX(${200 - scrollOffset}px)` }"
       >
-        <template v-for="(ch, i) in tickerText.split('')" :key="i">
-          <span
-            :class="{
-              'keyword-span': i >= 20 && i < 20 + keyword.length,
-              'noise-char': !(i >= 20 && i < 20 + keyword.length)
-            }"
-          >{{ ch }}</span>
-        </template>
+        <span class="ticker-char">{{ tickerText }}</span>
       </div>
     </div>
     <div class="signal-hint">{{ t(`「${keyword}」이 보일 때 탭하세요`) }}</div>
@@ -123,7 +103,6 @@ onUnmounted(() => {
 
 .signal-label {
   font-size: 14px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
 }
@@ -146,23 +125,17 @@ onUnmounted(() => {
 .ticker-content {
   white-space: nowrap;
   font-size: 24px;
-  font-family: monospace;
   font-weight: 700;
   letter-spacing: 3px;
 }
 
-.noise-char {
-  color: var(--arc-muted);
-}
-
-.keyword-span {
+.ticker-char {
   color: var(--px-green-bright);
-  text-shadow: 0 0 12px var(--px-green-glow);
+  text-shadow: 0 0 4px var(--px-green-glow);
 }
 
 .signal-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
   letter-spacing: 1px;

@@ -125,7 +125,6 @@ function handleFenceTap(e: Event) {
 
 .perimeter-label {
   font-size: 13px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
@@ -197,21 +196,18 @@ function handleFenceTap(e: Event) {
 
 .hole-icon {
   font-size: 20px;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 8px var(--arc-danger-glow);
 }
 
 .patch-icon {
   font-size: 20px;
-  font-family: monospace;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
 }
 
 .perimeter-status {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }

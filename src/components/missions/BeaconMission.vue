@@ -83,7 +83,6 @@ function handleChoice(n: number, e: Event) {
 
 .beacon-label {
   font-size: 13px;
-  font-family: monospace;
   font-weight: 700;
   color: var(--arc-muted);
   letter-spacing: 3px;
@@ -103,7 +102,6 @@ function handleChoice(n: number, e: Event) {
 
 .beacon-core {
   font-size: 40px;
-  font-family: monospace;
   color: #1a2a1a;
   transition: all 0.08s;
 }
@@ -120,7 +118,6 @@ function handleChoice(n: number, e: Event) {
 
 .beacon-wait {
   font-size: 13px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
   animation: blink-wait 0.8s infinite;
@@ -144,7 +141,6 @@ function handleChoice(n: number, e: Event) {
   border-radius: 0;
   color: var(--px-green-bright);
   font-size: 24px;
-  font-family: monospace;
   font-weight: 700;
   cursor: pointer;
   text-shadow: 0 0 8px var(--px-green-glow);

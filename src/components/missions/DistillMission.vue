@@ -142,7 +142,6 @@ onUnmounted(() => {
 .tick {
   position: absolute;
   font-size: 11px;
-  font-family: monospace;
   color: var(--px-green-bright);
   white-space: nowrap;
   transform: translateY(50%);
@@ -151,7 +150,6 @@ onUnmounted(() => {
 .temp-readout {
   font-size: 22px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-danger);
   text-shadow: 0 0 10px var(--arc-danger-glow);
 }
@@ -159,6 +157,5 @@ onUnmounted(() => {
 .hint {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 </style>

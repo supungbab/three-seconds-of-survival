@@ -85,7 +85,6 @@ function handleChoice(choice: 'Y' | 'N', e: Event) {
 }
 
 .reboot-terminal {
-  font-family: monospace;
   font-size: 16px;
   line-height: 1.6;
   text-align: left;
@@ -122,7 +121,6 @@ function handleChoice(choice: 'Y' | 'N', e: Event) {
   width: 56px;
   height: 56px;
   font-size: 28px;
-  font-family: monospace;
   font-weight: 700;
   border-radius: 0;
   cursor: pointer;

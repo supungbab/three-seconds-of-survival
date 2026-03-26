@@ -167,7 +167,6 @@ function onMouse(e: MouseEvent) {
 
 .phase-label {
   font-size: 18px;
-  font-family: monospace;
   font-weight: 700;
   letter-spacing: 4px;
   color: var(--px-green-bright);
@@ -236,7 +235,6 @@ function onMouse(e: MouseEvent) {
 
 .distress-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 1px;
 }

@@ -132,7 +132,7 @@ function handleKeyTap(digit: number) {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 8px var(--px-green-glow);
-  font-family: monospace;
+
   letter-spacing: 3px;
 }
 
@@ -157,7 +157,7 @@ function handleKeyTap(digit: number) {
   font-weight: 700;
   color: var(--px-green-bright);
   text-shadow: 0 0 16px var(--px-green-glow-strong);
-  font-family: monospace;
+
   min-width: 28px;
   text-align: center;
 }
@@ -166,7 +166,7 @@ function handleKeyTap(digit: number) {
   font-size: 28px;
   font-weight: 700;
   color: var(--px-green-dim);
-  font-family: monospace;
+
   min-width: 28px;
   text-align: center;
   transition: color 0.1s;
@@ -202,7 +202,7 @@ function handleKeyTap(digit: number) {
   color: var(--px-green-bright);
   font-size: 20px;
   font-weight: 700;
-  font-family: monospace;
+
   cursor: pointer;
   box-shadow:
     0 0 0 1px var(--px-green-frame),

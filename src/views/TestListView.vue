@@ -1,8 +1,24 @@
 <script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import type { MissionType } from '@/types/mission'
 
 const router = useRouter()
+const scrollArea = ref<HTMLElement | null>(null)
+const SCROLL_KEY = 'test-list-scroll'
+
+onMounted(() => {
+  const saved = sessionStorage.getItem(SCROLL_KEY)
+  if (saved && scrollArea.value) {
+    scrollArea.value.scrollTop = Number(saved)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (scrollArea.value) {
+    sessionStorage.setItem(SCROLL_KEY, String(scrollArea.value.scrollTop))
+  }
+})
 
 interface MissionInfo {
   type: MissionType
@@ -190,7 +206,7 @@ function handleBack() {
       <div class="count">{{ missions.length }}개</div>
     </div>
 
-    <div class="scroll-area">
+    <div ref="scrollArea" class="scroll-area">
       <div v-for="cat in categories" :key="cat" class="category">
         <div class="cat-label">{{ cat }}</div>
         <div class="mission-grid">
@@ -282,7 +298,6 @@ function handleBack() {
 .count {
   font-size: 14px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 .scroll-area {
@@ -353,7 +368,6 @@ function handleBack() {
 .card-diff {
   font-size: 10px;
   font-weight: 700;
-  font-family: monospace;
   letter-spacing: 1px;
 }
 
@@ -371,6 +385,5 @@ function handleBack() {
 .card-type {
   font-size: 9px;
   color: rgba(140, 200, 144, 0.3);
-  font-family: monospace;
 }
 </style>

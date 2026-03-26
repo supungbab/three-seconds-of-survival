@@ -115,7 +115,6 @@ onUnmounted(() => {
 }
 
 .hint-label {
-  font-family: monospace;
   font-size: 11px;
   color: var(--arc-muted);
   letter-spacing: 2px;
@@ -158,7 +157,6 @@ onUnmounted(() => {
 }
 
 .half-text {
-  font-family: monospace;
   font-size: 32px;
   font-weight: bold;
   color: var(--px-green-bright);
@@ -177,7 +175,6 @@ onUnmounted(() => {
 }
 
 .align-indicator {
-  font-family: monospace;
   font-size: 12px;
   color: var(--arc-muted);
   letter-spacing: 1px;

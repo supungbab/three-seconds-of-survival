@@ -160,7 +160,6 @@ onUnmounted(() => {
   font-size: 28px;
   font-weight: 700;
   color: var(--px-green-dim);
-  font-family: monospace;
   letter-spacing: 4px;
   text-shadow: 0 0 8px var(--px-green-glow);
 }
@@ -169,7 +168,6 @@ onUnmounted(() => {
   font-size: 32px;
   font-weight: 700;
   color: var(--px-green-bright);
-  font-family: monospace;
   text-shadow: 0 0 20px var(--px-green-glow-strong);
   animation: prompt-pulse 0.25s ease-in-out infinite alternate;
 }
@@ -177,7 +175,6 @@ onUnmounted(() => {
 .sos-lost {
   font-size: 24px;
   color: var(--arc-muted);
-  font-family: monospace;
 }
 
 @keyframes prompt-pulse {

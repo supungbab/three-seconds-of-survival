@@ -71,7 +71,6 @@ function handleTap(r: number, c: number, e: Event) {
 
 .bait-hint {
   font-size: 12px;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 2px;
 }
@@ -93,7 +92,6 @@ function handleTap(r: number, c: number, e: Event) {
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
-  font-family: monospace;
   color: var(--arc-muted);
 }
 

@@ -169,7 +169,6 @@ const isHorizontalWind = windDirection === 'LEFT' || windDirection === 'RIGHT'
 
 .wind-arrow {
   font-size: 32px;
-  font-family: monospace;
   color: var(--arc-muted);
   opacity: 0;
   animation: wind-blow 1.2s ease-in-out infinite;
@@ -221,7 +220,6 @@ const isHorizontalWind = windDirection === 'LEFT' || windDirection === 'RIGHT'
 .wind-label {
   font-size: 16px;
   font-weight: 700;
-  font-family: monospace;
   color: var(--arc-muted);
   letter-spacing: 3px;
   margin-top: 12px;

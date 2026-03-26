@@ -65,7 +65,6 @@ function handleChoice(letter: string) {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: monospace;
   font-size: 36px;
   font-weight: 700;
   color: var(--px-green-bright);
@@ -108,7 +107,6 @@ function handleChoice(letter: string) {
 .choice-btn {
   width: 64px;
   height: 64px;
-  font-family: monospace;
   font-size: 28px;
   font-weight: 700;
   color: var(--px-green-bright);

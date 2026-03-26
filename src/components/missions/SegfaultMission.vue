@@ -74,7 +74,6 @@ function handleTap(e: PointerEvent, block: MemBlock) {
   align-items: center;
   padding: 12px 16px;
   gap: 8px;
-  font-family: monospace;
   min-height: 180px;
 }
 
@@ -102,7 +101,6 @@ function handleTap(e: PointerEvent, block: MemBlock) {
   background: #0c140c;
   border: 1px solid var(--px-green-bright);
   color: var(--px-green-bright);
-  font-family: monospace;
   font-size: 12px;
   padding: 12px 4px;
   cursor: pointer;
