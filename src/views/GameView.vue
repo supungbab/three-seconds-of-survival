@@ -7,11 +7,14 @@ import { useI18n } from '@/composables/useI18n'
 import { useInputDetector } from '@/composables/useInputDetector'
 import { useSceneTransition } from '@/composables/useSceneTransition'
 import { useGameBgm } from '@/composables/useGameBgm'
+import { useEnergy } from '@/composables/useEnergy'
 import TimerBar from '@/components/TimerBar.vue'
 import ScoreDisplay from '@/components/ScoreDisplay.vue'
 import MissionText from '@/components/MissionText.vue'
 import FeedbackLayer from '@/components/FeedbackLayer.vue'
 import ResultOverlay from '@/components/ResultOverlay.vue'
+import VoltPopup from '@/components/VoltPopup.vue'
+import ReviveOverlay from '@/components/ReviveOverlay.vue'
 import TuneMission from '@/components/missions/TuneMission.vue'
 import PowerUpMission from '@/components/missions/PowerUpMission.vue'
 import WireCutMission from '@/components/missions/WireCutMission.vue'
@@ -48,7 +51,6 @@ import BlackoutMission from '@/components/missions/BlackoutMission.vue'
 import OverrideMission from '@/components/missions/OverrideMission.vue'
 import PressureMission from '@/components/missions/PressureMission.vue'
 import SpliceMission from '@/components/missions/SpliceMission.vue'
-import DistressMission from '@/components/missions/DistressMission.vue'
 import ElevatorMission from '@/components/missions/ElevatorMission.vue'
 import ScrambleMission from '@/components/missions/ScrambleMission.vue'
 import SignalInterceptMission from '@/components/missions/SignalInterceptMission.vue'
@@ -118,9 +120,7 @@ import KernelPanicMission from '@/components/missions/KernelPanicMission.vue'
 import BlueScreenMission from '@/components/missions/BlueScreenMission.vue'
 import SegfaultMission from '@/components/missions/SegfaultMission.vue'
 import TapeSpliceMission from '@/components/missions/TapeSpliceMission.vue'
-import CoreDumpMission from '@/components/missions/CoreDumpMission.vue'
 import SignalBoostMission from '@/components/missions/SignalBoostMission.vue'
-import VoltageMatchMission from '@/components/missions/VoltageMatchMission.vue'
 import TourniquetMission from '@/components/missions/TourniquetMission.vue'
 import DefibrillateMission from '@/components/missions/DefibrillateMission.vue'
 import HazmatSealMission from '@/components/missions/HazmatSealMission.vue'
@@ -146,13 +146,13 @@ import MemoryLeakMission from '@/components/missions/MemoryLeakMission.vue'
 import StackOverflowMission from '@/components/missions/StackOverflowMission.vue'
 import BaitSetMission from '@/components/missions/BaitSetMission.vue'
 import SonarPingMission from '@/components/missions/SonarPingMission.vue'
-import FrequencyLockMission from '@/components/missions/FrequencyLockMission.vue'
 
 const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const { transition, afterTransition } = useSceneTransition()
 const gameBgm = useGameBgm()
+const energy = useEnergy()
 const missionArea = ref<HTMLElement | null>(null)
 
 const {
@@ -160,12 +160,17 @@ const {
   score,
   mission,
   missionKey,
+  voltDrop,
   timer,
   feedback,
   storage,
+  volt,
+  revival,
   startGame,
   handleInput,
   setColorTapResult,
+  revive,
+  skipRevival,
   restart,
   clearAllTimers,
   setForcedMission,
@@ -176,7 +181,8 @@ const isBlocked = () =>
   phase.value === 'GAME_OVER' ||
   phase.value === 'IDLE' ||
   phase.value === 'FAIL' ||
-  phase.value === 'SHOWING'
+  phase.value === 'SHOWING' ||
+  phase.value === 'REVIVE_PROMPT'
 
 const { bind, resetTapCount } = useInputDetector((action) => {
   handleInput(action)
@@ -195,7 +201,22 @@ function handleColorTap(correct: boolean) {
   handleInput({ type: 'TAP', x: 0, y: 0 })
 }
 
+function handleRevive() {
+  revive()
+  gameBgm.start()
+}
+
+function handleSkipRevival() {
+  skipRevival()
+}
+
 function handleRestart() {
+  if (!energy.consumeEnergy()) {
+    // Not enough energy — go home
+    gameBgm.stop()
+    transition(() => router.push('/'))
+    return
+  }
   resetTapCount()
   restart()
   gameBgm.start()
@@ -217,6 +238,15 @@ onMounted(async () => {
     bind(missionArea.value)
   }
   await afterTransition()
+
+  // Consume energy on game start
+  if (!energy.consumeEnergy()) {
+    // Not enough energy — redirect home
+    transition(() => router.push('/'))
+    return
+  }
+
+  energy.startTick()
   gameBgm.start()
   startGame()
 })
@@ -225,7 +255,9 @@ onUnmounted(() => {
   timer.stop()
   clearAllTimers()
   gameBgm.stop()
+  energy.stopTick()
 })
+
 </script>
 
 <template>
@@ -251,6 +283,7 @@ onUnmounted(() => {
         <MissionText
           :key="missionKey"
           :text="t(mission.text)"
+          :instruction="t(mission.instruction)"
           :showing="phase === 'SHOWING'"
         />
 
@@ -418,11 +451,6 @@ onUnmounted(() => {
           <SpliceMission
             v-else-if="mission.type === 'SPLICE'"
             :splice-colors="mission.spliceColors!"
-            @tap="handleColorTap"
-          />
-          <DistressMission
-            v-else-if="mission.type === 'DISTRESS'"
-            :distress-pattern="mission.distressPattern!"
             @tap="handleColorTap"
           />
           <ElevatorMission
@@ -723,16 +751,8 @@ onUnmounted(() => {
             v-else-if="mission.type === 'TAPE_SPLICE'"
             @tap="handleColorTap"
           />
-          <CoreDumpMission
-            v-else-if="mission.type === 'CORE_DUMP'"
-            @tap="handleColorTap"
-          />
           <SignalBoostMission
             v-else-if="mission.type === 'SIGNAL_BOOST'"
-            @tap="handleColorTap"
-          />
-          <VoltageMatchMission
-            v-else-if="mission.type === 'VOLTAGE_MATCH'"
             @tap="handleColorTap"
           />
           <TourniquetMission
@@ -835,10 +855,6 @@ onUnmounted(() => {
             v-else-if="mission.type === 'SONAR_PING'"
             @tap="handleColorTap"
           />
-          <FrequencyLockMission
-            v-else-if="mission.type === 'FREQUENCY_LOCK'"
-            @tap="handleColorTap"
-          />
         </div>
       </template>
 
@@ -856,6 +872,23 @@ onUnmounted(() => {
       :show-flash="feedback.showFlash.value"
       :flash-color="feedback.flashColor.value"
       :particles="feedback.particles.value"
+    />
+
+    <!-- VOLT drop popup -->
+    <VoltPopup
+      v-if="voltDrop !== null"
+      :key="voltDrop"
+      :amount="voltDrop"
+      @done="voltDrop = null"
+    />
+
+    <!-- Revive prompt -->
+    <ReviveOverlay
+      v-if="phase === 'REVIVE_PROMPT'"
+      :cost="revival.revivalCost"
+      :volt-balance="volt.balance.value"
+      @revive="handleRevive"
+      @skip="handleSkipRevival"
     />
 
     <!-- Game over: mission-area 바깥 → 터치 이벤트 버블링 없음 -->

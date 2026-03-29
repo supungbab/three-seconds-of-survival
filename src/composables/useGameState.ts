@@ -6,9 +6,11 @@ import { useMissionPool } from './useMissionPool'
 import { useScoreStorage } from './useScoreStorage'
 import { useAudio } from './useAudio'
 import { useFeedback } from './useFeedback'
+import { useVolt } from './useVolt'
+import { useRevival } from './useRevival'
 
-const SHOWING_DURATION = 500
-const ACTING_DURATION = 2500
+const SHOWING_DURATION = 800
+const ACTING_DURATION = 2200
 const SUCCESS_DELAY = 300
 
 export function useGameState() {
@@ -16,16 +18,20 @@ export function useGameState() {
   const score = ref(0)
   const mission = shallowRef<MissionParams | null>(null)
   const missionKey = ref(0)
+  const voltDrop = ref<number | null>(null)
 
   const timer = useTimer()
   const pool = useMissionPool()
   const storage = useScoreStorage()
   const audio = useAudio()
   const feedback = useFeedback()
+  const volt = useVolt()
+  const revival = useRevival()
 
   // Color tap / component-validated missions
   // null = component hasn't emitted yet, true/false = component verdict
   let colorTapResult: boolean | null = null
+  let consecutiveClears = 0
 
   // Track pending timeouts to prevent ghost timers on restart
   const pendingTimers: number[] = []
@@ -54,6 +60,9 @@ export function useGameState() {
     clearAllTimers()
     audio.ensureContext()
     score.value = 0
+    consecutiveClears = 0
+    voltDrop.value = null
+    revival.resetForNewGame()
     pool.reset()
     phase.value = 'IDLE'
     nextRound()
@@ -105,6 +114,15 @@ export function useGameState() {
     timer.stop()
     phase.value = 'SUCCESS'
     score.value++
+    consecutiveClears++
+
+    // VOLT drop
+    const drop = volt.rollVoltDrop(consecutiveClears)
+    if (drop.dropped) {
+      volt.addVolt(drop.amount)
+      voltDrop.value = drop.amount
+    }
+
     audio.playSuccess()
     feedback.successFeedback()
 
@@ -123,9 +141,25 @@ export function useGameState() {
     feedback.failFeedback()
 
     safeTimeout(() => {
-      phase.value = 'GAME_OVER'
-      storage.saveScore(score.value)
+      if (revival.canRevive.value) {
+        phase.value = 'REVIVE_PROMPT'
+      } else {
+        phase.value = 'GAME_OVER'
+        storage.saveScore(score.value)
+      }
     }, 600)
+  }
+
+  function revive() {
+    if (revival.useRevival()) {
+      phase.value = 'IDLE'
+      nextRound()
+    }
+  }
+
+  function skipRevival() {
+    phase.value = 'GAME_OVER'
+    storage.saveScore(score.value)
   }
 
   function restart() {
@@ -137,12 +171,17 @@ export function useGameState() {
     score,
     mission,
     missionKey,
+    voltDrop,
     timer,
     feedback,
     storage,
+    volt,
+    revival,
     startGame,
     handleInput,
     setColorTapResult,
+    revive,
+    skipRevival,
     restart,
     clearAllTimers,
     setForcedMission: pool.setForcedType,

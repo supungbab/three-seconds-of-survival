@@ -90,7 +90,6 @@ const en: Record<string, string> = {
   '오버라이드': 'OVERRIDE',
   '압력': 'PRESSURE',
   '접합': 'SPLICE',
-  '조난': 'DISTRESS',
   '글자 맞추기': 'UNSCRAMBLE',
   '가로채기': 'INTERCEPT',
   '정수': 'PURIFY',
@@ -194,12 +193,6 @@ const en: Record<string, string> = {
   '빗나감': 'MISS',
   '타겟에서 떼기': 'RELEASE AT TARGET',
   '홀드하여 조정': 'HOLD TO TUNE',
-
-  // VoltageMatchMission
-  '목표': 'TARGET',
-  '현재': 'CURRENT',
-  '잠금': 'LOCK',
-  '값이 같을 때 탭하세요': 'TAP WHEN VALUES MATCH',
 
   // VentMission
   '환기구': 'VENT HATCH',
@@ -525,9 +518,6 @@ const en: Record<string, string> = {
   // TapeSpliceMission
   '테이프를 이어 붙이세요': 'SPLICE THE TAPE',
 
-  // CoreDumpMission
-  '에러 블록을 잡으세요': 'CATCH ERROR BLOCK',
-
   // SignalBoostMission
   '신호를 증폭하세요': 'BOOST THE SIGNAL',
 
@@ -600,9 +590,6 @@ const en: Record<string, string> = {
   // SonarPingMission
   '반응을 감지하세요': 'DETECT THE RESPONSE',
 
-  // FrequencyLockMission
-  '주파수를 고정하세요': 'LOCK THE FREQUENCY',
-
   // ====== Component UI Strings (batch 2) ======
 
   // SacrificeMission
@@ -621,9 +608,6 @@ const en: Record<string, string> = {
 
   // TapeSpliceMission
   '정렬되면 탭하세요': 'TAP WHEN ALIGNED',
-
-  // CoreDumpMission
-  '코어 덤프 — 에러를 탭하세요': 'CORE DUMP — TAP ON ERR',
 
   // TourniquetMission
   '지혈대 적용': 'APPLY TOURNIQUET',
@@ -860,8 +844,30 @@ const en: Record<string, string> = {
   '해치 밀봉': 'SEAL HATCH',
   '홀드하여 송신': 'HOLD TO TX',
   '회복': 'RECOVERED',
-  '회전': 'ROTATIONS',
+  '회전': 'ROTATE',
   '흔들림': 'SHAKING',
+
+  // ====== Mission Instructions ======
+  '탭': 'TAP',
+  '빠르게 탭': 'RAPID TAP',
+  '홀드': 'HOLD',
+  '홀드 후 놓기': 'HOLD & RELEASE',
+  '좌우 스와이프': 'SWIPE L/R',
+  '↑ 스와이프': 'SWIPE UP',
+  '↓ 스와이프': 'SWIPE DOWN',
+  '← 스와이프': 'SWIPE LEFT',
+  '→ 스와이프': 'SWIPE RIGHT',
+  '드래그': 'DRAG',
+  '순서대로 탭': 'TAP IN ORDER',
+  '타이밍 맞춰 탭': 'TAP ON TIMING',
+
+  // ====== Meta System ======
+  '부활': 'REVIVE',
+  '이어서 계속하시겠습니까?': 'Continue from here?',
+  '보유': 'BALANCE',
+  '포기': 'GIVE UP',
+  '에너지가 부족합니다': 'NOT ENOUGH ENERGY',
+  '상점': 'SHOP',
 }
 
 export default en

@@ -4,6 +4,7 @@ export type GamePhase =
   | 'ACTING'
   | 'SUCCESS'
   | 'FAIL'
+  | 'REVIVE_PROMPT'
   | 'GAME_OVER'
 
 export type InputAction =
